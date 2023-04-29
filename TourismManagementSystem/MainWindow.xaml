@@ -5,10 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourismManagementSystem"
         mc:Ignorable="d"
-        Title="MainWindow" Height="650" Width="800"
+        Title="MainWindow" Height="650" Width="1000"
+        ResizeMode="NoResize"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        WindowStartupLocation="CenterScreen"
         xmlns:uc="clr-namespace:TourismManagementSystem.UserControls"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <Grid>
         <uc:UCMenuBar HorizontalAlignment="Left" Width="94"/>
+        <uc:UCHome HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="900" Height="550"/>
     </Grid>
 </Window>
