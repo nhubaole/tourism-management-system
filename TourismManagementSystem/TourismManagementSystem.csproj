@@ -66,11 +66,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="UserControls\UCAddTour.xaml.cs">
+      <DependentUpon>UCAddTour.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UCHome.xaml.cs">
       <DependentUpon>UCHome.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCMenuBar.xaml.cs">
       <DependentUpon>UCMenuBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCTourDetails.xaml.cs">
+      <DependentUpon>UCTourDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
@@ -95,11 +101,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\UCAddTour.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\UCHome.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\UCMenuBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCTourDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
