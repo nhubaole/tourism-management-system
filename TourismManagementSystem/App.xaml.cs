@@ -18,7 +18,7 @@ namespace TourismManagementSystem
             base.OnStartup(e);
 
             // Tạo màn hình đăng nhập
-            var s = new ServiceManagementWindow();
+            var s = new NewServiceWindow();
             s.Show();
             
         }
