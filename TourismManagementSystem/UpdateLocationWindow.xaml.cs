@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace TourismManagementSystem
 {
     /// <summary>
-    /// Interaction logic for UpdateServiceWindow.xaml
+    /// Interaction logic for UpdateLocationWindow.xaml
     /// </summary>
-    public partial class UpdateServiceWindow : Window
+    public partial class UpdateLocationWindow : Window
     {
-        public UpdateServiceWindow()
+        public UpdateLocationWindow()
         {
             InitializeComponent();
         }

@@ -69,14 +69,17 @@
     <Compile Include="LocationManagementWindow.xaml.cs">
       <DependentUpon>LocationManagementWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NewLocationWindow.xaml.cs">
+      <DependentUpon>NewLocationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NewServiceWindow.xaml.cs">
       <DependentUpon>NewServiceWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ServiceManagementWindow.xaml.cs">
       <DependentUpon>ServiceManagementWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UpdateServiceWindow.xaml.cs">
-      <DependentUpon>UpdateServiceWindow.xaml</DependentUpon>
+    <Compile Include="UpdateLocationWindow.xaml.cs">
+      <DependentUpon>UpdateLocationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCHome.xaml.cs">
       <DependentUpon>UCHome.xaml</DependentUpon>
@@ -85,6 +88,10 @@
       <DependentUpon>UCMenuBar.xaml</DependentUpon>
     </Compile>
     <Page Include="LocationManagementWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NewLocationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -120,7 +127,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UpdateServiceWindow.xaml">
+    <Page Include="UpdateLocationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
