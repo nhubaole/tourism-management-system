@@ -81,6 +81,9 @@
     <Compile Include="UpdateLocationWindow.xaml.cs">
       <DependentUpon>UpdateLocationWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UpdateServiceWindow.xaml.cs">
+      <DependentUpon>UpdateServiceWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UCHome.xaml.cs">
       <DependentUpon>UCHome.xaml</DependentUpon>
     </Compile>
@@ -128,6 +131,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UpdateLocationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateServiceWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
