@@ -78,8 +78,14 @@
     <Compile Include="UserControls\UCMenuBar.xaml.cs">
       <DependentUpon>UCMenuBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UCSchedule.xaml.cs">
+      <DependentUpon>UCSchedule.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UCScheduleDetails.xaml.cs">
       <DependentUpon>UCScheduleDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCScheduleItem.xaml.cs">
+      <DependentUpon>UCScheduleItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCTourDetails.xaml.cs">
       <DependentUpon>UCTourDetails.xaml</DependentUpon>
@@ -123,7 +129,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\UCSchedule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\UCScheduleDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCScheduleItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
