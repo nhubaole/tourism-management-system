@@ -66,8 +66,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Customer.xaml.cs">
+      <DependentUpon>Customer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DetailTicket.xaml.cs">
       <DependentUpon>DetailTicket.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Location.xaml.cs">
+      <DependentUpon>Location.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Notification.xaml.cs">
+      <DependentUpon>Notification.xaml</DependentUpon>
     </Compile>
     <Compile Include="Purchase.xaml.cs">
       <DependentUpon>Purchase.xaml</DependentUpon>
@@ -75,7 +84,15 @@
     <Compile Include="Ticket.xaml.cs">
       <DependentUpon>Ticket.xaml</DependentUpon>
     </Compile>
+    <Page Include="Customer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DetailTicket.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Location.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -91,6 +108,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Notification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Purchase.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
