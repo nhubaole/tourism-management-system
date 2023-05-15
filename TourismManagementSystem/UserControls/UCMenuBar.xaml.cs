@@ -13,16 +13,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TourismManagementSystem
+namespace TourismManagementSystem.UserControls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for UCMenuBar.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class UCMenuBar : UserControl
     {
-        public MainWindow()
+        public UCMenuBar()
         {
-        
             InitializeComponent();
         }
     }

@@ -1,0 +1,16 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TourismManagementSystem"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="TourismManagementSystem.InfoBarUC"
+             mc:Ignorable="d" 
+             d:DesignHeight="70" d:DesignWidth="900">
+    <Grid Background="{DynamicResource Secondary}">
+        <Label x:Name="_admin_label" Content="Admin" Margin="0,10,85,31" FontSize="17" HorizontalAlignment="Right" Width="106"/>
+        <Label x:Name="_admin_name_label_Copy" Content="Nguyen Van B" Margin="0,32,70,4" FontSize="17" FontWeight="Bold" RenderTransformOrigin="0.504,0.61" HorizontalAlignment="Right" Width="121"/>
+        <materialDesign:PackIcon Kind="Bell" Margin="0,21,330,21" VerticalAlignment="Stretch" Height="28" Width="50" HorizontalAlignment="Right" />
+        <materialDesign:PackIcon Kind="AccountCircle" Margin="0,0,204,0" VerticalAlignment="Stretch" Height="70" MouseDown="Notification_Button_Click" Width="60" HorizontalAlignment="Right" />
+    </Grid>
+</UserControl>
