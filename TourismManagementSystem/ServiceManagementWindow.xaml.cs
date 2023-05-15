@@ -10,23 +10,29 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TourismManagementSystem.View;
 
 namespace TourismManagementSystem
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ServiceManagementWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ServiceManagementWindow : Window
     {
-        public MainWindow()
+        public ServiceManagementWindow()
         {
-        
             InitializeComponent();
-            LoginWindow lg = new LoginWindow();
-            lg.Show();
+          
+        }
+
+        private void ListBoxItem_Selected(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

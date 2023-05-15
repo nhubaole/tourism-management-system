@@ -12,21 +12,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TourismManagementSystem.View;
 
 namespace TourismManagementSystem
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for InfoBarUC.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class InfoBarUC : UserControl
     {
-        public MainWindow()
+        public InfoBarUC()
         {
-        
             InitializeComponent();
-            LoginWindow lg = new LoginWindow();
-            lg.Show();
+        }
+
+        private void Notification_Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

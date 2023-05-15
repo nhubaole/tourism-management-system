@@ -12,21 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TourismManagementSystem.View;
 
-namespace TourismManagementSystem
+namespace TourismManagementSystem.UserControls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for UCThemCapNhatPhieu.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class UCThemCapNhatPhieu : UserControl
     {
-        public MainWindow()
+        public UCThemCapNhatPhieu()
         {
-        
             InitializeComponent();
-            LoginWindow lg = new LoginWindow();
-            lg.Show();
         }
     }
 }

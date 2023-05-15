@@ -1,0 +1,152 @@
+﻿<Window x:Class="TourismManagementSystem.Ticket"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TourismManagementSystem"
+        mc:Ignorable="d"
+        Title="Ticket" Height="450" Width="800"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="10*"/>
+
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="15*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+            </Grid>
+            <Grid Grid.Column="1"
+                  Background="{StaticResource Secondary}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="8*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0"
+                  >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="6*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions >
+
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <materialDesign:PackIcon 
+                                Kind="Magnify"
+                                
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Right"
+                                Margin="0, 0, 5, 4" 
+                                Panel.ZIndex="1"/>
+                            <TextBox
+                                x:Name="tbfilter1"
+                                Width="150"
+                                Height="25"
+                                materialDesign:HintAssist.Hint="Nhập thông tin"
+                                HorizontalAlignment="Right"
+                                Background="White"
+                                VerticalAlignment="Bottom"
+                                BorderBrush="{StaticResource Primary}"
+                                BorderThickness="1"  
+                                HorizontalContentAlignment="Center"
+                            >
+                            </TextBox>
+                        </Grid>
+                       
+                        <Grid Grid.Column="2"
+                              >
+                            <Label Content="Tìm kiếm theo:"
+                                   VerticalAlignment="Top"
+                                   FontSize="10"
+                                   Padding="-4"
+                                   />
+                            <ComboBox
+                                Height="25"
+                                Width="100"
+                                materialDesign:HintAssist.Hint="Filter"
+                                materialDesign:HintAssist.HelperTextFontSize="10"
+                                materialDesign:HintAssist.FloatingHintHorizontalAlignment="Center"
+                                MinWidth="65"
+                                Background="White"
+                                ItemsSource="{Binding LongIntegerList}"
+                                SelectedValue="{Binding SelectedValueOne}"
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Left"
+                                BorderBrush="{StaticResource Primary}"
+                                BorderThickness="1"
+                                HorizontalContentAlignment="Center">
+
+                            </ComboBox>
+                        </Grid>
+
+                    </Grid>
+
+                </Grid>
+                
+                <Grid Grid.Row="1">
+                    <Border BorderBrush="White" BorderThickness="0" CornerRadius="20" Background="{StaticResource White}" Height="300"
+                    Width="620">
+                        <Grid>
+                            <DataGrid ItemsSource="{Binding MyItems}" AutoGenerateColumns="False" >
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Mã vé" Binding="{Binding Property1}" Width="*">
+                                        <DataGridTextColumn.HeaderStyle>
+                                            <Style TargetType="DataGridColumnHeader">
+                                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                            </Style>
+                                        </DataGridTextColumn.HeaderStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Mã khách hàng" Binding="{Binding Property2}" Width="*">
+                                        <DataGridTextColumn.HeaderStyle>
+                                            <Style TargetType="DataGridColumnHeader">
+                                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                            </Style>
+                                        </DataGridTextColumn.HeaderStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Mã phiếu" Binding="{Binding Property3}" Width="*">
+                                        <DataGridTextColumn.HeaderStyle>
+                                            <Style TargetType="DataGridColumnHeader">
+                                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                            </Style>
+                                        </DataGridTextColumn.HeaderStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Ngày bán" Binding="{Binding Property4}" Width="*">
+                                        <DataGridTextColumn.HeaderStyle>
+                                            <Style TargetType="DataGridColumnHeader">
+                                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                            </Style>
+                                        </DataGridTextColumn.HeaderStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTemplateColumn Header="Trạng thái" Width="*">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <ComboBox ItemsSource="{Binding ComboBoxOptions}" SelectedItem="{Binding SelectedOption}" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                        <DataGridTemplateColumn.HeaderStyle>
+                                            <Style TargetType="DataGridColumnHeader">
+                                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                            </Style>
+                                        </DataGridTemplateColumn.HeaderStyle>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

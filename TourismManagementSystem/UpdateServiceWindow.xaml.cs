@@ -10,23 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TourismManagementSystem.View;
 
 namespace TourismManagementSystem
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for UpdateServiceWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class UpdateServiceWindow : Window
     {
-        public MainWindow()
+        public UpdateServiceWindow()
         {
-        
             InitializeComponent();
-            LoginWindow lg = new LoginWindow();
-            lg.Show();
         }
     }
 }
