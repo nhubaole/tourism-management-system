@@ -151,38 +151,56 @@
     <Compile Include="Model\VE.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="LocationManagementWindow.xaml.cs">
-      <DependentUpon>LocationManagementWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="NewLocationWindow.xaml.cs">
-      <DependentUpon>NewLocationWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="NewServiceWindow.xaml.cs">
-      <DependentUpon>NewServiceWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="RevenueStatisticsWindow.xaml.cs">
-      <DependentUpon>RevenueStatisticsWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ServiceManagementWindow.xaml.cs">
-      <DependentUpon>ServiceManagementWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UpdateLocationWindow.xaml.cs">
-      <DependentUpon>UpdateLocationWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UpdateServiceWindow.xaml.cs">
-      <DependentUpon>UpdateServiceWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\UCBooking.xaml.cs">
       <DependentUpon>UCBooking.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCCustomer.xaml.cs">
+      <DependentUpon>UCCustomer.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCHome.xaml.cs">
       <DependentUpon>UCHome.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UCLocation.xaml.cs">
+      <DependentUpon>UCLocation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UCMenuBar.xaml.cs">
       <DependentUpon>UCMenuBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UCNotification.xaml.cs">
+      <DependentUpon>UCNotification.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCRevenueStatistics.xaml.cs">
+      <DependentUpon>UCRevenueStatistics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCService.xaml.cs">
+      <DependentUpon>UCService.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCTicket.xaml.cs">
+      <DependentUpon>UCTicket.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddBookingWindow.xaml.cs">
+      <DependentUpon>AddBookingWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddLocationWindow.xaml.cs">
+      <DependentUpon>AddLocationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AddScheduleWindow.xaml.cs">
       <DependentUpon>AddScheduleWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddServiceWindow.xaml.cs">
+      <DependentUpon>AddServiceWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddTripWindow.xaml.cs">
+      <DependentUpon>AddTripWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BookingDetailsWindow.xaml.cs">
+      <DependentUpon>BookingDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DetailTicketWindow.xaml.cs">
+      <DependentUpon>DetailTicketWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PurchaseWindow.xaml.cs">
+      <DependentUpon>PurchaseWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ScheduleDetailsWindow.xaml.cs">
       <DependentUpon>ScheduleDetailsWindow.xaml</DependentUpon>
@@ -193,18 +211,9 @@
     <Compile Include="View\TourDetailsWindow.xaml.cs">
       <DependentUpon>TourDetailsWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="LocationManagementWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="NewLocationWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="NewServiceWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <Compile Include="View\TripDetailsWindow.xaml.cs">
+      <DependentUpon>TripDetailsWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="Resource\ChoiceChipStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -212,54 +221,12 @@
     <Compile Include="UserControls\InfoBarUC.xaml.cs">
       <DependentUpon>InfoBarUC.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\UCChuyenDetail.xaml.cs">
-      <DependentUpon>UCChuyenDetail.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\UCPhieuDetail.xaml.cs">
-      <DependentUpon>UCPhieuDetail.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\UCThemCapNhatChuyen.xaml.cs">
-      <DependentUpon>UCThemCapNhatChuyen.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\UCThemCapNhatPhieu.xaml.cs">
-      <DependentUpon>UCThemCapNhatPhieu.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\UCTour.xaml.cs">
       <DependentUpon>UCTour.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCTrip.xaml.cs">
       <DependentUpon>UCTrip.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Customer.xaml.cs">
-      <DependentUpon>Customer.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="DetailTicket.xaml.cs">
-      <DependentUpon>DetailTicket.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Location.xaml.cs">
-      <DependentUpon>Location.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Notification.xaml.cs">
-      <DependentUpon>Notification.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Purchase.xaml.cs">
-      <DependentUpon>Purchase.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Ticket.xaml.cs">
-      <DependentUpon>Ticket.xaml</DependentUpon>
-    </Compile>
-    <Page Include="Customer.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="DetailTicket.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Location.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Compile Include="UserControls\UCScheduleItem.xaml.cs">
       <DependentUpon>UCScheduleItem.xaml</DependentUpon>
     </Compile>
@@ -285,14 +252,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Notification.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Purchase.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Resource\ColorPalette.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -305,43 +264,35 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\UCChuyenDetail.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="UserControls\UCCustomer.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\UCPhieuDetail.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="UserControls\UCLocation.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\UCThemCapNhatChuyen.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="UserControls\UCNotification.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\UCThemCapNhatPhieu.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="UserControls\UCRevenueStatistics.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCService.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCTicket.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\UCTour.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\UCTrip.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="RevenueStatisticsWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ServiceManagementWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UpdateLocationWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UpdateServiceWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -357,7 +308,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\AddBookingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddLocationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AddScheduleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddServiceWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -365,11 +328,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\AddTripWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BookingDetailsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DetailTicketWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Ticket.xaml">
+    <Page Include="View\PurchaseWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -382,6 +357,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\TourDetailsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TripDetailsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

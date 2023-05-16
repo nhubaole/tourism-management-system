@@ -10,29 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TourismManagementSystem
+namespace TourismManagementSystem.UserControls
 {
     /// <summary>
-    /// Interaction logic for ServiceManagementWindow.xaml
+    /// Interaction logic for UCTicket.xaml
     /// </summary>
-    public partial class ServiceManagementWindow : Window
+    public partial class UCTicket : UserControl
     {
-        public ServiceManagementWindow()
+        public UCTicket()
         {
             InitializeComponent();
-          
-        }
-
-        private void ListBoxItem_Selected(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

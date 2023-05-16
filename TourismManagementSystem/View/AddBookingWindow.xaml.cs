@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace TourismManagementSystem
+namespace TourismManagementSystem.View
 {
     /// <summary>
-    /// Interaction logic for Location.xaml
+    /// Interaction logic for AddBookingWindow.xaml
     /// </summary>
-    public partial class Location : Window
+    public partial class AddBookingWindow : Window
     {
-        public Location()
+        public AddBookingWindow()
         {
             InitializeComponent();
         }

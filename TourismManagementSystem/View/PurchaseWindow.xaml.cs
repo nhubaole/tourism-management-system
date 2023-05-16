@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace TourismManagementSystem
+namespace TourismManagementSystem.View
 {
     /// <summary>
-    /// Interaction logic for Customer.xaml
+    /// Interaction logic for PurchaseWindow.xaml
     /// </summary>
-    public partial class Customer : Window
+    public partial class PurchaseWindow : Window
     {
-        public Customer()
+        public PurchaseWindow()
         {
             InitializeComponent();
         }

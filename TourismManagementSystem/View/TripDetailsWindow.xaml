@@ -1,12 +1,18 @@
-﻿<UserControl
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:TourismManagementSystem.UserControls"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="TourismManagementSystem.UserControls.UCChuyenDetail"
-             mc:Ignorable="d" 
-             d:DesignHeight="550" d:DesignWidth="900">
+﻿<Window x:Class="TourismManagementSystem.View.TripDetailsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TourismManagementSystem.View"
+        mc:Ignorable="d"
+        Title="TripDetailsWindow" Height="550" Width="900"
+        ResizeMode="NoResize"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        xmlns:uc="clr-namespace:TourismManagementSystem.UserControls"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource Secondary}">
     <Grid Margin="50,20,50,20">
         <Border Background="White"
                 CornerRadius="20,20,20,20">
@@ -199,4 +205,4 @@
             </Grid>
         </Border>
     </Grid>
-</UserControl>
+</Window>

@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TourismManagementSystem
+namespace TourismManagementSystem.UserControls
 {
     /// <summary>
-    /// Interaction logic for NewServiceWindow.xaml
+    /// Interaction logic for UCLocation.xaml
     /// </summary>
-    public partial class NewServiceWindow : Window
+    public partial class UCLocation : UserControl
     {
-        public NewServiceWindow()
+        public UCLocation()
         {
             InitializeComponent();
         }

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace TourismManagementSystem.UserControls
 {
     /// <summary>
-    /// Interaction logic for UCThemCapNhatChuyen.xaml
+    /// Interaction logic for UCCustomer.xaml
     /// </summary>
-    public partial class UCThemCapNhatChuyen : UserControl
+    public partial class UCCustomer : UserControl
     {
-        public UCThemCapNhatChuyen()
+        public UCCustomer()
         {
             InitializeComponent();
         }

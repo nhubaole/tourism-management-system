@@ -12,21 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace TourismManagementSystem
+namespace TourismManagementSystem.View
 {
     /// <summary>
-    /// Interaction logic for Ticket.xaml
+    /// Interaction logic for AddLocationWindow.xaml
     /// </summary>
-    public partial class Ticket : Window
+    public partial class AddLocationWindow : Window
     {
-        public Ticket()
+        public AddLocationWindow()
         {
             InitializeComponent();
-        }
-
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

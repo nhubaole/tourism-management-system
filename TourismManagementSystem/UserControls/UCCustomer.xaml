@@ -1,0 +1,358 @@
+﻿<UserControl x:Class="TourismManagementSystem.UserControls.UCCustomer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TourismManagementSystem.UserControls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="900"
+             Background="{StaticResource Secondary}">
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width ="5*"/>
+            <ColumnDefinition Width ="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="7*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="6*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Button 
+                                Grid.Column="1"
+                                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                Height="25"
+                                Width="100"
+                                VerticalAlignment="Bottom"
+                                Background="{StaticResource Primary}"
+                                materialDesign:ButtonAssist.CornerRadius="15"
+                                ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
+                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                        <TextBlock
+                                Text="Thêm"
+                                FontSize="12"/>
+                    </Button>
+                </Grid>
+
+                <Grid Grid.Column="1">
+
+                    <Grid Grid.Column="0">
+                        <materialDesign:PackIcon 
+                                Kind="Magnify"
+                                
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Right"
+                                Margin="0, 0, 15, 4" 
+                                Panel.ZIndex="1"/>
+                        <TextBox
+                                x:Name="tbfilter1"
+                                Width="150"
+                                Height="25"
+                                materialDesign:HintAssist.Hint="Nhập thông tin"
+                                HorizontalAlignment="Center"
+                                Background="White"
+                                VerticalAlignment="Bottom"
+                                BorderBrush="{StaticResource Primary}"
+                                BorderThickness="1"  
+                                Margin="0,0,10,0"                                    
+                                HorizontalContentAlignment="Center">
+                        </TextBox>
+                    </Grid>
+                </Grid>
+
+
+                <Grid Grid.Column="1"
+                              >
+                    <Label Content="Tìm kiếm theo:"
+                                   VerticalAlignment="Top"
+                                   FontSize="10"
+                                   Padding="-4" Margin="0,18,0,0"
+                                   />
+                    <ComboBox
+                                Height="25"
+                                Width="100"
+                                materialDesign:HintAssist.Hint="Filter"
+                                materialDesign:HintAssist.HelperTextFontSize="10"
+                                materialDesign:HintAssist.FloatingHintHorizontalAlignment="Center"
+                                MinWidth="65"
+                                Background="White"
+                                ItemsSource="{Binding LongIntegerList}"
+                                SelectedValue="{Binding SelectedValueOne}"
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Left"
+                                BorderBrush="{StaticResource Primary}"
+                                BorderThickness="1"
+                                HorizontalContentAlignment="Center">
+
+                    </ComboBox>
+                </Grid>
+
+
+            </Grid>
+            <Grid Grid.Row="1">
+
+                <Border BorderBrush="Black" BorderThickness="0"  Background="{StaticResource White}" Height="400" CornerRadius="20" Margin="20,0,20,0">
+
+
+                    <DataGrid Background="White">
+                        <DataGrid.Columns  >
+                            <DataGridTextColumn Header="Mã khách hàng"  Binding="{Binding Column1}" Width ="*"/>
+                            <DataGridTextColumn Header="Tên khách" Binding="{Binding Column2}" Width ="*"/>
+                            <DataGridTextColumn Header="Số điện thoại" Binding="{Binding Column3}" Width ="*"/>
+                        </DataGrid.Columns>
+
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="Height" Value="25" />
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="FontSize" Value="12"/>
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
+                    </DataGrid>
+
+
+                </Border>
+
+
+            </Grid>
+
+        </Grid>
+        <Grid Grid.Column="1">
+            <Border BorderBrush="Black" BorderThickness="0"  Background="{StaticResource Primary}"  CornerRadius="20" Margin="10,20,20,10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="8*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <TextBlock
+                                     Text="Thanh toán"
+                                    Foreground="White"
+                                    FontSize="18"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Bottom"
+                                    Margin="30,0,0,7"/>
+                    </Grid>
+                    <Grid Grid.Row="1" Background="White">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+
+                            <RowDefinition Height="*"/>
+
+
+                            <RowDefinition Height="4*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0">
+                                <TextBlock
+                                            Text="Mã khách hàng :"
+                                            Foreground="Black"
+                                            FontSize="11"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Margin="20,0,0,0"/>
+                            </Grid>
+
+                            <Grid Grid.Column="1">
+                                <Label
+                                            Background="{StaticResource Secondary}"
+                                            Margin="0,0,10,5"/>
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Row="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <TextBlock
+                                            Text="Tên khách hàng :"
+                                            Foreground="Black"
+                                            FontSize="11"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Margin="20,0,0,0"/>
+                            </Grid>
+
+                            <Grid Grid.Column="1">
+                                <TextBox
+                                            Background="{StaticResource Secondary}"
+                                            Margin="0,0,10,5"/>
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <TextBlock
+                                            Text="CCCD :"
+                                            Foreground="Black"
+                                            FontSize="11"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Margin="20,0,0,0"/>
+                            </Grid>
+
+                            <Grid Grid.Column="1">
+                                <TextBox
+                                            Background="{StaticResource Secondary}"
+                                            Margin="0,0,10,5"/>
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Row="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <TextBlock
+                                            Text="Số điện thoại :"
+                                            Foreground="Black"
+                                            FontSize="11"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Margin="20,0,0,0"/>
+                            </Grid>
+
+                            <Grid Grid.Column="1">
+                                <TextBox
+                                            Background="{StaticResource Secondary}"
+                                            Margin="0,0,10,5"/>
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Row="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <TextBlock
+                                            Text="Email :"
+                                            Foreground="Black"
+                                            FontSize="11"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Margin="20,0,0,0"/>
+                            </Grid>
+
+                            <Grid Grid.Column="1">
+                                <TextBox
+                                            Background="{StaticResource Secondary}"
+                                            Margin="0,0,10,5"/>
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Row="6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0">
+                                <TextBlock
+                                            Text="Địa chỉ :"
+                                            Foreground="Black"
+                                            FontSize="11"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Margin="20,0,0,0"/>
+                            </Grid>
+
+                            <Grid Grid.Column="1">
+                                <TextBox
+                                            Background="{StaticResource Secondary}"
+                                            Margin="0,0,10,5"/>
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Row="7">
+                            <TextBlock
+                                            Text="Danh sách phiếu đã đặt :"
+                                            Foreground="Black"
+                                            FontSize="11"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            Margin="20,0,0,0"/>
+                        </Grid>
+                        <Grid Grid.Row="8">
+                            <Border BorderBrush="Black" BorderThickness="0"  Background="{StaticResource White}" CornerRadius="20" >
+
+                                <Label
+                                         Background="{StaticResource Secondary}"
+                                            Margin="10,10,10,10"/>
+                            </Border>
+
+                        </Grid>
+
+                    </Grid>
+                    <Grid Grid.Row="2" >
+                        <Border BorderBrush="Black" BorderThickness="0" Background="White"   CornerRadius="0,0,20,20" >
+                            <Grid  >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0">
+                                    <Button
+                                                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                                Height="25"
+                                                Width="80"
+                                                VerticalAlignment="Center"
+                                                Background="{StaticResource Primary}"
+                                                materialDesign:ButtonAssist.CornerRadius="15"
+                                                ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
+                                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                                        <TextBlock
+                                                Text="Cập nhật"
+                                                FontSize="12"/>
+                                    </Button>
+                                </Grid>
+                                <Grid Grid.Column="1">
+                                    <Button
+                                                Height="25"
+                                                Width="80"
+                                                VerticalAlignment="Center"
+                                                Background="White"
+                                                materialDesign:ButtonAssist.CornerRadius="15"
+                                                BorderBrush="Black"
+                                                BorderThickness="0.5"
+                                                ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
+                                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                                        <TextBlock
+                                                Text="Xóa"
+                                                Foreground="Black"   
+                                                FontSize="12"/>
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </Border>
+
+                    </Grid>
+                </Grid>
+            </Border>
+
+        </Grid>
+
+    </Grid>
+</UserControl>
