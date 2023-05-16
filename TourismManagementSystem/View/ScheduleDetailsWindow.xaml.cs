@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TourismManagementSystem.UserControls
+namespace TourismManagementSystem.View
 {
     /// <summary>
-    /// Interaction logic for UCAddSchedules.xaml
+    /// Interaction logic for ScheduleDetailsWindow.xaml
     /// </summary>
-    public partial class UCAddSchedules : UserControl
+    public partial class ScheduleDetailsWindow : Window
     {
-        public UCAddSchedules()
+        public ScheduleDetailsWindow()
         {
             InitializeComponent();
         }

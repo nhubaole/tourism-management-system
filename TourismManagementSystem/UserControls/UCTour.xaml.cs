@@ -16,14 +16,13 @@ using System.Windows.Shapes;
 namespace TourismManagementSystem.UserControls
 {
     /// <summary>
-    /// Interaction logic for UCQuanLyPhieuDatCho.xaml
+    /// Interaction logic for UCTour.xaml
     /// </summary>
-    public partial class UCQuanLyPhieuDatCho : UserControl
+    public partial class UCTour : UserControl
     {
-        public UCQuanLyPhieuDatCho()
+        public UCTour()
         {
             InitializeComponent();
         }
-
     }
 }

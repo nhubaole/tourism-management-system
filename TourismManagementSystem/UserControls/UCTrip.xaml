@@ -1,15 +1,15 @@
-﻿<UserControl
+﻿<UserControl 
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="TourismManagementSystem.UserControls.UCTrip"
              xmlns:local="clr-namespace:TourismManagementSystem.UserControls"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="TourismManagementSystem.UserControls.UCQuanLyPhieuDatCho"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="900">
     <Grid Background="{DynamicResource Secondary}">
-        <Button Style="{StaticResource ResourceKey=PrimaryButton}"  Content="Danh sách" HorizontalAlignment="Left" Margin="50,30,0,0" VerticalAlignment="Top" Height="35" Width="145" FontSize="18" Foreground="{DynamicResource White}" />
-        <Button Style="{StaticResource ResourceKey=SecondaryButton}"  Content="Thêm" HorizontalAlignment="Left" Margin="230,30,0,0" VerticalAlignment="Top" Height="35" Width="145" FontSize="18" Foreground="{DynamicResource Black}"/>
+        <Button Style="{StaticResource ResourceKey=SecondaryButton}"  Content="Tuyến" HorizontalAlignment="Left" Margin="50,30,0,0" VerticalAlignment="Top" Height="35" Width="145" FontSize="18" Foreground="{DynamicResource Black}"/>
+        <Button Style="{StaticResource ResourceKey=PrimaryButton}"  Content="Chuyến" HorizontalAlignment="Left" Margin="230,30,0,0" VerticalAlignment="Top" Height="35" Width="145" FontSize="18" Foreground="{DynamicResource White}"/>
         <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="18,100,18,40">
             <DataGrid.Columns>
                 <materialDesign:DataGridTextColumn/>
@@ -25,9 +25,9 @@
             X2="19" Y2="35" 
             Margin="729,30,135,488"/>
         <ComboBox VerticalAlignment="Stretch" Margin="765,39,28,496">
-            <ComboBoxItem Content="Mã Phiếu"></ComboBoxItem>
-            <ComboBoxItem Content="Tên Khách hàng"></ComboBoxItem>
-            <ComboBoxItem Content="Tình Trạng"></ComboBoxItem>
+            <ComboBoxItem Content="Mã Tuyến"></ComboBoxItem>
+            <ComboBoxItem Content="Tên Tuyến"></ComboBoxItem>
+            <ComboBoxItem Content="Loại Tuyến"></ComboBoxItem>
         </ComboBox>
         <materialDesign:PackIcon Kind="Magnify" Margin="726,38,158,0" RenderTransformOrigin="0.25,0.438" HorizontalAlignment="Stretch"/>
         <Label Content="Tìm kiếm theo" HorizontalAlignment="Left" Margin="747,10,0,0" VerticalAlignment="Top"/>
