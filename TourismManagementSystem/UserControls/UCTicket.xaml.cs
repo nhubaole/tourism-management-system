@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TourismManagementSystem
+namespace TourismManagementSystem.UserControls
 {
     /// <summary>
-    /// Interaction logic for DetailTicket.xaml
+    /// Interaction logic for UCTicket.xaml
     /// </summary>
-    public partial class DetailTicket : Window
+    public partial class UCTicket : UserControl
     {
-        public DetailTicket()
+        public UCTicket()
         {
             InitializeComponent();
         }

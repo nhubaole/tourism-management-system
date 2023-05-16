@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LiveCharts;
+using LiveCharts.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,21 +12,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using LiveCharts;
-using LiveCharts.Wpf;
 
-namespace TourismManagementSystem
+namespace TourismManagementSystem.UserControls
 {
     /// <summary>
-    /// Interaction logic for RevenueStatisticsWindow.xaml
+    /// Interaction logic for UCRevenueStatistics.xaml
     /// </summary>
-    public partial class RevenueStatisticsWindow : Window
+    public partial class UCRevenueStatistics : UserControl
     {
-        public RevenueStatisticsWindow()
+        public UCRevenueStatistics()
         {
-            InitializeComponent();
-            //SeriesCollection lưu trữ dl biểu đồ
+            InitializeComponent();//SeriesCollection lưu trữ dl biểu đồ
             SeriesCollection = new SeriesCollection
             {
                 new ColumnSeries{
@@ -49,10 +49,9 @@ namespace TourismManagementSystem
             DataContext = this;
 
         }
-        public SeriesCollection SeriesCollection { get; private set; }  
+        public SeriesCollection SeriesCollection { get; private set; }
         public String[] Labels { get; private set; }
         //lấy giá trị trong Value để chuyển đổi thành dạng cột Y
         public Func<double, String> Values { get; private set; }
-        
     }
 }

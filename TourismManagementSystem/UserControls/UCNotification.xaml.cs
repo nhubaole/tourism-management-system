@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TourismManagementSystem
+namespace TourismManagementSystem.UserControls
 {
     /// <summary>
-    /// Interaction logic for Purchase.xaml
+    /// Interaction logic for UCNotification.xaml
     /// </summary>
-    public partial class Purchase : Window
+    public partial class UCNotification : UserControl
     {
-        public Purchase()
+        public UCNotification()
         {
             InitializeComponent();
         }
