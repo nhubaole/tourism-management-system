@@ -178,6 +178,18 @@
     <Compile Include="UserControls\UCTicket.xaml.cs">
       <DependentUpon>UCTicket.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\BookingVM.cs" />
+    <Compile Include="ViewModel\CustomerVM.cs" />
+    <Compile Include="ViewModel\HomeVM.cs" />
+    <Compile Include="ViewModel\LocationVM.cs" />
+    <Compile Include="ViewModel\MainVM.cs" />
+    <Compile Include="ViewModel\NotificationVM.cs" />
+    <Compile Include="ViewModel\RevenueStatisticVM.cs" />
+    <Compile Include="ViewModel\ServiceVM.cs" />
+    <Compile Include="ViewModel\TicketVM.cs" />
+    <Compile Include="ViewModel\TourVM.cs" />
+    <Compile Include="ViewModel\TripVM.cs" />
     <Compile Include="View\AddBookingWindow.xaml.cs">
       <DependentUpon>AddBookingWindow.xaml</DependentUpon>
     </Compile>
@@ -253,6 +265,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resource\ColorPalette.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\DataTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resource\MainResource.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
