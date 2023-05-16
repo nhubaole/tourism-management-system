@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TourismManagementSystem.UserControls
+namespace TourismManagementSystem.View
 {
     /// <summary>
-    /// Interaction logic for UCThemCapNhatChuyen.xaml
+    /// Interaction logic for AddBookingWindow.xaml
     /// </summary>
-    public partial class UCThemCapNhatChuyen : UserControl
+    public partial class AddBookingWindow : Window
     {
-        public UCThemCapNhatChuyen()
+        public AddBookingWindow()
         {
             InitializeComponent();
         }

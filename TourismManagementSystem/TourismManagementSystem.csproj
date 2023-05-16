@@ -181,8 +181,17 @@
     <Compile Include="UserControls\UCMenuBar.xaml.cs">
       <DependentUpon>UCMenuBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\AddBookingWindow.xaml.cs">
+      <DependentUpon>AddBookingWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AddScheduleWindow.xaml.cs">
       <DependentUpon>AddScheduleWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddTripWindow.xaml.cs">
+      <DependentUpon>AddTripWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BookingDetailsWindow.xaml.cs">
+      <DependentUpon>BookingDetailsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ScheduleDetailsWindow.xaml.cs">
       <DependentUpon>ScheduleDetailsWindow.xaml</DependentUpon>
@@ -192,6 +201,9 @@
     </Compile>
     <Compile Include="View\TourDetailsWindow.xaml.cs">
       <DependentUpon>TourDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TripDetailsWindow.xaml.cs">
+      <DependentUpon>TripDetailsWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="LocationManagementWindow.xaml">
       <SubType>Designer</SubType>
@@ -211,18 +223,6 @@
     </Page>
     <Compile Include="UserControls\InfoBarUC.xaml.cs">
       <DependentUpon>InfoBarUC.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\UCChuyenDetail.xaml.cs">
-      <DependentUpon>UCChuyenDetail.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\UCPhieuDetail.xaml.cs">
-      <DependentUpon>UCPhieuDetail.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\UCThemCapNhatChuyen.xaml.cs">
-      <DependentUpon>UCThemCapNhatChuyen.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\UCThemCapNhatPhieu.xaml.cs">
-      <DependentUpon>UCThemCapNhatPhieu.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCTour.xaml.cs">
       <DependentUpon>UCTour.xaml</DependentUpon>
@@ -305,22 +305,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControls\UCChuyenDetail.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserControls\UCPhieuDetail.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserControls\UCThemCapNhatChuyen.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="UserControls\UCThemCapNhatPhieu.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="UserControls\UCTour.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -357,11 +341,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\AddBookingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\AddScheduleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddTourWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddTripWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BookingDetailsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -382,6 +378,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\TourDetailsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TripDetailsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
