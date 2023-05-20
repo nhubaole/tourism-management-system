@@ -12,8 +12,12 @@
         xmlns:uc="clr-namespace:TourismManagementSystem.UserControls"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowStartupLocation="CenterScreen"
-        Background="{StaticResource Secondary}">
-    <Grid Margin="50,30,50,30">
+        Background="{StaticResource Secondary}"
+        xmlns:vm="clr-namespace:TourismManagementSystem.ViewModel">
+    <Window.DataContext>
+        <vm:ScheduleVM/>
+    </Window.DataContext>
+    <Grid Margin="40,30,40,30">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition/>
@@ -23,7 +27,7 @@
             <TextBlock Text="Số ngày đêm: "
                        FontSize="20"
                        FontWeight="Medium"/>
-            <TextBlock Text="3 ngày 2 đêm"
+            <TextBlock Text="{Binding SoNgayDem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                        FontSize="20"
                        FontWeight="Bold"
                        Foreground="{StaticResource Primary}"/>

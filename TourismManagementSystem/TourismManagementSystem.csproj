@@ -178,6 +178,7 @@
     <Compile Include="UserControls\UCTicket.xaml.cs">
       <DependentUpon>UCTicket.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\AddTourVM.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BookingVM.cs" />
     <Compile Include="ViewModel\CustomerVM.cs" />
@@ -186,6 +187,7 @@
     <Compile Include="ViewModel\MainVM.cs" />
     <Compile Include="ViewModel\NotificationVM.cs" />
     <Compile Include="ViewModel\RevenueStatisticVM.cs" />
+    <Compile Include="ViewModel\ScheduleVM.cs" />
     <Compile Include="ViewModel\ServiceVM.cs" />
     <Compile Include="ViewModel\TicketVM.cs" />
     <Compile Include="ViewModel\TourVM.cs" />
