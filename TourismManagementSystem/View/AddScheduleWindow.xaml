@@ -12,7 +12,11 @@
         xmlns:uc="clr-namespace:TourismManagementSystem.UserControls"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowStartupLocation="CenterScreen"
-        Background="{StaticResource Secondary}">
+        Background="{StaticResource Secondary}"
+        xmlns:vm="clr-namespace:TourismManagementSystem.ViewModel">
+    <Window.DataContext>
+        <vm:AddScheduleVM/>
+    </Window.DataContext>
     <Grid Margin="50,20,50,20">
         <Border Background="White"
                 CornerRadius="20,20,20,20">
@@ -52,52 +56,30 @@
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0"
                                        Text="Địa điểm đi"
-                                       FontSize="28"
+                                       FontSize="24"
                                        FontWeight="Bold"
-                                       Foreground="{StaticResource Primary}"/>
-                            <Grid Grid.Row="1">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock FontSize="16"
-                                               FontWeight="SemiBold"
-                                               Text="Mã địa điểm đi: "
-                                               Height="20"
-                                               Margin="0,0,10,0"/>
-                                    <ComboBox Width="180"
-                                              Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                              Height="40"
-                                              FontSize="16"
-                                              Margin="0,0,10,0"/>
-                                    <Button Style="{StaticResource MaterialDesignIconButton}"
-                                            Width="30"
-                                            Height="30">
-                                        <materialDesign:PackIcon Foreground="{StaticResource Primary}" Kind="Eye" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Button>
-                                </StackPanel>
-                            </Grid>
+                                       Foreground="{StaticResource Primary}"
+                                       VerticalAlignment="Bottom"/>
+                            <ComboBox Width="Auto" Grid.Row="1"
+                                    Height="40"
+                                    FontSize="16"
+                                    Margin="0,0,10,0"
+                                    ItemsSource="{Binding ListDiaDiem}"
+                                      DisplayMemberPath="TENDD"
+                                      SelectedItem="{Binding DDDi}"/>
                             <TextBlock Grid.Row="2"
                                        Text="Địa điểm đến"
-                                       FontSize="28"
+                                       FontSize="24"
                                        FontWeight="Bold"
-                                       Foreground="{StaticResource Primary}"/>
-                            <Grid Grid.Row="3">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock FontSize="16"
-                                               FontWeight="SemiBold"
-                                               Text="Mã địa điểm đến: "
-                                               Height="20"
-                                               Margin="0,0,10,0"/>
-                                    <ComboBox Width="180"
-                                              Style="{StaticResource MaterialDesignOutlinedComboBox}"
-                                              Height="40"
-                                              FontSize="16"
-                                              Margin="0,0,10,0"/>
-                                    <Button Style="{StaticResource MaterialDesignIconButton}"
-                                            Width="30"
-                                            Height="30">
-                                        <materialDesign:PackIcon Foreground="{StaticResource Primary}" Kind="Eye" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Button>
-                                </StackPanel>
-                            </Grid>
+                                       Foreground="{StaticResource Primary}"
+                                       VerticalAlignment="Bottom"/>
+                            <ComboBox Width="Auto" Grid.Row="3"
+                                    Height="40"
+                                    FontSize="16"
+                                    Margin="0,0,10,0"
+                                    ItemsSource="{Binding Path=ListDiaDiem}"
+                                    DisplayMemberPath="TENDD"
+                                      SelectedItem="{Binding DDDen}"/>
                         </Grid>
                         <Grid Grid.Row="1" Margin="0,20,0,0">
                             <Image Source="../Resource/Image/scheduleImg.png"/>
@@ -105,133 +87,83 @@
                     </Grid>
                     <Grid Grid.Column="1" Margin="20,0,0,0">
                         <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
+                            <RowDefinition Height="40"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0"
                                    Text="Các dịch vụ"
-                                   FontSize="28"
+                                   FontSize="24"
                                    FontWeight="Bold"
                                    Foreground="{StaticResource Primary}"/>
-                        <Grid Grid.Row="1">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock FontSize="16"
+                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                            <StackPanel Margin="0,0,20,0">
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                    <TextBlock FontSize="16"
                                            FontWeight="SemiBold"
-                                           Text="Mã phương tiện: "
+                                           Text="Phương tiện: "
                                            Height="25"
                                            Margin="0,0,10,0"
                                            VerticalAlignment="Center"/>
-                                <Button VerticalAlignment="Center" Style="{StaticResource MaterialDesignIconButton}"
+                                    <Button VerticalAlignment="Center" Style="{StaticResource MaterialDesignIconButton}"
                                             Width="30"
-                                            Height="30">
-                                    <materialDesign:PackIcon Foreground="{StaticResource Primary}" Kind="AddBox" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Button>
-                            </StackPanel>
-                        </Grid>
-                        <Grid Grid.Row="2">
-                            <StackPanel Orientation="Horizontal">
-                                <ComboBox Width="250"
-                                              Height="25"
-                                              FontSize="16"
-                                              Margin="0,0,10,0"/>
-                                <Button Style="{StaticResource MaterialDesignIconButton}"
-                                            Width="30"
-                                            Height="30">
-                                    <materialDesign:PackIcon Foreground="{StaticResource Primary}" Kind="Eye" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Button>
-                            </StackPanel>
-                        </Grid>
-                        <Grid Grid.Row="3">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock FontSize="16"
+                                            Height="30"
+                                        Command="{Binding AddPTBoxCommand}">
+                                        <materialDesign:PackIcon Foreground="{StaticResource Primary}" Kind="AddBox" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Button>
+                                </StackPanel>
+                                <ItemsControl ItemsSource="{Binding PhuongTienBoxes}" HorizontalContentAlignment="Stretch" />
+
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                    <TextBlock FontSize="16"
                                            FontWeight="SemiBold"
-                                           Text="Mã nhà hàng: "
+                                           Text="Nhà hàng: "
                                            Height="25"
                                            Margin="0,0,10,0"
                                            VerticalAlignment="Center"/>
-                                <Button VerticalAlignment="Center" Style="{StaticResource MaterialDesignIconButton}"
+                                    <Button VerticalAlignment="Center" Style="{StaticResource MaterialDesignIconButton}"
                                             Width="30"
-                                            Height="30">
-                                    <materialDesign:PackIcon Foreground="{StaticResource Primary}" Kind="AddBox" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Button>
-                            </StackPanel>
-                        </Grid>
-                        <Grid Grid.Row="4">
-                            <StackPanel Orientation="Horizontal">
-                                <ComboBox Width="250"
-                                              Height="25"
-                                              FontSize="16"
-                                              Margin="0,0,10,0"/>
-                                <Button Style="{StaticResource MaterialDesignIconButton}"
-                                            Width="30"
-                                            Height="30">
-                                    <materialDesign:PackIcon Foreground="{StaticResource Primary}" Kind="Eye" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Button>
-                            </StackPanel>
-                        </Grid>
-                        <Grid Grid.Row="5">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock FontSize="16"
+                                            Height="30"
+                                        Command="{Binding AddNHBoxCommand}">
+                                        <materialDesign:PackIcon Foreground="{StaticResource Primary}" Kind="AddBox" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Button>
+                                </StackPanel>
+                                <ItemsControl ItemsSource="{Binding NhaHangBoxes}" HorizontalContentAlignment="Stretch" />
+
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                    <TextBlock FontSize="16"
                                            FontWeight="SemiBold"
-                                           Text="Mã khách sạn: "
+                                           Text="Khách sạn: "
                                            Height="25"
                                            Margin="0,0,10,0"
                                            VerticalAlignment="Center"/>
-                                <Button VerticalAlignment="Center" Style="{StaticResource MaterialDesignIconButton}"
+                                    <Button VerticalAlignment="Center" Style="{StaticResource MaterialDesignIconButton}"
                                             Width="30"
-                                            Height="30">
-                                    <materialDesign:PackIcon Foreground="{StaticResource Primary}" Kind="AddBox" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Button>
-                            </StackPanel>
-                        </Grid>
-                        <Grid Grid.Row="6">
-                            <StackPanel Orientation="Horizontal">
-                                <ComboBox Width="250"
-                                              Height="25"
-                                              FontSize="16"
-                                              Margin="0,0,10,0"/>
-                                <Button Style="{StaticResource MaterialDesignIconButton}"
-                                            Width="30"
-                                            Height="30">
-                                    <materialDesign:PackIcon Foreground="{StaticResource Primary}" Kind="Eye" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Button>
-                            </StackPanel>
-                        </Grid>
-                        <Grid Grid.Row="7">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock FontSize="16"
+                                            Height="30"
+                                        Command="{Binding AddKSBoxCommand}">
+                                        <materialDesign:PackIcon Foreground="{StaticResource Primary}" Kind="AddBox" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Button>
+                                </StackPanel>
+                                <ItemsControl ItemsSource="{Binding KhachSanBoxes}" HorizontalContentAlignment="Stretch" />
+
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                    <TextBlock FontSize="16"
                                            FontWeight="SemiBold"
-                                           Text="Mã dịch vụ khác: "
+                                           Text="Dịch vụ khác: "
                                            Height="25"
                                            Margin="0,0,10,0"
                                            VerticalAlignment="Center"/>
-                                <Button VerticalAlignment="Center" Style="{StaticResource MaterialDesignIconButton}"
+                                    <Button VerticalAlignment="Center" Style="{StaticResource MaterialDesignIconButton}"
                                             Width="30"
-                                            Height="30">
-                                    <materialDesign:PackIcon Foreground="{StaticResource Primary}" Kind="AddBox" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Button>
+                                            Height="30"
+                                        Command="{Binding AddDVBoxCommand}">
+                                        <materialDesign:PackIcon Foreground="{StaticResource Primary}" Kind="AddBox" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Button>
+                                </StackPanel>
+                                <ItemsControl ItemsSource="{Binding DVKhacBoxes}" HorizontalContentAlignment="Stretch" />
+
                             </StackPanel>
-                        </Grid>
-                        <Grid Grid.Row="8">
-                            <StackPanel Orientation="Horizontal">
-                                <ComboBox Width="250"
-                                              Height="25"
-                                              FontSize="16"
-                                              Margin="0,0,10,0"/>
-                                <Button Style="{StaticResource MaterialDesignIconButton}"
-                                            Width="30"
-                                            Height="30">
-                                    <materialDesign:PackIcon Foreground="{StaticResource Primary}" Kind="Eye" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Button>
-                            </StackPanel>
-                        </Grid>
+                        </ScrollViewer>
+                        
                     </Grid>
                 </Grid>
                 <Button Grid.Row="1" 
@@ -243,7 +175,8 @@
                         BorderBrush="Transparent"
                         materialDesign:ButtonAssist.CornerRadius="20"
                         Foreground="White"
-                        FontSize="20">Thêm</Button>
+                        FontSize="20"
+                        Command="{Binding AddScheduleCommand}">Thêm</Button>
             </Grid>
         </Border>
     </Grid>

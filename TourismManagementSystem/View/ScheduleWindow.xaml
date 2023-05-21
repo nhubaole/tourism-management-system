@@ -21,6 +21,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <StackPanel VerticalAlignment="Center"
                     Orientation="Horizontal">
@@ -49,7 +50,9 @@
                                                FontWeight="Bold"
                                                Foreground="{StaticResource Primary}"
                                                Margin="0,0,50,0"/>
-                                    <Button Style="{StaticResource MaterialDesignFlatAccentButton}"
+                                    <Button Command="{Binding AddScheduleCommand}"
+                                            Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                                            BorderThickness="0"
                                             Foreground="White"
                                             Background="{StaticResource Primary}"
                                             Width="170"
@@ -60,7 +63,7 @@
                                         </StackPanel>
                                     </Button>
                                 </StackPanel>
-                                <ItemsControl Grid.Row="1" ItemsSource="{Binding ListLichTrinh}" HorizontalContentAlignment="Stretch" >
+                                <ItemsControl Grid.Row="1" ItemsSource="{Binding ListLichTrinh, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" HorizontalContentAlignment="Stretch" >
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
                                             <Grid>
@@ -118,5 +121,15 @@
                 </ItemsControl>
             </ScrollViewer>
         </Grid>
+        <Button Grid.Row="2" 
+                VerticalAlignment="Center"
+                Background="{StaticResource Primary}"
+                Width="400"
+                Height="35"
+                BorderBrush="Transparent"
+                materialDesign:ButtonAssist.CornerRadius="20"
+                Foreground="White"
+                FontSize="20"
+                Content="Lưu"/>
     </Grid>
 </Window>
