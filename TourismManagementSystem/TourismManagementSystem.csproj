@@ -188,6 +188,7 @@
     <Compile Include="ViewModel\MainVM.cs" />
     <Compile Include="ViewModel\NotificationVM.cs" />
     <Compile Include="ViewModel\RevenueStatisticVM.cs" />
+    <Compile Include="ViewModel\ScheduleDetailsVM.cs" />
     <Compile Include="ViewModel\ScheduleVM.cs" />
     <Compile Include="ViewModel\ServiceVM.cs" />
     <Compile Include="ViewModel\TicketVM.cs" />

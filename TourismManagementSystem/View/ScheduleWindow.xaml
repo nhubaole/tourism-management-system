@@ -97,7 +97,9 @@
                                                     <Button Style="{StaticResource MaterialDesignIconButton}"
                                                         Width="30"
                                                         Height="30"
-                                                        Margin="0,0,5,0">
+                                                        Margin="0,0,5,0"
+                                                        Command="{Binding DataContext.ViewScheduleCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                        CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}">
                                                         <materialDesign:PackIcon Foreground="#727272" Kind="Eye" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                     </Button>
                                                     <Button Style="{StaticResource MaterialDesignIconButton}"

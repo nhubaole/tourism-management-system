@@ -46,6 +46,8 @@ namespace TourismManagementSystem.ViewModel
                 }
                 
             });
+
+            
         }
 
         public ICommand SaveCommand { get; set; }
@@ -87,8 +89,20 @@ namespace TourismManagementSystem.ViewModel
                 AddScheduleWindow addScheduleWindow = new AddScheduleWindow();
                 addScheduleWindow.ShowDialog();
             });
+
+            ViewScheduleCommand = new RelayCommand<object>((p) => {
+                return true;
+            },
+            (p) => {
+                LICHTRINH selectedLichTrinh = p as LICHTRINH;
+                ScheduleDetailsVM.SelectedLichTrinh = selectedLichTrinh;
+                ScheduleDetailsWindow scheduleDetailsWindow = new ScheduleDetailsWindow();
+                scheduleDetailsWindow.ShowDialog();
+            });
         }
         public ICommand AddScheduleCommand { get; set; }
+        public ICommand ViewScheduleCommand { get; set; }
+
 
         public string NgayThu { get => _NgayThu; set { _NgayThu = value; OnPropertyChanged(); }  }
         public ObservableCollection<LICHTRINH> ListLichTrinh { get => _ListLichTrinh; set { _ListLichTrinh = value; OnPropertyChanged(); }  }
