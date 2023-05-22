@@ -13,7 +13,8 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowStartupLocation="CenterScreen"
         Background="{StaticResource Secondary}"
-        xmlns:vm="clr-namespace:TourismManagementSystem.ViewModel">
+        xmlns:vm="clr-namespace:TourismManagementSystem.ViewModel"
+        Name="addScheduleWindow">
     <Window.DataContext>
         <vm:AddScheduleVM/>
     </Window.DataContext>
@@ -176,7 +177,8 @@
                         materialDesign:ButtonAssist.CornerRadius="20"
                         Foreground="White"
                         FontSize="20"
-                        Command="{Binding AddScheduleCommand}">Thêm</Button>
+                        Command="{Binding AddScheduleCommand}"
+                        CommandParameter="{Binding ElementName=addScheduleWindow}">Thêm</Button>
             </Grid>
         </Border>
     </Grid>

@@ -14,6 +14,7 @@ namespace TourismManagementSystem.ViewModel
     internal class AddScheduleVM : BaseViewModel
     {
         private static ObservableCollection<LICHTRINH> _CurrListLichTrinh;
+        private static string _CurrNgay;
         private DIADIEM _DDDi;
         private DIADIEM _DDDen;
 
@@ -38,6 +39,7 @@ namespace TourismManagementSystem.ViewModel
             ListNhaHang = new ObservableCollection<NHAHANG>(DataProvider.Ins.DB.NHAHANGs);
             ListKhachSan = new ObservableCollection<KHACHSAN>(DataProvider.Ins.DB.KHACHSANs);
             ListDVKhac = new ObservableCollection<DICHVUKHAC>(DataProvider.Ins.DB.DICHVUKHACs);
+
 
             AddPTBoxCommand = new RelayCommand<object>((p) => {
                 return true;
@@ -83,32 +85,40 @@ namespace TourismManagementSystem.ViewModel
                 DVKhacBoxes.Add(comboBox);
             });
 
-            AddScheduleCommand = new RelayCommand<object>((p) =>
+            AddScheduleCommand = new RelayCommand<Window>((p) =>
             {
                 return true;
             }, (p) =>
             {
-                LICHTRINH newLichTrinh = new LICHTRINH();
-                newLichTrinh.DIADIEM = DDDi;
-                newLichTrinh.DIADIEM1 = DDDen;
-                foreach(var item in PhuongTienBoxes)
+                var addScheduleWindow = p as Window;
+                if (addScheduleWindow != null)
                 {
-                    newLichTrinh.PHUONGTIENs.Add((PHUONGTIEN)item.SelectedItem);
+                    LICHTRINH newLichTrinh = new LICHTRINH();
+                    Random random = new Random();
+                    newLichTrinh.MALT = random.Next(1,1000).ToString();
+                    newLichTrinh.DIADIEM = DDDi;
+                    newLichTrinh.DIADIEM1 = DDDen;
+                    foreach (var item in PhuongTienBoxes)
+                    {
+                        newLichTrinh.PHUONGTIENs.Add((PHUONGTIEN)item.SelectedItem);
+                    }
+                    foreach (var item in NhaHangBoxes)
+                    {
+                        newLichTrinh.NHAHANGs.Add((NHAHANG)item.SelectedItem);
+                    }
+                    foreach (var item in KhachSanBoxes)
+                    {
+                        newLichTrinh.KHACHSANs.Add((KHACHSAN)item.SelectedItem);
+                    }
+                    foreach (var item in DVKhacBoxes)
+                    {
+                        newLichTrinh.DICHVUKHACs.Add((DICHVUKHAC)item.SelectedItem);
+                    }
+                    newLichTrinh.NGAYTHU = int.Parse(CurrNgay.Substring(CurrNgay.Length - 1, 1));
+                    CurrListLichTrinh.Add(newLichTrinh);
+                    MessageBox.Show("Thêm mới lịch trình thành công!");
+                    addScheduleWindow.Close();
                 }
-                foreach (var item in NhaHangBoxes)
-                {
-                    newLichTrinh.NHAHANGs.Add((NHAHANG)item.SelectedItem);
-                }
-                foreach (var item in KhachSanBoxes)
-                {
-                    newLichTrinh.KHACHSANs.Add((KHACHSAN)item.SelectedItem);
-                }
-                foreach (var item in DVKhacBoxes)
-                {
-                    newLichTrinh.DICHVUKHACs.Add((DICHVUKHAC)item.SelectedItem);
-                }
-                CurrListLichTrinh.Add(newLichTrinh);
-                MessageBox.Show("Thêm mới lịch trình thành công!");
             });
         }
 
@@ -128,5 +138,7 @@ namespace TourismManagementSystem.ViewModel
         public ObservableCollection<ComboBox> DVKhacBoxes { get => _DVKhacBoxes; set { _DVKhacBoxes = value; OnPropertyChanged(); }  }
 
         public static ObservableCollection<LICHTRINH> CurrListLichTrinh { get => _CurrListLichTrinh; set { _CurrListLichTrinh = value; } }
+
+        public static string CurrNgay { get => _CurrNgay; set => _CurrNgay = value; }
     }
 }

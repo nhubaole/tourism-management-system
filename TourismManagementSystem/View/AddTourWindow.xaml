@@ -61,7 +61,8 @@
                                  FontSize="18"
                                  Style="{StaticResource MaterialDesignTextBox}"
                                  Width="400"
-                                 Text="{Binding MaTuyen, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                 IsEnabled="False"
+                                 Text="{Binding NewTour.MATUYEN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                     </Grid>
                     <Grid Grid.Row="1">
                         <TextBlock VerticalAlignment="Center"
@@ -75,7 +76,7 @@
                                  FontSize="18"
                                  Style="{StaticResource MaterialDesignTextBox}"
                                  Width="400"
-                                 Text="{Binding TenTuyen, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                 Text="{Binding NewTour.TENTUYEN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                     </Grid>
                     <Grid Grid.Row="2">
                         <TextBlock VerticalAlignment="Center"
@@ -87,7 +88,10 @@
                                   HorizontalAlignment="Right"
                                   materialDesign:HintAssist.Hint="Chọn loại tuyến du lịch"
                                   FontSize="18"
-                                  Width="400">
+                                  Width="400"
+                                  ItemsSource="{Binding ListLoaiTuyen}"
+                                  DisplayMemberPath="TENLOAI"
+                                  SelectedItem="{Binding NewTour.LOAITUYEN}">
                         </ComboBox>
                     </Grid>
                     <Grid Grid.Row="3">
@@ -101,7 +105,9 @@
                                   materialDesign:HintAssist.Hint="Chọn địa điểm xuất phát"
                                   FontSize="18"
                                   Width="400"
-                                  Text="{Binding DDXuatPhat, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                                  ItemsSource="{Binding ListDiaDiem}"
+                                  DisplayMemberPath="TENDD"
+                                  SelectedItem="{Binding NewTour.DIADIEM}">
                         </ComboBox>
                     </Grid>
                     <Grid Grid.Row="4">
@@ -115,7 +121,7 @@
                                  HorizontalAlignment="Right"
                                     Orientation="Horizontal"
                                     Width="400">
-                            <TextBox Text="{Binding SoNgay, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            <TextBox Text="{Binding NewTour.SONGAY, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                  Style="{StaticResource MaterialDesignTextBox}"
                                  FontSize="18"
                                  Width="50"
@@ -124,7 +130,7 @@
                                        VerticalAlignment="Center"
                                        FontSize="18"
                                        Margin="0,0,20,0"/>
-                            <TextBox Text="{Binding SoDem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            <TextBox Text="{Binding NewTour.SODEM, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                  Style="{StaticResource MaterialDesignTextBox}"
                                  FontSize="18"
                                  Width="50"
@@ -150,7 +156,7 @@
                                  materialDesign:HintAssist.Hint="Nhập giá dự kiến"
                                  FontSize="18"
                                  Width="360"
-                                Text="{Binding GiaDuKien, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                Text="{Binding NewTour.GIADUKIEN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                             <TextBlock Text="vnđ"
                                        VerticalAlignment="Bottom"
                                        FontSize="18"

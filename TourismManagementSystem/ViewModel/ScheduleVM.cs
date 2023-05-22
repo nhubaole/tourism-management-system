@@ -26,7 +26,28 @@ namespace TourismManagementSystem.ViewModel
                 NgayTour ngayTour = new NgayTour("Ngày " + i);
                 ListNgay.Add(ngayTour);
             }
+
+            SaveCommand = new RelayCommand<Window>((p) => {
+                return true;
+            }, (p) => {
+                var scheduleWindow = p as Window;
+                if (scheduleWindow != null)
+                {
+                    foreach (var item in ListNgay)
+                    {
+                        foreach (var lt in item.ListLichTrinh)
+                        {
+                            CurrTour.LICHTRINHs.Add(lt);
+                        }
+                    }
+                    MessageBox.Show("Lưu lịch trình thành công");
+                    scheduleWindow.Close();
+                }
+                
+            });
         }
+
+        public ICommand SaveCommand { get; set; }
 
         public static TUYEN CurrTour { 
             get => currTour;
@@ -54,6 +75,7 @@ namespace TourismManagementSystem.ViewModel
                 return true;
             }, (p) => {
                 AddScheduleVM.CurrListLichTrinh = ListLichTrinh;
+                AddScheduleVM.CurrNgay = NgayThu;
                 AddScheduleWindow addScheduleWindow = new AddScheduleWindow();
                 addScheduleWindow.ShowDialog();
             });
