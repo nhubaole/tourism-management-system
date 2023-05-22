@@ -33,6 +33,7 @@ namespace TourismManagementSystem.ViewModel
                 var scheduleWindow = p as Window;
                 if (scheduleWindow != null)
                 {
+                    CurrTour.LICHTRINHs.Clear();
                     foreach (var item in ListNgay)
                     {
                         foreach (var lt in item.ListLichTrinh)
@@ -71,6 +72,13 @@ namespace TourismManagementSystem.ViewModel
         {
             NgayThu = ngayThu;
             ListLichTrinh = new ObservableCollection<LICHTRINH>();
+            foreach(var item in ScheduleVM.CurrTour.LICHTRINHs)
+            {
+                if(item.NGAYTHU == int.Parse(ngayThu.Substring(ngayThu.Length - 1, 1)))
+                {
+                    ListLichTrinh.Add(item);
+                }
+            }
             AddScheduleCommand = new RelayCommand<object>((p) => {
                 return true;
             }, (p) => {

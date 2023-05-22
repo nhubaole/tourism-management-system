@@ -121,7 +121,8 @@
                                  HorizontalAlignment="Right"
                                     Orientation="Horizontal"
                                     Width="400">
-                            <TextBox Text="{Binding NewTour.SONGAY, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            <TextBox x:Name="txtDays"
+                                Text="{Binding NewTour.SONGAY, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                  Style="{StaticResource MaterialDesignTextBox}"
                                  FontSize="18"
                                  Width="50"
@@ -130,7 +131,8 @@
                                        VerticalAlignment="Center"
                                        FontSize="18"
                                        Margin="0,0,20,0"/>
-                            <TextBox Text="{Binding NewTour.SODEM, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            <TextBox Name="txtNights"
+                                Text="{Binding NewTour.SODEM, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                  Style="{StaticResource MaterialDesignTextBox}"
                                  FontSize="18"
                                  Width="50"
@@ -151,7 +153,7 @@
                         <StackPanel Orientation="Horizontal"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Right">
-                            <TextBox 
+                            <TextBox x:Name="txtPrice"
                                  Style="{StaticResource MaterialDesignTextBox}"
                                  materialDesign:HintAssist.Hint="Nhập giá dự kiến"
                                  FontSize="18"
@@ -188,7 +190,6 @@
                     <Grid Grid.Row="8">
                         <Button VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
-                                Style="{StaticResource MaterialDesignFlatDarkBgButton}"
                                 materialDesign:ButtonAssist.CornerRadius="20"
                                 BorderBrush="Transparent"
                                 Width="500"
@@ -196,7 +197,27 @@
                                 FontSize="18"
                                 Background="{StaticResource Primary}"
                                 Foreground="White"
-                                Command="{Binding AddCommand}">THÊM</Button>
+                                Command="{Binding AddCommand}"
+                                ToolTip="{Binding ToolTipText, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTipService.ShowOnDisabled="True"
+                                Content="THÊM">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatDarkBgButton}">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                    <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtDays}" Value="False"/>
+                                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtNights}" Value="False"/>
+                                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtPrice}" Value="False"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="IsEnabled" Value="True"/>
+                                        </MultiDataTrigger>
+                                    </Style.Triggers>
+
+                                </Style>
+                            </Button.Style>
+                        </Button>
                     </Grid>
                 </Grid>
             </Grid>
