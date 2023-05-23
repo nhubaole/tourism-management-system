@@ -8,28 +8,102 @@
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="900">
     <Grid Background="{DynamicResource Secondary}">
-        <Button Style="{StaticResource ResourceKey=SecondaryButton}"  Content="Tuyến" HorizontalAlignment="Left" Margin="50,30,0,0" VerticalAlignment="Top" Height="35" Width="145" FontSize="18" Foreground="{DynamicResource Black}"/>
-        <Button Style="{StaticResource ResourceKey=PrimaryButton}"  Content="Chuyến" HorizontalAlignment="Left" Margin="230,30,0,0" VerticalAlignment="Top" Height="35" Width="145" FontSize="18" Foreground="{DynamicResource White}"/>
-        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="18,100,18,40">
-            <DataGrid.Columns>
-                <materialDesign:DataGridTextColumn/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Border CornerRadius="10" BorderThickness="1" BorderBrush="Black" Margin="602,30,18,487">
-            <TextBlock x:Name="Search" TextWrapping="Wrap" Text="Nhập thông tin" Margin="9,7,-9,-7"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <StackPanel Orientation="Horizontal" Margin="20,0,20,0">
+                <RadioButton Style="{StaticResource BtnStyle2}" 
+                             IsChecked="True" 
+                             VerticalAlignment="Center"
+                             Margin="0,0,10,0">
+                    <TextBlock Text="Tuyến"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               FontSize="18"
+                               FontWeight="Medium"/>
+                </RadioButton>
+                <RadioButton Style="{StaticResource BtnStyle2}" 
+                             IsChecked="False" 
+                             VerticalAlignment="Center"
+                             Margin="0,0,20,0">
+                    <TextBlock Text="Chuyến"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               FontSize="18"
+                               FontWeight="Medium"/>
+                </RadioButton>
+                <Button
+                        Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                        Width="30"
+                        Height="30"
+                        Padding="0, -3, 0, 0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="{StaticResource Primary}"
+                        materialDesign:ButtonAssist.CornerRadius="10"
+                    BorderThickness="0">
+                    <TextBlock Text="+" FontSize="20"/>
+                </Button>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Right"
+                        Margin="0,0,20,0">
+                <TextBlock Text="Tìm kiếm theo" 
+                           HorizontalAlignment="Right"  
+                           Margin="0,5,20,5"/>
+
+                <Border CornerRadius="20" 
+                    BorderThickness="1" 
+                    BorderBrush="Black" 
+                    Height="40"
+                    Width="400">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Width="200"
+                             HorizontalAlignment="Left"
+                             Margin="20,5,0,5"
+                             materialDesign:HintAssist.Hint="Nhập thông tin"/>
+                        <materialDesign:PackIcon Kind="Magnify" 
+                                                 Height="25"
+                                                 Width="25"
+                                                 VerticalAlignment="Center"
+                                                 Margin="0,0,10,0"/>
+
+                        <Rectangle VerticalAlignment="Stretch" Fill="Black" Width="1" Margin="0,0,10,0"/>
+                        <ComboBox VerticalAlignment="Center" 
+                                  Width="110">
+                            <ComboBoxItem Content="Mã Tuyến"></ComboBoxItem>
+                            <ComboBoxItem Content="Tên Tuyến"></ComboBoxItem>
+                            <ComboBoxItem Content="Loại Tuyến"></ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+        <Border Grid.Row="1"
+              Margin="30,20,30,20"
+              Background="White"
+                CornerRadius="20">
+            <ListView ItemsSource="{Binding Items1}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="Code" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Description" />
+                        <GridViewColumn Header="Options">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox Width="100">
+                                        <ComboBoxItem Content="Test" />
+                                        <ComboBoxItem Content="Test2" />
+                                        <ComboBoxItem Content="Test3" />
+                                    </ComboBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Border>
-        <Line 
-            Stroke="Black" 
-            StrokeThickness="1" 
-            X1="19" Y1="1"
-            X2="19" Y2="35" 
-            Margin="729,30,135,488"/>
-        <ComboBox VerticalAlignment="Stretch" Margin="765,39,28,496">
-            <ComboBoxItem Content="Mã Tuyến"></ComboBoxItem>
-            <ComboBoxItem Content="Tên Tuyến"></ComboBoxItem>
-            <ComboBoxItem Content="Loại Tuyến"></ComboBoxItem>
-        </ComboBox>
-        <materialDesign:PackIcon Kind="Magnify" Margin="726,38,158,0" RenderTransformOrigin="0.25,0.438" HorizontalAlignment="Stretch"/>
-        <Label Content="Tìm kiếm theo" HorizontalAlignment="Left" Margin="747,10,0,0" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>
