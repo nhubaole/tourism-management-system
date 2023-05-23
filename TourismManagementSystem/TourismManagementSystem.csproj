@@ -193,6 +193,9 @@
     <Compile Include="View\AddBookingWindow.xaml.cs">
       <DependentUpon>AddBookingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\AddCustomerWindow.xaml.cs">
+      <DependentUpon>AddCustomerWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\AddLocationWindow.xaml.cs">
       <DependentUpon>AddLocationWindow.xaml</DependentUpon>
     </Compile>
@@ -329,6 +332,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddBookingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddCustomerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
