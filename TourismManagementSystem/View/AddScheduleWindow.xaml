@@ -31,7 +31,7 @@
                         Height="50"
                         CornerRadius="20,20,0,0"
                         Background="{StaticResource Primary}">
-                    <TextBlock Text="Thêm mới lịch trình"
+                    <TextBlock Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"
                                VerticalAlignment="Center"
                                Margin="50,0,0,0"
                                Foreground="White"
@@ -178,7 +178,8 @@
                         Foreground="White"
                         FontSize="20"
                         Command="{Binding AddScheduleCommand}"
-                        CommandParameter="{Binding ElementName=addScheduleWindow}">Thêm</Button>
+                        CommandParameter="{Binding ElementName=addScheduleWindow}"
+                        Content="{Binding BtnText, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
         </Border>
     </Grid>

@@ -13,6 +13,8 @@ namespace TourismManagementSystem.ViewModel
 {
     internal class AddScheduleVM : BaseViewModel
     {
+        private string _Title;
+        private string _BtnText;
         private static ObservableCollection<LICHTRINH> _CurrListLichTrinh;
         private static string _CurrNgay;
         private DIADIEM _DDDi;
@@ -31,7 +33,8 @@ namespace TourismManagementSystem.ViewModel
         public ObservableCollection<DICHVUKHAC> ListDVKhac;
         private ObservableCollection<ComboBox> _DVKhacBoxes = new ObservableCollection<ComboBox>();
 
-
+        private static LICHTRINH _EditSelectedLichTrinh;
+        private static int _IsEdit = 0;
         public AddScheduleVM()
         {
             ListDiaDiem = new ObservableCollection<DIADIEM>(DataProvider.Ins.DB.DIADIEMs);
@@ -40,6 +43,58 @@ namespace TourismManagementSystem.ViewModel
             ListKhachSan = new ObservableCollection<KHACHSAN>(DataProvider.Ins.DB.KHACHSANs);
             ListDVKhac = new ObservableCollection<DICHVUKHAC>(DataProvider.Ins.DB.DICHVUKHACs);
 
+            if(IsEdit == 1)
+            {
+                Title = "Cập nhật lịch trình";
+                BtnText = "Cập nhật";
+                DDDi = EditSelectedLichTrinh.DIADIEM;
+                DDDen = EditSelectedLichTrinh.DIADIEM1;
+                foreach(var item in EditSelectedLichTrinh.PHUONGTIENs)
+                {
+                    ComboBox comboBox = new ComboBox();
+                    comboBox.ItemsSource = ListPhuongTien;
+                    comboBox.DisplayMemberPath = "TENPT";
+                    comboBox.Margin = new Thickness(comboBox.Margin.Left, comboBox.Margin.Top, comboBox.Margin.Right, 10);
+                    comboBox.FontSize = 16;
+                    comboBox.SelectedItem = item;
+                    PhuongTienBoxes.Add(comboBox);
+                }
+                foreach (var item in EditSelectedLichTrinh.NHAHANGs)
+                {
+                    ComboBox comboBox = new ComboBox();
+                    comboBox.ItemsSource = ListNhaHang;
+                    comboBox.DisplayMemberPath = "TENNH";
+                    comboBox.Margin = new Thickness(comboBox.Margin.Left, comboBox.Margin.Top, comboBox.Margin.Right, 10);
+                    comboBox.FontSize = 16;
+                    comboBox.SelectedItem = item;
+                    NhaHangBoxes.Add(comboBox);
+                }
+                foreach (var item in EditSelectedLichTrinh.KHACHSANs)
+                {
+                    ComboBox comboBox = new ComboBox();
+                    comboBox.ItemsSource = ListKhachSan;
+                    comboBox.DisplayMemberPath = "TENKS";
+                    comboBox.Margin = new Thickness(comboBox.Margin.Left, comboBox.Margin.Top, comboBox.Margin.Right, 10);
+                    comboBox.FontSize = 16;
+                    comboBox.SelectedItem = item;
+                    KhachSanBoxes.Add(comboBox);
+                }
+                foreach (var item in EditSelectedLichTrinh.DICHVUKHACs)
+                {
+                    ComboBox comboBox = new ComboBox();
+                    comboBox.ItemsSource = ListDVKhac;
+                    comboBox.DisplayMemberPath = "TENDV";
+                    comboBox.Margin = new Thickness(comboBox.Margin.Left, comboBox.Margin.Top, comboBox.Margin.Right, 10);
+                    comboBox.FontSize = 16;
+                    comboBox.SelectedItem = item;
+                    DVKhacBoxes.Add(comboBox);
+                }
+            }
+            else
+            {
+                Title = "Thêm mới lịch trình";
+                BtnText = "Thêm";
+            }
 
             AddPTBoxCommand = new RelayCommand<object>((p) => {
                 return true;
@@ -93,31 +148,65 @@ namespace TourismManagementSystem.ViewModel
                 var addScheduleWindow = p as Window;
                 if (addScheduleWindow != null)
                 {
-                    LICHTRINH newLichTrinh = new LICHTRINH();
-                    Random random = new Random();
-                    newLichTrinh.MALT = random.Next(1,1000).ToString();
-                    newLichTrinh.DIADIEM = DDDi;
-                    newLichTrinh.DIADIEM1 = DDDen;
-                    foreach (var item in PhuongTienBoxes)
+                    if(IsEdit == 0)
                     {
-                        newLichTrinh.PHUONGTIENs.Add((PHUONGTIEN)item.SelectedItem);
+                        LICHTRINH newLichTrinh = new LICHTRINH();
+                        Random random = new Random();
+                        newLichTrinh.MALT = random.Next(1, 1000).ToString();
+                        newLichTrinh.DIADIEM = DDDi;
+                        newLichTrinh.DIADIEM1 = DDDen;
+                        foreach (var item in PhuongTienBoxes)
+                        {
+                            newLichTrinh.PHUONGTIENs.Add((PHUONGTIEN)item.SelectedItem);
+                        }
+                        foreach (var item in NhaHangBoxes)
+                        {
+                            newLichTrinh.NHAHANGs.Add((NHAHANG)item.SelectedItem);
+                        }
+                        foreach (var item in KhachSanBoxes)
+                        {
+                            newLichTrinh.KHACHSANs.Add((KHACHSAN)item.SelectedItem);
+                        }
+                        foreach (var item in DVKhacBoxes)
+                        {
+                            newLichTrinh.DICHVUKHACs.Add((DICHVUKHAC)item.SelectedItem);
+                        }
+                        newLichTrinh.NGAYTHU = int.Parse(CurrNgay.Substring(CurrNgay.Length - 1, 1));
+                        CurrListLichTrinh.Add(newLichTrinh);
+                        MessageBox.Show("Thêm mới lịch trình thành công!");
+                        addScheduleWindow.Close();
                     }
-                    foreach (var item in NhaHangBoxes)
+                    else
                     {
-                        newLichTrinh.NHAHANGs.Add((NHAHANG)item.SelectedItem);
+                        var itemToUpdate = CurrListLichTrinh.FirstOrDefault(item => item.MALT == EditSelectedLichTrinh.MALT);
+                        if (itemToUpdate != null)
+                        {
+                            itemToUpdate.DIADIEM = DDDi;
+                            itemToUpdate.DIADIEM1 = DDDen;
+                            itemToUpdate.PHUONGTIENs.Clear();
+                            itemToUpdate.NHAHANGs.Clear();
+                            itemToUpdate.KHACHSANs.Clear();
+                            itemToUpdate.DICHVUKHACs.Clear();
+                            foreach (var item in PhuongTienBoxes)
+                            {
+                                itemToUpdate.PHUONGTIENs.Add((PHUONGTIEN)item.SelectedItem);
+                            }
+                            foreach (var item in NhaHangBoxes)
+                            {
+                                itemToUpdate.NHAHANGs.Add((NHAHANG)item.SelectedItem);
+                            }
+                            foreach (var item in KhachSanBoxes)
+                            {
+                                itemToUpdate.KHACHSANs.Add((KHACHSAN)item.SelectedItem);
+                            }
+                            foreach (var item in DVKhacBoxes)
+                            {
+                                itemToUpdate.DICHVUKHACs.Add((DICHVUKHAC)item.SelectedItem);
+                            }
+                            MessageBox.Show("Cập nhật lịch trình thành công!");
+                            addScheduleWindow.Close();
+                        }
                     }
-                    foreach (var item in KhachSanBoxes)
-                    {
-                        newLichTrinh.KHACHSANs.Add((KHACHSAN)item.SelectedItem);
-                    }
-                    foreach (var item in DVKhacBoxes)
-                    {
-                        newLichTrinh.DICHVUKHACs.Add((DICHVUKHAC)item.SelectedItem);
-                    }
-                    newLichTrinh.NGAYTHU = int.Parse(CurrNgay.Substring(CurrNgay.Length - 1, 1));
-                    CurrListLichTrinh.Add(newLichTrinh);
-                    MessageBox.Show("Thêm mới lịch trình thành công!");
-                    addScheduleWindow.Close();
                 }
             });
         }
@@ -140,5 +229,10 @@ namespace TourismManagementSystem.ViewModel
         public static ObservableCollection<LICHTRINH> CurrListLichTrinh { get => _CurrListLichTrinh; set { _CurrListLichTrinh = value; } }
 
         public static string CurrNgay { get => _CurrNgay; set => _CurrNgay = value; }
+        public static LICHTRINH EditSelectedLichTrinh { get => _EditSelectedLichTrinh; set => _EditSelectedLichTrinh = value; }
+        public static int IsEdit { get => _IsEdit; set => _IsEdit = value; }
+        public string Title { get => _Title; set { _Title = value; OnPropertyChanged(); }  }
+
+        public string BtnText { get => _BtnText; set { _BtnText = value; OnPropertyChanged(); }  }
     }
 }

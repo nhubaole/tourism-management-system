@@ -86,6 +86,7 @@ namespace TourismManagementSystem.ViewModel
             }, (p) => {
                 AddScheduleVM.CurrListLichTrinh = ListLichTrinh;
                 AddScheduleVM.CurrNgay = NgayThu;
+                AddScheduleVM.IsEdit = 0;
                 AddScheduleWindow addScheduleWindow = new AddScheduleWindow();
                 addScheduleWindow.ShowDialog();
             });
@@ -99,9 +100,41 @@ namespace TourismManagementSystem.ViewModel
                 ScheduleDetailsWindow scheduleDetailsWindow = new ScheduleDetailsWindow();
                 scheduleDetailsWindow.ShowDialog();
             });
+
+            DeleteScheduleCommand = new RelayCommand<object>((p) => {
+                return true;
+            },
+            (p) => {
+                var values = (object[])p;
+                NgayTour selectedNgayTour = (NgayTour)values[0];
+                LICHTRINH selectedLichTrinh = (LICHTRINH)values[1];
+                if(MessageBox.Show("Bạn có chắc chắn muốn xóa lịch trình này?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    selectedNgayTour.ListLichTrinh.Remove(selectedLichTrinh);
+                    MessageBox.Show("Xóa lịch trình thành công");
+                }
+            });
+
+            EditScheduleCommand = new RelayCommand<object>((p) => {
+                return true;
+            },
+            (p) => {
+                var values = (object[])p;
+                NgayTour selectedNgayTour = (NgayTour)values[0];
+                LICHTRINH selectedLichTrinh = (LICHTRINH)values[1];
+                AddScheduleVM.CurrListLichTrinh = selectedNgayTour.ListLichTrinh;
+                AddScheduleVM.EditSelectedLichTrinh = selectedLichTrinh;
+                AddScheduleVM.IsEdit = 1;
+                AddScheduleWindow addScheduleWindow = new AddScheduleWindow();
+                addScheduleWindow.ShowDialog();
+                ListLichTrinh = new ObservableCollection<LICHTRINH>();
+                ListLichTrinh = AddScheduleVM.CurrListLichTrinh;
+            });
         }
         public ICommand AddScheduleCommand { get; set; }
         public ICommand ViewScheduleCommand { get; set; }
+        public ICommand DeleteScheduleCommand  { get; set; }
+        public ICommand EditScheduleCommand  { get; set; }
 
 
         public string NgayThu { get => _NgayThu; set { _NgayThu = value; OnPropertyChanged(); }  }
