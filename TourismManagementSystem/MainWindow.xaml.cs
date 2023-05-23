@@ -25,8 +25,6 @@ namespace TourismManagementSystem
         {
         
             InitializeComponent();
-            AddTourWindow at = new AddTourWindow();
-            at.Show();
         }
     }
 }

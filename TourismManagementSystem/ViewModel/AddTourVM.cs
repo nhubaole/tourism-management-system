@@ -57,14 +57,19 @@ namespace TourismManagementSystem.ViewModel
                 return true;
             }, (p) =>
             {
-                if (NewTour.SODEM > NewTour.SONGAY || NewTour.SONGAY <= 0 || NewTour.SODEM <= 0)
+                var addTourWindow = p as Window;
+                if(addTourWindow != null)
                 {
-                    MessageBox.Show("Số ngày đêm không hợp lệ");
-                    return;
+                    if (NewTour.SODEM > NewTour.SONGAY || NewTour.SONGAY <= 0 || NewTour.SODEM <= 0)
+                    {
+                        MessageBox.Show("Số ngày đêm không hợp lệ");
+                        return;
+                    }
+                    DataProvider.Ins.DB.TUYENs.Add(NewTour);
+                    DataProvider.Ins.DB.SaveChanges();
+                    MessageBox.Show("Thêm mới tuyến thành công!");
+                    addTourWindow.Close();
                 }
-                DataProvider.Ins.DB.TUYENs.Add(NewTour);
-                DataProvider.Ins.DB.SaveChanges();
-                MessageBox.Show("Thêm mới tuyến thành công!");
             });
         }
 

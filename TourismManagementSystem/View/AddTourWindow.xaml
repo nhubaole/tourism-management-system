@@ -198,6 +198,7 @@
                                 Background="{StaticResource Primary}"
                                 Foreground="White"
                                 Command="{Binding AddCommand}"
+                                CommandParameter="{Binding ElementName=addTourWindow}"
                                 ToolTip="{Binding ToolTipText, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTipService.ShowOnDisabled="True"
                                 Content="THÊM">
