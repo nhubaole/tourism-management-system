@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TourismManagementSystem.Model;
+using System.Configuration;
 
 namespace TourismManagementSystem.View
 {
@@ -18,10 +20,65 @@ namespace TourismManagementSystem.View
     /// Interaction logic for AddLocationWindow.xaml
     /// </summary>
     public partial class AddLocationWindow : Window
+
     {
         public AddLocationWindow()
         {
             InitializeComponent();
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+                       
+            try
+            {
+
+
+                var dataProvider = DataProvider.Ins;
+                using (var dbContext = dataProvider.DB)
+                {
+                    dbContext.Database.Connection.Open();
+                    
+                    var newLocation = new DIADIEM()
+                    {
+                        MADD = tbMaDD.Text,
+                        TENDD = tbTenDD.Text,
+                        DIACHI = tbDc.Text,
+                        MOTA = tbMota.Text,
+                    };
+
+                    dbContext.DIADIEMs.Add(newLocation);
+                    dbContext.SaveChanges();
+
+                    MessageBox.Show("Location added successfully!");
+
+                }
+               
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
+            
+
+        }
+        private void getData()
+        {
+           
+            try
+            {
+               
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
+            
+        }
+
+
+
     }
 }
