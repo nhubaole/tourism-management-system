@@ -12,5 +12,7 @@
     <viewmodel:TicketVM x:Key="TicketVM"/>
     <viewmodel:TourVM x:Key="TourVM"/>
     <viewmodel:TripVM x:Key="TripVM"/>
+    <viewmodel:InforLocationVM x:Key="InforLocationVM"/>
+
 
 </ResourceDictionary>

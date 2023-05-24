@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -7,42 +8,52 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using TourismManagementSystem.Model;
+using TourismManagementSystem.View;
 
 namespace TourismManagementSystem.ViewModel
 {
     internal class LocationVM : BaseViewModel
 
     {
+      public static bool IsDone = false;
 
         private String _tbLocation;
         public String tbLocation { get { return _tbLocation; }  set { _tbLocation = value; OnPropertyChanged(); } }
         private String _cmbLocation;
         public String cmbLocation { get { return _cmbLocation; } set { _cmbLocation = value; OnPropertyChanged(); } }
 
-        
+        private DIADIEM _selectedItem;
+        public DIADIEM selectedItem { get { return _selectedItem; } set { _selectedItem = value; OnPropertyChanged(); } }
+
         public ICommand UpdateCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand FindLocationnCommand { get; set; }
 
         public ICommand ChangecmbLocation { get; set; }
+        public ICommand ToAddLocationCommand { get; set; }
+      
+        public ICommand ToEditLocationCommand { get; set; }
+
+        public ICommand DeleteLocationCommand { get; set; }
+
+        public ICommand ResetCommand { get; set; }
 
 
 
-        public ObservableCollection<String> cmbItems;
+
+        public ObservableCollection<String> cmbItems { get; set; }
 
         private ObservableCollection<DIADIEM> _diadiem;
-        public ObservableCollection<DIADIEM> diadiem {
+        public  ObservableCollection<DIADIEM> diadiem {
 
             get => _diadiem; 
             set  { _diadiem = value; OnPropertyChanged(); }
         }
 
-        public ObservableCollection<DIADIEM> ketqua
-        {
-            get => _diadiem;
-            set { _diadiem = value; OnPropertyChanged(); }
-        }
+        public static ObservableCollection<DIADIEM> ketqua = new ObservableCollection<DIADIEM>(DataProvider.Ins.DB.DIADIEMs);
+
         public LocationVM()
         {
             diadiem = new ObservableCollection<DIADIEM>(DataProvider.Ins.DB.DIADIEMs);
@@ -132,7 +143,34 @@ namespace TourismManagementSystem.ViewModel
                     }
                 }
             })  ;
-           
+
+            ToAddLocationCommand  = new RelayCommand<object> ((p) => { return p == null ? false : true; },(p) =>
+            {
+
+                AddLocationWindow addLocation = new AddLocationWindow();
+                addLocation.ShowDialog();
+                if (IsDone)
+                {
+                    LoadDatagrid();
+                    IsDone = false;
+                }
+
+            }) ;
+            
+            ToEditLocationCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                //Show thông tin
+                var a = selectedItem;
+                AddLocationWindow editLocation = new AddLocationWindow();
+                editLocation.Show();
+                
+            });
+
+            ResetCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                LoadDatagrid();
+            });
+
         }
 
         public bool IsSubstring(string str, string substr)
@@ -163,7 +201,12 @@ namespace TourismManagementSystem.ViewModel
             return false;
         }
 
-        
+
+        public  void LoadDatagrid ()
+        {
+            diadiem = new ObservableCollection<DIADIEM>(DataProvider.Ins.DB.DIADIEMs);
+        }
+
     }
 
 
