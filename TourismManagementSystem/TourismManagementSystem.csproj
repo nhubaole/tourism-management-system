@@ -193,8 +193,10 @@
     <Compile Include="ViewModel\ScheduleVM.cs" />
     <Compile Include="ViewModel\ServiceVM.cs" />
     <Compile Include="ViewModel\TicketVM.cs" />
+    <Compile Include="ViewModel\TourDetailsVM.cs" />
     <Compile Include="ViewModel\TourVM.cs" />
     <Compile Include="ViewModel\TripVM.cs" />
+    <Compile Include="ViewModel\ViewScheduleVM.cs" />
     <Compile Include="View\AddBookingWindow.xaml.cs">
       <DependentUpon>AddBookingWindow.xaml</DependentUpon>
     </Compile>
@@ -230,6 +232,9 @@
     </Compile>
     <Compile Include="View\TripDetailsWindow.xaml.cs">
       <DependentUpon>TripDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ViewScheduleWindow.xaml.cs">
+      <DependentUpon>ViewScheduleWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Resource\ChoiceChipStyle.xaml">
       <SubType>Designer</SubType>
@@ -386,6 +391,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\TripDetailsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ViewScheduleWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

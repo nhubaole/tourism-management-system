@@ -53,11 +53,19 @@ namespace TourismManagementSystem.ViewModel
                 AddTourWindow addTourWindow = new AddTourWindow();
                 addTourWindow.ShowDialog();
             });
+            ViewTourCommand = new RelayCommand<object>((p) => true, (p) =>
+            {
+                TUYEN selectedTuyen = p as TUYEN;
+                TourDetailsVM.SelectedTour = selectedTuyen;
+                TourDetailsWindow tourDetailsWindow = new TourDetailsWindow();
+                tourDetailsWindow.ShowDialog();
+            });
         }
 
         public ICommand AddTourCommand { get; set; }
         public ICommand DeleteTourCommand { get; set; }
         public ICommand EditTourCommand { get; set; }
+        public ICommand ViewTourCommand { get; set; }
         public ObservableCollection<TUYEN> ListTuyen { get => _ListTuyen; set { _ListTuyen = value; OnPropertyChanged(); } }
     }
 }
