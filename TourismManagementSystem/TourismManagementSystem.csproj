@@ -450,6 +450,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resource\Image\HomeImg.png" />
     <Content Include="TourManagement.sql" />
   </ItemGroup>
   <ItemGroup>
