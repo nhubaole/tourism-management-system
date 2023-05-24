@@ -66,7 +66,8 @@
                         <TextBox Width="200"
                              HorizontalAlignment="Left"
                              Margin="20,5,0,5"
-                             materialDesign:HintAssist.Hint="Nhập thông tin"/>
+                             materialDesign:HintAssist.Hint="Nhập thông tin"
+                             Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                         <materialDesign:PackIcon Kind="Magnify" 
                                                  Height="25"
                                                  Width="25"
@@ -75,11 +76,9 @@
 
                         <Rectangle VerticalAlignment="Stretch" Fill="Black" Width="1" Margin="0,0,10,0"/>
                         <ComboBox VerticalAlignment="Center" 
-                                  Width="110">
-                            <ComboBoxItem Content="Mã Tuyến"></ComboBoxItem>
-                            <ComboBoxItem Content="Tên Tuyến"></ComboBoxItem>
-                            <ComboBoxItem Content="Loại Tuyến"></ComboBoxItem>
-                        </ComboBox>
+                                  Width="110"
+                                  ItemsSource="{Binding FilterCbItems}"
+                                  SelectedItem="{Binding SelectedFilter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                     </StackPanel>
                 </Border>
             </StackPanel>

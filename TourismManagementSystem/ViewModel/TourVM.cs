@@ -14,9 +14,13 @@ namespace TourismManagementSystem.ViewModel
     internal class TourVM : BaseViewModel
     {
         private ObservableCollection<TUYEN> _ListTuyen;
+        private string _SearchText;
+        private ObservableCollection<string> _FilterCbItems = new ObservableCollection<string>() { "Mã tuyến", "Tên tuyến", "Loại tuyến" };
+        private string selectedFilter;
         public TourVM()
         {
             ListTuyen = new ObservableCollection<TUYEN>(DataProvider.Ins.DB.TUYENs);
+            SelectedFilter = FilterCbItems.First();
             AddTourCommand = new RelayCommand<object>((p) => true, (p) =>
             {
                 AddTourVM.IsEdit = 0;
@@ -67,5 +71,27 @@ namespace TourismManagementSystem.ViewModel
         public ICommand EditTourCommand { get; set; }
         public ICommand ViewTourCommand { get; set; }
         public ObservableCollection<TUYEN> ListTuyen { get => _ListTuyen; set { _ListTuyen = value; OnPropertyChanged(); } }
+
+        public string SearchText { 
+            get => _SearchText; 
+            set { 
+                _SearchText = value; 
+                if(SelectedFilter == FilterCbItems[0])
+                {
+                    ListTuyen = new ObservableCollection<TUYEN>(DataProvider.Ins.DB.TUYENs.Where(t => t.MATUYEN.Contains(SearchText)));
+                }
+                else if (SelectedFilter == FilterCbItems[1])
+                {
+                    ListTuyen = new ObservableCollection<TUYEN>(DataProvider.Ins.DB.TUYENs.Where(t => t.TENTUYEN.Contains(SearchText)));
+                }
+                else if (SelectedFilter == FilterCbItems[2])
+                {
+                    ListTuyen = new ObservableCollection<TUYEN>(DataProvider.Ins.DB.TUYENs.Where(t => t.LOAITUYEN.TENLOAI.Contains(SearchText)));
+                }
+                OnPropertyChanged(); 
+            } 
+        }
+        public ObservableCollection<string> FilterCbItems { get => _FilterCbItems; set => _FilterCbItems = value; }
+        public string SelectedFilter { get => selectedFilter; set { selectedFilter = value; OnPropertyChanged(); } }
     }
 }
