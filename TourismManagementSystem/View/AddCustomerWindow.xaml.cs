@@ -17,9 +17,9 @@ namespace TourismManagementSystem.View
     /// <summary>
     /// Interaction logic for AddCustomer.xaml
     /// </summary>
-    public partial class AddCustomer : Window
+    public partial class AddCustomerWindow : Window
     {
-        public AddCustomer()
+        public AddCustomerWindow()
         {
             InitializeComponent();
         }

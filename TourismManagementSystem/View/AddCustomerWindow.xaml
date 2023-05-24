@@ -242,8 +242,8 @@
                                             materialDesign:ButtonAssist.CornerRadius="25"
                                             Margin="0, 0, 0, 0"
                                             ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
-                                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Click="Button_Click_1">
-                                    <TextBlock
+                                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" >
+                                <TextBlock
                                                 Text="Thêm"
                                                 FontSize="18"/>
                                 </Button>
