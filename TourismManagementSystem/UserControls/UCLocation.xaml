@@ -5,13 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TourismManagementSystem.UserControls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="900"
-             Background="{StaticResource Secondary}">
+             xmlns:vm="clr-namespace:TourismManagementSystem.ViewModel"
+             Background="{StaticResource Secondary}"
+             x:Name="ucLocation"
+             >
+    <UserControl.DataContext >
+        <vm:LocationVM/>
+    </UserControl.DataContext>
+   
     <Grid Grid.Column="1"
                   Background="{StaticResource Secondary}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1.5*"/>
             <RowDefinition Height="8*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0"
@@ -21,7 +29,7 @@
                 <ColumnDefinition Width="6*"/>
             </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
-                <ListBox VerticalAlignment="Center"
+                <ListBox VerticalAlignment="Bottom"
                           Style="{StaticResource MaterialDesignChoiceChipAccentOutlineListBox}"
                           x:Name="RadioButtonGroupChoiceChipAccentOutline">
                     <ListBoxItem
@@ -29,7 +37,7 @@
                                 Foreground="{StaticResource Primary}"
                                 Content="Dịch vụ" 
                                 Width="70"
-                                Margin="20, 0, 0, 0"
+                                Margin="40, 0, 0, 0"
                                 HorizontalAlignment="Left"
                                 />
                     <ListBoxItem
@@ -44,13 +52,15 @@
                             Style="{StaticResource MaterialDesignRaisedButton}"
                             Width="30"
                             Height="30"
-                            Padding="0, -3, 0, 0"
+                            Padding="-3, -3, 0, 0"
                             HorizontalAlignment="Right"
-                            Margin="0 ,-3 , 15, 0"
+                            Margin="0 ,0 , 15, 5"
                             Background="{StaticResource Primary}"
                             materialDesign:ButtonAssist.CornerRadius="10"
                             ToolTip="MaterialDesignRaisedButton with Round Corners"
-                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    VerticalAlignment="Bottom">
+                               
                     <TextBlock
                                 Text="+" 
                                 FontSize="20"/>
@@ -62,39 +72,50 @@
 
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.5*"/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
                     <materialDesign:PackIcon 
                                 Kind="Magnify"
-                                
                                 VerticalAlignment="Bottom"
                                 HorizontalAlignment="Right"
                                 Margin="0, 0, 5, 4" 
                                 Panel.ZIndex="1"/>
                     <TextBox
-                                x:Name="tbfilter1"
-                                Width="150"
-                                Height="25"
-                                materialDesign:HintAssist.Hint="Nhập thông tin"
-                                HorizontalAlignment="Right"
-                                Background="White"
-                                VerticalAlignment="Bottom"
-                                BorderBrush="{StaticResource Primary}"
-                                BorderThickness="1"  
-                                HorizontalContentAlignment="Center"
+                        x:Name="tbfilter1"
+                        Width="220"
+                        Height="30"
+                        FontSize="13"
+                        materialDesign:HintAssist.Hint="Nhập thông tin"
+                        HorizontalAlignment="Right"
+                        Background="White"
+                        VerticalAlignment="Bottom"
+                        BorderBrush="{StaticResource Primary}"
+                        BorderThickness="1"  
+                        HorizontalContentAlignment="Center"
+                        Text="{Binding tbLocation}"
                             >
                     </TextBox>
                 </Grid>
-                <Grid Grid.Column="1">
-                    <Label Content="Loại dịch vụ:"
-                                   VerticalAlignment="Top"
-                                   FontSize="10"
-                                   Padding="-3"
-                                   />
-
+                <Grid Grid.Column="2">
+                    <Button
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        Width="30"
+                        Height="30"
+                        Padding="-1, -1, 0, 0"
+                        Margin="0,0,20,0"
+                        Background="{StaticResource Primary}"
+                        materialDesign:ButtonAssist.CornerRadius="10"
+                        ToolTip="MaterialDesignRaisedButton with Round Corners"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom">
+                        <materialDesign:PackIcon Kind="Autorenew"
+                                                 Width="22"
+                                                 Height="22"/>
+                    </Button>
 
                 </Grid>
-                <Grid Grid.Column="2"
+                <Grid Grid.Column="1"
                               >
                     <Label Content="Loại dịch vụ:"
                                    VerticalAlignment="Top"
@@ -102,36 +123,128 @@
                                    Padding="-4"
                                    />
                     <ComboBox
-                                Height="25"
-                                Width="100"
-                                materialDesign:HintAssist.Hint="Mã điạ điểm"
-                                materialDesign:HintAssist.HelperTextFontSize="10"
-                                materialDesign:HintAssist.FloatingHintHorizontalAlignment="Center"
-                                MinWidth="65"
-                                Background="White"
-                                ItemsSource="{Binding LongIntegerList}"
-                                SelectedValue="{Binding SelectedValueOne}"
-                                VerticalAlignment="Bottom"
-                                HorizontalAlignment="Left"
-                                BorderBrush="{StaticResource Primary}"
-                                BorderThickness="1"
-                                HorizontalContentAlignment="Center">
+                        materialDesign:HintAssist.Hint="Virtualisation"
+                        MinWidth="72"
+                        ItemsSource="{Binding cmbItems}">
+
+                      
+                                              
                     </ComboBox>
                 </Grid>
 
             </Grid>
 
         </Grid>
-        <Grid Grid.Row="1"
-                  >
-            <DataGrid
-                        x:Name="dtgridDD"
-                        VerticalAlignment="Center"
-                        Height="400"
-                        Margin="20, 0, 20, 0">
+        <DataGrid 
+                Grid.Row="1"
+                x:Name="dtgridDD"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Height="400"
+                Margin="30, 0, 30, 10"
+                ItemsSource="{Binding ketqua}"
+                AutoGenerateColumns="False"
+                Foreground="Black"
+                BorderBrush="#e8a66d"
+                BorderThickness="1.5" 
+                RowDetailsVisibilityMode="VisibleWhenSelected"
+                ScrollViewer.CanContentScroll="True"
+                ScrollViewer.PanningMode="Both"
+                Stylus.IsFlicksEnabled="False"
+                HeadersVisibility="Column"
+                SelectionMode="Single"
+                SelectionUnit="FullRow"
+                CanUserAddRows="False"
+                CanUserDeleteRows="False"
+                CanUserReorderColumns="False"
+                CanUserResizeRows="False"
+                ColumnWidth="*"
+                IsReadOnly="True"
+                GridLinesVisibility="None"
+                
+            
+               >
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="{StaticResource Primary}"/>
+                    <Setter Property="Margin" Value="0, 10, 0, 10"/>
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+            <DataGrid.Resources>
+                <SolidColorBrush x:Key="DataGridCellFocusBorderBrush" Color="Transparent" />
+                <Style TargetType="DataGridCell">
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="BorderThickness" Value="0" />
+                            <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="BorderThickness" Value="0" />
+                            <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
+                            <Setter Property="Background" Value="#e8a66d"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="Mã địa điểm" Binding="{Binding MADD}" Width="*"  IsReadOnly="True" CanUserSort="False">
+                   
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Tên địa điểm" Binding="{Binding TENDD}"  Width="*" IsReadOnly="True" CanUserSort="False"/>
+                <DataGridTextColumn Header="Địa chỉ" Binding="{Binding DIACHI}"  Width="*" IsReadOnly="True" CanUserSort="False"/>
+                <DataGridTextColumn Header="Mô tả" Binding="{Binding MOTA}"  Width="*" IsReadOnly="True" CanUserSort="False"/>
+                <DataGridTemplateColumn Header="" 
+                                        IsReadOnly="True"
+                                        CanUserSort="False"
+                                        Width="auto"
+                                        >
+                    <DataGridTemplateColumn.CellTemplate >
+                        <DataTemplate >
+                            <StackPanel Orientation="Horizontal">
+                                <Button
+                                    Height="auto"
+                                    Width="auto"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding UpdateCommand}"
+                                    CommandParameter="{Binding ElementName= ucLocation}"
+                                    >
+                                    <materialDesign:PackIcon 
+                                        Kind="LeadPencil"
+                                        Foreground ="{StaticResource Primary}"
+                                                             />
+                                </Button>
+                                <Button
+                                    Height="auto"
+                                    Width="auto"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent">
+                                    <materialDesign:PackIcon Kind="Delete"
+                                                             Foreground ="{StaticResource Primary}"/>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn >
+            </DataGrid.Columns>
 
-            </DataGrid>
-        </Grid>
+        </DataGrid>
+        
 
 
     </Grid>
