@@ -30,7 +30,7 @@
                         Height="50"
                         CornerRadius="20,20,0,0"
                         Background="{StaticResource Primary}">
-                    <TextBlock Text="Thêm mới tuyến du lịch"
+                    <TextBlock Text="{Binding Title}"
                                VerticalAlignment="Center"
                                Margin="50,0,0,0"
                                Foreground="White"
@@ -201,7 +201,7 @@
                                 CommandParameter="{Binding ElementName=addTourWindow}"
                                 ToolTip="{Binding ToolTipText, UpdateSourceTrigger=PropertyChanged}"
                                 ToolTipService.ShowOnDisabled="True"
-                                Content="THÊM">
+                                Content="{Binding BtnText}">
                             <Button.Style>
                                 <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatDarkBgButton}">
                                     <Setter Property="IsEnabled" Value="False"/>
