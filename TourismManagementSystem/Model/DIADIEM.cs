@@ -11,8 +11,9 @@ namespace TourismManagementSystem.Model
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class DIADIEM
+    using TourismManagementSystem.ViewModel;
+
+    public partial class DIADIEM : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DIADIEM()
@@ -23,9 +24,13 @@ namespace TourismManagementSystem.Model
         }
     
         public string MADD { get; set; }
-        public string TENDD { get; set; }
-        public string DIACHI { get; set; }
-        public string MOTA { get; set; }
+        private string _TENDD;
+        public string TENDD { get { return _TENDD; }set { _TENDD = value; OnPropertyChanged(); } }
+        private string _DIACHI;
+        public string DIACHI { get { return _DIACHI; } set { _DIACHI = value; OnPropertyChanged(); } }
+
+        private string _MOTA;
+        public string MOTA { get { return _MOTA; } set { _MOTA = value; OnPropertyChanged(); } }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LICHTRINH> LICHTRINHs { get; set; }

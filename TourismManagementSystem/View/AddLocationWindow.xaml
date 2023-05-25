@@ -201,10 +201,10 @@
                                             Margin="0, 10, 0, 0" 
                                     IsEnabled="True"
                                             ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
-                                            Command="{Binding AddLocationCommand}">
+                                            Command="{Binding SaveLocationCommand}">
                                     <TextBlock
                                         x:Name="textThem"
-                                                Text="Thêm"
+                                                Text="Lưu"
                                                 FontSize="18"/>
                                 </Button>
                             </Grid>

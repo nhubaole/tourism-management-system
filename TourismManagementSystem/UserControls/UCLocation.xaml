@@ -152,7 +152,7 @@
             HorizontalAlignment="Center"
             Height="400"
             Margin="30, 0, 30, 10"
-            ItemsSource="{Binding diadiem}"
+            ItemsSource="{Binding diadiem, UpdateSourceTrigger=PropertyChanged}"
             SelectedItem="{Binding selectedItem, Mode=OneWayToSource}"
             AutoGenerateColumns="False"
             BorderBrush="#e8a66d"
@@ -170,7 +170,6 @@
             ColumnWidth="*"
             IsReadOnly="False"
             GridLinesVisibility="None"
-           
                >
             <DataGrid.ColumnHeaderStyle>
                 <Style TargetType="DataGridColumnHeader">
@@ -181,7 +180,7 @@
                     <Setter Property="Margin" Value="0, 10, 0, 10"/>
                     <Setter Property="FontSize" Value="14"/>
                     <Setter Property="FontWeight" Value="Bold"/>
-                    
+
                 </Style>
             </DataGrid.ColumnHeaderStyle>
             <DataGrid.Resources>
@@ -211,7 +210,7 @@
             </DataGrid.Resources>
             <DataGrid.Columns >
                 <DataGridTextColumn Header="Mã địa điểm" Binding="{Binding MADD}" Width="*"  IsReadOnly="True" CanUserSort="False">
-                   
+
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Tên địa điểm" Binding="{Binding TENDD}"  Width="*" IsReadOnly="True" CanUserSort="False">
                     <DataGridTextColumn.ElementStyle>
@@ -238,46 +237,51 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Mô tả" Binding="{Binding MOTA}"  Width="*" IsReadOnly="True" CanUserSort="False"/>
-               
-                
+
+
                 <DataGridTemplateColumn Header="" 
                                         Width="auto"
-                                        
+
                                         >
                     <DataGridTemplateColumn.CellTemplate >
                         <DataTemplate >
-                            <StackPanel Orientation="Horizontal">
-                                <Button
+                            <Button
                                     x:Name="btnEdit"
                                     Height="auto"
                                     Width="auto"
                                     Background="Transparent"
                                     BorderBrush="Transparent"
-                                    Command="{Binding ToEditLocationCommand}"
+                                    Command="{Binding DataContext.ToEditLocationCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                     CommandParameter="{Binding}"
                                     >
-                                    <materialDesign:PackIcon 
+                                <materialDesign:PackIcon 
                                         Kind="LeadPencil"
                                         Foreground ="{StaticResource Primary}"
                                          />
-                                </Button>
-                                <Button
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn >
+                <DataGridTemplateColumn Header="" 
+                                        Width="auto"
+                                        >
+                    <DataGridTemplateColumn.CellTemplate >
+                        <DataTemplate >
+                            <Button
                                     Height="auto"
                                     Width="auto"
                                     Background="Transparent"
                                     BorderBrush="Transparent"
                                     Command="{Binding DeleteLocationCommand}"
                                     CommandParameter="{Binding}">
-                                    <materialDesign:PackIcon Kind="Delete"
+                                <materialDesign:PackIcon Kind="Delete"
                                                              Foreground ="{StaticResource Primary}"/>
-                                </Button>
-                            </StackPanel>
+                            </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn >
             </DataGrid.Columns>
         </DataGrid>
-        
 
 
     </Grid>

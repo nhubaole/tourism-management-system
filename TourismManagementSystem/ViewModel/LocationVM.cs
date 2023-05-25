@@ -17,7 +17,9 @@ namespace TourismManagementSystem.ViewModel
     internal class LocationVM : BaseViewModel
 
     {
-      public static bool IsDone = false;
+        public static bool IsDone = false;
+        public  static bool IsNew = false;
+
 
         private String _tbLocation;
         public String tbLocation { get { return _tbLocation; }  set { _tbLocation = value; OnPropertyChanged(); } }
@@ -26,6 +28,8 @@ namespace TourismManagementSystem.ViewModel
 
         private DIADIEM _selectedItem;
         public DIADIEM selectedItem { get { return _selectedItem; } set { _selectedItem = value; OnPropertyChanged(); } }
+
+        public static DIADIEM SelectedItem;
 
         public ICommand UpdateCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
@@ -53,9 +57,14 @@ namespace TourismManagementSystem.ViewModel
         }
 
         public static ObservableCollection<DIADIEM> ketqua = new ObservableCollection<DIADIEM>(DataProvider.Ins.DB.DIADIEMs);
+        public static String MaDD;
+        public static String TenDD;
+        public static String DcDD;
+        public static String MtDD;
 
         public LocationVM()
         {
+            
             diadiem = new ObservableCollection<DIADIEM>(DataProvider.Ins.DB.DIADIEMs);
             cmbItems = new ObservableCollection<String>();
             foreach (DIADIEM item in diadiem)
@@ -146,12 +155,28 @@ namespace TourismManagementSystem.ViewModel
 
             ToAddLocationCommand  = new RelayCommand<object> ((p) => { return p == null ? false : true; },(p) =>
             {
-
+                InforLocationVM.IsNew = true;
+                if (diadiem.Count() == 0)
+                {
+                    MaDD = GenerateCode();
+                }
+                else
+                {
+                    MaDD = diadiem[diadiem.Count - 1].MADD;
+                    MaDD = GenerateCode(MaDD);
+                }
+                TenDD = DcDD = MtDD = null;
+                
                 AddLocationWindow addLocation = new AddLocationWindow();
                 addLocation.ShowDialog();
+
+
+                
+
                 if (IsDone)
                 {
-                    LoadDatagrid();
+                    diadiem.Add(InforLocationVM.d);
+                    OnPropertyChanged(nameof(diadiem));
                     IsDone = false;
                 }
 
@@ -159,11 +184,20 @@ namespace TourismManagementSystem.ViewModel
             
             ToEditLocationCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                //Show thông tin
-                var a = selectedItem;
-                AddLocationWindow editLocation = new AddLocationWindow();
-                editLocation.Show();
-                
+                InforLocationVM.IsNew = false;
+                MaDD = selectedItem.MADD;
+                TenDD = selectedItem.TENDD;
+                DcDD = selectedItem.DIACHI;
+                MtDD = selectedItem.MOTA;
+                AddLocationWindow addLocation = new AddLocationWindow();
+
+                addLocation.ShowDialog();
+
+                if (IsDone)
+                {
+                    OnPropertyChanged(nameof(diadiem));
+                    IsDone = false;
+                }
             });
 
             ResetCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
@@ -205,6 +239,29 @@ namespace TourismManagementSystem.ViewModel
         public  void LoadDatagrid ()
         {
             diadiem = new ObservableCollection<DIADIEM>(DataProvider.Ins.DB.DIADIEMs);
+        }
+        public static string GenerateCode(string previousCode = null)
+        {
+            int newNumber;
+
+            if (previousCode == null)
+            {
+                newNumber = 1;
+            }
+            else
+            {
+                // Lấy số từ mã trước đó
+                int previousNumber = int.Parse(previousCode.Substring(2));
+                newNumber = previousNumber + 1;
+            }
+
+            // Chuyển số mới thành chuỗi và thêm số không vào đầu nếu cần
+            string newNumberStr = newNumber.ToString().PadLeft(6, '0');
+
+            // Tạo mã mới
+            string newCode = "DD" + newNumberStr;
+
+            return newCode;
         }
 
     }
