@@ -16,7 +16,6 @@ namespace TourismManagementSystem.ViewModel
         public static bool IsNew ; //xác định là tạo mới hay cập nhập
 
         public static DIADIEM d = null;
-        private String MaDD;
 
         private String _maDD;
         

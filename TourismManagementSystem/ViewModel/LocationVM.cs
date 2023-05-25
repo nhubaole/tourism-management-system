@@ -200,6 +200,36 @@ namespace TourismManagementSystem.ViewModel
                 }
             });
 
+            DeleteLocationCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                if (selectedItem != null)
+                {
+                    MessageBoxResult result = MessageBox.Show("Bạn có chắc muốn xáo địa điểm này", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        // kiểm tra có tham chiếu k
+                        bool hasReferences = CheckLocationReferences(selectedItem);
+
+                        if (hasReferences)
+                        {
+                            MessageBox.Show("Địa điểm này k thể xóa", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                            return;
+                        }
+
+                        // Xóa
+                        DataProvider.Ins.DB.DIADIEMs.Remove(selectedItem);
+                        DataProvider.Ins.DB.SaveChanges();
+                        diadiem.Remove(selectedItem);
+                        selectedItem = null;
+                        MessageBox.Show("Đã xóa địa điểm thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+                else return;
+               
+
+            });
+
+
             ResetCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 LoadDatagrid();
@@ -262,6 +292,14 @@ namespace TourismManagementSystem.ViewModel
             string newCode = "DD" + newNumberStr;
 
             return newCode;
+        }
+
+        private bool CheckLocationReferences(DIADIEM location)
+        {
+            //thỏa một trong 3 điều kiện thì trả về true
+            bool hasReferences = location.LICHTRINHs.Count > 0 || location.LICHTRINHs1.Count > 0 || location.TUYENs.Count > 0;
+
+            return hasReferences;
         }
 
     }

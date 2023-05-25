@@ -272,7 +272,7 @@
                                     Width="auto"
                                     Background="Transparent"
                                     BorderBrush="Transparent"
-                                    Command="{Binding DeleteLocationCommand}"
+                                    Command="{Binding DataContext.DeleteLocationCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                     CommandParameter="{Binding}">
                                 <materialDesign:PackIcon Kind="Delete"
                                                              Foreground ="{StaticResource Primary}"/>
