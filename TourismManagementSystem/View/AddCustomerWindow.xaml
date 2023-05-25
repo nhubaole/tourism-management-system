@@ -9,11 +9,12 @@
         ResizeMode="NoResize"
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
-        xmlns:uc="clr-namespace:TourismManagementSystem.UserControls"
-        
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:TourismManagementSystem.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:CustomerVM}"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:viewmodel="clr-namespace:TourismManagementSystem.ViewModel" 
+        d:DataContext="{d:DesignInstance Type=viewmodel:CustomerVM}"
         WindowStartupLocation="CenterScreen"
         Background="{StaticResource Secondary}">
+    
     <Grid >
         <Border 
                     BorderBrush="White" 
@@ -86,7 +87,7 @@
                                                 Background="Transparent"
                                                 Margin="0 , 0, 0, 0"
                                                 HorizontalAlignment="Center"
-                                                Text="{Binding HoTen}"
+                                                Text="{Binding MAKH}"
                                                 />
 
                                 </Border>
@@ -111,6 +112,7 @@
                                                x:Name="tbTenDD"
                                                 Width="280"
                                                 Height="30"
+                                                Text="{Binding HOTEN}"
                                                 Background="Transparent"
                                                 Margin="0 , 0, 0, 0"
                                                 HorizontalAlignment="Center"/>
@@ -139,6 +141,7 @@
                                                 Height="30"
                                                 Background="Transparent"
                                                 Margin="0 , 0, 0, 0"
+                                                Text="{Binding CCCD}"
                                                 HorizontalAlignment="Center"/>
 
                                 </Border>
@@ -163,6 +166,8 @@
                                                x:Name="tbMota"
                                                 Width="280"
                                                 Height="30"
+                                                Text="{Binding SDT}"
+                                        
                                                 Background="Transparent"
                                                 Margin="0 , 0, 0, 0"
                                                 HorizontalAlignment="Center"
@@ -191,10 +196,11 @@
                                                x:Name="tb"
                                                 Width="280"
                                                 Height="30"
+                                                Text="{Binding EMAIL}"
+                                        
                                                 Background="Transparent"
                                                 Margin="0 , 0, 0, 0"
-                                                HorizontalAlignment="Center"
-                                                />
+                                                HorizontalAlignment="Center"/>
 
                                 </Border>
 
@@ -219,6 +225,8 @@
                                                x:Name="tbMot"
                                                 Width="280"
                                                 Height="30"
+                                                Text="{Binding DIACHI}"
+                                        
                                                 Background="Transparent"
                                                 Margin="0 , 0, 0, 0"
                                                 HorizontalAlignment="Center"/>
@@ -238,7 +246,9 @@
                                             materialDesign:ButtonAssist.CornerRadius="25"
                                             Margin="0, 0, 0, 0"
                                             ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
+                                            
                                             Command="{Binding AddDataCommand}"
+                                            
                                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" >
                                 <TextBlock
                                                 Text="Thêm"

@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TourismManagementSystem.UserControls"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodel="clr-namespace:TourismManagementSystem.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:CustomerVM}"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="900"
              Background="{StaticResource Secondary}">
@@ -103,10 +103,10 @@
                 <Border BorderBrush="Black" BorderThickness="0"  Background="{StaticResource White}" Height="400" CornerRadius="20" Margin="20,0,20,0">
 
 
-                    <DataGrid Background="White">
-                        <DataGrid.Columns  >
-                            <DataGridTextColumn Header="Mã khách hàng"  Binding="{Binding MaKH}" Width ="*"/>
-                            <DataGridTextColumn Header="Tên khách" Binding="{Binding HoTen}" Width ="*"/>
+                    <DataGrid ItemsSource="{Binding ListKhachhang}" AutoGenerateColumns="False" Background="White">
+                        <DataGrid.Columns >
+                            <DataGridTextColumn Header="Mã khách hàng"  Binding="{Binding MAKH}" Width ="*"/>
+                            <DataGridTextColumn Header="Tên khách" Binding="{Binding HOTEN}" Width ="*"/>
                             <DataGridTextColumn Header="Số điện thoại" Binding="{Binding SDT}" Width ="*"/>
                         </DataGrid.Columns>
 

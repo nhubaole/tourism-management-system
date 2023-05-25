@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,37 +12,44 @@ using TourismManagementSystem.View;
 
 namespace TourismManagementSystem.ViewModel
 {
+    
     internal class CustomerVM : BaseViewModel
     {
+        
+
         public ObservableCollection<KHACHHANG> KhachHangs { get; set; }
         public ICommand AddDataCommand { get; set; }
+        public ICommand DeleteDataCommand { get; set; }
+        public ICommand UpdateDataCommand { get; set; }
+
+        
 
         private string maKH;
-        public string MaKH
+        public string MAKH
         {
-            get { return maKH; }
+            get => maKH;
             set
             {
                 maKH = value;
-                OnPropertyChanged(nameof(MaKH));
+                OnPropertyChanged(nameof(MAKH));
             }
         }
 
         private string hoTen;
-        public string HoTen
+        public string HOTEN
         {
-            get { return hoTen; }
+            get => hoTen;
             set
             {
                 hoTen = value;
-                OnPropertyChanged(nameof(HoTen));
+                OnPropertyChanged(nameof(HOTEN));
             }
         }
 
         private string cccd;
         public string CCCD
         {
-            get { return cccd; }
+            get => cccd;
             set
             {
                 cccd = value;
@@ -52,7 +60,7 @@ namespace TourismManagementSystem.ViewModel
         private string sdt;
         public string SDT
         {
-            get { return sdt; }
+            get => sdt;
             set
             {
                 sdt = value;
@@ -61,27 +69,29 @@ namespace TourismManagementSystem.ViewModel
         }
 
         private string email;
-        public string Email
+        public string EMAIL
         {
-            get { return email; }
+            get => email;
             set
             {
                 email = value;
-                OnPropertyChanged(nameof(Email));
+                OnPropertyChanged(nameof(EMAIL));
             }
         }
 
         private string diaChi;
-        public string DiaChi
+        public string DIACHI
         {
-            get { return diaChi; }
+            get => diaChi;
             set
             {
                 diaChi = value;
-                OnPropertyChanged(nameof(DiaChi));
+                OnPropertyChanged(nameof(DIACHI));
             }
-        }
-
+        } 
+        private ObservableCollection<KHACHHANG> _ListKhachhang = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs);
+        public ObservableCollection<KHACHHANG> ListKhachhang { get => _ListKhachhang; set { _ListKhachhang= value; OnPropertyChanged(nameof(DataProvider.Ins.DB.KHACHHANGs)); } }
+    
         public CustomerVM()
         {
             KhachHangs = new ObservableCollection<KHACHHANG>();
@@ -96,22 +106,44 @@ namespace TourismManagementSystem.ViewModel
                 }
             }, (p) =>
             {
-                
-                var temp = new KHACHHANG()
+                try
                 {
-                    MAKH = MaKH,
-                    HOTEN = HoTen,
-                    CCCD = CCCD,
-                    SDT = SDT,
-                    EMAIL = Email,
-                    DIACHI = DiaChi};
-                DataProvider.Ins.DB.KHACHHANGs.Add(temp);
-                DataProvider.Ins.DB.SaveChanges();
-                MessageBox.Show("Đã tạo mới địa điểm thành công");
-                //Xóa các thông tin cũ
+                    var temp = new KHACHHANG()
+                    {
+                        MAKH = MAKH,
+                        HOTEN = HOTEN,
+                        CCCD = CCCD,
+                        SDT = SDT,
+                        EMAIL = EMAIL,
+                        DIACHI = DIACHI
+                    };
+
+                    DataProvider.Ins.DB.KHACHHANGs.Add(temp);
+                    DataProvider.Ins.DB.SaveChanges();
+                    ListKhachhang.Add(temp);
+                    LoadDataGrid();
+
+                    MessageBox.Show(temp.ToString());
+
+
+                    MessageBox.Show("Đã tạo mới khách hàng thành công");
+
+
+                }
+                catch (Exception ex)
+                {
+                    // Handle the exception appropriately (e.g., log, display an error message)
+                    MessageBox.Show("An error occurred: " + ex.InnerException.Message);
+                }
+              
                
             }); 
+            
 
+        }
+        private void LoadDataGrid()
+        {
+          ListKhachhang = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs);
         }
 
       
