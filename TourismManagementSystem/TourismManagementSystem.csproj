@@ -179,6 +179,7 @@
       <DependentUpon>UCTicket.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\MultiCommandParameterConverter.cs" />
+    <Compile Include="Utils\RadioButtonConverter.cs" />
     <Compile Include="ViewModel\AddScheduleVM.cs" />
     <Compile Include="ViewModel\AddTourVM.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />

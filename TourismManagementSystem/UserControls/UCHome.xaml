@@ -6,7 +6,11 @@
              xmlns:local="clr-namespace:TourismManagementSystem.UserControls" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="900"
-             Background="{StaticResource Secondary}">
+             Background="{StaticResource Secondary}"
+             xmlns:vm="clr-namespace:TourismManagementSystem.ViewModel">
+    <UserControl.DataContext>
+        <vm:HomeVM/>
+    </UserControl.DataContext>
     <Grid Margin="20">
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -31,7 +35,9 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center">
                 <RadioButton Style="{StaticResource BtnStyle2}" 
-                             IsChecked="True" 
+                             IsChecked="{Binding SelectedRadioBtn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource RadioButtonConverter}, ConverterParameter=Ngày}" 
+                             Command="{Binding RadioButtonCommand}"
+                             CommandParameter="Ngày"
                              VerticalAlignment="Center"
                              Margin="0,0,10,0">
                     <TextBlock Text="Ngày"
@@ -41,7 +47,9 @@
                                FontWeight="Medium"/>
                 </RadioButton>
                 <RadioButton Style="{StaticResource BtnStyle2}" 
-                             IsChecked="False" 
+                             IsChecked="{Binding SelectedRadioBtn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource RadioButtonConverter}, ConverterParameter=Tháng}" 
+                             Command="{Binding RadioButtonCommand}"
+                             CommandParameter="Tháng"
                              VerticalAlignment="Center"
                              Margin="0,0,10,0">
                     <TextBlock Text="Tháng"
@@ -51,7 +59,9 @@
                                FontWeight="Medium"/>
                 </RadioButton>
                 <RadioButton Style="{StaticResource BtnStyle2}" 
-                             IsChecked="False" 
+                             IsChecked="{Binding SelectedRadioBtn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource RadioButtonConverter}, ConverterParameter=Năm}" 
+                             Command="{Binding RadioButtonCommand}"
+                             CommandParameter="Năm"
                              VerticalAlignment="Center">
                     <TextBlock Text="Năm"
                                VerticalAlignment="Center"
@@ -93,7 +103,7 @@
                                    Foreground="White"
                                    FontSize="18"
                                    FontWeight="Medium"/>
-                        <TextBlock Text="100"
+                        <TextBlock Text="{Binding TripNumber}"
                                    Foreground="White"
                                    FontSize="28"
                                    FontWeight="Bold"/>
@@ -126,7 +136,7 @@
                                    Foreground="White"
                                    FontSize="18"
                                    FontWeight="Medium"/>
-                        <TextBlock Text="100"
+                        <TextBlock Text="{Binding TicketNumber}"
                                    Foreground="White"
                                    FontSize="28"
                                    FontWeight="Bold"/>
@@ -159,7 +169,7 @@
                                    Foreground="White"
                                    FontSize="18"
                                    FontWeight="Medium"/>
-                        <TextBlock Text="100"
+                        <TextBlock Text="{Binding Revenue}"
                                    Foreground="White"
                                    FontSize="28"
                                    FontWeight="Bold"/>
@@ -192,81 +202,41 @@
                                    Foreground="Black"
                                    FontSize="20"
                                    FontWeight="Medium"/>
-                    <Border Margin="0,20,0,0"
-                            Width="Auto"
-                            Height="60"
-                            Background="{StaticResource Primary}"
-                            CornerRadius="10">
-                        <StackPanel VerticalAlignment="Center" Margin="10"
-                                    Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Car"
-                                             Width="50"
-                                             Height="50"
-                                             Foreground="White"
-                                             VerticalAlignment="Center"
-                                             HorizontalAlignment="Left"/>
-                            <StackPanel VerticalAlignment="Center"
-                                        Width="160"
-                                        Margin="10,0,0,0">
-                                <TextBlock Text="Du lịch Hà Nội"
-                                   Foreground="White"
-                                   FontSize="18"/>
-                                <TextBlock Text="24/05/2023"
-                                   Foreground="White"
-                                   FontSize="14"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </Border>
-                    <Border Margin="0,20,0,0"
-                            Width="Auto"
-                            Height="60"
-                            Background="{StaticResource Primary}"
-                            CornerRadius="10">
-                        <StackPanel VerticalAlignment="Center" Margin="10"
-                                    Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Car"
-                                             Width="50"
-                                             Height="50"
-                                             Foreground="White"
-                                             VerticalAlignment="Center"
-                                             HorizontalAlignment="Left"/>
-                            <StackPanel VerticalAlignment="Center"
-                                        Width="160"
-                                        Margin="10,0,0,0">
-                                <TextBlock Text="Du lịch Hà Nội"
-                                   Foreground="White"
-                                   FontSize="18"/>
-                                <TextBlock Text="24/05/2023"
-                                   Foreground="White"
-                                   FontSize="14"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </Border>
-                    <Border Margin="0,20,0,0"
-                            Width="Auto"
-                            Height="60"
-                            Background="{StaticResource Primary}"
-                            CornerRadius="10">
-                        <StackPanel VerticalAlignment="Center" Margin="10"
-                                    Orientation="Horizontal">
-                            <materialDesign:PackIcon Kind="Car"
-                                             Width="50"
-                                             Height="50"
-                                             Foreground="White"
-                                             VerticalAlignment="Center"
-                                             HorizontalAlignment="Left"/>
-                            <StackPanel VerticalAlignment="Center"
-                                        Width="160"
-                                        Margin="10,0,0,0">
-                                <TextBlock Text="Du lịch Hà Nội"
-                                   Foreground="White"
-                                   FontSize="18"/>
-                                <TextBlock Text="24/05/2023"
-                                   Foreground="White"
-                                   FontSize="14"/>
-                            </StackPanel>
-                        </StackPanel>
-                    </Border>
+                    <ItemsControl ItemsSource="{Binding UpComingTrip}" HorizontalContentAlignment="Stretch">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Border Margin="0,20,0,0"
+                                            Width="Auto"
+                                            Height="60"
+                                            Background="{StaticResource Primary}"
+                                            CornerRadius="10">
+                                        <StackPanel VerticalAlignment="Center" 
+                                                    Margin="10"
+                                                    Orientation="Horizontal">
+                                            <materialDesign:PackIcon Kind="Car"
+                                                                     Width="50"
+                                                                     Height="50"
+                                                                     Foreground="White"
+                                                                     VerticalAlignment="Center"
+                                                                     HorizontalAlignment="Left"/>
+                                            <StackPanel VerticalAlignment="Center"
+                                                        Width="160"
+                                                        Margin="10,0,0,0">
+                                                <!--TODO: change to name-->
+                                                <TextBlock Text="{Binding TUYEN.TENTUYEN}"
+                                                           Foreground="White"
+                                                           FontSize="18"/>
+                                                <TextBlock Text="{Binding TGBATDAU, StringFormat=\{0:dd/MM/yyyy\}}"
+                                                           Foreground="White"
+                                                           FontSize="14"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </StackPanel>
             </Border>
         </Grid>
