@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
+using TourismManagementSystem.View;
 
 namespace TourismManagementSystem.ViewModel
 {
@@ -23,8 +25,50 @@ namespace TourismManagementSystem.ViewModel
             TourCommand = new RelayCommand<object>((p) => { return true; }, Tour);
             TripCommand = new RelayCommand<object>((p) => { return true; }, Trip);
 
-            CurrentView = new HomeVM();
+            LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
+                try
+                {
+                    IsLoaded = true;
+                    if (p == null) return;
+                    p.Hide();
+
+                    LoginWindow login = new LoginWindow();
+                    login.ShowDialog();
+
+                    if (login.DataContext == null) return;
+                    var loginVM = login.DataContext as LoginVM;
+                    if (loginVM.IsLogin == true)
+                    {
+                        CurrentView = new HomeVM();
+                        p.Show();
+                    }
+                    else
+                    {
+                        p.Close();
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            });
+
+            LogOutCommand = new RelayCommand<Window>((p) => { return p == null ? false : true; }, (p) => {
+                if (MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    var w = p as Window;
+                    if (w != null)
+                    {
+                        MainWindow main = new MainWindow();
+                        w.Close();
+                        main.Show();
+                    }
+                }
+            });
         }
+
+        public bool IsLoaded = false;
 
         public object CurrentView
         {
@@ -42,6 +86,9 @@ namespace TourismManagementSystem.ViewModel
         public ICommand TicketCommand { get; set; }
         public ICommand TourCommand { get; set; }
         public ICommand TripCommand { get; set; }
+
+        public ICommand LoadedWindowCommand { get; set; }
+        public ICommand LogOutCommand { get; set; }
 
 
         private void Home(object obj) => CurrentView = new HomeVM();

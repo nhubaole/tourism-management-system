@@ -13,11 +13,11 @@
     </UserControl.DataContext>
     <Grid Margin="20">
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="160"/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" VerticalAlignment="Top" Margin="0,0,10,0">
+        <Grid Grid.Row="0" VerticalAlignment="Top" Margin="0,0,10,20">
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center">
@@ -71,15 +71,16 @@
                 </RadioButton>
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="0,0,0,20">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Border Margin="0,0,10,20" 
+            <Border Margin="0,0,10,0" 
                     Background="#23BED0"
-                    Grid.Column="0">
+                    Grid.Column="0"
+                    Height="140">
                 <Border.Clip>
                     <RectangleGeometry RadiusX="20" RadiusY="20" Rect="0,0,276,140"/>
                 </Border.Clip>
@@ -110,7 +111,7 @@
                     </StackPanel>
                 </Grid>
             </Border>
-            <Border Margin="0,0,10,20" 
+            <Border Margin="0,0,10,0" 
                     Background="#F59121"
                     Grid.Column="1">
                 <Border.Clip>
@@ -143,7 +144,7 @@
                     </StackPanel>
                 </Grid>
             </Border>
-            <Border Margin="0,0,10,20" 
+            <Border Margin="0,0,10,0" 
                     Background="#FFD45B"
                     Grid.Column="2">
                 <Border.Clip>
