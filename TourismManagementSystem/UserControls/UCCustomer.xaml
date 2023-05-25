@@ -35,6 +35,7 @@
                                 Background="{StaticResource Primary}"
                                 materialDesign:ButtonAssist.CornerRadius="15"
                                 ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
+                                Command="{Binding SwitchWindowCommand}"
                                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
                         <TextBlock
                                 Text="Thêm"
@@ -104,9 +105,9 @@
 
                     <DataGrid Background="White">
                         <DataGrid.Columns  >
-                            <DataGridTextColumn Header="Mã khách hàng"  Binding="{Binding Column1}" Width ="*"/>
-                            <DataGridTextColumn Header="Tên khách" Binding="{Binding Column2}" Width ="*"/>
-                            <DataGridTextColumn Header="Số điện thoại" Binding="{Binding Column3}" Width ="*"/>
+                            <DataGridTextColumn Header="Mã khách hàng"  Binding="{Binding MaKH}" Width ="*"/>
+                            <DataGridTextColumn Header="Tên khách" Binding="{Binding HoTen}" Width ="*"/>
+                            <DataGridTextColumn Header="Số điện thoại" Binding="{Binding SDT}" Width ="*"/>
                         </DataGrid.Columns>
 
                         <DataGrid.ColumnHeaderStyle>
@@ -199,6 +200,7 @@
                             <Grid Grid.Column="1">
                                 <TextBox
                                             Background="{StaticResource Secondary}"
+                                            Text="{Binding HoTen}"
                                             Margin="0,0,10,5"/>
                             </Grid>
                         </Grid>
@@ -219,6 +221,8 @@
 
                             <Grid Grid.Column="1">
                                 <TextBox
+                                            Text="{Binding CCCD}"
+                                    
                                             Background="{StaticResource Secondary}"
                                             Margin="0,0,10,5"/>
                             </Grid>
@@ -240,6 +244,8 @@
 
                             <Grid Grid.Column="1">
                                 <TextBox
+                                            Text="{Binding SDT}"
+                                    
                                             Background="{StaticResource Secondary}"
                                             Margin="0,0,10,5"/>
                             </Grid>
@@ -261,6 +267,8 @@
 
                             <Grid Grid.Column="1">
                                 <TextBox
+                                            Text="{Binding Email}"
+                                    
                                             Background="{StaticResource Secondary}"
                                             Margin="0,0,10,5"/>
                             </Grid>
@@ -282,6 +290,8 @@
 
                             <Grid Grid.Column="1">
                                 <TextBox
+                                            Text="{Binding Diachi}"
+                                            
                                             Background="{StaticResource Secondary}"
                                             Margin="0,0,10,5"/>
                             </Grid>
