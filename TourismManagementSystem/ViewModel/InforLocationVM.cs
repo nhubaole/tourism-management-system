@@ -34,7 +34,6 @@ namespace TourismManagementSystem.ViewModel
         public ICommand SaveLocationCommand { get; set; }
 
 
-        public Action<DIADIEM> OnLocationAdded;
         public InforLocationVM() {
             maDD = LocationVM.MaDD;
             tenDD = LocationVM.TenDD;
@@ -128,7 +127,7 @@ namespace TourismManagementSystem.ViewModel
             }
             else
             {
-                MessageBox.Show("Hãy chỉnh sửa thông tin cần cập nhập");
+                MessageBox.Show("Hãy kiểm tra các thông tin cần cập nhập");
             }
 
 
@@ -149,7 +148,7 @@ namespace TourismManagementSystem.ViewModel
             DataProvider.Ins.DB.SaveChanges();
 
             LocationVM.IsDone = true;
-            MessageBox.Show("Đã tạo mới địa điểm thành công \nHãy kiểm tra lại các thông tin ");
+            MessageBox.Show("Đã tạo mới địa điểm thành công \nBạn có thể xem lại các thông tin");
             //sau cập nhập 
             LocationVM.TenDD = tenDD;
             LocationVM.DcDD = dcDD;

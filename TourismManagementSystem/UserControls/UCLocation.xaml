@@ -94,8 +94,12 @@
                         BorderBrush="{StaticResource Primary}"
                         BorderThickness="1"  
                         HorizontalContentAlignment="Center"
-                        Text="{Binding tbLocation, UpdateSourceTrigger=PropertyChanged}"
+                        Text="{Binding SearchTerm, UpdateSourceTrigger=PropertyChanged}"
+                        IsEnabled="{Binding CanWrite}"
                             >
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Enter" Command="{Binding FindLocationnCommand}" CommandParameter="{Binding ElementName=tbfilter1}" />
+                        </TextBox.InputBindings>
                     </TextBox>
                 </Grid>
                 <Grid Grid.Column="2">
@@ -119,16 +123,16 @@
                 </Grid>
                 <Grid Grid.Column="1"
                               >
-                    <Label Content="Loại dịch vụ:"
+                    <Label Content="Tìm kiếm theo"
                                    FontSize="10"
                                    Padding="-4"
                                     VerticalAlignment="Center"
                                    />
                     <ComboBox
+                        materialDesign:HintAssist.Hint="Mã địa điểm"
                         Height="30"
                         Width="150"
                         FontSize="13"
-                        materialDesign:HintAssist.Hint="Chọn mã điạ điểm"
                         materialDesign:HintAssist.HelperTextFontSize="10"
                         materialDesign:HintAssist.FloatingHintHorizontalAlignment="Center"
                         MinWidth="65"
@@ -138,7 +142,10 @@
                         BorderBrush="{StaticResource Primary}"
                         BorderThickness="1"
                         HorizontalContentAlignment="Center"
-                        ItemsSource="{Binding cmbItems, RelativeSource={RelativeSource AncestorType=UserControl}}">
+                        ItemsSource="{Binding cmbItems}"
+                        SelectedItem="{Binding Filter, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                        materialDesign:TextFieldAssist.HasClearButton="True"
+                        Padding="10, 5, 0,0">
                     </ComboBox>
                 </Grid>
 
@@ -152,7 +159,7 @@
             HorizontalAlignment="Center"
             Height="400"
             Margin="30, 0, 30, 10"
-            ItemsSource="{Binding diadiem, UpdateSourceTrigger=PropertyChanged}"
+            ItemsSource="{Binding SearchResult, UpdateSourceTrigger=PropertyChanged}"
             SelectedItem="{Binding selectedItem, Mode=OneWayToSource}"
             AutoGenerateColumns="False"
             BorderBrush="#e8a66d"

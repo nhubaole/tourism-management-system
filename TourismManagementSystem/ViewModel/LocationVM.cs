@@ -1,4 +1,5 @@
-﻿using MaterialDesignThemes.Wpf;
+﻿using MaterialDesignColors;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,13 +19,24 @@ namespace TourismManagementSystem.ViewModel
 
     {
         public static bool IsDone = false;
-        public  static bool IsNew = false;
+        public static bool IsNew = false;
 
+        private bool _CanWrite;
+        public bool CanWrite
+        {
+            get { return _CanWrite; }
+            set
+            {
+                _CanWrite = value;
+                OnPropertyChanged();
+            }
+        }
 
-        private String _tbLocation;
-        public String tbLocation { get { return _tbLocation; }  set { _tbLocation = value; OnPropertyChanged(); } }
-        private String _cmbLocation;
-        public String cmbLocation { get { return _cmbLocation; } set { _cmbLocation = value; OnPropertyChanged(); } }
+        private String _Filter;
+        public String Filter { get { return _Filter; } set { _Filter = value; OnPropertyChanged(); CanWrite = !string.IsNullOrEmpty(value); } }
+
+        private String _SearchTerm;
+        public String SearchTerm { get { return _SearchTerm; } set { _SearchTerm = value; OnPropertyChanged(); } }
 
         private DIADIEM _selectedItem;
         public DIADIEM selectedItem { get { return _selectedItem; } set { _selectedItem = value; OnPropertyChanged(); } }
@@ -37,7 +49,7 @@ namespace TourismManagementSystem.ViewModel
 
         public ICommand ChangecmbLocation { get; set; }
         public ICommand ToAddLocationCommand { get; set; }
-      
+
         public ICommand ToEditLocationCommand { get; set; }
 
         public ICommand DeleteLocationCommand { get; set; }
@@ -50,13 +62,21 @@ namespace TourismManagementSystem.ViewModel
         public ObservableCollection<String> cmbItems { get; set; }
 
         private ObservableCollection<DIADIEM> _diadiem;
-        public  ObservableCollection<DIADIEM> diadiem {
+        public ObservableCollection<DIADIEM> diadiem
+        {
 
-            get => _diadiem; 
-            set  { _diadiem = value; OnPropertyChanged(); }
+            get => _diadiem;
+            set { _diadiem = value; OnPropertyChanged(); }
+        }
+        private ObservableCollection<DIADIEM> _SearchResult;
+        public ObservableCollection<DIADIEM> SearchResult
+        {
+
+            get => _SearchResult;
+            set { _SearchResult = value; OnPropertyChanged(); }
         }
 
-        public static ObservableCollection<DIADIEM> ketqua = new ObservableCollection<DIADIEM>(DataProvider.Ins.DB.DIADIEMs);
+
         public static String MaDD;
         public static String TenDD;
         public static String DcDD;
@@ -64,96 +84,80 @@ namespace TourismManagementSystem.ViewModel
 
         public LocationVM()
         {
-            
-            diadiem = new ObservableCollection<DIADIEM>(DataProvider.Ins.DB.DIADIEMs);
-            cmbItems = new ObservableCollection<String>();
-            foreach (DIADIEM item in diadiem)
-            {
-                cmbItems.Add(item.MADD);
-            }    
 
-            FindLocationnCommand = new RelayCommand<Window>((p) => { return p == null ? false : true; }, (p) => {
-                //2 ô không được điền
-                if (tbLocation == null && cmbLocation == null)
+            diadiem = new ObservableCollection<DIADIEM>(DataProvider.Ins.DB.DIADIEMs);
+            SearchResult = new ObservableCollection<DIADIEM>(DataProvider.Ins.DB.DIADIEMs);
+
+            cmbItems = new ObservableCollection<String>(new List<string> { "Mã địa điểm", "Tên địa điểm", "Địa chỉ", "Mô tả" });
+
+
+            FindLocationnCommand = new RelayCommand<object>((p) => { return p == null ? false : true; }, (p) =>
+            {
+                SearchResult.Clear();
+
+                if (SearchTerm != null)
                 {
-                    MessageBox.Show("Vui lòng điền thông tin cần tìm kiếm");
+                    List<DIADIEM> temporaryList = new List<DIADIEM>();
+
+                    switch (Filter)
+                    {
+                        case "Mã địa điểm":
+                            foreach (DIADIEM item in diadiem)
+                            {
+                                if (IsSubstring(item.MADD.ToLower(), SearchTerm.ToLower()))
+                                {
+                                    temporaryList.Add(item);
+                                }
+                            }
+                            break;
+
+                        case "Tên địa điểm":
+                            foreach (DIADIEM item in diadiem)
+                            {
+                                if (IsSubstring(item.TENDD.ToLower(), SearchTerm.ToLower()))
+                                {
+                                    temporaryList.Add(item);
+                                }
+                            }
+                            break;
+
+                        case "Địa chỉ":
+                            foreach (DIADIEM item in diadiem)
+                            {
+                                if (IsSubstring(item.DIACHI.ToLower(), SearchTerm.ToLower()))
+                                {
+                                    temporaryList.Add(item);
+                                }
+                            }
+                            break;
+
+                        case "Mô tả":
+                            foreach (DIADIEM item in diadiem)
+                            {
+                                if (IsSubstring(item.MOTA.ToLower(), SearchTerm.ToLower()   ))
+                                {
+                                    temporaryList.Add(item);
+                                }
+                            }
+                            break;
+                    }
+
+                    SearchResult.Clear();
+                    foreach (DIADIEM item in temporaryList)
+                    {
+                        SearchResult.Add(item);
+                    }
+                    OnPropertyChanged(nameof(SearchResult));
+                    OnPropertyChanged(nameof(SearchResult));
                 }
                 else
                 {
-                    //2 ô đều được điền nhưng khác nhau
-                    if (tbLocation != cmbLocation)
-                    {
-                        MessageBox.Show("Thông tin bạn đưa vào không trùng nhau, chỉ cần nhập một trong hai để tìm kiếm \nHãy xóa thông tin không cần thiết");
-                    }
-                    else
-                    {
-                        //một trong 2 ô được điền
-                        bool IsFinded = false;
-                        if (tbLocation != null)
-                        {
-
-
-                            //tìm kiếm theo mã
-
-                            if (!IsFinded)
-                            {
-                                foreach (DIADIEM item in diadiem)
-                                {
-                                    if (IsSubstring(item.MADD, tbLocation))
-                                    {
-                                        IsFinded = true;
-                                        ketqua.Add(item);
-                                    }
-                                }
-                            }
-
-                            //kiếm theo tên địa điểm
-
-                            if (!IsFinded)
-                            {
-                                foreach (DIADIEM item in diadiem)
-                                {
-                                    if ( IsSubstring(item.TENDD, tbLocation))
-                                    {
-                                        IsFinded = true;
-                                        ketqua.Add(item);
-                                    }
-                                }
-                            }
-
-                           //kiếm theo địa chỉ
-                            if (!IsFinded)
-                            {
-                                foreach (DIADIEM item in diadiem)
-                                {
-                                    if (IsSubstring(item.DIACHI, tbLocation))
-                                    {
-                                        IsFinded = true;
-                                        ketqua.Add(item);
-                                    }
-                                }
-                            }
-
-                            //kiếm theo mô tả
-
-                            if (!IsFinded)
-                            {
-                                foreach (DIADIEM item in diadiem)
-                                {
-                                    if (IsSubstring(item.MOTA, tbLocation))
-                                    {
-                                        IsFinded = true;
-                                        ketqua.Add(item);
-                                    }
-                                }
-                            }
-                        }
-                           
-                    }
+                    MessageBox.Show("Hãy nhập thông tin bạn cần tìm");
                 }
-            })  ;
+           
+            });
 
-            ToAddLocationCommand  = new RelayCommand<object> ((p) => { return p == null ? false : true; },(p) =>
+            ToAddLocationCommand = new RelayCommand<object>((p) => { return p == null ? false : true; }, (p) =>
             {
                 InforLocationVM.IsNew = true;
                 if (diadiem.Count() == 0)
@@ -166,22 +170,25 @@ namespace TourismManagementSystem.ViewModel
                     MaDD = GenerateCode(MaDD);
                 }
                 TenDD = DcDD = MtDD = null;
-                
+
                 AddLocationWindow addLocation = new AddLocationWindow();
                 addLocation.ShowDialog();
 
 
-                
+
 
                 if (IsDone)
                 {
                     diadiem.Add(InforLocationVM.d);
                     OnPropertyChanged(nameof(diadiem));
+
+                    SearchResult.Add(InforLocationVM.d);
+                    OnPropertyChanged(nameof(SearchResult));
                     IsDone = false;
                 }
 
-            }) ;
-            
+            });
+
             ToEditLocationCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 InforLocationVM.IsNew = false;
@@ -196,6 +203,7 @@ namespace TourismManagementSystem.ViewModel
                 if (IsDone)
                 {
                     OnPropertyChanged(nameof(diadiem));
+                    OnPropertyChanged(nameof(SearchResult));
                     IsDone = false;
                 }
             });
@@ -220,12 +228,14 @@ namespace TourismManagementSystem.ViewModel
                         DataProvider.Ins.DB.DIADIEMs.Remove(selectedItem);
                         DataProvider.Ins.DB.SaveChanges();
                         diadiem.Remove(selectedItem);
+                        SearchResult.Remove(selectedItem);
+
                         selectedItem = null;
                         MessageBox.Show("Đã xóa địa điểm thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
                 else return;
-               
+
 
             });
 
@@ -266,9 +276,11 @@ namespace TourismManagementSystem.ViewModel
         }
 
 
-        public  void LoadDatagrid ()
+        public void LoadDatagrid()
         {
             diadiem = new ObservableCollection<DIADIEM>(DataProvider.Ins.DB.DIADIEMs);
+            SearchResult = new ObservableCollection<DIADIEM>(DataProvider.Ins.DB.DIADIEMs);
+
         }
         public static string GenerateCode(string previousCode = null)
         {
@@ -303,6 +315,4 @@ namespace TourismManagementSystem.ViewModel
         }
 
     }
-
-
 }
