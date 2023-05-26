@@ -94,7 +94,7 @@
                         BorderBrush="{StaticResource Primary}"
                         BorderThickness="1"  
                         HorizontalContentAlignment="Center"
-                        Text="{Binding tbLocation}"
+                        Text="{Binding tbLocation, UpdateSourceTrigger=PropertyChanged}"
                             >
                     </TextBox>
                 </Grid>

@@ -33,6 +33,8 @@ namespace TourismManagementSystem.ViewModel
 
         public ICommand SaveLocationCommand { get; set; }
 
+
+        public Action<DIADIEM> OnLocationAdded;
         public InforLocationVM() {
             maDD = LocationVM.MaDD;
             tenDD = LocationVM.TenDD;
@@ -53,52 +55,34 @@ namespace TourismManagementSystem.ViewModel
                 }
                else//cập nhâp
                 {
-                    if (maDD == LocationVM.MaDD && tenDD == LocationVM.TenDD && mtDD == LocationVM.MtDD) { return false; };
+                    if (dcDD == LocationVM.DcDD && tenDD == LocationVM.TenDD && mtDD == LocationVM.MtDD)
+                    { 
+                        return false; 
+                    }
+                    else 
+                    {
+                        if (tenDD == null || dcDD == null || tenDD == "" || dcDD == "")
+                        {
+                            return false;
+                        }
+                    }
                     return true;
-
                 }
                     
             }, (p) =>
             {
                 if (IsNew)//tạo mới
                 {
-                    var temp = new DIADIEM()
-                    {
-                        MADD = maDD,
-                        TENDD = tenDD,
-                        DIACHI = dcDD,
-                        MOTA = mtDD
-                    };
-                    d = temp;
 
-                    DataProvider.Ins.DB.DIADIEMs.Add(temp);
-                    DataProvider.Ins.DB.SaveChanges();
+                    //mtDD = null;
+                    NewLocation();
+                    IsNew = false;
 
-                    LocationVM.IsDone = true;
-                    MessageBox.Show("Đã tạo mới địa điểm thành công");
-
-                    //Xóa các thông tin cũ
-                    maDD = GenerateCode(maDD);
-                    LocationVM.MaDD = maDD;
-                    tenDD = null;
-                    dcDD = null;
-                    mtDD = null;
                 }
                 else//cập nhập
                 {
-                    var temp = DataProvider.Ins.DB.DIADIEMs.Where(x=> x.MADD == maDD).SingleOrDefault();
-                    temp.TENDD = tenDD;
-                    temp.DIACHI = dcDD;
-                    temp.MOTA = mtDD;
-                    DataProvider.Ins.DB.SaveChanges();
-                    LocationVM.IsDone = true;
-                    MessageBox.Show("Địa địa điểm đã được cập nhập");
-
-                    //sau cập nhập 
-                    LocationVM.TenDD = tenDD;
-                    LocationVM.DcDD = dcDD;
-                    LocationVM.MtDD = mtDD;
-
+                   
+                    EditLocation();
                 }
 
             });
@@ -127,6 +111,59 @@ namespace TourismManagementSystem.ViewModel
 
             return newCode;
         }
+        public void EditLocation()
+        {
+            var temp = DataProvider.Ins.DB.DIADIEMs.Where(x => x.MADD == maDD).SingleOrDefault();
+            if (tenDD != null && dcDD != null ) {
+                temp.TENDD = tenDD;
+                temp.DIACHI = dcDD;
+                temp.MOTA = mtDD;
+                DataProvider.Ins.DB.SaveChanges();
+                LocationVM.IsDone = true;
+                MessageBox.Show("Thông tin địa điểm đã được cập nhập");
+                //sau cập nhập 
+                LocationVM.TenDD = tenDD;
+                LocationVM.DcDD = dcDD;
+                LocationVM.MtDD = mtDD;
+            }
+            else
+            {
+                MessageBox.Show("Hãy chỉnh sửa thông tin cần cập nhập");
+            }
+
+
+            
+        }
+        public void NewLocation ()
+        {
+            var temp = new DIADIEM()
+            {
+                MADD = maDD,
+                TENDD = tenDD,
+                DIACHI = dcDD,
+                MOTA = mtDD
+            };
+            d = temp;
+
+            DataProvider.Ins.DB.DIADIEMs.Add(temp);
+            DataProvider.Ins.DB.SaveChanges();
+
+            LocationVM.IsDone = true;
+            MessageBox.Show("Đã tạo mới địa điểm thành công \nHãy kiểm tra lại các thông tin ");
+            //sau cập nhập 
+            LocationVM.TenDD = tenDD;
+            LocationVM.DcDD = dcDD;
+            LocationVM.MtDD = mtDD;
+
+
+
+            //Xóa các thông tin cũ
+            //maDD = GenerateCode(maDD);
+            //LocationVM.MaDD = maDD;
+            //tenDD = null;
+            //dcDD = null;
+        }
 
     }
+   
 }
