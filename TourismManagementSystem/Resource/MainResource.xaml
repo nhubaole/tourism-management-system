@@ -13,7 +13,9 @@
     <viewmodel:TicketVM x:Key="TicketVM"/>
     <viewmodel:TourVM x:Key="TourVM"/>
     <viewmodel:TripVM x:Key="TripVM"/>
+    <viewmodel:RequireLoginVM x:Key="RequireLoginVM"/>
     <ut:MultiCommandParameterConverter x:Key="MultiCommandParameterConverter"/>
     <ut:RadioButtonConverter x:Key="RadioButtonConverter"/>
+    <ut:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
 
 </ResourceDictionary>

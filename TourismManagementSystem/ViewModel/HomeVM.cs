@@ -16,10 +16,12 @@ namespace TourismManagementSystem.ViewModel
         private int _Revenue = 0;
         private string _SelectedRadioBtn;
         private ObservableCollection<CHUYEN> _UpComingTrip;
+        private bool _IsAdmin;
 
         public HomeVM()
         {
             init();
+            IsAdmin = MainVM.AdminRole;
             RadioButtonCommand = new RelayCommand<string>((p) => true, (p) => { 
                 if(p == "Ngày")
                 {
@@ -82,5 +84,6 @@ namespace TourismManagementSystem.ViewModel
         public string SelectedRadioBtn { get => _SelectedRadioBtn; set { _SelectedRadioBtn = value; OnPropertyChanged(); } }
 
         public ObservableCollection<CHUYEN> UpComingTrip { get => _UpComingTrip; set => _UpComingTrip = value; }
+        public bool IsAdmin { get => _IsAdmin; set { _IsAdmin = value; OnPropertyChanged(); } }
     }
 }

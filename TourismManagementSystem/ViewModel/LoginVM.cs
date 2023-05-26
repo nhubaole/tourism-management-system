@@ -30,6 +30,7 @@ namespace TourismManagementSystem.ViewModel
                         if (Password == "admin" && Username == "admin")
                         {
                             IsLogin = true;
+                            IsGuest = false;
                             p.Close();
                         }
                         else
@@ -41,14 +42,26 @@ namespace TourismManagementSystem.ViewModel
                 }
             });
 
+            ContinueAsGuestCommand = new RelayCommand<Window>((p) => { return p == null ? false : true; }, (p) =>
+            {
+                if (p == null) return;
+                else
+                {
+                    IsGuest = true;
+                    p.Close();
+                }
+            });
+
             PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) =>
             {
                 Password = p.Password;
             });
         }
         public bool IsLogin { get; set; }
+        public bool IsGuest { get; set; }
         public ICommand LoginCommand { get; set; }
         public ICommand PasswordChangedCommand { get; set; }
+        public ICommand ContinueAsGuestCommand { get; set; }
         public string Username { get => _Username; set { _Username = value; OnPropertyChanged(); } }
         public string Password { get => _Password; set { _Password = value; OnPropertyChanged(); } }
     }

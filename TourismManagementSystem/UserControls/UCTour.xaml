@@ -37,7 +37,7 @@
                                FontSize="18"
                                FontWeight="Medium"/>
                 </RadioButton>
-                <Button
+                <Button Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}"
                         Style="{StaticResource MaterialDesignFlatDarkBgButton}"
                         Width="30"
                         Height="30"
@@ -112,14 +112,16 @@
                                                 Height="30"
                                                 Margin="0,0,5,0"
                                                 Command="{Binding DataContext.EditTourCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
-                                                CommandParameter="{Binding .}">
+                                                CommandParameter="{Binding .}"
+                                                Visibility="{Binding DataContext.IsAdmin, RelativeSource={RelativeSource AncestorType=ListView}, Converter={StaticResource BooleanToVisibilityConverter}}">
                                             <materialDesign:PackIcon Foreground="#727272" Kind="Pencil" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Button>
                                         <Button Style="{StaticResource MaterialDesignIconButton}"
                                                 Width="30"
                                                 Height="30"
                                                 Command="{Binding DataContext.DeleteTourCommand, RelativeSource={RelativeSource AncestorType=ListView}}"
-                                                CommandParameter="{Binding .}">
+                                                CommandParameter="{Binding .}"
+                                                Visibility="{Binding DataContext.IsAdmin, RelativeSource={RelativeSource AncestorType=ListView}, Converter={StaticResource BooleanToVisibilityConverter}}">
                                             <materialDesign:PackIcon Foreground="#727272" Kind="Delete" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Button>
                                     </StackPanel>

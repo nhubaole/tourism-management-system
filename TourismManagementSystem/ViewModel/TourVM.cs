@@ -17,8 +17,11 @@ namespace TourismManagementSystem.ViewModel
         private string _SearchText;
         private ObservableCollection<string> _FilterCbItems = new ObservableCollection<string>() { "Mã tuyến", "Tên tuyến", "Loại tuyến" };
         private string selectedFilter;
+        private bool _IsAdmin;
+
         public TourVM()
         {
+            IsAdmin = MainVM.AdminRole;
             ListTuyen = new ObservableCollection<TUYEN>(DataProvider.Ins.DB.TUYENs);
             SelectedFilter = FilterCbItems.First();
             AddTourCommand = new RelayCommand<object>((p) => true, (p) =>
@@ -93,5 +96,7 @@ namespace TourismManagementSystem.ViewModel
         }
         public ObservableCollection<string> FilterCbItems { get => _FilterCbItems; set => _FilterCbItems = value; }
         public string SelectedFilter { get => selectedFilter; set { selectedFilter = value; OnPropertyChanged(); } }
+
+        public bool IsAdmin { get => _IsAdmin; set { _IsAdmin = value; OnPropertyChanged(); } }
     }
 }

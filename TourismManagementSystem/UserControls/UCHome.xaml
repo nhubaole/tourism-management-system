@@ -33,7 +33,8 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Right"
-                        VerticalAlignment="Center">
+                        VerticalAlignment="Center"
+                        Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}">
                 <RadioButton Style="{StaticResource BtnStyle2}" 
                              IsChecked="{Binding SelectedRadioBtn, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, Converter={StaticResource RadioButtonConverter}, ConverterParameter=Ngày}" 
                              Command="{Binding RadioButtonCommand}"
@@ -71,7 +72,9 @@
                 </RadioButton>
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="1" Margin="0,0,0,20">
+        <Grid Grid.Row="1" 
+              Margin="0,0,0,20"
+              Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>

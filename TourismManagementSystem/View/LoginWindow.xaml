@@ -60,7 +60,7 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </PasswordBox>
-                <Button Margin="0,50,0,0"
+                <Button Margin="0,40,0,0"
                         Background="{StaticResource Primary}"
                         Width="300"
                         Height="60"
@@ -70,6 +70,23 @@
                         FontSize="24"
                         Command="{Binding LoginCommand}"
                         CommandParameter="{Binding ElementName=loginWindow}">Đăng nhập</Button>
+                <TextBlock Margin="0,20,0,0"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontSize="16"
+                           FontWeight="Medium">
+                    <TextBlock.Inlines>
+                        <Hyperlink Command="{Binding ContinueAsGuestCommand}"
+                                   CommandParameter="{Binding ElementName=loginWindow}">
+                            <Hyperlink.Style>
+                                <Style TargetType="Hyperlink">
+                                    <Setter Property="Foreground" Value="{StaticResource Primary}" />
+                                </Style>
+                            </Hyperlink.Style>
+                            Tiếp tục dưới vai trò Khách
+                        </Hyperlink>
+                    </TextBlock.Inlines>
+                </TextBlock>
             </StackPanel>
         </Grid>
     </Grid>

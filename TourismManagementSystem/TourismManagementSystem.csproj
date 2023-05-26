@@ -175,6 +175,9 @@
     <Compile Include="UserControls\UCNotification.xaml.cs">
       <DependentUpon>UCNotification.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UCRequireLogin.xaml.cs">
+      <DependentUpon>UCRequireLogin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UCRevenueStatistics.xaml.cs">
       <DependentUpon>UCRevenueStatistics.xaml</DependentUpon>
     </Compile>
@@ -184,6 +187,7 @@
     <Compile Include="UserControls\UCTicket.xaml.cs">
       <DependentUpon>UCTicket.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\BoolToVisibilityConverter.cs" />
     <Compile Include="Utils\MultiCommandParameterConverter.cs" />
     <Compile Include="Utils\RadioButtonConverter.cs" />
     <Compile Include="ViewModel\AddScheduleVM.cs" />
@@ -196,6 +200,7 @@
     <Compile Include="ViewModel\LoginVM.cs" />
     <Compile Include="ViewModel\MainVM.cs" />
     <Compile Include="ViewModel\NotificationVM.cs" />
+    <Compile Include="ViewModel\RequireLoginVM.cs" />
     <Compile Include="ViewModel\RevenueStatisticVM.cs" />
     <Compile Include="ViewModel\ScheduleDetailsVM.cs" />
     <Compile Include="ViewModel\ScheduleVM.cs" />
@@ -311,6 +316,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\UCNotification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCRequireLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -459,6 +468,7 @@
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
     <Resource Include="Resource\Image\HomeImg.png" />
+    <Resource Include="Resource\Image\LoginRequireImg.png" />
     <Content Include="TourManagement.sql" />
   </ItemGroup>
   <ItemGroup>

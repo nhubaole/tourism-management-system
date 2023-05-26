@@ -11,6 +11,7 @@ namespace TourismManagementSystem.ViewModel
 {
     internal class MainVM : BaseViewModel
     {
+        public static bool AdminRole;
         private object _currentView;
         public MainVM()
         {
@@ -40,6 +41,13 @@ namespace TourismManagementSystem.ViewModel
                     if (loginVM.IsLogin == true)
                     {
                         CurrentView = new HomeVM();
+                        AdminRole = true;
+                        p.Show();
+                    }
+                    else if (loginVM.IsGuest == true)
+                        {
+                        CurrentView = new HomeVM();
+                        AdminRole = false;
                         p.Show();
                     }
                     else
@@ -92,13 +100,83 @@ namespace TourismManagementSystem.ViewModel
 
 
         private void Home(object obj) => CurrentView = new HomeVM();
-        private void Booking(object obj) => CurrentView = new BookingVM();
-        private void Customer(object obj) => CurrentView = new CustomerVM();
-        private void Location(object obj) => CurrentView = new LocationVM();
-        private void Notification(object obj) => CurrentView = new NotificationVM();
-        private void RevenueStatistic(object obj) => CurrentView = new RevenueStatisticVM();
-        private void Service(object obj) => CurrentView = new ServiceVM();
-        private void Ticket(object obj) => CurrentView = new TicketVM();
+        private void Booking(object obj)
+        {
+            if (AdminRole)
+            {
+                CurrentView = new BookingVM();
+            }
+            else
+            {
+                CurrentView = new RequireLoginVM();
+            }
+        }
+        private void Customer(object obj)
+        {
+            if (AdminRole)
+            {
+                CurrentView = new CustomerVM();
+            }
+            else
+            {
+                CurrentView = new RequireLoginVM();
+            }
+        }
+        private void Location(object obj)
+        {
+            if (AdminRole)
+            {
+                CurrentView = new LocationVM();
+            }
+            else
+            {
+                CurrentView = new RequireLoginVM();
+            }
+        }
+        private void Notification(object obj)
+        {
+            if (AdminRole)
+            {
+                CurrentView = new NotificationVM();
+            }
+            else
+            {
+                CurrentView = new RequireLoginVM();
+            }
+        }
+        private void RevenueStatistic(object obj)
+        {
+            if (AdminRole)
+            {
+                CurrentView = new RevenueStatisticVM();
+            }
+            else
+            {
+                CurrentView = new RequireLoginVM();
+            }
+        }
+        private void Service(object obj)
+        {
+            if (AdminRole)
+            {
+                CurrentView = new ServiceVM();
+            }
+            else
+            {
+                CurrentView = new RequireLoginVM();
+            }
+        }
+        private void Ticket(object obj)
+        {
+            if (AdminRole)
+            {
+                CurrentView = new TicketVM();
+            }
+            else
+            {
+                CurrentView = new RequireLoginVM();
+            }
+        }
         private void Tour(object obj) => CurrentView = new TourVM();
         private void Trip(object obj) => CurrentView = new TripVM();
 

@@ -42,4 +42,8 @@
         <uc:UCTrip/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type viewmodel:RequireLoginVM}">
+        <uc:UCRequireLogin/>
+    </DataTemplate>
+
 </ResourceDictionary>
