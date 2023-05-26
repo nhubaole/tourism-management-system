@@ -25,7 +25,13 @@ namespace TourismManagementSystem.ViewModel
         public ICommand DeleteDataCommand { get; set; }
         public ICommand UpdateDataCommand { get; set; }
 
-        public KHACHHANG SelectedCustomer { get; set; }
+        private KHACHHANG _selectedCustomer;
+        public KHACHHANG SelectedCustomer { get => _selectedCustomer; set
+            {
+                _selectedCustomer = value;
+                OnPropertyChanged(nameof(SelectedCustomer));
+            }
+        }
 
 
         private string maKH;
@@ -182,6 +188,9 @@ namespace TourismManagementSystem.ViewModel
             SelectedCustomer.SDT = SDT;
             SelectedCustomer.EMAIL = EMAIL;
             SelectedCustomer.DIACHI = DIACHI;
+            //message show nothing
+
+            MessageBox.Show(SelectedCustomer.HOTEN + SelectedCustomer.SDT);
 
             DataProvider.Ins.DB.SaveChanges();
             LoadDataGrid();
@@ -189,7 +198,6 @@ namespace TourismManagementSystem.ViewModel
         private void DeleteCustomer()
         {
             MessageBox.Show("Bạn muốn xóa khách hàng " +SelectedCustomer.MAKH);
-
             DataProvider.Ins.DB.KHACHHANGs.Remove(SelectedCustomer);
             DataProvider.Ins.DB.SaveChanges();
             ListKhachhang.Remove(SelectedCustomer);

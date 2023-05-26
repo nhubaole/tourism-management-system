@@ -103,7 +103,7 @@
                 <Border BorderBrush="Black" BorderThickness="0"  Background="{StaticResource White}" Height="400" CornerRadius="20" Margin="20,0,20,0">
 
 
-                    <DataGrid ItemsSource="{Binding ListKhachhang}" AutoGenerateColumns="False" Background="White">
+                    <DataGrid ItemsSource="{Binding ListKhachhang}" SelectedItem="{Binding SelectedCustomer}" AutoGenerateColumns="False" Background="White">
                         <DataGrid.Columns >
                             <DataGridTextColumn Header="Mã khách hàng"  Binding="{Binding MAKH}" Width ="*"/>
                             <DataGridTextColumn Header="Tên khách" Binding="{Binding HOTEN}" Width ="*"/>
@@ -178,7 +178,7 @@
 
                             <Grid Grid.Column="1">
                                 <Label
-                                            Content="{Binding MAKH}"
+                                            Content="{Binding SelectedCustomer.MAKH}"
                                             Background="{StaticResource Secondary}"
                                             Margin="0,0,10,5"/>
                             </Grid>
@@ -200,7 +200,7 @@
 
                             <Grid Grid.Column="1">
                                 <TextBox
-                                            Text="{Binding HOTEN}"
+                                            Text="{Binding SelectedCustomer.HOTEN}"
                                             Background="{StaticResource Secondary}"
                                             Margin="0,0,10,5"/>
                             </Grid>
@@ -222,7 +222,7 @@
 
                             <Grid Grid.Column="1">
                                 <TextBox
-                                            Text="{Binding CCCD}"
+                                            Text="{Binding SelectedCustomer.CCCD}"
                                     
                                             Background="{StaticResource Secondary}"
                                             Margin="0,0,10,5"/>
@@ -245,7 +245,7 @@
 
                             <Grid Grid.Column="1">
                                 <TextBox
-                                            Text="{Binding SDT}"
+                                            Text="{Binding SelectedCustomer.SDT}"
                                     
                                             Background="{StaticResource Secondary}"
                                             Margin="0,0,10,5"/>
@@ -268,7 +268,7 @@
 
                             <Grid Grid.Column="1">
                                 <TextBox
-                                            Text="{Binding EMAIL}"
+                                            Text="{Binding SelectedCustomer.EMAIL}"
                                     
                                             Background="{StaticResource Secondary}"
                                             Margin="0,0,10,5"/>
@@ -291,7 +291,7 @@
 
                             <Grid Grid.Column="1">
                                 <TextBox
-                                            Text="{Binding DIACHI}"
+                                            Text="{Binding SelectedCustomer.DIACHI}"
                                             
                                             Background="{StaticResource Secondary}"
                                             Margin="0,0,10,5"/>
