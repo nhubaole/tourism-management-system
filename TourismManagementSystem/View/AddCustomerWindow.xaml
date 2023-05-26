@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourismManagementSystem.View"
         mc:Ignorable="d"
-        Title="AddLocationWindow" Height="400" Width="700"
+        Title="AddCustomerWindow" Height="400" Width="700"
         ResizeMode="NoResize"
         HorizontalAlignment="Center"
         VerticalAlignment="Center"

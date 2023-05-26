@@ -178,6 +178,7 @@
 
                             <Grid Grid.Column="1">
                                 <Label
+                                            Content="{Binding MAKH}"
                                             Background="{StaticResource Secondary}"
                                             Margin="0,0,10,5"/>
                             </Grid>
@@ -199,8 +200,8 @@
 
                             <Grid Grid.Column="1">
                                 <TextBox
+                                            Text="{Binding HOTEN}"
                                             Background="{StaticResource Secondary}"
-                                            Text="{Binding HoTen}"
                                             Margin="0,0,10,5"/>
                             </Grid>
                         </Grid>
@@ -267,7 +268,7 @@
 
                             <Grid Grid.Column="1">
                                 <TextBox
-                                            Text="{Binding Email}"
+                                            Text="{Binding EMAIL}"
                                     
                                             Background="{StaticResource Secondary}"
                                             Margin="0,0,10,5"/>
@@ -290,7 +291,7 @@
 
                             <Grid Grid.Column="1">
                                 <TextBox
-                                            Text="{Binding Diachi}"
+                                            Text="{Binding DIACHI}"
                                             
                                             Background="{StaticResource Secondary}"
                                             Margin="0,0,10,5"/>
@@ -332,6 +333,7 @@
                                                 Background="{StaticResource Primary}"
                                                 materialDesign:ButtonAssist.CornerRadius="15"
                                                 ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
+                                                Command="{Binding UpdateDataCommand}" CommandParameter="{Binding SelectedCustomer}"
                                                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
                                         <TextBlock
                                                 Text="Cập nhật"
@@ -348,6 +350,7 @@
                                                 BorderBrush="Black"
                                                 BorderThickness="0.5"
                                                 ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
+                                                Command="{Binding DeleteDataCommand}" CommandParameter="{Binding SelectedCustomer}"
                                                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
                                         <TextBlock
                                                 Text="Xóa"

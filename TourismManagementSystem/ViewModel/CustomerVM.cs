@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Input;
 using TourismManagementSystem.Model;
 using TourismManagementSystem.View;
+using TourismManagementSystem.UserControls;
 
 namespace TourismManagementSystem.ViewModel
 {
@@ -18,11 +19,14 @@ namespace TourismManagementSystem.ViewModel
         
 
         public ObservableCollection<KHACHHANG> KhachHangs { get; set; }
+        public ICommand SwitchWindowCommand { get; set; }
+
         public ICommand AddDataCommand { get; set; }
         public ICommand DeleteDataCommand { get; set; }
         public ICommand UpdateDataCommand { get; set; }
 
-        
+        public KHACHHANG SelectedCustomer { get; set; }
+
 
         private string maKH;
         public string MAKH
@@ -91,12 +95,19 @@ namespace TourismManagementSystem.ViewModel
         } 
         private ObservableCollection<KHACHHANG> _ListKhachhang = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs);
         public ObservableCollection<KHACHHANG> ListKhachhang { get => _ListKhachhang; set { _ListKhachhang= value; OnPropertyChanged(nameof(DataProvider.Ins.DB.KHACHHANGs)); } }
-    
+
         public CustomerVM()
         {
+            SwitchWindowCommand = new RelayCommand<object>((p) => {
+               
+                  return true;
+                
+            }, (p) =>
+            {SwitchWindow(p);});
+
             KhachHangs = new ObservableCollection<KHACHHANG>();
             AddDataCommand = new RelayCommand<object>((p) => {
-                if (maKH== null || hoTen == null)
+                if (maKH == null || hoTen == null)
                 {
                     return false;
                 }
@@ -123,7 +134,6 @@ namespace TourismManagementSystem.ViewModel
                     ListKhachhang.Add(temp);
                     LoadDataGrid();
 
-                    MessageBox.Show(temp.ToString());
 
 
                     MessageBox.Show("Đã tạo mới khách hàng thành công");
@@ -132,20 +142,58 @@ namespace TourismManagementSystem.ViewModel
                 }
                 catch (Exception ex)
                 {
-                    // Handle the exception appropriately (e.g., log, display an error message)
                     MessageBox.Show("An error occurred: " + ex.InnerException.Message);
                 }
-              
-               
-            }); 
-            
+
+
+            });
+
+
+            UpdateDataCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            },
+            (p) => { UpdateCustomer(); });
+            DeleteDataCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            },
+          (p) => { DeleteCustomer(); });
 
         }
         private void LoadDataGrid()
         {
           ListKhachhang = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs);
         }
+        private void SwitchWindow(object parameter)
+        {
+            AddCustomerWindow addCustomerWindow = new AddCustomerWindow();
+            addCustomerWindow.Show();
+           
+        }
+        private void UpdateCustomer()
+        {
 
-      
+            if (SelectedCustomer == null)
+                return;
+
+            SelectedCustomer.HOTEN = HOTEN;
+            SelectedCustomer.CCCD = CCCD;
+            SelectedCustomer.SDT = SDT;
+            SelectedCustomer.EMAIL = EMAIL;
+            SelectedCustomer.DIACHI = DIACHI;
+
+            DataProvider.Ins.DB.SaveChanges();
+            LoadDataGrid();
+        }
+        private void DeleteCustomer()
+        {
+            MessageBox.Show("Bạn muốn xóa khách hàng " +SelectedCustomer.MAKH);
+
+            DataProvider.Ins.DB.KHACHHANGs.Remove(SelectedCustomer);
+            DataProvider.Ins.DB.SaveChanges();
+            ListKhachhang.Remove(SelectedCustomer);
+            LoadDataGrid();
+        }
     }
 }
