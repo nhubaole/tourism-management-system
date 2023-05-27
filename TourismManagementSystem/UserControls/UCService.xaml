@@ -7,7 +7,12 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="900"
-             Background="{StaticResource Secondary}">
+             Background="{StaticResource Secondary}"
+             xmlns:vm="clr-namespace:TourismManagementSystem.ViewModel"
+             >
+    <UserControl.DataContext >
+        <vm:ServiceVM/>
+    </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -64,15 +69,19 @@
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
                     <TextBox
-                                x:Name="tbfilter1"
-                                Width="150"
-                                Height="25"
-                                materialDesign:HintAssist.Hint="Nhập thông tin"
-                                HorizontalAlignment="Right"
-                                Background="White"
-                                VerticalAlignment="Bottom"
-                                BorderBrush="{StaticResource Primary}"
-                                BorderThickness="1"    
+                        x:Name="tbfilter1"
+                        Width="150"
+                        Height="25"
+                        materialDesign:HintAssist.Hint="Nhập thông tin"
+                        HorizontalAlignment="Right"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Background="White"
+                        VerticalAlignment="Bottom"
+                        BorderBrush="{StaticResource Primary}"
+                        BorderThickness="1"  
+                        FontSize="13"
+                        
                             >
                     </TextBox>
                 </Grid>
@@ -83,43 +92,47 @@
                                    Padding="-3" Margin="0,17,0,0"
                                    />
                     <ComboBox
-                                Height="25"
-                                materialDesign:HintAssist.Hint="Phương tiện"
-                                materialDesign:HintAssist.HelperTextFontSize="10"
-                                MinWidth="72"
-                                Background="White"
-                                ItemsSource="{Binding LongIntegerList}"
-                                SelectedValue="{Binding SelectedValueOne}"
-                                VerticalAlignment="Bottom"
-                                BorderBrush="{StaticResource Primary}"
-                                BorderThickness="1"
-                                HorizontalContentAlignment="Center"
->
+                        Height="25"
+                        materialDesign:HintAssist.Hint="Phương tiện"
+                        materialDesign:HintAssist.HelperTextFontSize="10"
+                        MinWidth="72"
+                        Background="White"
+                        ItemsSource="{Binding FilterItems1}"
+                        SelectedItem="{Binding Filter1, UpdateSourceTrigger=PropertyChanged}"
+                        VerticalAlignment="Bottom"
+                        BorderBrush="{StaticResource Primary}"
+                        BorderThickness="1"
+                        HorizontalContentAlignment="Center"
+                        Padding="10,3.5, 0, 0"
+                        FontSize="13"
+                        >
                     </ComboBox>
 
                 </Grid>
                 <Grid Grid.Column="2"
                               >
-                    <Label Content="Loại dịch vụ:"
+                    <Label Content="Tìm kiếm theo: "
                                    VerticalAlignment="Top"
                                    FontSize="10"
                                    Padding="-4" Margin="0,18,0,0"
                                    />
                     <ComboBox
-                                Height="25"
-                                Width="88"
-                                materialDesign:HintAssist.Hint="Mã phiếu"
-                                materialDesign:HintAssist.HelperTextFontSize="10"
-                                materialDesign:HintAssist.FloatingHintHorizontalAlignment="Center"
-                                MinWidth="65"
-                                Background="White"
-                                ItemsSource="{Binding LongIntegerList}"
-                                SelectedValue="{Binding SelectedValueOne}"
-                                VerticalAlignment="Bottom"
-                                HorizontalAlignment="Left"
-                                BorderBrush="{StaticResource Primary}"
-                                BorderThickness="1"
-                                HorizontalContentAlignment="Center">
+                        Height="25"
+                        Width="110"
+                        materialDesign:HintAssist.Hint="Mã phiếu"
+                        materialDesign:HintAssist.HelperTextFontSize="10"
+                        materialDesign:HintAssist.FloatingHintHorizontalAlignment="Center"
+                        MinWidth="65"
+                        Background="White"
+                        ItemsSource="{Binding FilterItems2, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedItem="{Binding Filter2, UpdateSourceTrigger=PropertyChanged}"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Left"
+                        BorderBrush="{StaticResource Primary}"
+                        BorderThickness="1"
+                        HorizontalContentAlignment="Center"
+                        Padding="10,3.5, 0, 0"
+                        FontSize="13">
                     </ComboBox>
                 </Grid>
 
@@ -136,22 +149,149 @@
                         >
                 <StackPanel>
                     <TextBlock 
-                                    Width="100"
-                                    Height="20"
-                                    VerticalAlignment="Top"
-                                    HorizontalAlignment="Left"
-                                    Text="Phương tiện"
-                                    Foreground="{StaticResource Primary}"
-                                    FontWeight="Bold"
-                                    FontSize="10"
-                                    Margin="20, 10, 0, 0"
-                                    ></TextBlock>
-                    <DataGrid
-                                x:Name="dtgridPT"
-                                VerticalAlignment="Bottom"
-                                Height="85"
-                                Margin="20, 0, 20, 0">
+                        Width="100"
+                        Height="20"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        Text="Phương tiện"
+                        Foreground="{StaticResource Primary}"
+                        FontWeight="Bold"
+                        FontSize="10"
+                        Margin="30, 10, 0, 0"
+                        ></TextBlock>
+                    <DataGrid 
+                        Grid.Row="1"
+                        x:Name="dtgridPT"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Height="155"
+                        Margin="30, 0, 30, 10"
+                        ItemsSource="{Binding SearchResultPT, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedItem="{Binding selectedItemPT, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                        AutoGenerateColumns="False"
+                        BorderBrush="#e8a66d"
+                        BorderThickness="1.5" 
+                        RowDetailsVisibilityMode="VisibleWhenSelected"
+                        ScrollViewer.CanContentScroll="True"
+                        ScrollViewer.PanningMode="Both"
+                        HeadersVisibility="Column"
+                        SelectionMode="Single"
+                        SelectionUnit="FullRow"
+                        CanUserAddRows="False"
+                        CanUserDeleteRows="False"
+                        CanUserReorderColumns="False"
+                        CanUserResizeRows="False"
+                        ColumnWidth="*"
+                        IsReadOnly="False"
+                        GridLinesVisibility="None"
+               >
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                <Setter Property="VerticalContentAlignment" Value="Center" />
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="{StaticResource Primary}"/>
+                                <Setter Property="Margin" Value="0, 10, 0, 10"/>
+                                <Setter Property="FontSize" Value="14"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
 
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
+                        <DataGrid.Resources>
+                            <SolidColorBrush x:Key="DataGridCellFocusBorderBrush" Color="Transparent" />
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="BorderThickness" Value="0" />
+                                        <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
+                                        <Setter Property="Background" Value="Transparent"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="BorderThickness" Value="0" />
+                                        <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
+                                        <Setter Property="Background" Value="#e8a66d"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns >
+                            <DataGridTextColumn Header="Mã phương tiện" Binding="{Binding MAPT}" Width="*"  IsReadOnly="True" CanUserSort="False">
+
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Tên Phương tiện" Binding="{Binding TENPT}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="TextWrapping" Value="Wrap" />
+                                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="TextAlignment" Value="Center" />
+                                        <Setter Property="Padding" Value="10"/>
+
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Số lượng ghế" Binding="{Binding SLGHE}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="TextWrapping" Value="Wrap" />
+                                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="TextAlignment" Value="Center" />
+                                        <Setter Property="Padding" Value="10"/>
+
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                          
+                            <DataGridTemplateColumn Header="" 
+                                        Width="auto"
+                                        >
+                                <DataGridTemplateColumn.CellTemplate >
+                                    <DataTemplate >
+                                        <Button
+                                        x:Name="btnEdit"
+                                        Height="auto"
+                                        Width="auto"
+                                        Background="Transparent"
+                                        BorderBrush="Transparent"
+                                        Command="{Binding DataContext.ToEditTrafficCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        CommandParameter="{Binding}"
+                                    >
+                                            <materialDesign:PackIcon 
+                                        Kind="LeadPencil"
+                                        Foreground ="{StaticResource Primary}"
+                                         />
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn >
+                            <DataGridTemplateColumn Header="" 
+                                        Width="auto"
+                                        >
+                                <DataGridTemplateColumn.CellTemplate >
+                                    <DataTemplate >
+                                        <Button
+                                    Height="auto"
+                                    Width="auto"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding DataContext.DeleteTrafficCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    CommandParameter="{Binding}">
+                                            <materialDesign:PackIcon Kind="Delete"
+                                                             Foreground ="{StaticResource Primary}"/>
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn >
+                        </DataGrid.Columns>
                     </DataGrid>
                     <TextBlock 
                                 Width="100"
@@ -162,15 +302,144 @@
                                 Foreground="{StaticResource Primary}"
                                 FontWeight="Bold"
                                 FontSize="10"
-                                Margin="20, 10, 0, 0"
+                                Margin="30, 10, 0, 0"
                                 ></TextBlock>
 
-                    <DataGrid
-                                x:Name="dtgriKS"
-                                VerticalAlignment="Bottom"
-                                Height="85"
-                                Margin="20, 0, 20, 0">
+                    <DataGrid 
+                        Grid.Row="1"
+                        x:Name="dtgridKS"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Height="155"
+                        Margin="30, 0, 30, 10"
+                        ItemsSource="{Binding SearchResultKS, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedItem="{Binding selectedItemKS, Mode=OneWayToSource}"
+                        AutoGenerateColumns="False"
+                        BorderBrush="#e8a66d"
+                        BorderThickness="1.5" 
+                        RowDetailsVisibilityMode="VisibleWhenSelected"
+                        ScrollViewer.CanContentScroll="True"
+                        ScrollViewer.PanningMode="Both"
+                        HeadersVisibility="Column"
+                        SelectionMode="Single"
+                        SelectionUnit="FullRow"
+                        CanUserAddRows="False"
+                        CanUserDeleteRows="False"
+                        CanUserReorderColumns="False"
+                        CanUserResizeRows="False"
+                        ColumnWidth="*"
+                        IsReadOnly="False"
+                        GridLinesVisibility="None"
+               >
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                <Setter Property="VerticalContentAlignment" Value="Center" />
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="{StaticResource Primary}"/>
+                                <Setter Property="Margin" Value="0, 10, 0, 10"/>
+                                <Setter Property="FontSize" Value="14"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
 
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
+                        <DataGrid.Resources>
+                            <SolidColorBrush x:Key="DataGridCellFocusBorderBrush" Color="Transparent" />
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="BorderThickness" Value="0" />
+                                        <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
+                                        <Setter Property="Background" Value="Transparent"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="BorderThickness" Value="0" />
+                                        <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
+                                        <Setter Property="Background" Value="#e8a66d"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns >
+                            <DataGridTextColumn Header="Mã khách sạn" Binding="{Binding MAKS}" Width="*"  IsReadOnly="True" CanUserSort="False">
+
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Tên khách sạn" Binding="{Binding TENKS}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="TextWrapping" Value="Wrap" />
+                                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="TextAlignment" Value="Center" />
+                                        <Setter Property="Padding" Value="10"/>
+
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Địa chỉ" Binding="{Binding DIACHI}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="TextWrapping" Value="Wrap" />
+                                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="TextAlignment" Value="Center" />
+                                        <Setter Property="Padding" Value="10"/>
+
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Số điện thoại" Binding="{Binding SDT}"  Width="*" IsReadOnly="True" CanUserSort="False"/>
+                            <DataGridTextColumn Header="Số sao" Binding="{Binding SOSAO}"  Width="*" IsReadOnly="True" CanUserSort="False"/>
+                            <DataGridTextColumn Header="Sức chứa" Binding="{Binding SUCCHUA}"  Width="*" IsReadOnly="True" CanUserSort="False"/>
+                            <DataGridTemplateColumn Header="" 
+                                        Width="auto"
+                                        >
+                                <DataGridTemplateColumn.CellTemplate >
+                                    <DataTemplate >
+                                        <Button
+                                    x:Name="btnEdit"
+                                    Height="auto"
+                                    Width="auto"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding DataContext.ToEditHotelCommand , RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    CommandParameter="{Binding}"
+                                    >
+                                            <materialDesign:PackIcon 
+                                        Kind="LeadPencil"
+                                        Foreground ="{StaticResource Primary}"
+                                         />
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn >
+                            <DataGridTemplateColumn Header="" 
+                                        Width="auto"
+                                        >
+                                <DataGridTemplateColumn.CellTemplate >
+                                    <DataTemplate >
+                                        <Button
+                                    Height="auto"
+                                    Width="auto"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding DataContext.DeleteHotelCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    CommandParameter="{Binding}">
+                                            <materialDesign:PackIcon Kind="Delete"
+                                                             Foreground ="{StaticResource Primary}"/>
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn >
+                        </DataGrid.Columns>
                     </DataGrid>
 
                     <TextBlock 
@@ -182,14 +451,141 @@
                                 Foreground="{StaticResource Primary}"
                                 FontWeight="Bold"
                                 FontSize="10"
-                                Margin="20, 10, 0, 0"
+                                Margin="30, 10, 0, 0"
                             ></TextBlock>
-                    <DataGrid
-                                x:Name="dtgridNH"
-                                VerticalAlignment="Bottom"
-                                Height="85"
-                                Margin="20, 0, 20, 0">
+                    <DataGrid 
+                        Grid.Row="1"
+                        x:Name="dtgridNH"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Height="155"
+                        Margin="30, 0, 30, 10"
+                        ItemsSource="{Binding SearchResultNH, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedItem="{Binding selectedItemNH, Mode=OneWayToSource}"
+                        AutoGenerateColumns="False"
+                        BorderBrush="#e8a66d"
+                        BorderThickness="1.5" 
+                        RowDetailsVisibilityMode="VisibleWhenSelected"
+                        ScrollViewer.CanContentScroll="True"
+                        ScrollViewer.PanningMode="Both"
+                        HeadersVisibility="Column"
+                        SelectionMode="Single"
+                        SelectionUnit="FullRow"
+                        CanUserAddRows="False"
+                        CanUserDeleteRows="False"
+                        CanUserReorderColumns="False"
+                        CanUserResizeRows="False"
+                        ColumnWidth="*"
+                        IsReadOnly="False"
+                        GridLinesVisibility="None"
+               >
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                <Setter Property="VerticalContentAlignment" Value="Center" />
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="{StaticResource Primary}"/>
+                                <Setter Property="Margin" Value="0, 10, 0, 10"/>
+                                <Setter Property="FontSize" Value="14"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
 
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
+                        <DataGrid.Resources>
+                            <SolidColorBrush x:Key="DataGridCellFocusBorderBrush" Color="Transparent" />
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="BorderThickness" Value="0" />
+                                        <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
+                                        <Setter Property="Background" Value="Transparent"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="BorderThickness" Value="0" />
+                                        <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
+                                        <Setter Property="Background" Value="#e8a66d"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns >
+                            <DataGridTextColumn Header="Mã nhà hàng" Binding="{Binding MANH}" Width="*"  IsReadOnly="True" CanUserSort="False">
+
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Tên nhà hàng" Binding="{Binding TENNH}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="TextWrapping" Value="Wrap" />
+                                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="TextAlignment" Value="Center" />
+                                        <Setter Property="Padding" Value="10"/>
+
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Số điện thoại" Binding="{Binding SDT}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="TextWrapping" Value="Wrap" />
+                                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="TextAlignment" Value="Center" />
+                                        <Setter Property="Padding" Value="10"/>
+
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Mô tả" Binding="{Binding MOTA}"  Width="*" IsReadOnly="True" CanUserSort="False"/>
+                            <DataGridTemplateColumn Header="" 
+                                        Width="auto"
+                                        >
+                                <DataGridTemplateColumn.CellTemplate >
+                                    <DataTemplate >
+                                        <Button
+                                    x:Name="btnEdit"
+                                    Height="auto"
+                                    Width="auto"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding DataContext.ToEditRestaurantCommand , RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    CommandParameter="{Binding}"
+                                    >
+                                            <materialDesign:PackIcon 
+                                        Kind="LeadPencil"
+                                        Foreground ="{StaticResource Primary}"
+                                         />
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn >
+                            <DataGridTemplateColumn Header="" 
+                                        Width="auto"
+                                        >
+                                <DataGridTemplateColumn.CellTemplate >
+                                    <DataTemplate >
+                                        <Button
+                                    Height="auto"
+                                    Width="auto"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding DataContext.DeleteRestaurantCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    CommandParameter="{Binding}">
+                                            <materialDesign:PackIcon Kind="Delete"
+                                                             Foreground ="{StaticResource Primary}"/>
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn >
+                        </DataGrid.Columns>
                     </DataGrid>
                     <TextBlock 
                                 Width="100"
@@ -200,17 +596,142 @@
                                 Foreground="{StaticResource Primary}"
                                 FontWeight="Bold"
                                 FontSize="10"
-                                Margin="20, 10, 0, 0"
+                                Margin="30, 10, 0, 0"
                              ></TextBlock>
-                    <DataGrid
-                                x:Name="dtgridDVK"
-                                VerticalAlignment="Bottom"
-                                Height="85"
-                                Margin="20, 0, 20, 0"
-                                >
+                    <DataGrid 
+                        Grid.Row="1"
+                        x:Name="dtgridDVK"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Height="155"
+                        Margin="30, 0, 30, 10"
+                        ItemsSource="{Binding SearchResultDVK, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedItem="{Binding selectedItemDVK, Mode=OneWayToSource}"
+                        AutoGenerateColumns="False"
+                        BorderBrush="#e8a66d"
+                        BorderThickness="1.5" 
+                        RowDetailsVisibilityMode="VisibleWhenSelected"
+                        ScrollViewer.CanContentScroll="True"
+                        ScrollViewer.PanningMode="Both"
+                        HeadersVisibility="Column"
+                        SelectionMode="Single"
+                        SelectionUnit="FullRow"
+                        CanUserAddRows="False"
+                        CanUserDeleteRows="False"
+                        CanUserReorderColumns="False"
+                        CanUserResizeRows="False"
+                        ColumnWidth="*"
+                        IsReadOnly="False"
+                        GridLinesVisibility="None" 
+               >
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                <Setter Property="VerticalContentAlignment" Value="Center" />
+                                <Setter Property="Background" Value="Transparent"/>
+                                <Setter Property="Foreground" Value="{StaticResource Primary}"/>
+                                <Setter Property="Margin" Value="0, 10, 0, 10"/>
+                                <Setter Property="FontSize" Value="14"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
 
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
+                        <DataGrid.Resources>
+                            <SolidColorBrush x:Key="DataGridCellFocusBorderBrush" Color="Transparent" />
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="BorderThickness" Value="0" />
+                                        <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
+                                        <Setter Property="Background" Value="Transparent"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="BorderThickness" Value="0" />
+                                        <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
+                                        <Setter Property="Background" Value="#e8a66d"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.Resources>
+                        <DataGrid.Columns >
+                            <DataGridTextColumn Header="Mã dịch vụ" Binding="{Binding MADV}" Width="*"  IsReadOnly="True" CanUserSort="False">
+
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Tên dịch vụ" Binding="{Binding TENDV}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="TextWrapping" Value="Wrap" />
+                                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="TextAlignment" Value="Center" />
+                                        <Setter Property="Padding" Value="10"/>
+
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Mô tả" Binding="{Binding MOTA}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="TextWrapping" Value="Wrap" />
+                                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Setter Property="TextAlignment" Value="Center" />
+                                        <Setter Property="Padding" Value="10"/>
+
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            
+                            <DataGridTemplateColumn Header="" 
+                                        Width="auto"
+                                        >
+                                <DataGridTemplateColumn.CellTemplate >
+                                    <DataTemplate >
+                                        <Button
+                                            x:Name="btnEdit"
+                                            Height="auto"
+                                            Width="auto"
+                                            Background="Transparent"
+                                            BorderBrush="Transparent"
+                                            Command="{Binding DataContext.ToEditOtherServiceCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                            CommandParameter="{Binding}"
+                                    >
+                                            <materialDesign:PackIcon 
+                                                Kind="LeadPencil"
+                                                Foreground ="{StaticResource Primary}"
+                                         />
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn >
+                            <DataGridTemplateColumn Header="" 
+                                                    Width="auto"
+                                        >
+                                <DataGridTemplateColumn.CellTemplate >
+                                    <DataTemplate >
+                                        <Button
+                                            Height="auto"
+                                            Width="auto"
+                                            Background="Transparent"
+                                            BorderBrush="Transparent"
+                                            Command="{Binding DataContext.DeleteOtherServiceCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                            CommandParameter="{Binding}">
+                                            <materialDesign:PackIcon Kind="Delete"
+                                                             Foreground ="{StaticResource Primary}"/>
+                                        </Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn >
+                        </DataGrid.Columns>
                     </DataGrid>
-
 
 
 

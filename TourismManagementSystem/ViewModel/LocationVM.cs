@@ -56,9 +56,6 @@ namespace TourismManagementSystem.ViewModel
 
         public ICommand ResetCommand { get; set; }
 
-
-
-
         public ObservableCollection<String> cmbItems { get; set; }
 
         private ObservableCollection<DIADIEM> _diadiem;

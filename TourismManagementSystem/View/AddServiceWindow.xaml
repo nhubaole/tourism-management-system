@@ -80,12 +80,15 @@
                                             HorizontalAlignment="Right"
                                             >
                                     <ComboBox
-                                                x:Name="cmbLoaiDV"
-                                                Width="280"
-                                                Height="30"
-                                                Background="Transparent"
-                                                Margin="0 , 0, 0, 0"
-                                                HorizontalAlignment="Center"
+                                        x:Name="cmbLoaiDV"
+                                        Width="280"
+                                        Height="30"
+                                        Background="Transparent"
+                                        Margin="0 , 0, 0, 0"
+                                        HorizontalAlignment="Center"
+                                        ItemsSource="{Binding cmbItems , UpdateSourceTrigger=PropertyChanged}"
+                                        SelectedItem ="{Binding Filter, UpdateSourceTrigger=PropertyChanged}"
+                                       
                                                 />
 
                                 </Border>

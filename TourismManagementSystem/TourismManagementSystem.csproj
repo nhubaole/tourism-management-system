@@ -198,6 +198,7 @@
     <Compile Include="ViewModel\CustomerVM.cs" />
     <Compile Include="ViewModel\HomeVM.cs" />
     <Compile Include="ViewModel\InforLocationVM.cs" />
+    <Compile Include="ViewModel\InforServiceVM.cs" />
     <Compile Include="ViewModel\LocationVM.cs" />
     <Compile Include="ViewModel\MainVM.cs" />
     <Compile Include="ViewModel\NotificationVM.cs" />
