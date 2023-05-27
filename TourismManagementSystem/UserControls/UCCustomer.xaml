@@ -22,36 +22,38 @@
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="6*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
                     <Button 
                                 Grid.Column="1"
                                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                 Height="25"
-                                Width="100"
-                                VerticalAlignment="Bottom"
+                                Width="130"
+                                VerticalAlignment="Center"
                                 Background="{StaticResource Primary}"
                                 materialDesign:ButtonAssist.CornerRadius="15"
                                 ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
                                 Command="{Binding SwitchWindowCommand}"
                                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
                         <TextBlock
+                                VerticalAlignment="Center"
                                 Text="Thêm"
-                                FontSize="12"/>
+                                FontSize="16"/>
                     </Button>
                 </Grid>
 
                 <Grid Grid.Column="1">
-
+                   
                     <Grid Grid.Column="0">
                         <materialDesign:PackIcon 
                                 Kind="Magnify"
-                                
-                                VerticalAlignment="Bottom"
+                                VerticalAlignment="Center"
                                 HorizontalAlignment="Right"
-                                Margin="0, 0, 15, 4" 
+                                Margin="0,0,20,0"
                                 Panel.ZIndex="1"/>
                         <TextBox
                                 x:Name="tbfilter1"
@@ -60,39 +62,33 @@
                                 materialDesign:HintAssist.Hint="Nhập thông tin"
                                 HorizontalAlignment="Center"
                                 Background="White"
-                                VerticalAlignment="Bottom"
+                                VerticalAlignment="Center"
                                 BorderBrush="{StaticResource Primary}"
                                 BorderThickness="1"  
-                                Margin="0,0,10,0"                                    
                                 HorizontalContentAlignment="Center">
                         </TextBox>
                     </Grid>
                 </Grid>
 
 
-                <Grid Grid.Column="1"
-                              >
+                <Grid Grid.Column="2">
                     <Label Content="Tìm kiếm theo:"
-                                   VerticalAlignment="Top"
-                                   FontSize="10"
-                                   Padding="-4" Margin="0,18,0,0"
-                                   />
-                    <ComboBox
+                                   FontSize="12"
+                                  VerticalAlignment="Top"/>
+                    <ComboBox ItemsSource="{Binding filter}"
                                 Height="25"
-                                Width="100"
+                                Width="120"
                                 materialDesign:HintAssist.Hint="Filter"
                                 materialDesign:HintAssist.HelperTextFontSize="10"
                                 materialDesign:HintAssist.FloatingHintHorizontalAlignment="Center"
                                 MinWidth="65"
                                 Background="White"
-                                ItemsSource="{Binding LongIntegerList}"
-                                SelectedValue="{Binding SelectedValueOne}"
-                                VerticalAlignment="Bottom"
+                                SelectedValue="{Binding selectedFilter}"
+                                VerticalAlignment="Center"
                                 HorizontalAlignment="Left"
                                 BorderBrush="{StaticResource Primary}"
                                 BorderThickness="1"
-                                HorizontalContentAlignment="Center">
-
+                                HorizontalContentAlignment="Left">
                     </ComboBox>
                 </Grid>
 
@@ -100,7 +96,7 @@
             </Grid>
             <Grid Grid.Row="1">
 
-                <Border BorderBrush="Black" BorderThickness="0"  Background="{StaticResource White}" Height="400" CornerRadius="20" Margin="20,0,20,0">
+                <Border BorderBrush="Black" BorderThickness="0"  Background="{StaticResource White}" CornerRadius="20" Margin="30,10,20,10" Padding="0,10,0,20">
 
 
                     <DataGrid ItemsSource="{Binding ListKhachhang}" SelectedItem="{Binding SelectedCustomer}" AutoGenerateColumns="False" Background="White">
@@ -115,7 +111,8 @@
                                 <Setter Property="Height" Value="25" />
                                 <Setter Property="HorizontalAlignment" Value="Center"/>
                                 <Setter Property="Background" Value="White"/>
-                                <Setter Property="FontSize" Value="12"/>
+                                <Setter Property="FontSize" Value="14"/>
+                                <Setter Property="Foreground" Value="{StaticResource Primary}"/>
                             </Style>
                         </DataGrid.ColumnHeaderStyle>
                     </DataGrid>
@@ -137,7 +134,7 @@
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <TextBlock
-                                     Text="Thanh toán"
+                                    Text="Thanh toán"
                                     Foreground="White"
                                     FontSize="18"
                                     HorizontalAlignment="Left"
@@ -154,10 +151,7 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
-
                             <RowDefinition Height="*"/>
-
-
                             <RowDefinition Height="4*"/>
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="1">

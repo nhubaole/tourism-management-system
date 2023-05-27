@@ -10,14 +10,14 @@ using System.Windows.Input;
 using TourismManagementSystem.Model;
 using TourismManagementSystem.View;
 using TourismManagementSystem.UserControls;
+using System.Windows.Controls;
 
 namespace TourismManagementSystem.ViewModel
 {
     
     internal class CustomerVM : BaseViewModel
     {
-        
-
+        private ObservableCollection<string> _filter = new ObservableCollection<string>() { "Mã phiếu", "Mã khách hàng", "Tên khách hàng" };
         public ObservableCollection<KHACHHANG> KhachHangs { get; set; }
         public ICommand SwitchWindowCommand { get; set; }
 
@@ -98,7 +98,23 @@ namespace TourismManagementSystem.ViewModel
                 diaChi = value;
                 OnPropertyChanged(nameof(DIACHI));
             }
-        } 
+        }
+        private string _selectedFilter;
+        public string selectedFilter
+        {
+            get => _selectedFilter;
+            set
+            {
+                _selectedFilter = value;
+                OnPropertyChanged(nameof(selectedFilter));
+            }
+        }
+        public ObservableCollection<string> filter { get => _filter; set { _filter = value; OnPropertyChanged(nameof(filter)); } }  
+      
+
+
+
+
         private ObservableCollection<KHACHHANG> _ListKhachhang = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs);
         public ObservableCollection<KHACHHANG> ListKhachhang { get => _ListKhachhang; set { _ListKhachhang= value; OnPropertyChanged(nameof(DataProvider.Ins.DB.KHACHHANGs)); } }
 
@@ -180,17 +196,15 @@ namespace TourismManagementSystem.ViewModel
         private void UpdateCustomer()
         {
 
-            if (SelectedCustomer == null)
-                return;
 
-            SelectedCustomer.HOTEN = HOTEN;
-            SelectedCustomer.CCCD = CCCD;
-            SelectedCustomer.SDT = SDT;
-            SelectedCustomer.EMAIL = EMAIL;
+            SelectedCustomer.HOTEN = SelectedCustomer.HOTEN;
+            SelectedCustomer.CCCD = SelectedCustomer.CCCD;
+            SelectedCustomer.SDT = SelectedCustomer.SDT;
+            SelectedCustomer.EMAIL = SelectedCustomer.EMAIL;
             SelectedCustomer.DIACHI = DIACHI;
             //message show nothing
 
-            MessageBox.Show(SelectedCustomer.HOTEN + SelectedCustomer.SDT);
+            MessageBox.Show(SelectedCustomer.HOTEN+ SelectedCustomer.SDT);
 
             DataProvider.Ins.DB.SaveChanges();
             LoadDataGrid();
@@ -203,5 +217,6 @@ namespace TourismManagementSystem.ViewModel
             ListKhachhang.Remove(SelectedCustomer);
             LoadDataGrid();
         }
+        
     }
 }
