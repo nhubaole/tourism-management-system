@@ -286,7 +286,6 @@
                             <Grid Grid.Column="1">
                                 <TextBox
                                             Text="{Binding SelectedCustomer.DIACHI}"
-                                            
                                             Background="{StaticResource Secondary}"
                                             Margin="0,0,10,5"/>
                             </Grid>

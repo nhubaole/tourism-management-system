@@ -3,6 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodel="clr-namespace:TourismManagementSystem.ViewModel" 
+        d:DataContext="{d:DesignInstance Type=viewmodel:PurchaseVM}"
         xmlns:local="clr-namespace:TourismManagementSystem.View"
         mc:Ignorable="d"
         Title="PurchaseWindow" Height="500" Width="800"
@@ -13,7 +15,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowStartupLocation="CenterScreen"
         Background="{StaticResource Secondary}">
-    <Grid>
+         <Grid>
         <Border 
                     BorderBrush="White" 
                     BorderThickness="0"
@@ -85,8 +87,16 @@
                                                 Height="30"
                                                 Background="Transparent"
                                                 Margin="0 , 0, 0, 0"
-                                                HorizontalAlignment="Center"
-                                                />
+                                                HorizontalAlignment="Center">
+                                        <TextBox.InputBindings>
+                                            <KeyBinding Command="{Binding OnlyNumericCommand}"/>
+                                        </TextBox.InputBindings>
+
+                                    </TextBox>
+                                         
+
+                                        
+                                    
 
                                 </Border>
 
@@ -118,7 +128,11 @@
                                                 Background="Transparent"
                                                 Margin="0 , 0, 0, 0"
                                                 HorizontalAlignment="Center"
+                                                SelectedDateFormat="Short"
+                                                Language="en-GB"
+                                                
                                                 />
+                                    
 
                                 </Border>
 
@@ -150,6 +164,8 @@
                                                 Background="Transparent"
                                                 Margin="0 , 0, 0, 0"
                                                 HorizontalAlignment="Center"
+                                                ItemsSource="{Binding status}"
+                                                SelectedItem="{Binding selectedstatus}"
                                                 />
 
                                 </Border>
@@ -178,6 +194,8 @@
                                                 Background="Transparent"
                                                 Margin="0 , 0, 0, 0"
                                                 HorizontalAlignment="Center"
+                                                ItemsSource="{Binding method}"
+                                                SelectedValue="{Binding selectedmethod}"
                                                 />
 
                                 </Border>
@@ -198,6 +216,7 @@
                                             Background="{StaticResource Primary}"
                                             materialDesign:ButtonAssist.CornerRadius="25"
                                             ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
+                                            Command="{Binding AddDataCommand}"
                                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
                                     <TextBlock
                                                 Text="Xác nhận thanh toán"
