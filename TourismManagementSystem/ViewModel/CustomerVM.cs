@@ -21,6 +21,8 @@ namespace TourismManagementSystem.ViewModel
         public ObservableCollection<KHACHHANG> KhachHangs { get; set; }
         public ICommand SwitchWindowCommand { get; set; }
 
+        public ICommand OnlyNumericCommand { get; private set; }
+
         public ICommand AddDataCommand { get; set; }
         public ICommand DeleteDataCommand { get; set; }
         public ICommand UpdateDataCommand { get; set; }
@@ -129,7 +131,7 @@ namespace TourismManagementSystem.ViewModel
 
             KhachHangs = new ObservableCollection<KHACHHANG>();
             AddDataCommand = new RelayCommand<object>((p) => {
-                if (maKH == null || hoTen == null)
+                if (maKH == null || hoTen == null||cccd==null||sdt==null||diaChi==null)
                 {
                     return false;
                 }
@@ -180,7 +182,13 @@ namespace TourismManagementSystem.ViewModel
             {
                 return true;
             },
-          (p) => { DeleteCustomer(); });
+            (p) => { DeleteCustomer(); });
+
+            OnlyNumericCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            },
+           (p) => { OnlyNumericExecute(); });
 
         }
         private void LoadDataGrid()
@@ -201,7 +209,7 @@ namespace TourismManagementSystem.ViewModel
             SelectedCustomer.CCCD = SelectedCustomer.CCCD;
             SelectedCustomer.SDT = SelectedCustomer.SDT;
             SelectedCustomer.EMAIL = SelectedCustomer.EMAIL;
-            SelectedCustomer.DIACHI = DIACHI;
+            SelectedCustomer.DIACHI = SelectedCustomer.DIACHI;
             //message show nothing
 
             MessageBox.Show(SelectedCustomer.HOTEN+ SelectedCustomer.SDT);
@@ -217,6 +225,10 @@ namespace TourismManagementSystem.ViewModel
             ListKhachhang.Remove(SelectedCustomer);
             LoadDataGrid();
         }
-        
+        private void OnlyNumericExecute()
+        {
+            
+            
+        }
     }
 }

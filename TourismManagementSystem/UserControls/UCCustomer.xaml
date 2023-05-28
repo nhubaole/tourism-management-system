@@ -101,7 +101,7 @@
 
                     <DataGrid ItemsSource="{Binding ListKhachhang}" SelectedItem="{Binding SelectedCustomer}" AutoGenerateColumns="False" Background="White">
                         <DataGrid.Columns >
-                            <DataGridTextColumn Header="Mã khách hàng"  Binding="{Binding MAKH}" Width ="*"/>
+                            <DataGridTextColumn Header="Mã khách hàng"  Binding="{Binding MAKH}" Width ="*" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Tên khách" Binding="{Binding HOTEN}" Width ="*"/>
                             <DataGridTextColumn Header="Số điện thoại" Binding="{Binding SDT}" Width ="*"/>
                         </DataGrid.Columns>
@@ -286,7 +286,6 @@
                             <Grid Grid.Column="1">
                                 <TextBox
                                             Text="{Binding SelectedCustomer.DIACHI}"
-                                            
                                             Background="{StaticResource Secondary}"
                                             Margin="0,0,10,5"/>
                             </Grid>

@@ -11,6 +11,8 @@
         VerticalAlignment="Center"
         xmlns:uc="clr-namespace:TourismManagementSystem.UserControls"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:viewmodel="clr-namespace:TourismManagementSystem.ViewModel"
+        d:DataContext="{d:DesignInstance Type=viewmodel:TicketVM}"
         WindowStartupLocation="CenterScreen"
         Background="{StaticResource Secondary}">
     <Grid>
@@ -79,13 +81,13 @@
 
                         <Grid Grid.Row="1" Margin="10,0,10,0">
                             <Border BorderBrush="Black" BorderThickness="0.5">
-                                <DataGrid Background="{StaticResource Secondary}">
-                                    <DataGrid.Columns  >
-                                        <DataGridTextColumn Header="Mã vé"  Binding="{Binding Column1}" Width ="*"/>
-                                        <DataGridTextColumn Header="Mã phiếu" Binding="{Binding Column2}" Width ="*"/>
-                                        <DataGridTextColumn Header="Ngày bán" Binding="{Binding Column3}" Width ="*"/>
-                                        <DataGridTextColumn Header="Giá vé" Binding="{Binding Column4}" Width ="*"/>
-                                        <DataGridTextColumn Header="Trạng thái" Binding="{Binding Column5}" Width ="*" />
+                                <DataGrid  Background="{StaticResource Secondary}" AutoGenerateColumns="False" >
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Mã vé"  Binding="{Binding MAVE }" Width ="*"/>
+                                        <DataGridTextColumn Header="Mã phiếu" Binding="{Binding MAPHIEU}" Width ="*"/>
+                                        <DataGridTextColumn Header="Ngày bán" Binding="{Binding NGAYBAN}" Width ="*"/>
+                                        <DataGridTextColumn Header="Giá vé" Binding="{Binding GIAVE}" Width ="*"/>
+                                        <DataGridTextColumn Header="Trạng thái" Binding="{Binding TRANGTHAI}" Width ="*" />
                                     </DataGrid.Columns>
 
                                     <DataGrid.ColumnHeaderStyle>
@@ -169,7 +171,7 @@
                         <Grid Grid.Row="1" Margin="10,0,10,0">
                             <Border BorderBrush="Black" BorderThickness="0.5">
                                 <DataGrid Background="{StaticResource Secondary}" >
-                                    <DataGrid.Columns  >
+                                    <DataGrid.Columns>
                                         <DataGridTextColumn Header="Mã chuyến"  Binding="{Binding Column1}" Width ="*"/>
                                         <DataGridTextColumn Header="Tên tuyến" Binding="{Binding Column2}" Width ="*"/>
                                         <DataGridTextColumn Header="Thời gian bắt đầu" Binding="{Binding Column3}" Width ="*"/>
