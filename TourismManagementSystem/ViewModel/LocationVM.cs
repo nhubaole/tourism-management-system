@@ -145,7 +145,7 @@ namespace TourismManagementSystem.ViewModel
                         SearchResult.Add(item);
                     }
                     OnPropertyChanged(nameof(SearchResult));
-                    OnPropertyChanged(nameof(SearchResult));
+                    OnPropertyChanged(nameof(SearchResult)); 
                 }
                 else
                 {

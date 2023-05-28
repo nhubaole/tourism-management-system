@@ -76,6 +76,18 @@
                     <ColumnDefinition Width="0.5*"/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
+                    <TextBlock
+                        Width="100"
+                        Text="*Nhấn Enter để bắt đầu tìm kiếm"
+                        FontSize="10"
+                        Foreground="IndianRed"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center"
+                        TextWrapping="Wrap"
+                        Margin="-150,0, 0, 0" 
+                        >
+
+                    </TextBlock>
                     <materialDesign:PackIcon 
                                 Kind="Magnify"
                                 VerticalAlignment="Bottom"
@@ -84,7 +96,7 @@
                                 Panel.ZIndex="1"/>
                     <TextBox
                         x:Name="tbfilter1"
-                        Width="220"
+                        Width="200"
                         Height="30"
                         FontSize="13"
                         materialDesign:HintAssist.Hint="Nhập thông tin"

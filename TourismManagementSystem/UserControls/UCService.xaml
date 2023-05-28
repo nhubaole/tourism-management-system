@@ -9,6 +9,7 @@
              d:DesignHeight="550" d:DesignWidth="900"
              Background="{StaticResource Secondary}"
              xmlns:vm="clr-namespace:TourismManagementSystem.ViewModel"
+             x:Name="ucService"
              >
     <UserControl.DataContext >
         <vm:ServiceVM/>
@@ -29,35 +30,35 @@
                           Style="{StaticResource MaterialDesignChoiceChipAccentOutlineListBox}"
                           x:Name="RadioButtonGroupChoiceChipAccentOutline">
                     <ListBoxItem
-                                x:Name="btnDV"
-                                Foreground="{StaticResource Primary}"
-                                Content="Dịch vụ" 
-                                Width="70"
-                                Margin="20, 0, 0, 0"
-                                HorizontalAlignment="Left"
+                            x:Name="btnDV"
+                            Foreground="{StaticResource Primary}"
+                            Content="Dịch vụ" 
+                            Width="70"
+                            Margin="20, 0, 0, 0"
+                            HorizontalAlignment="Left"
                                 />
                     <ListBoxItem
-                                x:Name="btnDD"
+                            x:Name="btnDD"
    
-                                Content="Địa điểm" 
-                                Width="75"
-                                Margin="5, 0, 0, 0"
-                                HorizontalAlignment="Left"/>
+                            Content="Địa điểm" 
+                            Width="75"
+                            Margin="5, 0, 0, 0"
+                            HorizontalAlignment="Left"/>
                 </ListBox>
                 <Button
-                            Style="{StaticResource MaterialDesignRaisedButton}"
-                            Width="30"
-                            Height="30"
-                            Padding="0, -3, 0, 0"
-                            HorizontalAlignment="Right"
-                            Margin="0 ,-3 , 15, 0"
-                            Background="{StaticResource Primary}"
-                            materialDesign:ButtonAssist.CornerRadius="10"
-                            ToolTip="MaterialDesignRaisedButton with Round Corners"
-                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        Width="30"
+                        Height="30"
+                        Padding="0, -3, 0, 0"
+                        HorizontalAlignment="Right"
+                        Margin="0 ,-3 , 15, 0"
+                        Background="{StaticResource Primary}"
+                        materialDesign:ButtonAssist.CornerRadius="10"
+                        ToolTip="MaterialDesignRaisedButton with Round Corners"
+                        IsEnabled="{Binding DataContext.ToAddServiceCommand}">
                     <TextBlock
-                                Text="+" 
-                                FontSize="20"/>
+                            Text="+" 
+                            FontSize="20"/>
                 </Button>
 
             </Grid>
@@ -68,6 +69,18 @@
                     <ColumnDefinition Width="1.5*"/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
+                    <TextBlock
+                        Width="100"
+                        Text="*Nhấn Enter để bắt đầu tìm kiếm"
+                        FontSize="10"
+                        Foreground="IndianRed"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center"
+                        TextWrapping="Wrap"
+                        Margin="-100,0, 0, 0" 
+                        >
+                                 
+                    </TextBlock>
                     <TextBox
                         x:Name="tbfilter1"
                         Width="150"
@@ -79,10 +92,15 @@
                         Background="White"
                         VerticalAlignment="Bottom"
                         BorderBrush="{StaticResource Primary}"
+                        IsEnabled="{Binding IsTbEnable}"
+                        Text="{Binding SearchTerm, UpdateSourceTrigger=PropertyChanged}"
                         BorderThickness="1"  
                         FontSize="13"
-                        
+                        Padding="0, 0, 0, 0"
                             >
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Enter" Command="{Binding FindServiceCommand}" CommandParameter="{Binding ElementName=tbfilter1}" />
+                        </TextBox.InputBindings>
                     </TextBox>
                 </Grid>
                 <Grid Grid.Column="1">
@@ -103,8 +121,9 @@
                         BorderBrush="{StaticResource Primary}"
                         BorderThickness="1"
                         HorizontalContentAlignment="Center"
-                        Padding="10,3.5, 0, 0"
+                        Padding="10,2, 0, 0"
                         FontSize="13"
+                        materialDesign:TextFieldAssist.HasClearButton="True"
                         >
                     </ComboBox>
 
@@ -119,7 +138,7 @@
                     <ComboBox
                         Height="25"
                         Width="110"
-                        materialDesign:HintAssist.Hint="Mã phiếu"
+                        materialDesign:HintAssist.Hint="Mã"
                         materialDesign:HintAssist.HelperTextFontSize="10"
                         materialDesign:HintAssist.FloatingHintHorizontalAlignment="Center"
                         MinWidth="65"
@@ -131,8 +150,10 @@
                         BorderBrush="{StaticResource Primary}"
                         BorderThickness="1"
                         HorizontalContentAlignment="Center"
-                        Padding="10,3.5, 0, 0"
-                        FontSize="13">
+                        Padding="10,2, 0, 0"
+                        FontSize="13"
+                        IsEnabled="{Binding IsFilter2Enable}"
+                        materialDesign:TextFieldAssist.HasClearButton="True">
                     </ComboBox>
                 </Grid>
 
@@ -184,6 +205,7 @@
                         ColumnWidth="*"
                         IsReadOnly="False"
                         GridLinesVisibility="None"
+                        
                >
                         <DataGrid.ColumnHeaderStyle>
                             <Style TargetType="DataGridColumnHeader">
@@ -732,8 +754,6 @@
                             </DataGridTemplateColumn >
                         </DataGrid.Columns>
                     </DataGrid>
-
-
 
                 </StackPanel>
 
