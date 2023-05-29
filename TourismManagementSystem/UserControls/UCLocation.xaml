@@ -60,7 +60,7 @@
                             ToolTip="Nhấn để thêm thông tin mới"
                             Command="{Binding ToAddLocationCommand}"
                             CommandParameter="{Binding ElementName=ucLocation}"
-                    VerticalAlignment="Bottom">
+                            VerticalAlignment="Bottom">
                                
                     <TextBlock
                                 Text="+" 

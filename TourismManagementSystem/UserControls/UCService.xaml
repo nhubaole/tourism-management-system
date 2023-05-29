@@ -39,7 +39,6 @@
                                 />
                     <ListBoxItem
                             x:Name="btnDD"
-   
                             Content="Địa điểm" 
                             Width="75"
                             Margin="5, 0, 0, 0"
@@ -55,7 +54,8 @@
                         Background="{StaticResource Primary}"
                         materialDesign:ButtonAssist.CornerRadius="10"
                         ToolTip="MaterialDesignRaisedButton with Round Corners"
-                        IsEnabled="{Binding DataContext.ToAddServiceCommand}">
+                        Command="{Binding ToAddServiceCommand}"
+                        CommandParameter="{Binding ElementName=ucService}">
                     <TextBlock
                             Text="+" 
                             FontSize="20"/>
