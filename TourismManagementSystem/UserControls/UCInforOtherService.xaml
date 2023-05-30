@@ -20,7 +20,7 @@
         <Grid Grid.Row="0">
             <TextBlock
                     Width="140"
-                    Text="Mã dịch vụ"
+                    Text="Mã dịch vụ*"
                     FontSize="16"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
@@ -42,6 +42,8 @@
                     Background="Transparent"
                     Margin="0 , 0, 0, 0"
                     HorizontalAlignment="Center"
+                    IsEnabled="False"
+                    Text="{Binding maDVK, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         
                                                 />
 
@@ -51,7 +53,7 @@
         <Grid Grid.Row="1">
             <TextBlock
                 Width="140"
-                Text="Tên dịch vụ"
+                Text="Tên dịch vụ*"
                 FontSize="16"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Left"
@@ -74,6 +76,7 @@
                     Background="Transparent"
                     Margin="0 , 0, 0, 0"
                     HorizontalAlignment="Center"
+                    Text="{Binding tenDVK, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     />
 
             </Border>
@@ -82,7 +85,7 @@
         <Grid Grid.Row="2">
             <TextBlock
                     Width="100"
-                    Text="Mô tả"
+                    Text="Mô tả*"
                     FontSize="16"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
@@ -104,8 +107,8 @@
                     Background="Transparent"
                     Margin="0 , 0, 0, 0"
                     HorizontalAlignment="Center"
+                    Text="{Binding moTaDVK, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                 />
-
             </Border>
 
         </Grid>

@@ -121,6 +121,15 @@
                                         Text="Lưu"
                                         FontSize="18"/>
                                 </Button>
+                                <TextBlock
+                                    Width="120"
+                                    Text="Những thông tin có dấu * cần nhập đủ trước khi lưu"
+                                    FontSize="10"
+                                    TextWrapping="Wrap"
+                                    Foreground="OrangeRed"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Bottom"
+                                    Margin="0, 0, 10, 10"/>
                             </Grid>
                         </Grid>
                     </Border>

@@ -25,6 +25,8 @@ namespace TourismManagementSystem.ViewModel
         public static String TenPT;
         public static int SLGhe ;
 
+
+
         public bool IsTbEnable
         {
             get { return _IsTbEnable; }
@@ -234,6 +236,7 @@ namespace TourismManagementSystem.ViewModel
                     switch (InforServiceVM.filter)
                     {
                         case "Phương tiện":
+
                             PhuongTien.Add(InforServiceVM.newPT);
                             OnPropertyChanged(nameof(PhuongTien));
 
@@ -243,6 +246,7 @@ namespace TourismManagementSystem.ViewModel
                             break;
 
                         case "Nhà hàng":
+
                             NhaHang.Add(InforServiceVM.newNH);
                             OnPropertyChanged(nameof(NhaHang));
 
@@ -255,9 +259,26 @@ namespace TourismManagementSystem.ViewModel
 
 
                         case "Khách sạn":
+
+                            KhachSan.Add(InforServiceVM.newKS);
+                            OnPropertyChanged(nameof(KhachSan));
+
+                            SearchResultKS.Add(InforServiceVM.newKS);
+                            OnPropertyChanged(nameof(SearchResultKS));
+
+                            IsDone = false;
                             break;
+
                         case "Dịch vụ khác":
+                            DVKhac.Add(InforServiceVM.newDVK);
+                            OnPropertyChanged(nameof(DVKhac));
+
+                            SearchResultDVK.Add(InforServiceVM.newDVK);
+                            OnPropertyChanged(nameof(SearchResultDVK));
+
+                            IsDone = false;
                             break;
+
                             default: break;
                     }
                 }
@@ -658,5 +679,6 @@ namespace TourismManagementSystem.ViewModel
 
             return newCode;
         }
+       
     }
 }

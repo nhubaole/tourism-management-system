@@ -38,8 +38,8 @@ namespace TourismManagementSystem.ViewModel
             //nhận các thông tin từ InforService
             maNH = InforServiceVM.MaNH;
             tenNH = InforServiceVM.TenNH;
-            sdt = InforServiceVM.SDT;
-            moTa = InforServiceVM.MoTa;
+            sdt = InforServiceVM.SDTNH;
+            moTa = InforServiceVM.MoTaNH;
 
             // Đăng ký sự kiện PropertyChanged
             PropertyChanged += InforRestaurantVm_PropertyChanged;
@@ -60,11 +60,11 @@ namespace TourismManagementSystem.ViewModel
                     break;
                 case nameof(sdt):
                     // Cập nhật giá trị SLG khi SLGhe thay đổi
-                    InforServiceVM.SDT = sdt;
+                    InforServiceVM.SDTNH = sdt;
                     break;
                 case nameof(moTa):
                     // Cập nhật giá trị SLG khi SLGhe thay đổi
-                    InforServiceVM.MoTa = moTa;
+                    InforServiceVM.MoTaNH = moTa;
                     break;
                 default:
                     // Xử lý cho các thuộc tính khác (nếu cần)

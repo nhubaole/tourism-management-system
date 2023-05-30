@@ -5,6 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TourismManagementSystem.UserControls"
              mc:Ignorable="d" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
               xmlns:vm="clr-namespace:TourismManagementSystem.ViewModel"
              d:DesignHeight="139" d:DesignWidth="700"
              Background="White">
@@ -60,7 +62,7 @@
             <Grid Grid.Row="1">
                 <TextBlock
                 Width="140"
-                Text="Tên nhà hàng"
+                Text="Tên nhà hàng *"
                 FontSize="16"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Left"
@@ -91,7 +93,7 @@
             <Grid Grid.Row="2">
                 <TextBlock
                     Width="100"
-                    Text="Số điện thoại"
+                    Text="Số điện thoại*"
                     FontSize="16"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
@@ -113,7 +115,7 @@
                     Background="Transparent"
                     Margin="0 , 0, 0, 0"
                     HorizontalAlignment="Center" TextChanged="tbSDT_TextChanged"
-                    Text="{Binding sdt, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"                            />
+                    Text="{Binding sdt, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"></TextBox>
 
                 </Border>
 
@@ -125,7 +127,7 @@
         <Grid Grid.Column="1">
             <TextBlock
                     Width="100"
-                    Text="Mô tả"
+                    Text="Mô tả*"
                     FontSize="16"
                     VerticalAlignment="Top"
                     HorizontalAlignment="Left"

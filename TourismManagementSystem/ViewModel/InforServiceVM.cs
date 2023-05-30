@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,21 +26,24 @@ namespace TourismManagementSystem.ViewModel
         //nhà hàng
         public static String MaNH;
         public static String TenNH;
-        public static String SDT;
-        public static String MoTa;
+        public static String SDTNH;
+        public static String MoTaNH;
         public static NHAHANG newNH;
 
+        //khách sạn
+        public static String MaKS;
+        public static String TenKS;
+        public static String SDTKS;
+        public static String DcKS;
+        public static int SoSaoKS;
+        public static int SucChuaKS;
+        public static KHACHSAN newKS;
 
-        //binding với .xaml
-        private String _maPT;
-
-        public String maPT { get { return _maPT; } set { _maPT = value; OnPropertyChanged(); } }
-
-        private String _tenPT;
-        public String tenPT { get { return _tenPT; } set { _tenPT = value; OnPropertyChanged(); } }
-
-        private int _SLGhe;
-        public int SLGhe { get { return _SLGhe; } set { _SLGhe = value; OnPropertyChanged(); } }
+        //dịch vụ khác
+        public static String MaDVK;
+        public static String TenDVK;
+        public static String MoTaDVK;
+        public static DICHVUKHAC newDVK;
 
 
         private object _currentView;
@@ -138,14 +142,46 @@ namespace TourismManagementSystem.ViewModel
                                 MaNH = GenerateCode("NH", MaNH);
                             }
                             TenNH = null;
-                            SDT = null;
-                            MoTa = null;
+                            SDTNH = null;
+                            MoTaNH = null;
                             Restaurant(null);
                             break;
                         case "Khách sạn":
+                            filter = Filter;
+                            KhachSan = new ObservableCollection<KHACHSAN>(DataProvider.Ins.DB.KHACHSANs);
+                            if (KhachSan.Count() == 0)
+                            {
+                                MaKS = GenerateCode("KS");
+                            }
+
+                            else
+                            {
+                                MaKS = KhachSan[KhachSan.Count - 1].MAKS;
+                                MaKS = GenerateCode("KS", MaKS);
+                            }
+                            TenKS = null;
+                            SDTKS = null;
+                            DcKS = null;
+                            SoSaoKS = SucChuaKS = 0;
                             Hotel(null);
                             break;
                         case "Dịch vụ khác":
+                            filter = Filter;
+                            DVKhac = new ObservableCollection<DICHVUKHAC>(DataProvider.Ins.DB.DICHVUKHACs);
+                            if (DVKhac.Count() == 0)
+                            {
+                                MaDVK = GenerateCodeDVK("DVK");
+                            }
+
+                            else
+                            {
+                                MaDVK = DVKhac[DVKhac.Count - 1].MADV;
+                                MaDVK = GenerateCodeDVK("DVK", MaDVK);
+                            }
+                            TenDVK = null;
+                            MoTaDVK = null;
+
+
                             OTherService(null);
                             break;
                         default:
@@ -176,9 +212,9 @@ namespace TourismManagementSystem.ViewModel
                            
                             break;
                         case "Nhà hàng":
-                            if (TenNH == null || SDT == null || MoTa == null)
+                            if (TenNH == null || SDTNH == null || MoTaNH == null || !IsNumeric(SDTNH))
                             {
-                                MessageBox.Show("Hãy điền các thông tin cần thiết.");
+                                MessageBox.Show("Hãy kiểm tra lại các thông tin\nHãy chắc chắn bạn đã điền đủ thông tin rồi.");
                             }
                             else
                             {
@@ -187,10 +223,24 @@ namespace TourismManagementSystem.ViewModel
 
                             break;
                         case "Khách sạn":
-                            Hotel(null);
+                            if (TenKS == null || SDTKS == null || DcKS == null || SoSaoKS == 0 || SucChuaKS == 0 || !IsNumeric(SDTKS))
+                            {
+                                MessageBox.Show("Hãy kiểm tra lại các thông tin\nHãy chắc chắn bạn đã điền đủ thông tin rồi.");
+                            }
+                            else
+                            {
+                                NewHotel();
+                            }
                             break;
                         case "Dịch vụ khác":
-                            OTherService(null);
+                            if (TenDVK == null || MoTaDVK == null)
+                            {
+                                MessageBox.Show("Hãy điền các thông tin cần thiết.");
+                            }
+                            else
+                            {
+                                NewOtherService();
+                            }
                             break;
                         default:
                             // Xử lý cho trường hợp khác
@@ -206,7 +256,7 @@ namespace TourismManagementSystem.ViewModel
         }
 
       
-        private void Traffic(object obj) => CurrentView = new UCInforTrafffic();
+        private void Traffic(object obj) => CurrentView = new InforTrafficVm();
         private void Restaurant(object obj) => CurrentView = new InforRestaurantVm();
         private void Hotel(object obj) => CurrentView = new InforHotelVM();
         private void OTherService(object obj) => CurrentView = new InforOTherServiceVM();
@@ -232,6 +282,33 @@ namespace TourismManagementSystem.ViewModel
 
             return newCode;
         }
+        public static string GenerateCodeDVK(string filter, string previousCode = null)
+        {
+            int newNumber;
+
+            if (previousCode == null)
+            {
+                newNumber = 1;
+            }
+            else
+            {
+                // Lấy số từ mã trước đó
+                int previousNumber = int.Parse(previousCode.Substring(3));
+                newNumber = previousNumber + 1;
+            }
+
+            // Chuyển số mới thành chuỗi và thêm số không vào đầu nếu cần
+            string newNumberStr = newNumber.ToString().PadLeft(5, '0');
+
+            string newCode = filter + newNumberStr;
+
+            return newCode;
+        }
+        public static bool IsNumeric(string input)
+        {
+            double result;
+            return double.TryParse(input, out result);
+        }
         private void NewTraffic()
         {
             var temp = new PHUONGTIEN {
@@ -255,8 +332,8 @@ namespace TourismManagementSystem.ViewModel
             {
                 MANH = MaNH,
                 TENNH = TenNH,
-                SDT = SDT,
-                MOTA = MoTa,
+                SDT = SDTNH,
+                MOTA = MoTaNH,
             };
 
             DataProvider.Ins.DB.NHAHANGs.Add(temp);
@@ -266,6 +343,57 @@ namespace TourismManagementSystem.ViewModel
             //báo cho bên ServiceVm đã xong
             ServiceVM.IsDone = true;
             newNH = temp;
+        }
+        private void NewHotel()
+        {
+            var temp = new KHACHSAN
+            {
+                MAKS = MaKS,
+                TENKS = TenKS,
+                DIACHI = DcKS,
+                SDT = SDTKS,
+                SOSAO = SoSaoKS,
+                SUCCHUA = SucChuaKS,
+            };
+
+            DataProvider.Ins.DB.KHACHSANs.Add(temp);
+            DataProvider.Ins.DB.SaveChanges();
+            MessageBox.Show("Đã tạo mới khách sạn thành công \nBạn có thể xem lại các thông tin");
+            //sau cập nhập;
+            //báo cho bên ServiceVm đã xong
+            ServiceVM.IsDone = true;
+            newKS = temp;
+        }
+
+        private void NewOtherService()
+        {
+            try
+            {
+                var temp = new DICHVUKHAC
+                {
+                    MADV = MaDVK,
+                    TENDV = TenDVK,
+                    MOTA = MoTaDVK,
+                };
+
+                DataProvider.Ins.DB.DICHVUKHACs.Add(temp);
+                DataProvider.Ins.DB.SaveChanges();
+                MessageBox.Show("Đã tạo mới dịch vụ thành công \nBạn có thể xem lại các thông tin");
+                //sau cập nhập;
+                //báo cho bên ServiceVm đã xong
+                ServiceVM.IsDone = true;
+                newDVK = temp;
+            }
+            catch (DbEntityValidationException ex)
+            {
+                foreach (var validationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        MessageBox.Show($"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}");
+                    }
+                }
+            }
         }
 
     }

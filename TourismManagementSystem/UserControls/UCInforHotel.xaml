@@ -44,12 +44,14 @@
                     HorizontalAlignment="Right"
                                             >
                     <TextBox
-                    x:Name="tbMa"
-                    Width="130"
-                    Height="30"
-                    Background="Transparent"
-                    Margin="0 , 0, 0, 0"
-                    HorizontalAlignment="Center"
+                        x:Name="tbMa"
+                        Width="130"
+                        Height="30"
+                        Background="Transparent"
+                        Margin="0 , 0, 0, 0"
+                        HorizontalAlignment="Center"
+                        IsEnabled="False"
+                        Text="{Binding maKS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         
                                                 />
 
@@ -59,7 +61,7 @@
             <Grid Grid.Row="1">
                 <TextBlock
                 Width="140"
-                Text="Tên khách sạn"
+                Text="Tên khách sạn*"
                 FontSize="16"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Left"
@@ -76,12 +78,13 @@
                 
                                     >
                     <TextBox
-                    x:Name="tbTen"
-                    Width="130"
-                    Height="30"
-                    Background="Transparent"
-                    Margin="0 , 0, 0, 0"
-                    HorizontalAlignment="Center"
+                        x:Name="tbTen"
+                        Width="130"
+                        Height="30"
+                        Background="Transparent"
+                        Margin="0 , 0, 0, 0"
+                        HorizontalAlignment="Center"
+                        Text="{Binding tenKS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                     />
 
                 </Border>
@@ -90,7 +93,7 @@
             <Grid Grid.Row="2">
                 <TextBlock
                     Width="100"
-                    Text="Địa chỉ"
+                    Text="Địa chỉ*"
                     FontSize="16"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
@@ -106,13 +109,13 @@
                     HorizontalAlignment="Right"
                                             >
                     <TextBox
-                    x:Name="tbDC"
-                    Width="130"
-                    Height="30"
-                    Background="Transparent"
-                    Margin="0 , 0, 0, 0"
-                    HorizontalAlignment="Center"
-                                                />
+                        x:Name="tbDC"
+                        Width="130"
+                        Height="30"
+                        Background="Transparent"
+                        Margin="0 , 0, 0, 0"
+                        HorizontalAlignment="Center"
+                        Text="{Binding dcKS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"                  />
 
                 </Border>
 
@@ -131,7 +134,7 @@
             <Grid Grid.Row="0">
                 <TextBlock
                     Width="140"
-                    Text="Số điện thoại"
+                    Text="Số điện thoại*"
                     FontSize="16"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
@@ -147,13 +150,13 @@
                     HorizontalAlignment="Right"
                                             >
                     <TextBox
-                    x:Name="tbSDT"
-                    Width="130"
-                    Height="30"
-                    Background="Transparent"
-                    Margin="0 , 0, 0, 0"
-                    HorizontalAlignment="Center"
-                                        
+                        x:Name="tbSDT"
+                        Width="130"
+                        Height="30"
+                        Background="Transparent"
+                        Margin="0 , 0, 0, 0"
+                        HorizontalAlignment="Center"
+                        Text="{Binding sdt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"       
                                                 />
 
                 </Border>
@@ -162,7 +165,7 @@
             <Grid Grid.Row="1">
                 <TextBlock
                 Width="140"
-                Text="Số sao"
+                Text="Số sao*"
                 FontSize="16"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Left"
@@ -171,17 +174,18 @@
                                             FontWeight="Bold"/>
                 <materialDesign:RatingBar
                     x:Name="rating"
-                    Value="0"
+                    Value="{Binding soSao, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                     IsPreviewValueEnabled="True"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Right"
                     Margin="0, 0, 20, 0"
-                    Foreground="{StaticResource Primary}"/>
+                    Foreground="{StaticResource Primary}"
+                    />
             </Grid>
             <Grid Grid.Row="2">
                 <TextBlock
                     Width="100"
-                    Text="Sức chứa"
+                    Text="Sức chứa*"
                     FontSize="16"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Left"
@@ -197,12 +201,13 @@
                     HorizontalAlignment="Right"
                                             >
                     <TextBox
-                    x:Name="tbSC"
-                    Width="130"
-                    Height="30"
-                    Background="Transparent"
-                    Margin="0 , 0, 0, 0"
-                    HorizontalAlignment="Center"
+                        x:Name="tbSC"
+                        Width="130"
+                        Height="30"
+                        Background="Transparent"
+                        Margin="0 , 0, 0, 0"
+                        HorizontalAlignment="Center"
+                        Text="{Binding sucChua, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                 />
 
                 </Border>
