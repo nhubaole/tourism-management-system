@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TourismManagementSystem.UserControls"
              mc:Ignorable="d" 
-              xmlns:vm="clr-namespace:TourismManagementSystem.ViewModel"
+             xmlns:vm="clr-namespace:TourismManagementSystem.ViewModel"
              d:DesignHeight="146" d:DesignWidth="620"
              Background="White">
     <UserControl.DataContext >
@@ -42,8 +42,9 @@
                     Background="Transparent"
                     Margin="0 , 0, 0, 0"
                     HorizontalAlignment="Center"
-                                        
-                                                />
+                    IsEnabled="False"
+                    Text="{Binding maPT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                        />
 
             </Border>
 
@@ -74,6 +75,7 @@
                     Background="Transparent"
                     Margin="0 , 0, 0, 0"
                     HorizontalAlignment="Center"
+                    Text= "{Binding tenPT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                     />
 
             </Border>
@@ -104,7 +106,7 @@
                     Background="Transparent"
                     Margin="0 , 0, 0, 0"
                     HorizontalAlignment="Center"
-                                                />
+                    Text="{Binding SLGhe, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  />
 
             </Border>
 

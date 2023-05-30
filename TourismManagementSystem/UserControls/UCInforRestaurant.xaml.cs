@@ -24,5 +24,10 @@ namespace TourismManagementSystem.UserControls
         {
             InitializeComponent();
         }
+
+        private void tbSDT_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }

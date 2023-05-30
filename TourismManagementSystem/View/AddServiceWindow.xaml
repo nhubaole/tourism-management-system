@@ -116,9 +116,9 @@
                                     materialDesign:ButtonAssist.CornerRadius="25"
                                     Margin="0, 10, 0, 0"
                                     ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
-                                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                                    Command="{Binding SaveServiceCommand}">
                                     <TextBlock
-                                        Text="Thêm"
+                                        Text="Lưu"
                                         FontSize="18"/>
                                 </Button>
                             </Grid>

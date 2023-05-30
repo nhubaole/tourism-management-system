@@ -35,6 +35,7 @@ namespace TourismManagementSystem.ViewModel
 
 
         public InforLocationVM() {
+            //generate mã từ bên kia
             maDD = LocationVM.MaDD;
             tenDD = LocationVM.TenDD;
             dcDD = LocationVM.DcDD;

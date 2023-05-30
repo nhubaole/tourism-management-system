@@ -43,12 +43,14 @@
                     HorizontalAlignment="Right"
                                             >
                     <TextBox
-                    x:Name="tbMa"
-                    Width="180"
-                    Height="30"
-                    Background="Transparent"
-                    Margin="0 , 0, 0, 0"
-                    HorizontalAlignment="Center"
+                        x:Name="tbMa"
+                        Width="180"
+                        Height="30"
+                        Background="Transparent"
+                        Margin="0 , 0, 0, 0"
+                        HorizontalAlignment="Center"
+                        IsEnabled="False"
+                        Text="{Binding maNH, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"
                                         
                                                 />
 
@@ -81,7 +83,7 @@
                     Background="Transparent"
                     Margin="0 , 0, 0, 0"
                     HorizontalAlignment="Center"
-                                    />
+                       Text="{Binding tenNH, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"             />
 
                 </Border>
 
@@ -110,8 +112,8 @@
                     Height="30"
                     Background="Transparent"
                     Margin="0 , 0, 0, 0"
-                    HorizontalAlignment="Center"
-                                                />
+                    HorizontalAlignment="Center" TextChanged="tbSDT_TextChanged"
+                    Text="{Binding sdt, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"                            />
 
                 </Border>
 
@@ -142,14 +144,16 @@
                                             >
                 <TextBox
                     x:Name="tbMoTa"
-                    Width="180"
-                    Height="30"
+                    Width="160"
+                    Height="80"
                     Background="Transparent"
                     Margin="0 , 0, 0, 0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Top"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto"
+                    Text="{Binding moTa, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"
                                                 />
-
             </Border>
 
         </Grid>

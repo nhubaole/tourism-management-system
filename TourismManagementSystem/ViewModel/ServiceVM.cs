@@ -16,7 +16,15 @@ namespace TourismManagementSystem.ViewModel
 {
     internal class ServiceVM : BaseViewModel
     {
+        public static bool IsDone = false;
         private bool _IsTbEnable;
+        //Thông tin phương tiện
+        public static PHUONGTIEN pt; 
+
+        public static String MaPT;
+        public static String TenPT;
+        public static int SLGhe ;
+
         public bool IsTbEnable
         {
             get { return _IsTbEnable; }
@@ -221,6 +229,38 @@ namespace TourismManagementSystem.ViewModel
 
                 addService.ShowDialog();
 
+                if (IsDone)
+                {
+                    switch (InforServiceVM.filter)
+                    {
+                        case "Phương tiện":
+                            PhuongTien.Add(InforServiceVM.newPT);
+                            OnPropertyChanged(nameof(PhuongTien));
+
+                            SearchResultPT.Add(InforServiceVM.newPT);
+                            OnPropertyChanged(nameof(SearchResultPT));
+                            IsDone = false;
+                            break;
+
+                        case "Nhà hàng":
+                            NhaHang.Add(InforServiceVM.newNH);
+                            OnPropertyChanged(nameof(NhaHang));
+
+                            SearchResultNH.Add(InforServiceVM.newNH);
+                            OnPropertyChanged(nameof(SearchResultNH));
+
+
+                            IsDone = false;
+                            break;
+
+
+                        case "Khách sạn":
+                            break;
+                        case "Dịch vụ khác":
+                            break;
+                            default: break;
+                    }
+                }
             });
 
             FindServiceCommand = new RelayCommand<object>((p) => { return p == null ? false : true; }, (p) =>
@@ -548,8 +588,6 @@ namespace TourismManagementSystem.ViewModel
             OnPropertyChanged(nameof(SelectedTable));
             //scroll đến table nếu có thể
         }
-        
-        
        
         public bool IsSubstring(string str, string substr)
         {
@@ -578,8 +616,8 @@ namespace TourismManagementSystem.ViewModel
 
             return false;
         }
-       
-        public static string GenerateCode(string previousCode = null)
+
+        public static string GenerateCode(string filter, string previousCode = null)
         {
             int newNumber;
 
@@ -597,8 +635,26 @@ namespace TourismManagementSystem.ViewModel
             // Chuyển số mới thành chuỗi và thêm số không vào đầu nếu cần
             string newNumberStr = newNumber.ToString().PadLeft(6, '0');
 
+            string temp = null;
+
             // Tạo mã mới
-            string newCode = "DD" + newNumberStr;
+            switch (filter)
+            {
+                case "Phương tiện":
+                    temp = "PT";
+                    break;
+                case "Khách sạn":
+                    temp = "KS";
+                    break;
+                case "Nhà hàng":
+                    temp = "NH";
+                    break;
+                case "Dịch vụ khác":
+                    temp = "DV";
+                    break;
+            }
+
+            string newCode = temp + newNumberStr;
 
             return newCode;
         }
