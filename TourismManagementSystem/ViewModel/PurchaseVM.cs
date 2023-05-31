@@ -177,7 +177,7 @@ namespace TourismManagementSystem.ViewModel
                     foreach (var validationErrors in ex.EntityValidationErrors)
                     {
                         foreach (var validationError in validationErrors.ValidationErrors)
-                        {
+                {
                             MessageBox.Show($"Property: {validationError.PropertyName}");
                             MessageBox.Show($"Error Message: {validationError.ErrorMessage}");
                         }
