@@ -87,7 +87,6 @@ namespace TourismManagementSystem.ViewModel
 
             cmbItems = new ObservableCollection<String>(new List<string> { "Mã địa điểm", "Tên địa điểm", "Địa chỉ", "Mô tả" });
 
-
             FindLocationnCommand = new RelayCommand<object>((p) => { return p == null ? false : true; }, (p) =>
             {
                 SearchResult.Clear();
@@ -171,9 +170,6 @@ namespace TourismManagementSystem.ViewModel
                 AddLocationWindow addLocation = new AddLocationWindow();
                 addLocation.ShowDialog();
 
-
-
-
                 if (IsDone)
                 {
                     diadiem.Add(InforLocationVM.d);
@@ -235,7 +231,6 @@ namespace TourismManagementSystem.ViewModel
 
 
             });
-
 
             ResetCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {

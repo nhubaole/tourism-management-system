@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Management.Instrumentation;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -176,6 +177,7 @@ namespace TourismManagementSystem.ViewModel
 
         public PHUONGTIEN selectedItemPT { get { return _selectedItemPT; } set { _selectedItemPT = value; OnPropertyChanged(); } }
 
+
         private NHAHANG _selectedItemNH;
 
         public NHAHANG selectedItemNH { get { return _selectedItemNH; } set { _selectedItemNH = value; OnPropertyChanged(); } }
@@ -225,6 +227,34 @@ namespace TourismManagementSystem.ViewModel
             //
             ToAddServiceCommand = new RelayCommand<object>((p) => { return p == null ? false : true; }, (p) =>
             {
+                selectedItemPT = null;
+                selectedItemNH = null;
+                selectedItemKS = null;
+                selectedItemDVK = null;
+
+                InforServiceVM.filter = null;
+
+                InforServiceVM.MaPT = null;
+                InforServiceVM.TenPT = null;
+                InforServiceVM.SLG = 0;
+
+                InforServiceVM.MaKS = null;
+                InforServiceVM.TenKS = null;
+                InforServiceVM.DcKS = null;
+                InforServiceVM.SDTKS = null;
+                InforServiceVM.SoSaoKS = 0;
+                InforServiceVM.SucChuaKS = 0;
+
+                InforServiceVM.MaNH = null; 
+                InforServiceVM.TenNH = null;
+                InforServiceVM.MoTaNH = null;
+                InforServiceVM.SDTNH = null;
+
+                InforServiceVM.MaDVK = null;
+                InforServiceVM.TenDVK = null;
+                InforServiceVM.MoTaDVK = null;
+
+
                 InforServiceVM.IsNew = true;
 
                 AddServiceWindow addService = new AddServiceWindow();
@@ -243,6 +273,14 @@ namespace TourismManagementSystem.ViewModel
                             SearchResultPT.Add(InforServiceVM.newPT);
                             OnPropertyChanged(nameof(SearchResultPT));
                             IsDone = false;
+
+                            InforServiceVM.MaPT = null;
+                            InforServiceVM.TenPT = null;
+                            InforServiceVM.SLG = 0;
+                            InforServiceVM.filter = null;
+                            selectedItemPT = null;
+                            
+
                             break;
 
                         case "Nhà hàng":
@@ -558,7 +596,91 @@ namespace TourismManagementSystem.ViewModel
                 }
 
             });
- 
+
+            ToEditTrafficCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                InforServiceVM.IsNew = false;
+                InforServiceVM.filter = "Phương tiện";
+                OnPropertyChanged(nameof(InforServiceVM.filter));
+                InforServiceVM.MaPT = selectedItemPT.MAPT;
+                InforServiceVM.TenPT = selectedItemPT.TENPT;
+                InforServiceVM.SLG = (int)selectedItemPT.SLGHE;
+
+                AddServiceWindow Infor = new AddServiceWindow();
+
+                Infor.ShowDialog();
+
+                if (IsDone)
+                {
+                    OnPropertyChanged(nameof(PhuongTien));
+                    OnPropertyChanged(nameof(SearchResultPT));
+                    IsDone = false;
+                }
+            });
+
+            ToEditRestaurantCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                InforServiceVM.IsNew = false;
+                InforServiceVM.filter = "Nhà hàng";
+                OnPropertyChanged(nameof(InforServiceVM.filter));
+                InforServiceVM.MaNH = selectedItemNH.MANH;
+                InforServiceVM.TenNH  = selectedItemNH.TENNH;
+                InforServiceVM.MoTaNH = selectedItemNH.MOTA;
+                InforServiceVM.SDTNH = selectedItemNH.SDT;
+
+                AddServiceWindow Infor = new AddServiceWindow();
+
+                Infor.ShowDialog();
+
+                if (IsDone)
+                {
+                    //OnPropertyChanged(nameof(diadiem));
+                    //OnPropertyChanged(nameof(SearchResult));
+                    IsDone = false;
+                }
+            });
+            ToEditHotelCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                InforServiceVM.IsNew = false;
+                InforServiceVM.filter = "Khách sạn";
+                OnPropertyChanged(nameof(InforServiceVM.filter));
+                InforServiceVM.MaKS = selectedItemKS.MAKS;
+                InforServiceVM.TenKS = selectedItemKS.TENKS;
+                InforServiceVM.SoSaoKS = (int)selectedItemKS.SOSAO;
+                InforServiceVM.SucChuaKS = (int)selectedItemKS.SUCCHUA;
+                InforServiceVM.SDTKS = selectedItemKS.SDT;
+
+                AddServiceWindow Infor = new AddServiceWindow();
+
+                Infor.ShowDialog();
+
+                if (IsDone)
+                {
+                    //OnPropertyChanged(nameof(diadiem));
+                    //OnPropertyChanged(nameof(SearchResult));
+                    IsDone = false;
+                }
+            });
+
+            ToEditOtherServiceCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                InforServiceVM.IsNew = false;
+                InforServiceVM.filter = "Dịch vụ khác";
+                OnPropertyChanged(nameof(InforServiceVM.filter));
+                InforServiceVM.MaDVK = selectedItemDVK.MADV;
+                InforServiceVM.TenDVK = selectedItemDVK.TENDV;
+                InforServiceVM.MoTaDVK = selectedItemDVK.MOTA;
+
+                AddServiceWindow Infor = new AddServiceWindow();
+                Infor.ShowDialog();
+
+                if (IsDone)
+                {
+                    //OnPropertyChanged(nameof(diadiem));
+                    //OnPropertyChanged(nameof(SearchResult));
+                    IsDone = false;
+                }
+            });
         }
 
     

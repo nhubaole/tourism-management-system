@@ -130,9 +130,6 @@ namespace TourismManagementSystem.ViewModel
             {
                 MessageBox.Show("Hãy kiểm tra các thông tin cần cập nhập");
             }
-
-
-            
         }
         public void NewLocation ()
         {
@@ -155,13 +152,6 @@ namespace TourismManagementSystem.ViewModel
             LocationVM.DcDD = dcDD;
             LocationVM.MtDD = mtDD;
 
-
-
-            //Xóa các thông tin cũ
-            //maDD = GenerateCode(maDD);
-            //LocationVM.MaDD = maDD;
-            //tenDD = null;
-            //dcDD = null;
         }
 
     }

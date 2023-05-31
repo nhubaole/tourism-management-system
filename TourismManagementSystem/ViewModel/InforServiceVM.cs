@@ -17,6 +17,7 @@ namespace TourismManagementSystem.ViewModel
     public class InforServiceVM :BaseViewModel
     {
         public static string filter;
+        public static bool iscmbEnable; 
         //Phương tiện
         public static String MaPT;
         public static String TenPT;
@@ -89,6 +90,20 @@ namespace TourismManagementSystem.ViewModel
             get => _DVKhac;
             set { _DVKhac = value; OnPropertyChanged(); }
         }
+
+        private bool _IscmbEnable;
+        public bool IscmbEnable
+        {
+            get { return _IscmbEnable; }
+            set
+            {
+                _IscmbEnable = value;
+
+                OnPropertyChanged();
+            }
+        }
+
+
         private string _Filter;
         public string Filter
         {
@@ -104,92 +119,129 @@ namespace TourismManagementSystem.ViewModel
         public InforServiceVM() {
             FilterItems = new ObservableCollection<String>(new List<string> { "Phương tiện", "Khách sạn", "Nhà hàng", "Dịch vụ khác" });
 
+            Filter = filter;
+            IscmbEnable = true;
+            OnPropertyChanged(nameof(IscmbEnable));
+
+            if (Filter != null)//nếu có thì cập nhập
+            {
+                IscmbEnable = false;
+                OnPropertyChanged(nameof(IscmbEnable));
+
+                switch (Filter)
+                {
+                    case "Phương tiện":
+                        Traffic(null);
+                        break;
+                    case "Nhà hàng":
+
+                        Restaurant(null);
+                        break;
+                    case "Khách sạn":
+
+                        Hotel(null);
+                        break;
+                    case "Dịch vụ khác":
+
+                        OTherService(null);
+                        break;
+                    default:
+                        // Xử lý cho trường hợp khác
+                        break;
+                }
+            }    
             PropertyChanged += (sender, e) =>
             {
                 if (e.PropertyName == nameof(Filter))
                 {
-                    switch (Filter)
+                    if (IsNew)
                     {
-                        case "Phương tiện":
-                            filter = Filter;
-                            PhuongTien = new ObservableCollection<PHUONGTIEN>(DataProvider.Ins.DB.PHUONGTIENs);
-                            if (PhuongTien.Count() == 0)
-                            {
-                                MaPT = GenerateCode("PT");
-                            }
-                            else
-                            {
-                                MaPT = PhuongTien[PhuongTien.Count - 1].MAPT;
-                                MaPT = GenerateCode("PT", MaPT);
-                            }
-                            TenPT = null;
-                            SLG = 0;
+                        switch (Filter)
+                        {
+                            case "Phương tiện":
+                                filter = Filter;
+                                PhuongTien = new ObservableCollection<PHUONGTIEN>(DataProvider.Ins.DB.PHUONGTIENs);
+                                if (PhuongTien.Count() == 0)
+                                {
+                                    MaPT = GenerateCode("PT");
+                                }
+                                else
+                                {
+                                    MaPT = PhuongTien[PhuongTien.Count - 1].MAPT;
+                                    MaPT = GenerateCode("PT", MaPT);
+                                }
+                                TenPT = null;
+                                SLG = 0;
 
-                            Traffic(null);
-                            
-                            break;
-                        case "Nhà hàng":
-                            filter = Filter;
-                            NhaHang = new ObservableCollection<NHAHANG>(DataProvider.Ins.DB.NHAHANGs);
-                            if (NhaHang.Count() == 0)
-                            {
-                                MaNH = GenerateCode("NH");
-                            }
+                                Traffic(null);
 
-                            else
-                            {
-                                MaNH = NhaHang[NhaHang.Count - 1].MANH;
-                                MaNH = GenerateCode("NH", MaNH);
-                            }
-                            TenNH = null;
-                            SDTNH = null;
-                            MoTaNH = null;
-                            Restaurant(null);
-                            break;
-                        case "Khách sạn":
-                            filter = Filter;
-                            KhachSan = new ObservableCollection<KHACHSAN>(DataProvider.Ins.DB.KHACHSANs);
-                            if (KhachSan.Count() == 0)
-                            {
-                                MaKS = GenerateCode("KS");
-                            }
+                                break;
+                            case "Nhà hàng":
+                                filter = Filter;
+                                NhaHang = new ObservableCollection<NHAHANG>(DataProvider.Ins.DB.NHAHANGs);
+                                if (NhaHang.Count() == 0)
+                                {
+                                    MaNH = GenerateCode("NH");
+                                }
 
-                            else
-                            {
-                                MaKS = KhachSan[KhachSan.Count - 1].MAKS;
-                                MaKS = GenerateCode("KS", MaKS);
-                            }
-                            TenKS = null;
-                            SDTKS = null;
-                            DcKS = null;
-                            SoSaoKS = SucChuaKS = 0;
-                            Hotel(null);
-                            break;
-                        case "Dịch vụ khác":
-                            filter = Filter;
-                            DVKhac = new ObservableCollection<DICHVUKHAC>(DataProvider.Ins.DB.DICHVUKHACs);
-                            if (DVKhac.Count() == 0)
-                            {
-                                MaDVK = GenerateCodeDVK("DVK");
-                            }
+                                else
+                                {
+                                    MaNH = NhaHang[NhaHang.Count - 1].MANH;
+                                    MaNH = GenerateCode("NH", MaNH);
+                                }
+                                TenNH = null;
+                                SDTNH = null;
+                                MoTaNH = null;
+                                Restaurant(null);
+                                break;
+                            case "Khách sạn":
+                                filter = Filter;
+                                KhachSan = new ObservableCollection<KHACHSAN>(DataProvider.Ins.DB.KHACHSANs);
+                                if (KhachSan.Count() == 0)
+                                {
+                                    MaKS = GenerateCode("KS");
+                                }
 
-                            else
-                            {
-                                MaDVK = DVKhac[DVKhac.Count - 1].MADV;
-                                MaDVK = GenerateCodeDVK("DVK", MaDVK);
-                            }
-                            TenDVK = null;
-                            MoTaDVK = null;
+                                else
+                                {
+                                    MaKS = KhachSan[KhachSan.Count - 1].MAKS;
+                                    MaKS = GenerateCode("KS", MaKS);
+                                }
+                                TenKS = null;
+                                SDTKS = null;
+                                DcKS = null;
+                                SoSaoKS = SucChuaKS = 0;
+                                Hotel(null);
+                                break;
+                            case "Dịch vụ khác":
+                                filter = Filter;
+                                DVKhac = new ObservableCollection<DICHVUKHAC>(DataProvider.Ins.DB.DICHVUKHACs);
+                                if (DVKhac.Count() == 0)
+                                {
+                                    MaDVK = GenerateCodeDVK("DVK");
+                                }
+
+                                else
+                                {
+                                    MaDVK = DVKhac[DVKhac.Count - 1].MADV;
+                                    MaDVK = GenerateCodeDVK("DVK", MaDVK);
+                                }
+                                TenDVK = null;
+                                MoTaDVK = null;
 
 
-                            OTherService(null);
-                            break;
-                        default:
-                            // Xử lý cho trường hợp khác
-                            break;
-                    }
+                                OTherService(null);
+                                break;
+                            default:
+                                // Xử lý cho trường hợp khác
+                                break;
+                        }
+                    }   
+
                 }
             };
+
+
             SaveServiceCommand = new RelayCommand<object>((p) => {
                 return true;
             }, (p) =>
@@ -208,8 +260,9 @@ namespace TourismManagementSystem.ViewModel
                             else
                             {
                                 NewTraffic();
+
+                                
                             }
-                           
                             break;
                         case "Nhà hàng":
                             if (TenNH == null || SDTNH == null || MoTaNH == null || !IsNumeric(SDTNH))
@@ -218,7 +271,7 @@ namespace TourismManagementSystem.ViewModel
                             }
                             else
                             {
-                                NewRestaurant();
+                               NewRestaurant();
                             }    
 
                             break;
@@ -229,7 +282,7 @@ namespace TourismManagementSystem.ViewModel
                             }
                             else
                             {
-                                NewHotel();
+                               NewHotel();
                             }
                             break;
                         case "Dịch vụ khác":
@@ -246,16 +299,68 @@ namespace TourismManagementSystem.ViewModel
                             // Xử lý cho trường hợp khác
                             break;
                     }
+                    IscmbEnable = false;
+                    OnPropertyChanged(nameof(IscmbEnable));
                 }
                 else//cập nhập
                 {
+                    //xem coi cái nào được chọn
+                    switch (Filter)
+                    {
+                        case "Phương tiện":
+                            //cập nhập dữ liệu từ InforTRafficVm
+                            if (TenPT == null || SLG == 0)
+                            {
+                                MessageBox.Show("Hãy điền các thông tin cần thiết.");
+                            }
+                            else
+                            {
+                                EditInforTraffic();
+                            }
 
+                            break;
+                        case "Nhà hàng":
+                            if (TenNH == null || SDTNH == null || MoTaNH == null || !IsNumeric(SDTNH))
+                            {
+                                MessageBox.Show("Hãy kiểm tra lại các thông tin\nHãy chắc chắn bạn đã điền đủ thông tin rồi.");
+                            }
+                            else
+                            {
+                                
+                            }
+
+                            break;
+                        case "Khách sạn":
+                            if (TenKS == null || SDTKS == null || DcKS == null || SoSaoKS == 0 || SucChuaKS == 0 || !IsNumeric(SDTKS))
+                            {
+                                MessageBox.Show("Hãy kiểm tra lại các thông tin\nHãy chắc chắn bạn đã điền đủ thông tin rồi.");
+                            }
+                            else
+                            {
+                                
+                            }
+                            break;
+                        case "Dịch vụ khác":
+                            if (TenDVK == null || MoTaDVK == null)
+                            {
+                                MessageBox.Show("Hãy điền các thông tin cần thiết.");
+                            }
+                            else
+                            {
+                                
+                            }
+                            break;
+                        default:
+                            // Xử lý cho trường hợp khác
+                            break;
+                    }
                 }
 
             });
         }
 
-      
+        
+
         private void Traffic(object obj) => CurrentView = new InforTrafficVm();
         private void Restaurant(object obj) => CurrentView = new InforRestaurantVm();
         private void Hotel(object obj) => CurrentView = new InforHotelVM();
@@ -396,5 +501,26 @@ namespace TourismManagementSystem.ViewModel
             }
         }
 
+        private void EditInforTraffic()
+        {
+            var temp = DataProvider.Ins.DB.PHUONGTIENs.Where(x => x.MAPT == MaPT).SingleOrDefault();
+            if (TenPT != null && SLG != 0)
+            {
+                temp.TENPT = TenPT;
+                temp.SLGHE = SLG;
+                DataProvider.Ins.DB.SaveChanges();
+
+                ServiceVM.IsDone = true;
+                MessageBox.Show("Thông tin phương tiện đã được cập nhập");
+                //sau cập nhập 
+                //LocationVM.TenDD = tenDD;
+                //LocationVM.DcDD = dcDD;
+                //LocationVM.MtDD = mtDD;
+            }
+            else
+            {
+                MessageBox.Show("Hãy kiểm tra các thông tin cần cập nhập");
+            }
+        }
     }
 }

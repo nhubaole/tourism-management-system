@@ -90,7 +90,7 @@
                                         HorizontalAlignment="Center"
                                         ItemsSource="{Binding FilterItems , UpdateSourceTrigger=PropertyChanged}"
                                         SelectedItem ="{Binding Filter, UpdateSourceTrigger=PropertyChanged}"
-                                       
+                                        IsEnabled="{Binding IscmbEnable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                 />
 
                                 </Border>

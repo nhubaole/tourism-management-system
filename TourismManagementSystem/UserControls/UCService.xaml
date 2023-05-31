@@ -288,8 +288,8 @@
                                         CommandParameter="{Binding}"
                                     >
                                             <materialDesign:PackIcon 
-                                        Kind="LeadPencil"
-                                        Foreground ="{StaticResource Primary}"
+                                            Kind="LeadPencil"
+                                            Foreground ="{StaticResource Primary}"
                                          />
                                         </Button>
                                     </DataTemplate>
