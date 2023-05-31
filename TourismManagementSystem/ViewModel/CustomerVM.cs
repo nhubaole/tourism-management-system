@@ -156,11 +156,19 @@ namespace TourismManagementSystem.ViewModel
                     DataProvider.Ins.DB.KHACHHANGs.Add(temp);
                     DataProvider.Ins.DB.SaveChanges();
                     ListKhachhang.Add(temp);
-                    LoadDataGrid();
 
 
 
                     MessageBox.Show("Đã tạo mới khách hàng thành công");
+
+                    MAKH = null;
+                    HOTEN = null;
+                    CCCD = null;
+                    SDT = null;
+                    EMAIL = null;
+                    DIACHI = null;
+                    LoadDataGrid();
+
 
 
                 }
@@ -210,9 +218,9 @@ namespace TourismManagementSystem.ViewModel
             SelectedCustomer.SDT = SelectedCustomer.SDT;
             SelectedCustomer.EMAIL = SelectedCustomer.EMAIL;
             SelectedCustomer.DIACHI = SelectedCustomer.DIACHI;
-            //message show nothing
+           
 
-            MessageBox.Show(SelectedCustomer.HOTEN+ SelectedCustomer.SDT);
+            MessageBox.Show("Bạn muốn cập nhật thông tin cho khách hàng" + SelectedCustomer.MAKH);
 
             DataProvider.Ins.DB.SaveChanges();
             LoadDataGrid();

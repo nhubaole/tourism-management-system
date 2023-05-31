@@ -11,6 +11,7 @@
              d:DataContext="{d:DesignInstance Type=viewmodel:TicketVM}"
             
              d:DesignHeight="550" d:DesignWidth="900">
+   
     <Grid Background="{StaticResource Secondary}">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -85,15 +86,15 @@
             <Border BorderBrush="White" BorderThickness="0" CornerRadius="20" Background="{StaticResource White}" Height="450"
                     Width="800">
                 <Grid>
-                    <DataGrid ItemsSource="{Binding ListVE}"  AutoGenerateColumns="False"  SelectedItem="{Binding SelectedTicket}">
+                    <DataGrid ItemsSource="{Binding ListVE}"  AutoGenerateColumns="False"  SelectedItem="{Binding SelectedTicket}" >
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="RowDoubleClick">
-                                <i:InvokeCommandAction Command="{Binding ShowDetailTicketCommand}"
+                                <i:InvokeCommandAction Command="{Binding ShowTicketDetailCommand}"
                                    CommandParameter="{Binding SelectedTicket}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Mã vé" Binding="{Binding MAVE}" Width="*">
+                            <DataGridTextColumn Header="Mã vé" Binding="{Binding MAVE}" Width="*" IsReadOnly="True">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="Height" Value="25" />
@@ -104,7 +105,7 @@
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Mã khách hàng" Binding="{Binding MAHK}" Width="*">
+                            <DataGridTextColumn Header="Mã khách hàng" Binding="{Binding MAHK}" Width="*" IsReadOnly="True">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="Height" Value="25" />
@@ -115,7 +116,7 @@
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Mã phiếu" Binding="{Binding MAPHIEU}" Width="*">
+                            <DataGridTextColumn Header="Mã phiếu" Binding="{Binding MAPHIEU}" Width="*" IsReadOnly="True">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="Height" Value="25" />
@@ -129,7 +130,7 @@
                             <DataGridTemplateColumn  Header="Ngày bán" Width="*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <DatePicker SelectedDate="{Binding NGAYBAN}" />
+                                        <DatePicker Language="en-GB" SelectedDate="{Binding NGAYBAN}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.HeaderStyle>
@@ -144,8 +145,23 @@
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn  Header="Trạng thái" Width="*">
                                 <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate >
-                                        <ComboBox ItemsSource="{Binding status}" SelectedItem="{Binding TRANGTHAI}" />
+                                    <DataTemplate>
+                                        <ComboBox ItemsSource="{Binding status}" SelectedItem="{Binding TRANGTHAI}" DisplayMemberPath="{Binding TRANGTHAI}">
+
+
+                                            <ComboBoxItem Content="Đã hủy"/>
+                                            <ComboBoxItem Content="Chưa sử dụng"/>
+                                            <ComboBoxItem Content="Đã sử dụng"/>
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="SelectionChanged">
+                                                    <i:InvokeCommandAction Command="{Binding UpdateDataCommand}"
+                                                     CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource Self}}" />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+
+
+                                        </ComboBox>
+
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.HeaderStyle>

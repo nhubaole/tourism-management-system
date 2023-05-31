@@ -83,11 +83,11 @@
                             <Border BorderBrush="Black" BorderThickness="0.5">
                                 <DataGrid  Background="{StaticResource Secondary}" AutoGenerateColumns="False" >
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Mã vé"  Binding="{Binding MAVE }" Width ="*"/>
-                                        <DataGridTextColumn Header="Mã phiếu" Binding="{Binding MAPHIEU}" Width ="*"/>
-                                        <DataGridTextColumn Header="Ngày bán" Binding="{Binding NGAYBAN}" Width ="*"/>
-                                        <DataGridTextColumn Header="Giá vé" Binding="{Binding GIAVE}" Width ="*"/>
-                                        <DataGridTextColumn Header="Trạng thái" Binding="{Binding TRANGTHAI}" Width ="*" />
+                                        <DataGridTextColumn Header="Mã vé"  Binding="{Binding SelectedTicket.MAVE}" Width ="*"/>
+                                        <DataGridTextColumn Header="Mã phiếu" Binding="{Binding SelectedTicket.MAPHIEU}" Width ="*"/>
+                                        <DataGridTextColumn Header="Ngày bán" Binding="{Binding SelectedTicket.NGAYBAN}" Width ="*"/>
+                                        <DataGridTextColumn Header="Giá vé" Binding="{Binding SelectedTicket.GIAVE}" Width ="*"/>
+                                        <DataGridTextColumn Header="Trạng thái" Binding="{Binding SelectedTicket.TRANGTHAI}" Width ="*" />
                                     </DataGrid.Columns>
 
                                     <DataGrid.ColumnHeaderStyle>

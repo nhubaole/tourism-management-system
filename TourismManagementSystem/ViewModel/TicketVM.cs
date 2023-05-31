@@ -13,18 +13,17 @@ namespace TourismManagementSystem.ViewModel
 {
     internal class TicketVM : BaseViewModel
     {
-        public ICommand SwitchWindowCommand { get; set; }
+        public ICommand ShowTicketDetailCommand { get; set; }
 
-        public ICommand OnlyNumericCommand { get; private set; }
-
-        public ICommand AddDataCommand { get; set; }
-        public ICommand DeleteDataCommand { get; set; }
         public ICommand UpdateDataCommand { get; set; }
-        private ObservableCollection<string> _status = new ObservableCollection<string>() { "Chưa sử dụng", "Đã sử dụng", "Đã hủy" };
-        public ObservableCollection<string> status { get => _status; set { _status = value; OnPropertyChanged(nameof(status)); } }
-
+      
         private ObservableCollection<string> _filter = new ObservableCollection<string>() { "Mã phiếu", "Mã vé", "Mã khách hàng" };
         public ObservableCollection<string> filter { get => _filter; set { _filter = value; OnPropertyChanged(nameof(filter)); } }
+       
+
+
+
+
 
         private string _ticket;
         public string VE
@@ -102,17 +101,22 @@ namespace TourismManagementSystem.ViewModel
             }
         }
 
+        private ObservableCollection<string> _status = new ObservableCollection<string>() { "Mã phiếu", "Mã vé", "Mã khách hàng" };
+        public ObservableCollection<string> status { get => _status; set { _status = value; OnPropertyChanged(nameof(status)); } }
+
+
 
         public TicketVM()
         {
-            SwitchWindowCommand = new RelayCommand<object>((p) => {
+            status= new ObservableCollection<string>();
+            ShowTicketDetailCommand = new RelayCommand<object>((p) => {
 
                 return true;
 
             }, (p) =>
             { SwitchWindow(p); });
 
-            AddDataCommand = new RelayCommand<object>((p) => {
+            UpdateDataCommand = new RelayCommand<object>((p) => {
                 if (MaVE == null)
                 {
                     return false;
@@ -131,20 +135,15 @@ namespace TourismManagementSystem.ViewModel
                         NGAYBAN = NGAYBAN
                     };
 
-                    DataProvider.Ins.DB.VEs.Add(temp);
                     DataProvider.Ins.DB.SaveChanges();
-                    ListVE.Add(temp);
-                    //LoadDataGrid();
-
-
-
-                    MessageBox.Show("Đã tạo mới khách hàng thành công");
+                    LoadDataGrid();
+                    MessageBox.Show("Đã thay đổi thông tin vé thành công");
 
 
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("An error occurred: " + ex.InnerException.Message);
+                    MessageBox.Show("An error occurred: " + ex.Message);
                 }
 
 
@@ -160,6 +159,11 @@ namespace TourismManagementSystem.ViewModel
             DetailTicketWindow detailTicketWindow= new DetailTicketWindow();
             detailTicketWindow.Show();
 
+        }
+        private void LoadDataGrid()
+        {
+            ListVE = new ObservableCollection<VE>(DataProvider.Ins.DB.VEs);
+            OnPropertyChanged(nameof(ListVE));
         }
     }
 }
