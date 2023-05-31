@@ -115,7 +115,8 @@
                                     Background="{StaticResource Primary}"
                                     materialDesign:ButtonAssist.CornerRadius="25"
                                     Margin="0, 10, 0, 0"
-                                    ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
+                                    IsEnabled="{Binding CanSave, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                    ToolTip="Nhấn để lưu thông tin"
                                     Command="{Binding SaveServiceCommand}">
                                     <TextBlock
                                         Text="Lưu"

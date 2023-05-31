@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 using TourismManagementSystem.Model;
 using TourismManagementSystem.UserControls;
@@ -103,6 +104,18 @@ namespace TourismManagementSystem.ViewModel
             }
         }
 
+        private bool _CanSave;
+        public bool CanSave
+        {
+            get { return _CanSave; }
+            set
+            {
+                _CanSave = value;
+
+                OnPropertyChanged();
+            }
+        }
+
 
         private string _Filter;
         public string Filter
@@ -121,9 +134,11 @@ namespace TourismManagementSystem.ViewModel
 
             Filter = filter;
             IscmbEnable = true;
+            CanSave = true;
+
             OnPropertyChanged(nameof(IscmbEnable));
 
-            if (Filter != null)//nếu có thì cập nhập
+            if (Filter != null)// có giá trị truyền từ ServiceVM -> cập nhập
             {
                 IscmbEnable = false;
                 OnPropertyChanged(nameof(IscmbEnable));
@@ -134,7 +149,6 @@ namespace TourismManagementSystem.ViewModel
                         Traffic(null);
                         break;
                     case "Nhà hàng":
-
                         Restaurant(null);
                         break;
                     case "Khách sạn":
@@ -149,7 +163,9 @@ namespace TourismManagementSystem.ViewModel
                         // Xử lý cho trường hợp khác
                         break;
                 }
-            }    
+            }   
+            
+            //load khi thay đỏi Filter
             PropertyChanged += (sender, e) =>
             {
                 if (e.PropertyName == nameof(Filter))
@@ -259,9 +275,8 @@ namespace TourismManagementSystem.ViewModel
                             }
                             else
                             {
-                                NewTraffic();
 
-                                
+                                NewTraffic();
                             }
                             break;
                         case "Nhà hàng":
@@ -271,7 +286,8 @@ namespace TourismManagementSystem.ViewModel
                             }
                             else
                             {
-                               NewRestaurant();
+
+                                NewRestaurant();
                             }    
 
                             break;
@@ -282,7 +298,9 @@ namespace TourismManagementSystem.ViewModel
                             }
                             else
                             {
-                               NewHotel();
+                
+
+                                NewHotel();
                             }
                             break;
                         case "Dịch vụ khác":
@@ -292,6 +310,7 @@ namespace TourismManagementSystem.ViewModel
                             }
                             else
                             {
+                     
                                 NewOtherService();
                             }
                             break;
@@ -326,7 +345,7 @@ namespace TourismManagementSystem.ViewModel
                             }
                             else
                             {
-                                
+
                             }
 
                             break;
@@ -337,7 +356,7 @@ namespace TourismManagementSystem.ViewModel
                             }
                             else
                             {
-                                
+
                             }
                             break;
                         case "Dịch vụ khác":
@@ -347,7 +366,7 @@ namespace TourismManagementSystem.ViewModel
                             }
                             else
                             {
-                                
+
                             }
                             break;
                         default:
@@ -504,23 +523,59 @@ namespace TourismManagementSystem.ViewModel
         private void EditInforTraffic()
         {
             var temp = DataProvider.Ins.DB.PHUONGTIENs.Where(x => x.MAPT == MaPT).SingleOrDefault();
-            if (TenPT != null && SLG != 0)
+            if (temp.TENPT == TenPT && temp.SLGHE == SLG)
             {
-                temp.TENPT = TenPT;
-                temp.SLGHE = SLG;
-                DataProvider.Ins.DB.SaveChanges();
-
-                ServiceVM.IsDone = true;
-                MessageBox.Show("Thông tin phương tiện đã được cập nhập");
-                //sau cập nhập 
-                //LocationVM.TenDD = tenDD;
-                //LocationVM.DcDD = dcDD;
-                //LocationVM.MtDD = mtDD;
-            }
+                MessageBox.Show("Hãy điền các thông tin cần cập nhập");
+            }   
             else
             {
-                MessageBox.Show("Hãy kiểm tra các thông tin cần cập nhập");
-            }
+                if (TenPT != null && SLG != 0)
+                {
+                    temp.TENPT = TenPT;
+                    temp.SLGHE = SLG;
+                    DataProvider.Ins.DB.SaveChanges();
+
+                    ServiceVM.IsDone = true;
+                    MessageBox.Show("Thông tin phương tiện đã được cập nhập");
+                    //sau cập nhập 
+                    //LocationVM.TenDD = tenDD;
+                    //LocationVM.DcDD = dcDD;
+                    //LocationVM.MtDD = mtDD;
+                }
+                else
+                {
+                    MessageBox.Show("Hãy kiểm tra các thông tin cần cập nhập");
+                }
+            }    
+        }
+        private void EditInforRestaurent()
+        {
+            var temp = DataProvider.Ins.DB.NHAHANGs.Where(x => x.MANH == MaNH).SingleOrDefault();
+           if (temp.TENNH == TenNH && temp.SDT == SDTNH && temp.MOTA == MoTaNH)
+            {
+                MessageBox.Show("Hãy nhập các thông tin cần thay đổi");
+            }   
+           else
+            {
+                if (TenNH != null && MoTaNH != null && SDTNH != null  )
+                {
+                    temp.TENNH = TenNH;
+                    temp.SDT = SDTNH;
+                    temp.MOTA = MoTaNH;
+                    DataProvider.Ins.DB.SaveChanges();
+
+                    ServiceVM.IsDone = true;
+                    MessageBox.Show("Thông tin nhà hàng đã được cập nhập");
+                    //sau cập nhập 
+                    //LocationVM.TenDD = tenDD;
+                    //LocationVM.DcDD = dcDD;
+                    //LocationVM.MtDD = mtDD;
+                }
+                else
+                {
+                    MessageBox.Show("Hãy kiểm tra các thông tin cần cập nhập");
+                }
+            }    
         }
     }
 }
