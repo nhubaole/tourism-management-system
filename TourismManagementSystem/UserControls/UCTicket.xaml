@@ -66,7 +66,7 @@
                                 materialDesign:HintAssist.FloatingHintHorizontalAlignment="Center"
                                 MinWidth="65"
                                 Background="White"
-                                ItemsSource="{Binding LongIntegerList}"
+                                ItemsSource="{Binding filter}"
                                 SelectedValue="{Binding SelectedValueOne}"
                                 VerticalAlignment="Bottom"
                                 HorizontalAlignment="Left"
@@ -126,8 +126,13 @@
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Ngày bán" Binding="{Binding NGAYBAN}" Width="*">
-                                <DataGridTextColumn.HeaderStyle>
+                            <DataGridTemplateColumn  Header="Ngày bán" Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <DatePicker SelectedDate="{Binding NGAYBAN}" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="Height" Value="25" />
                                         <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -135,12 +140,12 @@
                                         <Setter Property="FontSize" Value="14"/>
                                         <Setter Property="Foreground" Value="{StaticResource Primary}"/>
                                     </Style>
-                                </DataGridTextColumn.HeaderStyle>
-                            </DataGridTextColumn>
+                                </DataGridTemplateColumn.HeaderStyle>
+                            </DataGridTemplateColumn>
                             <DataGridTemplateColumn  Header="Trạng thái" Width="*">
                                 <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <ComboBox ItemsSource="{Binding TRANGTHAI}" SelectedItem="{Binding SelectedOption}" />
+                                    <DataTemplate >
+                                        <ComboBox ItemsSource="{Binding status}" SelectedItem="{Binding TRANGTHAI}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.HeaderStyle>

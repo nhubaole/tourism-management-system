@@ -17,7 +17,7 @@ namespace TourismManagementSystem.ViewModel
     
     internal class CustomerVM : BaseViewModel
     {
-        private ObservableCollection<string> _filter = new ObservableCollection<string>() { "Mã phiếu", "Mã khách hàng", "Tên khách hàng" };
+        private ObservableCollection<string> _filter = new ObservableCollection<string>() { "Mã khách hàng", "Tên khách hàng" };
         public ObservableCollection<KHACHHANG> KhachHangs { get; set; }
         public ICommand SwitchWindowCommand { get; set; }
 

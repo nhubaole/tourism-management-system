@@ -23,6 +23,9 @@ namespace TourismManagementSystem.ViewModel
         private ObservableCollection<string> _status = new ObservableCollection<string>() { "Chưa sử dụng", "Đã sử dụng", "Đã hủy" };
         public ObservableCollection<string> status { get => _status; set { _status = value; OnPropertyChanged(nameof(status)); } }
 
+        private ObservableCollection<string> _filter = new ObservableCollection<string>() { "Mã phiếu", "Mã vé", "Mã khách hàng" };
+        public ObservableCollection<string> filter { get => _filter; set { _filter = value; OnPropertyChanged(nameof(filter)); } }
+
         private string _ticket;
         public string VE
         {
@@ -124,7 +127,8 @@ namespace TourismManagementSystem.ViewModel
                 {
                     var temp = new VE()
                     {
-                        
+                        TRANGTHAI = TRANGTHAI,
+                        NGAYBAN = NGAYBAN
                     };
 
                     DataProvider.Ins.DB.VEs.Add(temp);
@@ -148,11 +152,7 @@ namespace TourismManagementSystem.ViewModel
 
 
 
-           // OnlyNumericCommand = new RelayCommand<object>((p) =>
-           // {
-           //     return true;
-           // },
-           //(p) => { OnlyNumericExecute(); });
+       
 
         }
         private void SwitchWindow(object parameter)

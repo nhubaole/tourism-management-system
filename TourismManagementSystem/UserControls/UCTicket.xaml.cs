@@ -24,6 +24,7 @@ namespace TourismManagementSystem.UserControls
         public UCTicket()
         {
             InitializeComponent();
+            DataContext = new TicketVM();
         }
     }
 }
