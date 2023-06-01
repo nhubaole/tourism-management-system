@@ -328,7 +328,7 @@ namespace TourismManagementSystem.ViewModel
                     {
                         case "Phương tiện":
                             //cập nhập dữ liệu từ InforTRafficVm
-                            if (TenPT == null || SLG == 0)
+                            if (TenPT == null || SLG == 0 || IsAllWhitespace(TenPT) || SLG.ToString() == null)
                             {
                                 MessageBox.Show("Hãy điền các thông tin cần thiết.");
                             }
@@ -339,7 +339,7 @@ namespace TourismManagementSystem.ViewModel
 
                             break;
                         case "Nhà hàng":
-                            if (TenNH == null || SDTNH == null || MoTaNH == null || !IsNumeric(SDTNH))
+                            if (TenNH == null || MoTaNH == null || !IsNumeric(SDTNH) || IsAllWhitespace(TenNH) || IsAllWhitespace(MoTaNH))
                             {
                                 MessageBox.Show("Hãy kiểm tra lại các thông tin\nHãy chắc chắn bạn đã điền đủ thông tin rồi.");
                             }
@@ -350,7 +350,7 @@ namespace TourismManagementSystem.ViewModel
 
                             break;
                         case "Khách sạn":
-                            if (TenKS == null || SDTKS == null || DcKS == null || SoSaoKS == 0 || SucChuaKS == 0 || !IsNumeric(SDTKS))
+                            if (TenKS == null || SDTKS == null || DcKS == null || SoSaoKS == 0 || SucChuaKS == 0 || !IsNumeric(SDTKS) ||  IsAllWhitespace(TenKS) || IsAllWhitespace(DcKS))
                             {
                                 MessageBox.Show("Hãy kiểm tra lại các thông tin\nHãy chắc chắn bạn đã điền đủ thông tin rồi.");
                             }
@@ -360,7 +360,7 @@ namespace TourismManagementSystem.ViewModel
                             }
                             break;
                         case "Dịch vụ khác":
-                            if (TenDVK == null || MoTaDVK == null)
+                            if (TenDVK == null || MoTaDVK == null || IsAllWhitespace(TenDVK) || IsAllWhitespace(MoTaDVK))
                             {
                                 MessageBox.Show("Hãy điền các thông tin cần thiết.");
                             }
@@ -432,6 +432,18 @@ namespace TourismManagementSystem.ViewModel
         {
             double result;
             return double.TryParse(input, out result);
+        }
+        public static bool IsAllWhitespace(string input)
+        {
+            foreach (char c in input)
+            {
+                if (!char.IsWhiteSpace(c))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
         private void NewTraffic()
         {
@@ -523,29 +535,18 @@ namespace TourismManagementSystem.ViewModel
         private void EditInforTraffic()
         {
             var temp = DataProvider.Ins.DB.PHUONGTIENs.Where(x => x.MAPT == MaPT).SingleOrDefault();
-            if (temp.TENPT == TenPT && temp.SLGHE == SLG)
+            if (temp.TENPT == TenPT && temp.SLGHE == SLG )
             {
                 MessageBox.Show("Hãy điền các thông tin cần cập nhập");
             }   
             else
             {
-                if (TenPT != null && SLG != 0)
-                {
-                    temp.TENPT = TenPT;
-                    temp.SLGHE = SLG;
-                    DataProvider.Ins.DB.SaveChanges();
+                temp.TENPT = TenPT;
+                temp.SLGHE = SLG;
+                DataProvider.Ins.DB.SaveChanges();
 
-                    ServiceVM.IsDone = true;
-                    MessageBox.Show("Thông tin phương tiện đã được cập nhập");
-                    //sau cập nhập 
-                    //LocationVM.TenDD = tenDD;
-                    //LocationVM.DcDD = dcDD;
-                    //LocationVM.MtDD = mtDD;
-                }
-                else
-                {
-                    MessageBox.Show("Hãy kiểm tra các thông tin cần cập nhập");
-                }
+                ServiceVM.IsDone = true;
+                MessageBox.Show("Thông tin phương tiện đã được cập nhập");
             }    
         }
         private void EditInforRestaurant()
@@ -557,51 +558,32 @@ namespace TourismManagementSystem.ViewModel
             }   
            else
             {
-                if (TenNH != null && MoTaNH != null && SDTNH != null && IsNumeric(SDTNH))
-                {
-                    temp.TENNH = TenNH;
-                    temp.SDT = SDTNH;
-                    temp.MOTA = MoTaNH;
-                    DataProvider.Ins.DB.SaveChanges();
+                temp.TENNH = TenNH;
+                temp.SDT = SDTNH;
+                temp.MOTA = MoTaNH;
+                DataProvider.Ins.DB.SaveChanges();
 
-                    ServiceVM.IsDone = true;
-                    MessageBox.Show("Thông tin nhà hàng đã được cập nhập");
-                    //sau cập nhập 
-                    //LocationVM.TenDD = tenDD;
-                    //LocationVM.DcDD = dcDD;
-                    //LocationVM.MtDD = mtDD;
-                }
-                else
-                {
-                    MessageBox.Show("Hãy kiểm tra các thông tin cần cập nhập");
-                }
+                ServiceVM.IsDone = true;
+                MessageBox.Show("Thông tin nhà hàng đã được cập nhập");
             }    
         }
         private void EditInforHotel()
         {
             var temp = DataProvider.Ins.DB.KHACHSANs.Where(x => x.MAKS == MaKS).SingleOrDefault();
-            if (temp.TENKS == TenKS && temp.SDT == SDTKS && temp.SOSAO == SoSaoKS && temp.SUCCHUA == SucChuaKS )
+            if (temp.TENKS == TenKS && temp.DIACHI == DcKS && temp.SDT == SDTKS && temp.SOSAO == SoSaoKS && temp.SUCCHUA == SucChuaKS )
             {
                 MessageBox.Show("Hãy nhập các thông tin cần thay đổi");
             }
             else
             {
-                if (TenKS != null && DcKS != null && SDTKS != null && SoSaoKS != 0 && SucChuaKS != 0 && IsNumeric(SDTKS))
-                {
-                    temp.TENKS = TenKS;
-                    temp.DIACHI = DcKS;
-                    temp.SDT = SDTKS;
-                    temp.SOSAO = SoSaoKS;
-                    temp.SUCCHUA = SucChuaKS;
-                    DataProvider.Ins.DB.SaveChanges();
-                    ServiceVM.IsDone = true;
-                    MessageBox.Show("Thông tin khách sạn đã được cập nhập");
-
-                }
-                else
-                {
-                    MessageBox.Show("Hãy kiểm tra các thông tin cần cập nhập");
-                }
+                temp.TENKS = TenKS;
+                temp.DIACHI = DcKS;
+                temp.SDT = SDTKS;
+                temp.SOSAO = SoSaoKS;
+                temp.SUCCHUA = SucChuaKS;
+                DataProvider.Ins.DB.SaveChanges();
+                ServiceVM.IsDone = true;
+                MessageBox.Show("Thông tin khách sạn đã được cập nhập");
             }
         }
 
@@ -614,21 +596,14 @@ namespace TourismManagementSystem.ViewModel
             }
             else
             {
-                if (TenDVK != null && MoTaDVK != null )
-                {
-                    temp.TENDV = TenDVK;
-                    temp.MOTA = MoTaDVK;
-                 
-                    DataProvider.Ins.DB.SaveChanges();
 
-                    ServiceVM.IsDone = true;
-                    MessageBox.Show("Thông tin dịch vụ đã được cập nhập");
+                temp.TENDV = TenDVK;
+                temp.MOTA = MoTaDVK;
 
-                }
-                else
-                {
-                    MessageBox.Show("Hãy kiểm tra các thông tin cần cập nhập");
-                }
+                DataProvider.Ins.DB.SaveChanges();
+
+                ServiceVM.IsDone = true;
+                MessageBox.Show("Thông tin dịch vụ đã được cập nhập");
             }
         }
     }

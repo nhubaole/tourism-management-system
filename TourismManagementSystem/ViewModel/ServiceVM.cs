@@ -279,7 +279,6 @@ namespace TourismManagementSystem.ViewModel
                             InforServiceVM.SLG = 0;
                             InforServiceVM.filter = null;
                             selectedItemPT = null;
-                            
 
                             break;
 

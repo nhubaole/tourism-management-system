@@ -28,7 +28,7 @@ namespace TourismManagementSystem.Model
         public string TENKS { get => _TENKS; set { _TENKS = value; OnPropertyChanged(); } }
 
         private string _DIACHI;
-        public string DIACHI { get => _DIACHI; set { _TENKS = value; OnPropertyChanged(); } }
+        public string DIACHI { get => _DIACHI; set { _DIACHI = value; OnPropertyChanged(); } }
 
         private string _SDT;
         public string SDT { get => _SDT; set { _SDT = value; OnPropertyChanged(); } }

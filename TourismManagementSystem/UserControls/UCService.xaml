@@ -407,7 +407,7 @@
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
                             <DataGridTextColumn Header="Địa chỉ" Binding="{Binding DIACHI}"  Width="*" IsReadOnly="True" CanUserSort="False">
-                                <DataGridTextColumn.ElementStyle>
+                                <!--<DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap" />
                                         <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -416,7 +416,7 @@
                                         <Setter Property="Padding" Value="10"/>
 
                                     </Style>
-                                </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn.ElementStyle>-->
                             </DataGridTextColumn>
                             <DataGridTextColumn Header="Số điện thoại" Binding="{Binding SDT}"  Width="*" IsReadOnly="True" CanUserSort="False"/>
                             <DataGridTextColumn Header="Số sao" Binding="{Binding SOSAO}"  Width="*" IsReadOnly="True" CanUserSort="False"/>
