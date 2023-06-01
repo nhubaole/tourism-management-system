@@ -16,14 +16,17 @@ using TourismManagementSystem.ViewModel;
 namespace TourismManagementSystem.View
 {
     /// <summary>
-    /// Interaction logic for DetailTicketWindow.xaml
+    /// Interaction logic for AddCustomer.xaml
     /// </summary>
-    public partial class DetailTicketWindow : Window
+    public partial class AddCustomerWindow : Window
     {
-        public DetailTicketWindow()
+        public AddCustomerWindow()
         {
             InitializeComponent();
-            DataContext = new TicketVM();
+            DataContext = new CustomerVM();
+
         }
+
+      
     }
 }

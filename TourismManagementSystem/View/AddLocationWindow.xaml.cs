@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TourismManagementSystem.Model;
+using System.Configuration;
 
 namespace TourismManagementSystem.View
 {
@@ -18,10 +20,15 @@ namespace TourismManagementSystem.View
     /// Interaction logic for AddLocationWindow.xaml
     /// </summary>
     public partial class AddLocationWindow : Window
+
     {
         public AddLocationWindow()
         {
             InitializeComponent();
         }
+
+       
+
+
     }
 }

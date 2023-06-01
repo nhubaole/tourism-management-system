@@ -10,20 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TourismManagementSystem.ViewModel;
 
-namespace TourismManagementSystem.View
+namespace TourismManagementSystem.UserControls
 {
     /// <summary>
-    /// Interaction logic for DetailTicketWindow.xaml
+    /// Interaction logic for UCInforOtherService.xaml
     /// </summary>
-    public partial class DetailTicketWindow : Window
+    public partial class UCInforOtherService : UserControl
     {
-        public DetailTicketWindow()
+        public UCInforOtherService()
         {
             InitializeComponent();
-            DataContext = new TicketVM();
         }
     }
 }
