@@ -4,9 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:TourismManagementSystem.UserControls"
+             xmlns:viewmodel="clr-namespace:TourismManagementSystem.ViewModel"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance Type=viewmodel:TicketVM}"
+            
              d:DesignHeight="550" d:DesignWidth="900">
+   
     <Grid Background="{StaticResource Secondary}">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -21,7 +26,6 @@
 
             <Grid Grid.Column="1">
                 <Grid.ColumnDefinitions >
-
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
@@ -63,7 +67,7 @@
                                 materialDesign:HintAssist.FloatingHintHorizontalAlignment="Center"
                                 MinWidth="65"
                                 Background="White"
-                                ItemsSource="{Binding LongIntegerList}"
+                                ItemsSource="{Binding filter}"
                                 SelectedValue="{Binding SelectedValueOne}"
                                 VerticalAlignment="Bottom"
                                 HorizontalAlignment="Left"
@@ -82,45 +86,91 @@
             <Border BorderBrush="White" BorderThickness="0" CornerRadius="20" Background="{StaticResource White}" Height="450"
                     Width="800">
                 <Grid>
-                    <DataGrid ItemsSource="{Binding MyItems}" AutoGenerateColumns="False" >
+                    <DataGrid ItemsSource="{Binding ListVE}"  AutoGenerateColumns="False"  SelectedItem="{Binding SelectedTicket}" >
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="RowDoubleClick">
+                                <i:InvokeCommandAction Command="{Binding ShowTicketDetailCommand}"
+                                   CommandParameter="{Binding SelectedTicket}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Mã vé" Binding="{Binding Property1}" Width="*">
+                            <DataGridTextColumn Header="Mã vé" Binding="{Binding MAVE}" Width="*" IsReadOnly="True">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="Height" Value="25" />
                                         <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        <Setter Property="Background" Value="White"/>
+                                        <Setter Property="FontSize" Value="14"/>
+                                        <Setter Property="Foreground" Value="{StaticResource Primary}"/>
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Mã khách hàng" Binding="{Binding Property2}" Width="*">
+                            <DataGridTextColumn Header="Mã khách hàng" Binding="{Binding MAHK}" Width="*" IsReadOnly="True">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="Height" Value="25" />
                                         <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        <Setter Property="Background" Value="White"/>
+                                        <Setter Property="FontSize" Value="14"/>
+                                        <Setter Property="Foreground" Value="{StaticResource Primary}"/>
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Mã phiếu" Binding="{Binding Property3}" Width="*">
+                            <DataGridTextColumn Header="Mã phiếu" Binding="{Binding MAPHIEU}" Width="*" IsReadOnly="True">
                                 <DataGridTextColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="Height" Value="25" />
                                         <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        <Setter Property="Background" Value="White"/>
+                                        <Setter Property="FontSize" Value="14"/>
+                                        <Setter Property="Foreground" Value="{StaticResource Primary}"/>
                                     </Style>
                                 </DataGridTextColumn.HeaderStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Ngày bán" Binding="{Binding Property4}" Width="*">
-                                <DataGridTextColumn.HeaderStyle>
-                                    <Style TargetType="DataGridColumnHeader">
-                                        <Setter Property="HorizontalAlignment" Value="Center"/>
-                                    </Style>
-                                </DataGridTextColumn.HeaderStyle>
-                            </DataGridTextColumn>
-                            <DataGridTemplateColumn Header="Trạng thái" Width="*">
+                            <DataGridTemplateColumn  Header="Ngày bán" Width="*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <ComboBox ItemsSource="{Binding ComboBoxOptions}" SelectedItem="{Binding SelectedOption}" />
+                                        <DatePicker Language="en-GB" SelectedDate="{Binding NGAYBAN}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                                 <DataGridTemplateColumn.HeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="Height" Value="25" />
                                         <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        <Setter Property="Background" Value="White"/>
+                                        <Setter Property="FontSize" Value="14"/>
+                                        <Setter Property="Foreground" Value="{StaticResource Primary}"/>
+                                    </Style>
+                                </DataGridTemplateColumn.HeaderStyle>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn  Header="Trạng thái" Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ComboBox ItemsSource="{Binding status}" SelectedItem="{Binding TRANGTHAI}" DisplayMemberPath="{Binding TRANGTHAI}">
+
+
+                                            <ComboBoxItem Content="Đã hủy"/>
+                                            <ComboBoxItem Content="Chưa sử dụng"/>
+                                            <ComboBoxItem Content="Đã sử dụng"/>
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="SelectionChanged">
+                                                    <i:InvokeCommandAction Command="{Binding UpdateDataCommand}"
+                                                     CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource Self}}" />
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+
+
+                                        </ComboBox>
+
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                                <DataGridTemplateColumn.HeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="Height" Value="25" />
+                                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                                        <Setter Property="Background" Value="White"/>
+                                        <Setter Property="FontSize" Value="14"/>
+                                        <Setter Property="Foreground" Value="{StaticResource Primary}"/>
                                     </Style>
                                 </DataGridTemplateColumn.HeaderStyle>
                             </DataGridTemplateColumn>

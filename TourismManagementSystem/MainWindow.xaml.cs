@@ -25,7 +25,7 @@ namespace TourismManagementSystem
         {
         
             InitializeComponent();
-            LoginWindow lg = new LoginWindow();
+            PurchaseWindow lg = new PurchaseWindow();
             lg.Show();
         }
     }

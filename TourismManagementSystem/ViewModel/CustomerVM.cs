@@ -1,12 +1,242 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
+using TourismManagementSystem.Model;
+using TourismManagementSystem.View;
+using TourismManagementSystem.UserControls;
+using System.Windows.Controls;
 
 namespace TourismManagementSystem.ViewModel
 {
+    
     internal class CustomerVM : BaseViewModel
     {
+        private ObservableCollection<string> _filter = new ObservableCollection<string>() { "Mã khách hàng", "Tên khách hàng" };
+        public ObservableCollection<KHACHHANG> KhachHangs { get; set; }
+        public ICommand SwitchWindowCommand { get; set; }
+
+        public ICommand OnlyNumericCommand { get; private set; }
+
+        public ICommand AddDataCommand { get; set; }
+        public ICommand DeleteDataCommand { get; set; }
+        public ICommand UpdateDataCommand { get; set; }
+
+        private KHACHHANG _selectedCustomer;
+        public KHACHHANG SelectedCustomer { get => _selectedCustomer; set
+            {
+                _selectedCustomer = value;
+                OnPropertyChanged(nameof(SelectedCustomer));
+            }
+        }
+
+
+        private string maKH;
+        public string MAKH
+        {
+            get => maKH;
+            set
+            {
+                maKH = value;
+                OnPropertyChanged(nameof(MAKH));
+            }
+        }
+
+        private string hoTen;
+        public string HOTEN
+        {
+            get => hoTen;
+            set
+            {
+                hoTen = value;
+                OnPropertyChanged(nameof(HOTEN));
+            }
+        }
+
+        private string cccd;
+        public string CCCD
+        {
+            get => cccd;
+            set
+            {
+                cccd = value;
+                OnPropertyChanged(nameof(CCCD));
+            }
+        }
+
+        private string sdt;
+        public string SDT
+        {
+            get => sdt;
+            set
+            {
+                sdt = value;
+                OnPropertyChanged(nameof(SDT));
+            }
+        }
+
+        private string email;
+        public string EMAIL
+        {
+            get => email;
+            set
+            {
+                email = value;
+                OnPropertyChanged(nameof(EMAIL));
+            }
+        }
+
+        private string diaChi;
+        public string DIACHI
+        {
+            get => diaChi;
+            set
+            {
+                diaChi = value;
+                OnPropertyChanged(nameof(DIACHI));
+            }
+        }
+        private string _selectedFilter;
+        public string selectedFilter
+        {
+            get => _selectedFilter;
+            set
+            {
+                _selectedFilter = value;
+                OnPropertyChanged(nameof(selectedFilter));
+            }
+        }
+        public ObservableCollection<string> filter { get => _filter; set { _filter = value; OnPropertyChanged(nameof(filter)); } }  
+      
+
+
+
+
+        private ObservableCollection<KHACHHANG> _ListKhachhang = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs);
+        public ObservableCollection<KHACHHANG> ListKhachhang { get => _ListKhachhang; set { _ListKhachhang= value; OnPropertyChanged(nameof(DataProvider.Ins.DB.KHACHHANGs)); } }
+
+        public CustomerVM()
+        {
+            SwitchWindowCommand = new RelayCommand<object>((p) => {
+               
+                  return true;
+                
+            }, (p) =>
+            {SwitchWindow(p);});
+
+            KhachHangs = new ObservableCollection<KHACHHANG>();
+            AddDataCommand = new RelayCommand<object>((p) => {
+                if (maKH == null || hoTen == null||cccd==null||sdt==null||diaChi==null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }, (p) =>
+            {
+                try
+                {
+                    var temp = new KHACHHANG()
+                    {
+                        MAKH = MAKH,
+                        HOTEN = HOTEN,
+                        CCCD = CCCD,
+                        SDT = SDT,
+                        EMAIL = EMAIL,
+                        DIACHI = DIACHI
+                    };
+
+                    DataProvider.Ins.DB.KHACHHANGs.Add(temp);
+                    DataProvider.Ins.DB.SaveChanges();
+                    ListKhachhang.Add(temp);
+
+
+
+                    MessageBox.Show("Đã tạo mới khách hàng thành công");
+
+                    MAKH = null;
+                    HOTEN = null;
+                    CCCD = null;
+                    SDT = null;
+                    EMAIL = null;
+                    DIACHI = null;
+                    LoadDataGrid();
+
+
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("An error occurred: " + ex.InnerException.Message);
+                }
+
+
+            });
+
+
+            UpdateDataCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            },
+            (p) => { UpdateCustomer(); });
+            DeleteDataCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            },
+            (p) => { DeleteCustomer(); });
+
+            OnlyNumericCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            },
+           (p) => { OnlyNumericExecute(); });
+
+        }
+        private void LoadDataGrid()
+        {
+          ListKhachhang = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs);
+        }
+        private void SwitchWindow(object parameter)
+        {
+            AddCustomerWindow addCustomerWindow = new AddCustomerWindow();
+            addCustomerWindow.Show();
+           
+        }
+        private void UpdateCustomer()
+        {
+
+
+            SelectedCustomer.HOTEN = SelectedCustomer.HOTEN;
+            SelectedCustomer.CCCD = SelectedCustomer.CCCD;
+            SelectedCustomer.SDT = SelectedCustomer.SDT;
+            SelectedCustomer.EMAIL = SelectedCustomer.EMAIL;
+            SelectedCustomer.DIACHI = SelectedCustomer.DIACHI;
+           
+
+            MessageBox.Show("Bạn muốn cập nhật thông tin cho khách hàng" + SelectedCustomer.MAKH);
+
+            DataProvider.Ins.DB.SaveChanges();
+            LoadDataGrid();
+        }
+        private void DeleteCustomer()
+        {
+            MessageBox.Show("Bạn muốn xóa khách hàng " +SelectedCustomer.MAKH);
+            DataProvider.Ins.DB.KHACHHANGs.Remove(SelectedCustomer);
+            DataProvider.Ins.DB.SaveChanges();
+            ListKhachhang.Remove(SelectedCustomer);
+            LoadDataGrid();
+        }
+        private void OnlyNumericExecute()
+        {
+            
+            
+        }
     }
 }
