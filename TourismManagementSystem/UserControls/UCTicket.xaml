@@ -157,14 +157,16 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTemplateColumn  Header="Trạng thái" Width="*">
+                    <DataGridTemplateColumn Header="Trạng thái" Width="*">
+                        
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <ComboBox ItemsSource="{Binding status}" SelectedItem="{Binding TRANGTHAI}" DisplayMemberPath="{Binding TRANGTHAI}">
+                                <ComboBox ItemsSource="{Binding DataContext.ListStatus, RelativeSource={RelativeSource AncestorType=DataGrid}}" 
+                                          SelectedItem="{Binding TRANGTHAI, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="SelectionChanged">
-                                            <i:InvokeCommandAction Command="{Binding UpdateDataCommand}"
-                                                     CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource Self}}" />
+                                            <i:InvokeCommandAction Command="{Binding DataContext.UpdateStatusCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                                   CommandParameter="{Binding .}"/>
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </ComboBox>
@@ -180,7 +182,9 @@
                                     Width="auto"
                                     Margin="0,0,10,0"
                                     Background="Transparent"
-                                    BorderBrush="Transparent">
+                                    BorderBrush="Transparent"
+                                    Command="{Binding DataContext.ShowTicketDetailCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    CommandParameter="{Binding .}">
                                     <materialDesign:PackIcon Kind="Eye" Foreground ="{StaticResource Primary}"/>
                                 </Button>
                             </DataTemplate>
