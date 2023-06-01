@@ -71,6 +71,15 @@ namespace TourismManagementSystem.ViewModel
                     if (IsEdit == 0)
                     {
                         NewTrip.MALOAI = DataProvider.Ins.DB.LOAICHUYENs.Where(t => t.TENLOAI.Equals(NewTrip.LOAICHUYEN)).ToString();
+                        foreach (var item in DataProvider.Ins.DB.HUONGDANVIENs)
+                        {
+                            foreach (var tripItem in NewTrip.HUONGDANVIENs)
+                            {
+                                if (item.MAHDV.Equals(tripItem.MAHDV))
+                                    item.CHUYENs.Add(NewTrip);
+
+                            }
+                        }
                         DataProvider.Ins.DB.CHUYENs.Add(NewTrip);
                         DataProvider.Ins.DB.SaveChanges();
                         MessageBox.Show("Thêm mới chuyến thành công!");
@@ -82,6 +91,15 @@ namespace TourismManagementSystem.ViewModel
                         {
                             NewTrip.MALOAI = DataProvider.Ins.DB.LOAICHUYENs.Where(t => t.TENLOAI.Equals(NewTrip.LOAICHUYEN)).ToString();
                             itemToUpdate = NewTrip;
+                            foreach (var item in DataProvider.Ins.DB.HUONGDANVIENs)
+                            {
+                                foreach (var tripItem in NewTrip.HUONGDANVIENs)
+                                {
+                                    if (item.MAHDV.Equals(tripItem.MAHDV))
+                                        item.CHUYENs.Add(NewTrip);
+
+                                }
+                            }
                             DataProvider.Ins.DB.SaveChanges();
                             MessageBox.Show("Cập nhật thành công!");
                         }

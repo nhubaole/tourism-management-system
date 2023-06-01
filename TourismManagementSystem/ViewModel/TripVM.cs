@@ -104,7 +104,18 @@ namespace TourismManagementSystem.ViewModel
                 CHUYEN selectedChuyen = p as CHUYEN;
                 if (MessageBox.Show("Bạn có muốn xóa chuyến du lịch này?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
+                    foreach (var item in DataProvider.Ins.DB.HUONGDANVIENs)
+                    {
+                        foreach (var tripItem in selectedChuyen.HUONGDANVIENs)
+                        {
+                            if (item.MAHDV.Equals(tripItem.MAHDV))
+                                item.CHUYENs.Remove(selectedChuyen);
+
+                        }
+                    }
+
                     DataProvider.Ins.DB.CHUYENs.Remove(selectedChuyen);
+
                     DataProvider.Ins.DB.SaveChanges();
                     ChuyenList = new ObservableCollection<CHUYEN>(DataProvider.Ins.DB.CHUYENs);
                     MessageBox.Show("Xóa chuyến du lịch thành công");
@@ -121,7 +132,7 @@ namespace TourismManagementSystem.ViewModel
             ViewTripCommand = new RelayCommand<object>((p) => true, (p) =>
             {
                 CHUYEN selectedChuyen = p as CHUYEN;
-                //TourDetailsVM.SelectedTour = selectedChuyen;
+                TripDetailVM.SelectedChuyen = SelectedChuyen;
                 TripDetailsWindow tripDetailWindow = new TripDetailsWindow();
                 tripDetailWindow.ShowDialog();
             });
