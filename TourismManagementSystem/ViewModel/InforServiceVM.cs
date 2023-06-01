@@ -269,7 +269,7 @@ namespace TourismManagementSystem.ViewModel
                     {
                         case "Phương tiện":
                             //cập nhập dữ liệu từ InforTRafficVm
-                            if (TenPT == null ||  SLG == 0)
+                            if (TenPT == null || SLG == 0 || IsAllWhitespace(TenPT) || SLG.ToString() == null)
                             {
                                 MessageBox.Show("Hãy điền các thông tin cần thiết.");
                             }
@@ -280,7 +280,7 @@ namespace TourismManagementSystem.ViewModel
                             }
                             break;
                         case "Nhà hàng":
-                            if (TenNH == null || SDTNH == null || MoTaNH == null || !IsNumeric(SDTNH))
+                            if (TenNH == null || MoTaNH == null || !IsNumeric(SDTNH) || IsAllWhitespace(TenNH) || IsAllWhitespace(MoTaNH))
                             {
                                 MessageBox.Show("Hãy kiểm tra lại các thông tin\nHãy chắc chắn bạn đã điền đủ thông tin rồi.");
                             }
@@ -292,7 +292,7 @@ namespace TourismManagementSystem.ViewModel
 
                             break;
                         case "Khách sạn":
-                            if (TenKS == null || SDTKS == null || DcKS == null || SoSaoKS == 0 || SucChuaKS == 0 || !IsNumeric(SDTKS))
+                            if (TenKS == null || SDTKS == null || DcKS == null || SoSaoKS == 0 || SucChuaKS == 0 || !IsNumeric(SDTKS) || IsAllWhitespace(TenKS) || IsAllWhitespace(DcKS))
                             {
                                 MessageBox.Show("Hãy kiểm tra lại các thông tin\nHãy chắc chắn bạn đã điền đủ thông tin rồi.");
                             }
@@ -304,13 +304,13 @@ namespace TourismManagementSystem.ViewModel
                             }
                             break;
                         case "Dịch vụ khác":
-                            if (TenDVK == null || MoTaDVK == null)
+                            if (TenDVK == null || MoTaDVK == null || IsAllWhitespace(TenDVK) || IsAllWhitespace(MoTaDVK))
                             {
                                 MessageBox.Show("Hãy điền các thông tin cần thiết.");
                             }
                             else
                             {
-                     
+     
                                 NewOtherService();
                             }
                             break;
