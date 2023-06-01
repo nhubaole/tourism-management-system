@@ -11,18 +11,26 @@ namespace TourismManagementSystem.Model
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class DICHVUKHAC
+    using TourismManagementSystem.ViewModel;
+
+    public partial class DICHVUKHAC : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DICHVUKHAC()
         {
             this.LICHTRINHs = new HashSet<LICHTRINH>();
         }
-    
-        public string MADV { get; set; }
-        public string TENDV { get; set; }
-        public string MOTA { get; set; }
+
+        private string _MADV;
+        public string MADV { get => _MADV; set { _MADV = value; OnPropertyChanged(); } }
+
+
+        private string _TENDV;
+        public string TENDV { get => _TENDV; set { _TENDV = value; OnPropertyChanged(); } }
+
+
+        private string _MOTA;
+        public string MOTA { get => _MOTA; set { _MOTA = value; OnPropertyChanged(); } }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LICHTRINH> LICHTRINHs { get; set; }

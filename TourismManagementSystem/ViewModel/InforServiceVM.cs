@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Forms;
+using System.Windows;
 using System.Windows.Input;
 using TourismManagementSystem.Model;
 using TourismManagementSystem.UserControls;
@@ -345,7 +345,7 @@ namespace TourismManagementSystem.ViewModel
                             }
                             else
                             {
-
+                                EditInforRestaurant();
                             }
 
                             break;
@@ -356,7 +356,7 @@ namespace TourismManagementSystem.ViewModel
                             }
                             else
                             {
-
+                                EditInforHotel();
                             }
                             break;
                         case "Dịch vụ khác":
@@ -366,7 +366,7 @@ namespace TourismManagementSystem.ViewModel
                             }
                             else
                             {
-
+                                EditInforOtherService();
                             }
                             break;
                         default:
@@ -548,7 +548,7 @@ namespace TourismManagementSystem.ViewModel
                 }
             }    
         }
-        private void EditInforRestaurent()
+        private void EditInforRestaurant()
         {
             var temp = DataProvider.Ins.DB.NHAHANGs.Where(x => x.MANH == MaNH).SingleOrDefault();
            if (temp.TENNH == TenNH && temp.SDT == SDTNH && temp.MOTA == MoTaNH)
@@ -557,7 +557,7 @@ namespace TourismManagementSystem.ViewModel
             }   
            else
             {
-                if (TenNH != null && MoTaNH != null && SDTNH != null  )
+                if (TenNH != null && MoTaNH != null && SDTNH != null && IsNumeric(SDTNH))
                 {
                     temp.TENNH = TenNH;
                     temp.SDT = SDTNH;
@@ -576,6 +576,60 @@ namespace TourismManagementSystem.ViewModel
                     MessageBox.Show("Hãy kiểm tra các thông tin cần cập nhập");
                 }
             }    
+        }
+        private void EditInforHotel()
+        {
+            var temp = DataProvider.Ins.DB.KHACHSANs.Where(x => x.MAKS == MaKS).SingleOrDefault();
+            if (temp.TENKS == TenKS && temp.SDT == SDTKS && temp.SOSAO == SoSaoKS && temp.SUCCHUA == SucChuaKS )
+            {
+                MessageBox.Show("Hãy nhập các thông tin cần thay đổi");
+            }
+            else
+            {
+                if (TenKS != null && DcKS != null && SDTKS != null && SoSaoKS != 0 && SucChuaKS != 0 && IsNumeric(SDTKS))
+                {
+                    temp.TENKS = TenKS;
+                    temp.DIACHI = DcKS;
+                    temp.SDT = SDTKS;
+                    temp.SOSAO = SoSaoKS;
+                    temp.SUCCHUA = SucChuaKS;
+                    DataProvider.Ins.DB.SaveChanges();
+                    ServiceVM.IsDone = true;
+                    MessageBox.Show("Thông tin khách sạn đã được cập nhập");
+
+                }
+                else
+                {
+                    MessageBox.Show("Hãy kiểm tra các thông tin cần cập nhập");
+                }
+            }
+        }
+
+        private void EditInforOtherService()
+        {
+            var temp = DataProvider.Ins.DB.DICHVUKHACs.Where(x => x.MADV == MaDVK).SingleOrDefault();
+            if (temp.TENDV == TenDVK && temp.MOTA == MoTaDVK)
+            {
+                MessageBox.Show("Hãy nhập các thông tin cần thay đổi");
+            }
+            else
+            {
+                if (TenDVK != null && MoTaDVK != null )
+                {
+                    temp.TENDV = TenDVK;
+                    temp.MOTA = MoTaDVK;
+                 
+                    DataProvider.Ins.DB.SaveChanges();
+
+                    ServiceVM.IsDone = true;
+                    MessageBox.Show("Thông tin dịch vụ đã được cập nhập");
+
+                }
+                else
+                {
+                    MessageBox.Show("Hãy kiểm tra các thông tin cần cập nhập");
+                }
+            }
         }
     }
 }
