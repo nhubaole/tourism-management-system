@@ -22,7 +22,6 @@ namespace TourismManagementSystem.ViewModel
             TicketCommand = new RelayCommand<object>((p) => { return true; }, Ticket);
             TourCommand = new RelayCommand<object>((p) => { return true; }, Tour);
             TripCommand = new RelayCommand<object>((p) => { return true; }, Trip);
-
             CurrentView = new HomeVM();
         }
 

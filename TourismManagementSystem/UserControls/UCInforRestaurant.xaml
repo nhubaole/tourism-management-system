@@ -1,0 +1,164 @@
+﻿<UserControl x:Class="TourismManagementSystem.UserControls.UCInforRestaurant"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TourismManagementSystem.UserControls"
+             mc:Ignorable="d" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+              xmlns:vm="clr-namespace:TourismManagementSystem.ViewModel"
+             d:DesignHeight="139" d:DesignWidth="700"
+             Background="White">
+    <UserControl.DataContext >
+        <vm:InforRestaurantVm/>
+    </UserControl.DataContext>
+    <Grid >
+        <Grid.ColumnDefinitions >
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <TextBlock
+                    Width="140"
+                    Text="Mã nhà hàng"
+                    FontSize="16"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Margin="30,0,0,8"
+                Foreground="{StaticResource Primary}"
+                                            FontWeight="Bold"/>
+                <Border
+                    Width="200"
+                    Height="30"
+                    CornerRadius="10"
+                    Background="{StaticResource Secondary}"
+                    Margin="0 , 0, 70, 0"
+                    HorizontalAlignment="Right"
+                                            >
+                    <TextBox
+                        x:Name="tbMa"
+                        Width="180"
+                        Height="30"
+                        Background="Transparent"
+                        Margin="0 , 0, 0, 0"
+                        HorizontalAlignment="Center"
+                        IsEnabled="False"
+                        Text="{Binding maNH, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"
+                                        
+                                                />
+
+                </Border>
+
+            </Grid>
+            <Grid Grid.Row="1">
+                <TextBlock
+                Width="140"
+                Text="Tên nhà hàng *"
+                FontSize="16"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left"
+                 Margin="30,0,0,8"
+                Foreground="{StaticResource Primary}"
+                                            FontWeight="Bold"/>
+                <Border
+                Width="200"
+                Height="30"
+                CornerRadius="10"
+                Background="{StaticResource Secondary}"
+                Margin="0 , 0, 70, 0"
+                HorizontalAlignment="Right"
+                
+                                    >
+                    <TextBox
+                    x:Name="tbTen"
+                    Width="180"
+                    Height="30"
+                    Background="Transparent"
+                    Margin="0 , 0, 0, 0"
+                    HorizontalAlignment="Center"
+                       Text="{Binding tenNH, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"             />
+
+                </Border>
+
+            </Grid>
+            <Grid Grid.Row="2">
+                <TextBlock
+                    Width="100"
+                    Text="Số điện thoại*"
+                    FontSize="16"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Margin="30,0,0,8"
+                    Foreground="{StaticResource Primary}"
+                    FontWeight="Bold"/>
+                <Border
+                    Width="200"
+                    Height="30"
+                    CornerRadius="10"
+                    Background="{StaticResource Secondary}"
+                    Margin="0 , 0, 70, 0"
+                    HorizontalAlignment="Right"
+                                            >
+                    <TextBox
+                    x:Name="tbSDT"
+                    Width="180"
+                    Height="30"
+                    Background="Transparent"
+                    Margin="0 , 0, 0, 0"
+                    HorizontalAlignment="Center" TextChanged="tbSDT_TextChanged"
+                    Text="{Binding sdt, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"></TextBox>
+
+                </Border>
+
+            </Grid>
+            <Grid Grid.Row="3">
+               
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1">
+            <TextBlock
+                    Width="100"
+                    Text="Mô tả*"
+                    FontSize="16"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Margin="0,10,0,8"
+                    Foreground="{StaticResource Primary}"
+                    FontWeight="Bold"/>
+            <Border
+                    Width="180"
+                    Height="80"
+                    CornerRadius="10"
+                    Background="{StaticResource Secondary}"
+                    Margin="0 ,30, 0, 0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    
+                                            >
+                <TextBox
+                    x:Name="tbMoTa"
+                    Width="160"
+                    Height="80"
+                    Background="Transparent"
+                    Margin="0 , 0, 0, 0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto"
+                    Text="{Binding moTa, Mode=TwoWay , UpdateSourceTrigger=PropertyChanged}"
+                                                />
+            </Border>
+
+        </Grid>
+    </Grid>
+    
+</UserControl>

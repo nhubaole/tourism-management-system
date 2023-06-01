@@ -11,22 +11,34 @@ namespace TourismManagementSystem.Model
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class KHACHSAN
+    using TourismManagementSystem.ViewModel;
+
+    public partial class KHACHSAN: BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public KHACHSAN()
         {
             this.LICHTRINHs = new HashSet<LICHTRINH>();
         }
-    
-        public string MAKS { get; set; }
-        public string TENKS { get; set; }
-        public string DIACHI { get; set; }
-        public string SDT { get; set; }
-        public Nullable<int> SOSAO { get; set; }
-        public Nullable<int> SUCCHUA { get; set; }
-    
+
+        private string _MAKS;
+        public string MAKS { get => _MAKS; set { _MAKS = value; OnPropertyChanged(); } }
+
+        private string _TENKS;
+        public string TENKS { get => _TENKS; set { _TENKS = value; OnPropertyChanged(); } }
+
+        private string _DIACHI;
+        public string DIACHI { get => _DIACHI; set { _DIACHI = value; OnPropertyChanged(); } }
+
+        private string _SDT;
+        public string SDT { get => _SDT; set { _SDT = value; OnPropertyChanged(); } }
+
+        private Nullable<int> _SOSAO;
+        public Nullable<int> SOSAO { get => _SOSAO; set { _SOSAO = value; OnPropertyChanged(); } }
+
+        private Nullable<int> _SUCCHUA;
+        public Nullable<int> SUCCHUA { get => _SUCCHUA; set { _SUCCHUA = value; OnPropertyChanged(); } }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LICHTRINH> LICHTRINHs { get; set; }
     }

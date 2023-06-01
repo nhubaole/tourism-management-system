@@ -11,20 +11,25 @@ namespace TourismManagementSystem.Model
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class NHAHANG
+    using TourismManagementSystem.ViewModel;
+
+    public partial class NHAHANG: BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public NHAHANG()
         {
             this.LICHTRINHs = new HashSet<LICHTRINH>();
         }
-    
-        public string MANH { get; set; }
-        public string TENNH { get; set; }
-        public string SDT { get; set; }
-        public string MOTA { get; set; }
-    
+
+        private string _MANH;
+        public string MANH { get => _MANH; set { _MANH = value; OnPropertyChanged(); } }
+        private string _TENNH;
+        public string TENNH { get => _TENNH; set { _TENNH = value; OnPropertyChanged(); } }
+        private string _SDT;
+        public string SDT { get => _SDT; set { _SDT = value; OnPropertyChanged(); } }
+        private string _MOTA;
+        public string MOTA { get => _MOTA; set { _MOTA = value; OnPropertyChanged(); } }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LICHTRINH> LICHTRINHs { get; set; }
     }
