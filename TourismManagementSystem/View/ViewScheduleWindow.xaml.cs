@@ -10,20 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TourismManagementSystem.View;
 
-namespace TourismManagementSystem
+namespace TourismManagementSystem.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ViewScheduleWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ViewScheduleWindow : Window
     {
-        public MainWindow()
+        public ViewScheduleWindow()
         {
-        
             InitializeComponent();
         }
     }

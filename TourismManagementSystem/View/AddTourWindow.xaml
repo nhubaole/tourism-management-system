@@ -11,7 +11,12 @@
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
         WindowStartupLocation="CenterScreen"
-        Background="{StaticResource Secondary}">
+        Background="{StaticResource Secondary}"
+        Name="addTourWindow"
+        xmlns:vm="clr-namespace:TourismManagementSystem.ViewModel">
+    <Window.DataContext>
+        <vm:AddTourVM/>
+    </Window.DataContext>
     <Grid Margin="50,20,50,20">
         <Border Background="White"
                 CornerRadius="20,20,20,20">
@@ -25,7 +30,7 @@
                         Height="50"
                         CornerRadius="20,20,0,0"
                         Background="{StaticResource Primary}">
-                    <TextBlock Text="Thêm mới tuyến du lịch"
+                    <TextBlock Text="{Binding Title}"
                                VerticalAlignment="Center"
                                Margin="50,0,0,0"
                                Foreground="White"
@@ -49,80 +54,111 @@
                         <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Text="Mã tuyến"
-                                   FontSize="20"
+                                   FontSize="18"
                                    FontWeight="Medium"/>
                         <TextBox VerticalAlignment="Center"
                                  HorizontalAlignment="Right"
-                                 FontSize="20"
+                                 FontSize="18"
                                  Style="{StaticResource MaterialDesignTextBox}"
-                                 Width="400"/>
+                                 Width="400"
+                                 IsEnabled="False"
+                                 Text="{Binding NewTour.MATUYEN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                     </Grid>
                     <Grid Grid.Row="1">
                         <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Text="Tên tuyến"
-                                   FontSize="20"
+                                   FontSize="18"
                                    FontWeight="Medium"/>
                         <TextBox VerticalAlignment="Center"
                                  HorizontalAlignment="Right"
                                  materialDesign:HintAssist.Hint="Nhập tên tuyến du lịch"
-                                 FontSize="20"
+                                 FontSize="18"
                                  Style="{StaticResource MaterialDesignTextBox}"
-                                 Width="400"/>
+                                 Width="400"
+                                 Text="{Binding NewTour.TENTUYEN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                     </Grid>
                     <Grid Grid.Row="2">
                         <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Text="Loại tuyến"
-                                   FontSize="20"
+                                   FontSize="18"
                                    FontWeight="Medium"/>
                         <ComboBox VerticalAlignment="Center"
                                   HorizontalAlignment="Right"
                                   materialDesign:HintAssist.Hint="Chọn loại tuyến du lịch"
-                                  FontSize="20"
-                                  Width="400">
+                                  FontSize="18"
+                                  Width="400"
+                                  ItemsSource="{Binding ListLoaiTuyen}"
+                                  DisplayMemberPath="TENLOAI"
+                                  SelectedItem="{Binding NewTour.LOAITUYEN}">
                         </ComboBox>
                     </Grid>
                     <Grid Grid.Row="3">
                         <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Text="Địa điểm xuất phát"
-                                   FontSize="20"
+                                   FontSize="18"
                                    FontWeight="Medium"/>
                         <ComboBox VerticalAlignment="Center"
                                   HorizontalAlignment="Right"
                                   materialDesign:HintAssist.Hint="Chọn địa điểm xuất phát"
-                                  FontSize="20"
-                                  Width="400">
+                                  FontSize="18"
+                                  Width="400"
+                                  ItemsSource="{Binding ListDiaDiem}"
+                                  DisplayMemberPath="TENDD"
+                                  SelectedItem="{Binding NewTour.DIADIEM}">
                         </ComboBox>
                     </Grid>
                     <Grid Grid.Row="4">
                         <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Text="Số ngày đêm"
-                                   FontSize="20"
+                                   FontSize="18"
                                    FontWeight="Medium"/>
-                        <TextBox VerticalAlignment="Center"
+
+                        <StackPanel VerticalAlignment="Center"
                                  HorizontalAlignment="Right"
+                                    Orientation="Horizontal"
+                                    Width="400">
+                            <TextBox x:Name="txtDays"
+                                Text="{Binding NewTour.SONGAY, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                  Style="{StaticResource MaterialDesignTextBox}"
-                                 FontSize="20"
-                                 materialDesign:HintAssist.Hint="Ví dụ: 2 ngày 1 đêm"
-                                 Width="400"/>
+                                 FontSize="18"
+                                 Width="50"
+                                Margin="0,0,10,0"/>
+                            <TextBlock Text="ngày" 
+                                       VerticalAlignment="Center"
+                                       FontSize="18"
+                                       Margin="0,0,20,0"/>
+                            <TextBox Name="txtNights"
+                                Text="{Binding NewTour.SODEM, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                 Style="{StaticResource MaterialDesignTextBox}"
+                                 FontSize="18"
+                                 Width="50"
+                                Margin="0,0,10,0"/>
+                            <TextBlock Text="đêm" 
+                                       VerticalAlignment="Center"
+                                       FontSize="18"
+                                       Margin="0,0,20,0"/>
+
+                        </StackPanel>
                     </Grid>
                     <Grid Grid.Row="5">
                         <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Text="Giá dự kiến"
-                                   FontSize="20"
+                                   FontSize="18"
                                    FontWeight="Medium"/>
                         <StackPanel Orientation="Horizontal"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Right">
-                            <TextBox 
+                            <TextBox x:Name="txtPrice"
                                  Style="{StaticResource MaterialDesignTextBox}"
                                  materialDesign:HintAssist.Hint="Nhập giá dự kiến"
-                                 FontSize="20"
-                                 Width="360"/>
+                                 FontSize="18"
+                                 Width="360"
+                                Text="{Binding NewTour.GIADUKIEN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                             <TextBlock Text="vnđ"
                                        VerticalAlignment="Bottom"
                                        FontSize="18"
@@ -134,7 +170,7 @@
                         <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Text="Lịch trình chi tiết"
-                                   FontSize="20"
+                                   FontSize="18"
                                    FontWeight="Medium"/>
                         <Button VerticalAlignment="Center"
                                 HorizontalAlignment="Right"
@@ -144,7 +180,9 @@
                                 Width="400"
                                 Height="30"
                                 Background="White"
-                                Foreground="Black">Tùy chỉnh</Button>
+                                Foreground="Black"
+                                Command="{Binding ScheduleOptionCommand}"
+                                CommandParameter="{Binding ElementName=addTourWindow}">Tùy chỉnh</Button>
                     </Grid>
                     <Grid Grid.Row="7">
                         <Separator/>
@@ -152,14 +190,35 @@
                     <Grid Grid.Row="8">
                         <Button VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
-                                Style="{StaticResource MaterialDesignFlatDarkBgButton}"
                                 materialDesign:ButtonAssist.CornerRadius="20"
                                 BorderBrush="Transparent"
                                 Width="500"
                                 Height="40"
                                 FontSize="18"
                                 Background="{StaticResource Primary}"
-                                Foreground="White">THÊM</Button>
+                                Foreground="White"
+                                Command="{Binding AddCommand}"
+                                CommandParameter="{Binding ElementName=addTourWindow}"
+                                ToolTip="{Binding ToolTipText, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTipService.ShowOnDisabled="True"
+                                Content="{Binding BtnText}">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatDarkBgButton}">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                    <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtDays}" Value="False"/>
+                                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtNights}" Value="False"/>
+                                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtPrice}" Value="False"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="IsEnabled" Value="True"/>
+                                        </MultiDataTrigger>
+                                    </Style.Triggers>
+
+                                </Style>
+                            </Button.Style>
+                        </Button>
                     </Grid>
                 </Grid>
             </Grid>

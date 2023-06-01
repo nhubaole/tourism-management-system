@@ -13,10 +13,17 @@
         WindowStartupLocation="CenterScreen"
         xmlns:uc="clr-namespace:TourismManagementSystem.UserControls"
         xmlns:vm="clr-namespace:TourismManagementSystem.ViewModel"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        Name="mainWindow">
     <Window.DataContext>
         <vm:MainVM/>
     </Window.DataContext>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" CommandParameter="{Binding ElementName=mainWindow}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="94"/>
@@ -63,7 +70,14 @@
                     </RadioButton>
                 </StackPanel>
                 <Grid Grid.Row="2">
-                    <Button Background="Transparent" BorderThickness="0" Foreground="{StaticResource Primary}" VerticalAlignment="Center" Height="50" Width="70">
+                    <Button Background="Transparent" 
+                            BorderThickness="0" 
+                            Foreground="{StaticResource Primary}" 
+                            VerticalAlignment="Center" 
+                            Height="50" 
+                            Width="70"
+                            Command="{Binding LogOutCommand}"
+                            CommandParameter="{Binding ElementName=mainWindow}">
                         <materialDesign:PackIcon Kind="Logout" Width="30" Height="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Button>
                 </Grid>

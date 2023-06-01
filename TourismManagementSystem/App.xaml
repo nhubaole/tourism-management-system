@@ -52,6 +52,7 @@
                 <ResourceDictionary Source="/Resource/ButtonStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/Resource/ChoiceChipStyle.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="/Resource/DataTemplate.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="/Resource/MainResource.xaml"></ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
            
           

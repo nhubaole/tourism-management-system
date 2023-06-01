@@ -52,4 +52,8 @@
         <uc:UCInforOtherService/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type viewmodel:RequireLoginVM}">
+        <uc:UCRequireLogin/>
+    </DataTemplate>
+
 </ResourceDictionary>

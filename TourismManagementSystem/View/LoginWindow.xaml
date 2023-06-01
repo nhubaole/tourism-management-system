@@ -10,7 +10,13 @@
         ResizeMode="NoResize"
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        xmlns:vm="clr-namespace:TourismManagementSystem.ViewModel" 
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        Name="loginWindow">
+    <Window.DataContext>
+        <vm:LoginVM/>
+    </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="600"/>
@@ -37,23 +43,50 @@
                          materialDesign:HintAssist.Hint="Tên đăng nhập"
                          FontSize="24"
                          materialDesign:HintAssist.Foreground="{StaticResource Primary}"
-                         BorderBrush="{StaticResource Primary}"/>
-                <PasswordBox Width="300"
+                         BorderBrush="{StaticResource Primary}"
+                         Text="{Binding Username, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                <PasswordBox x:Name="passwordBox"
+                        Width="300"
                         Style="{StaticResource MaterialDesignOutlinedRevealPasswordBox}"
                         materialDesign:HintAssist.Hint="Mật khẩu"
                         materialDesign:TextFieldAssist.HasClearButton="True"
                         Margin="0,30,0,0"
                         FontSize="24"
                         materialDesign:HintAssist.Foreground="{StaticResource Primary}"
-                        BorderBrush="{StaticResource Primary}"/>
-                <Button Margin="0,50,0,0"
+                        BorderBrush="{StaticResource Primary}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PasswordChanged">
+                            <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" CommandParameter="{Binding ElementName=passwordBox}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </PasswordBox>
+                <Button Margin="0,40,0,0"
                         Background="{StaticResource Primary}"
                         Width="300"
                         Height="60"
                         BorderBrush="Transparent"
                         materialDesign:ButtonAssist.CornerRadius="30"
                         Foreground="White"
-                        FontSize="24">Đăng nhập</Button>
+                        FontSize="24"
+                        Command="{Binding LoginCommand}"
+                        CommandParameter="{Binding ElementName=loginWindow}">Đăng nhập</Button>
+                <TextBlock Margin="0,20,0,0"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontSize="16"
+                           FontWeight="Medium">
+                    <TextBlock.Inlines>
+                        <Hyperlink Command="{Binding ContinueAsGuestCommand}"
+                                   CommandParameter="{Binding ElementName=loginWindow}">
+                            <Hyperlink.Style>
+                                <Style TargetType="Hyperlink">
+                                    <Setter Property="Foreground" Value="{StaticResource Primary}" />
+                                </Style>
+                            </Hyperlink.Style>
+                            Tiếp tục dưới vai trò Khách
+                        </Hyperlink>
+                    </TextBlock.Inlines>
+                </TextBlock>
             </StackPanel>
         </Grid>
     </Grid>

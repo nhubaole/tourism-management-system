@@ -205,6 +205,9 @@
     <Compile Include="UserControls\UCNotification.xaml.cs">
       <DependentUpon>UCNotification.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UCRequireLogin.xaml.cs">
+      <DependentUpon>UCRequireLogin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UCRevenueStatistics.xaml.cs">
       <DependentUpon>UCRevenueStatistics.xaml</DependentUpon>
     </Compile>
@@ -214,6 +217,11 @@
     <Compile Include="UserControls\UCTicket.xaml.cs">
       <DependentUpon>UCTicket.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utils\BoolToVisibilityConverter.cs" />
+    <Compile Include="Utils\MultiCommandParameterConverter.cs" />
+    <Compile Include="Utils\RadioButtonConverter.cs" />
+    <Compile Include="ViewModel\AddScheduleVM.cs" />
+    <Compile Include="ViewModel\AddTourVM.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BookingVM.cs" />
     <Compile Include="ViewModel\CustomerVM.cs" />
@@ -225,14 +233,20 @@
     <Compile Include="ViewModel\InforServiceVM.cs" />
     <Compile Include="ViewModel\InforTrafficVm.cs" />
     <Compile Include="ViewModel\LocationVM.cs" />
+    <Compile Include="ViewModel\LoginVM.cs" />
     <Compile Include="ViewModel\MainVM.cs" />
     <Compile Include="ViewModel\NotificationVM.cs" />
     <Compile Include="ViewModel\PurchaseVM.cs" />
+    <Compile Include="ViewModel\RequireLoginVM.cs" />
     <Compile Include="ViewModel\RevenueStatisticVM.cs" />
+    <Compile Include="ViewModel\ScheduleDetailsVM.cs" />
+    <Compile Include="ViewModel\ScheduleVM.cs" />
     <Compile Include="ViewModel\ServiceVM.cs" />
     <Compile Include="ViewModel\TicketVM.cs" />
+    <Compile Include="ViewModel\TourDetailsVM.cs" />
     <Compile Include="ViewModel\TourVM.cs" />
     <Compile Include="ViewModel\TripVM.cs" />
+    <Compile Include="ViewModel\ViewScheduleVM.cs" />
     <Compile Include="View\AddBookingWindow.xaml.cs">
       <DependentUpon>AddBookingWindow.xaml</DependentUpon>
     </Compile>
@@ -271,6 +285,9 @@
     </Compile>
     <Compile Include="View\TripDetailsWindow.xaml.cs">
       <DependentUpon>TripDetailsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ViewScheduleWindow.xaml.cs">
+      <DependentUpon>ViewScheduleWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Resource\ChoiceChipStyle.xaml">
       <SubType>Designer</SubType>
@@ -355,6 +372,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\UCNotification.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCRequireLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -450,6 +471,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ViewScheduleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -502,6 +527,8 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resource\Image\HomeImg.png" />
+    <Resource Include="Resource\Image\LoginRequireImg.png" />
     <Content Include="TourManagement.sql" />
   </ItemGroup>
   <ItemGroup>
