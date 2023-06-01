@@ -21,10 +21,6 @@ namespace TourismManagementSystem.ViewModel
         public ObservableCollection<string> filter { get => _filter; set { _filter = value; OnPropertyChanged(nameof(filter)); } }
        
 
-
-
-
-
         private string _ticket;
         public string VE
         {
