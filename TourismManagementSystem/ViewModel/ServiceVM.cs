@@ -680,6 +680,123 @@ namespace TourismManagementSystem.ViewModel
                     IsDone = false;
                 }
             });
+
+            DeleteTrafficCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                if (selectedItemPT != null)
+                {
+                    MessageBoxResult result = MessageBox.Show("Bạn có chắc muốn xóa phương tiện này", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        // kiểm tra có tham chiếu k
+
+                        if (selectedItemPT.LICHTRINHs.Count > 0)
+                        {
+                            MessageBox.Show("Phương tiện này k thể xóa", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                            return;
+                        }
+
+                        // Xóa
+                        DataProvider.Ins.DB.PHUONGTIENs.Remove(selectedItemPT);
+                        DataProvider.Ins.DB.SaveChanges();
+                        PhuongTien.Remove(selectedItemPT);
+                        SearchResultPT.Remove(selectedItemPT);
+
+                        selectedItemPT = null;
+                        MessageBox.Show("Đã xóa phương tiện thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+                else return;
+
+
+            });
+            DeleteRestaurantCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                if (selectedItemNH != null)
+                {
+                    MessageBoxResult result = MessageBox.Show("Bạn có chắc muốn xóa nhà hàng này", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        // kiểm tra có tham chiếu k
+
+                        if (selectedItemNH.LICHTRINHs.Count > 0)
+                        {
+                            MessageBox.Show("Nhà hàng này k thể xóa", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                            return;
+                        }
+
+                        // Xóa
+                        DataProvider.Ins.DB.NHAHANGs.Remove(selectedItemNH);
+                        DataProvider.Ins.DB.SaveChanges();
+                        NhaHang.Remove(selectedItemNH);
+                        SearchResultNH.Remove(selectedItemNH);
+
+                        selectedItemNH = null;
+                        MessageBox.Show("Đã xóa nhà hàng thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+                else return;
+
+
+            });
+            DeleteHotelCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                if (selectedItemKS != null)
+                {
+                    MessageBoxResult result = MessageBox.Show("Bạn có chắc muốn xóa khách sạn này", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        // kiểm tra có tham chiếu k
+
+                        if (selectedItemKS.LICHTRINHs.Count > 0)
+                        {
+                            MessageBox.Show("Khách sạn này k thể xóa", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                            return;
+                        }
+
+                        // Xóa
+                        DataProvider.Ins.DB.KHACHSANs.Remove(selectedItemKS);
+                        DataProvider.Ins.DB.SaveChanges();
+                        KhachSan.Remove(selectedItemKS);
+                        SearchResultKS.Remove(selectedItemKS);
+
+                        selectedItemNH = null;
+                        MessageBox.Show("Đã xóa khách sạn thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+                else return;
+
+
+            });
+            DeleteOtherServiceCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                if (selectedItemDVK != null)
+                {
+                    MessageBoxResult result = MessageBox.Show("Bạn có chắc muốn xóa dịch vụ này", "Xác nhận", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        // kiểm tra có tham chiếu k
+
+                        if (selectedItemDVK.LICHTRINHs.Count > 0)
+                        {
+                            MessageBox.Show("Dịch vụ này không thể xóa", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                            return;
+                        }
+
+                        // Xóa
+                        DataProvider.Ins.DB.DICHVUKHACs.Remove(selectedItemDVK);
+                        DataProvider.Ins.DB.SaveChanges();
+                        DVKhac.Remove(selectedItemDVK);
+                        SearchResultDVK.Remove(selectedItemDVK);
+
+                        selectedItemDVK = null;
+                        MessageBox.Show("Đã xóa dịch vụ thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+                else return;
+
+
+            });
         }
 
     
@@ -800,6 +917,7 @@ namespace TourismManagementSystem.ViewModel
 
             return newCode;
         }
-       
+      
+
     }
 }

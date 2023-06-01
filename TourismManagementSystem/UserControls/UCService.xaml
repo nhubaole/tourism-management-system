@@ -449,12 +449,12 @@
                                 <DataGridTemplateColumn.CellTemplate >
                                     <DataTemplate >
                                         <Button
-                                    Height="auto"
-                                    Width="auto"
-                                    Background="Transparent"
-                                    BorderBrush="Transparent"
-                                    Command="{Binding DataContext.DeleteHotelCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                    CommandParameter="{Binding}">
+                                            Height="auto"
+                                            Width="auto"
+                                            Background="Transparent"
+                                            BorderBrush="Transparent"
+                                            Command="{Binding DataContext.DeleteHotelCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                            CommandParameter="{Binding}">
                                             <materialDesign:PackIcon Kind="Delete"
                                                              Foreground ="{StaticResource Primary}"/>
                                         </Button>

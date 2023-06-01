@@ -44,7 +44,7 @@ namespace TourismManagementSystem.ViewModel
             SaveLocationCommand = new RelayCommand<object>((p) => {
                if (IsNew)//them mới k nhập tên với địa chỉ thì sai
                 {
-                    if (tenDD == null || dcDD == null)
+                    if (tenDD == null || dcDD == null || IsAllWhitespace(tenDD) || IsAllWhitespace(dcDD))
                     {
                         return false;
                     }
@@ -61,7 +61,7 @@ namespace TourismManagementSystem.ViewModel
                     }
                     else 
                     {
-                        if (tenDD == null || dcDD == null || tenDD == "" || dcDD == "")
+                        if (tenDD == null || dcDD == null || IsAllWhitespace(tenDD) || IsAllWhitespace(dcDD))
                         {
                             return false;
                         }
@@ -152,6 +152,19 @@ namespace TourismManagementSystem.ViewModel
             LocationVM.DcDD = dcDD;
             LocationVM.MtDD = mtDD;
 
+        }
+
+        public static bool IsAllWhitespace(string input)
+        {
+            foreach (char c in input)
+            {
+                if (!char.IsWhiteSpace(c))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
     }
