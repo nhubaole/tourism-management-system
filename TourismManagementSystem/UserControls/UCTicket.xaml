@@ -71,8 +71,7 @@
                     IsReadOnly="False"
                     GridLinesVisibility="None"
                     ItemsSource="{Binding ListVE}"
-                    AutoGenerateColumns="False"
-                    SelectedItem="{Binding SelectedTicket}" >
+                    AutoGenerateColumns="False">
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="HorizontalContentAlignment" Value="Center" />

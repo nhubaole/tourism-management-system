@@ -24,6 +24,8 @@ namespace TourismManagementSystem.ViewModel
             SelectedFilter = FilterCbItems.First();
             ShowTicketDetailCommand = new RelayCommand<object>((p) => true,
             (p) => {
+                VE selectedVe = p as VE;
+                DetailTicketVM.SelectedTicket = selectedVe;
                 DetailTicketWindow detailTicketWindow = new DetailTicketWindow();
                 detailTicketWindow.Show();
             });

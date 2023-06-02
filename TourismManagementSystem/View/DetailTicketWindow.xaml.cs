@@ -23,7 +23,6 @@ namespace TourismManagementSystem.View
         public DetailTicketWindow()
         {
             InitializeComponent();
-            DataContext = new TicketVM();
         }
     }
 }
