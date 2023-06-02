@@ -23,6 +23,7 @@ namespace TourismManagementSystem.View
         public PurchaseWindow()
         {
             InitializeComponent();
+            
             DataContext = new PurchaseVM();
         }
     }

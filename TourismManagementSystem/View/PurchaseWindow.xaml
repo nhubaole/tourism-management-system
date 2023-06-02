@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewmodel="clr-namespace:TourismManagementSystem.ViewModel" 
         d:DataContext="{d:DesignInstance Type=viewmodel:PurchaseVM}"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+
         xmlns:local="clr-namespace:TourismManagementSystem.View"
         mc:Ignorable="d"
         Title="PurchaseWindow" Height="500" Width="800"
@@ -82,13 +84,14 @@
                                             HorizontalAlignment="Left" Grid.ColumnSpan="2"
                                             >
                                     <TextBox
-                                                x:Name="tbMaDD"
+                                                x:Name="tbSOTIEN"
                                                 Width="280"
                                                 Height="30"
                                                 Background="Transparent"
                                                 Margin="0 , 0, 0, 0"
-                                                Text="{Binding SOTIEN}"
+                                                Text="{Binding SOTIEN,UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
                                                 HorizontalAlignment="Center">
+
                                         
                                     </TextBox>
                                          
@@ -123,6 +126,7 @@
                                                x:Name="dpThoigian"
                                                 Width="280"
                                                 Height="30"
+                                                DisplayDateStart="{Binding Mode=OneWay, Source={x:Static sys:DateTime.Today}}" 
                                                 Background="Transparent"
                                                 Margin="0 , 0, 0, 0"
                                                 HorizontalAlignment="Center"
@@ -184,8 +188,7 @@
                                             CornerRadius="10"
                                             Background="{StaticResource Secondary}"
                                             Margin="0 , 0, 60, 0"
-                                            HorizontalAlignment="Right"
-                                            >
+                                            HorizontalAlignment="Right">
                                     <ComboBox
                                                x:Name="cbPthuc"
                                                 Width="280"
@@ -202,12 +205,6 @@
                             </Grid>
                             <Grid Grid.Row="5"
                                           >
-                                <Border 
-                                            Background="{StaticResource Secondary}"
-                                            Height="3"
-                                            Width="500"
-                                            VerticalAlignment="Top"
-                                            Margin="0, 0, 0, 0"/>
                                 <Button
                                             Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                             Height="33"
@@ -215,7 +212,7 @@
                                             Background="{StaticResource Primary}"
                                             materialDesign:ButtonAssist.CornerRadius="25"
                                             ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
-                                            Command="{Binding AddDataCommand}"
+                                            Command="{Binding AddDataCommand, ValidatesOnDataErrors=True}"
                                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
                                     <TextBlock
                                                 Text="Xác nhận thanh toán"

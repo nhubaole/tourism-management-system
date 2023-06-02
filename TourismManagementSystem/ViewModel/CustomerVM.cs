@@ -11,18 +11,86 @@ using TourismManagementSystem.Model;
 using TourismManagementSystem.View;
 using TourismManagementSystem.UserControls;
 using System.Windows.Controls;
+using System.ComponentModel.DataAnnotations;
+using System.Collections;
+using System.Windows.Data;
 
 namespace TourismManagementSystem.ViewModel
 {
     
-    internal class CustomerVM : BaseViewModel
+    internal class CustomerVM : BaseViewModel,INotifyDataErrorInfo
     {
+        private Dictionary<string, List<string>> _errors = new Dictionary<string, List<string>>();
+        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+
+        public bool HasErrors
+        {
+            get { return _errors.Values.Any(list => list != null && list.Count > 0); }
+        }
+
+        public IEnumerable GetErrors(string propertyName)
+        {
+            if (string.IsNullOrEmpty(propertyName) || !_errors.ContainsKey(propertyName))
+                return null;
+
+            return _errors[propertyName];
+        }
+
+        private void OnErrorsChanged(string propertyName)
+        {
+            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+        }
+
+
+        private void ValidateProperty(string propertyName)
+        {
+            List<string> errors = new List<string>();
+
+            if (propertyName == nameof(SDT))
+            {
+                if (!string.IsNullOrEmpty(SDT) && !IsNumber(SDT))
+                {
+                    errors.Add("Please enter a valid number.");
+                }
+            }
+            if (propertyName == nameof(CCCD))
+            {
+                if (!string.IsNullOrEmpty(CCCD) && !IsNumber(CCCD))
+                {
+                    errors.Add("Please enter a valid number.");
+                }
+            }
+
+            if (propertyName == nameof(HOTEN))
+            {
+                if (!string.IsNullOrEmpty(HOTEN) && IsNumber(HOTEN))
+                {
+                    errors.Add("Please enter a valid name.");
+                }
+            }
+            
+
+            if (errors.Count > 0)
+            {
+                _errors[propertyName] = errors;
+            }
+            else
+            {
+                _errors.Remove(propertyName);
+            }
+
+            OnErrorsChanged(propertyName);
+        }
+
+        private bool IsNumber(string value)
+        {
+            return double.TryParse(value, out _);
+        }
+
+
         private ObservableCollection<string> _filter = new ObservableCollection<string>() { "Mã khách hàng", "Tên khách hàng" };
         public ObservableCollection<KHACHHANG> KhachHangs { get; set; }
         public ICommand SwitchWindowCommand { get; set; }
-
-        public ICommand OnlyNumericCommand { get; private set; }
-
         public ICommand AddDataCommand { get; set; }
         public ICommand DeleteDataCommand { get; set; }
         public ICommand UpdateDataCommand { get; set; }
@@ -55,6 +123,7 @@ namespace TourismManagementSystem.ViewModel
             {
                 hoTen = value;
                 OnPropertyChanged(nameof(HOTEN));
+                ValidateProperty(nameof(HOTEN));
             }
         }
 
@@ -66,6 +135,7 @@ namespace TourismManagementSystem.ViewModel
             {
                 cccd = value;
                 OnPropertyChanged(nameof(CCCD));
+                ValidateProperty(nameof(CCCD));
             }
         }
 
@@ -77,6 +147,7 @@ namespace TourismManagementSystem.ViewModel
             {
                 sdt = value;
                 OnPropertyChanged(nameof(SDT));
+                ValidateProperty(nameof(SDT));
             }
         }
 
@@ -118,7 +189,7 @@ namespace TourismManagementSystem.ViewModel
 
 
         private ObservableCollection<KHACHHANG> _ListKhachhang = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs);
-        public ObservableCollection<KHACHHANG> ListKhachhang { get => _ListKhachhang; set { _ListKhachhang= value; OnPropertyChanged(nameof(DataProvider.Ins.DB.KHACHHANGs)); } }
+        public ObservableCollection<KHACHHANG> ListKhachhang { get => _ListKhachhang; set { _ListKhachhang= value; OnPropertyChanged(nameof(ListKhachhang)); } }
 
         public CustomerVM()
         {
@@ -130,8 +201,8 @@ namespace TourismManagementSystem.ViewModel
             {SwitchWindow(p);});
 
             KhachHangs = new ObservableCollection<KHACHHANG>();
-            AddDataCommand = new RelayCommand<object>((p) => {
-                if (maKH == null || hoTen == null||cccd==null||sdt==null||diaChi==null)
+            AddDataCommand = new RelayCommand<object>((p) => { 
+                if (!CanAddData())
                 {
                     return false;
                 }
@@ -167,7 +238,9 @@ namespace TourismManagementSystem.ViewModel
                     SDT = null;
                     EMAIL = null;
                     DIACHI = null;
-                    LoadDataGrid();
+
+                    CollectionViewSource.GetDefaultView(ListKhachhang).Refresh();
+                    //LoadDataGrid();
 
 
 
@@ -192,22 +265,23 @@ namespace TourismManagementSystem.ViewModel
             },
             (p) => { DeleteCustomer(); });
 
-            OnlyNumericCommand = new RelayCommand<object>((p) =>
-            {
-                return true;
-            },
-           (p) => { OnlyNumericExecute(); });
+          
 
         }
         private void LoadDataGrid()
         {
-          ListKhachhang = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs);
+            ListKhachhang = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs);
+
         }
         private void SwitchWindow(object parameter)
         {
             AddCustomerWindow addCustomerWindow = new AddCustomerWindow();
             addCustomerWindow.Show();
            
+        }
+        private bool CanAddData()
+        {
+            return !string.IsNullOrEmpty(MAKH)&& !string.IsNullOrEmpty(DIACHI)&& !string.IsNullOrEmpty(EMAIL) && !HasErrors;
         }
         private void UpdateCustomer()
         {
@@ -223,7 +297,7 @@ namespace TourismManagementSystem.ViewModel
             MessageBox.Show("Bạn muốn cập nhật thông tin cho khách hàng" + SelectedCustomer.MAKH);
 
             DataProvider.Ins.DB.SaveChanges();
-            LoadDataGrid();
+            //LoadDataGrid();
         }
         private void DeleteCustomer()
         {
@@ -231,12 +305,7 @@ namespace TourismManagementSystem.ViewModel
             DataProvider.Ins.DB.KHACHHANGs.Remove(SelectedCustomer);
             DataProvider.Ins.DB.SaveChanges();
             ListKhachhang.Remove(SelectedCustomer);
-            LoadDataGrid();
-        }
-        private void OnlyNumericExecute()
-        {
-            
-            
+            //LoadDataGrid();
         }
     }
 }

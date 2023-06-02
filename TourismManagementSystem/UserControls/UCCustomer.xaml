@@ -99,11 +99,11 @@
                 <Border BorderBrush="Black" BorderThickness="0"  Background="{StaticResource White}" CornerRadius="20" Margin="30,10,20,10" Padding="0,10,0,20">
 
 
-                    <DataGrid ItemsSource="{Binding ListKhachhang}" SelectedItem="{Binding SelectedCustomer}" AutoGenerateColumns="False" Background="White">
+                    <DataGrid ItemsSource="{Binding ListKhachhang, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedCustomer}" AutoGenerateColumns="False" Background="White">
                         <DataGrid.Columns >
-                            <DataGridTextColumn Header="Mã khách hàng"  Binding="{Binding MAKH}" Width ="*" IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Tên khách" Binding="{Binding HOTEN}" Width ="*"/>
-                            <DataGridTextColumn Header="Số điện thoại" Binding="{Binding SDT}" Width ="*"/>
+                            <DataGridTextColumn Header="Mã khách hàng"  Binding="{Binding MAKH, UpdateSourceTrigger=PropertyChanged}" Width ="*" IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Tên khách" Binding="{Binding HOTEN, UpdateSourceTrigger=PropertyChanged}" Width ="*"/>
+                            <DataGridTextColumn Header="Số điện thoại" Binding="{Binding SDT, UpdateSourceTrigger=PropertyChanged}" Width ="*"/>
                         </DataGrid.Columns>
 
                         <DataGrid.ColumnHeaderStyle>
@@ -326,7 +326,7 @@
                                                 Background="{StaticResource Primary}"
                                                 materialDesign:ButtonAssist.CornerRadius="15"
                                                 ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
-                                                Command="{Binding UpdateDataCommand}" CommandParameter="{Binding SelectedCustomer}"
+                                                Command="{Binding UpdateDataCommand, UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding SelectedCustomer}"
                                                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
                                         <TextBlock
                                                 Text="Cập nhật"
@@ -343,7 +343,7 @@
                                                 BorderBrush="Black"
                                                 BorderThickness="0.5"
                                                 ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
-                                                Command="{Binding DeleteDataCommand}" CommandParameter="{Binding SelectedCustomer}"
+                                                Command="{Binding DeleteDataCommand, UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding SelectedCustomer}"
                                                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
                                         <TextBlock
                                                 Text="Xóa"
