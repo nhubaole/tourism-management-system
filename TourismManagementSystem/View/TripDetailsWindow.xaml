@@ -113,7 +113,7 @@
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
             Margin="30, 0, 30, 10"
-            ItemsSource="{Binding ListHDV, UpdateSourceTrigger=PropertyChanged}"
+            ItemsSource="{Binding CHUYEN.HUONGDANVIENs, UpdateSourceTrigger=PropertyChanged}"
             AutoGenerateColumns="False"
             BorderBrush="#e8a66d"
             BorderThickness="1.5" 
@@ -280,7 +280,7 @@
                         <Grid Grid.Row="10">
                             <TextBlock VerticalAlignment="Top"
                                    HorizontalAlignment="Left"
-                                   Text="Danh sách khách hàng:"
+                                   Text="Danh sách hành khách:"
                                    FontSize="20"
                                    FontWeight="Medium" Grid.ColumnSpan="2"/>
                         </Grid>
@@ -347,7 +347,7 @@
                                     </Style>
                                 </DataGrid.Resources>
                                 <DataGrid.Columns >
-                                    <DataGridTextColumn Header="Mã khách hàng" Binding="{Binding MAKH}" Width="*"  IsReadOnly="True" CanUserSort="False">
+                                    <DataGridTextColumn Header="Mã hành khách" Binding="{Binding MAHK}" Width="*"  IsReadOnly="True" CanUserSort="False">
 
                                     </DataGridTextColumn>
                                     <DataGridTextColumn Header="Họ tên" Binding="{Binding HOTEN}"  Width="*" IsReadOnly="True" CanUserSort="False">

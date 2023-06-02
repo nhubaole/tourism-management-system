@@ -12,10 +12,8 @@ namespace TourismManagementSystem.ViewModel
 {
     internal class TripDetailVM : BaseViewModel
     {
-        public ObservableCollection<LOAICHUYEN> ListLoaiChuyen { get; set; }
 
-        public ObservableCollection<KHACHHANG> ListKhach { get; set; }
-        public ObservableCollection<HUONGDANVIEN> ListHDV { get; set; }
+        public ObservableCollection<HANHKHACH> ListKhach { get; set; }
 
         private static CHUYEN _selectedChuyen;
         public static CHUYEN SelectedChuyen { get => _selectedChuyen; set 
@@ -28,9 +26,7 @@ namespace TourismManagementSystem.ViewModel
         public TripDetailVM()
         {
             CHUYEN = SelectedChuyen;
-            ListLoaiChuyen = new ObservableCollection<LOAICHUYEN>(DataProvider.Ins.DB.LOAICHUYENs);
-            ListKhach = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs.Where(k => k.PHIEUDATCHOes.Any(p => p.CHUYEN.MACHUYEN.Equals(SelectedChuyen.MACHUYEN))));
-            ListHDV = new ObservableCollection<HUONGDANVIEN>(DataProvider.Ins.DB.HUONGDANVIENs.Where(h => h.CHUYENs.Any(c=>c.MACHUYEN.Equals(SelectedChuyen.MACHUYEN))));
+            ListKhach = new ObservableCollection<HANHKHACH>(DataProvider.Ins.DB.HANHKHACHes.Where(k => k.PHIEUDATCHO.MACHUYEN.Equals(SelectedChuyen.MACHUYEN)));
         }
     }
 }

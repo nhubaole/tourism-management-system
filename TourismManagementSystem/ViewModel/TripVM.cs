@@ -65,29 +65,9 @@ namespace TourismManagementSystem.ViewModel
             {
                 _selectedChuyen = value;
                 OnPropertyChanged();
-                if (SelectedChuyen != null)
-                {
-                    MaChuyen = SelectedChuyen.MACHUYEN;
-                    MaTuyen = SelectedChuyen.MATUYEN;
-                    Tgbd = SelectedChuyen.TGBATDAU;
-                    LOAICHUYEN = SelectedChuyen.LOAICHUYEN;
-                }
             }
         }
 
-        private string _MaChuyen;
-        public string MaChuyen { get => _MaChuyen; set { _MaChuyen = value; OnPropertyChanged(); } }
-
-        private string _MaTuyen;
-        public string MaTuyen { get => _MaTuyen; set { _MaTuyen = value; OnPropertyChanged(); } }
-
-
-        private DateTime? _Tgbd;
-        public DateTime? Tgbd { get => _Tgbd; set { _Tgbd = value; OnPropertyChanged(); } }
-
-
-        private LOAICHUYEN _LOAICHUYEN;
-        public LOAICHUYEN LOAICHUYEN { get => _LOAICHUYEN; set { _LOAICHUYEN = value; OnPropertyChanged(); } }
 
         public TripVM()
         {
