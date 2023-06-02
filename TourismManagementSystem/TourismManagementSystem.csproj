@@ -211,11 +211,17 @@
     <Compile Include="UserControls\UCRevenueStatistics.xaml.cs">
       <DependentUpon>UCRevenueStatistics.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UCSalesStatistics.xaml.cs">
+      <DependentUpon>UCSalesStatistics.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UCService.xaml.cs">
       <DependentUpon>UCService.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCTicket.xaml.cs">
       <DependentUpon>UCTicket.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCTripsStatistics.xaml.cs">
+      <DependentUpon>UCTripsStatistics.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\BoolToVisibilityConverter.cs" />
     <Compile Include="Utils\MultiCommandParameterConverter.cs" />
@@ -239,12 +245,14 @@
     <Compile Include="ViewModel\PurchaseVM.cs" />
     <Compile Include="ViewModel\RequireLoginVM.cs" />
     <Compile Include="ViewModel\RevenueStatisticVM.cs" />
+    <Compile Include="ViewModel\SalesStatisticsVM.cs" />
     <Compile Include="ViewModel\ScheduleDetailsVM.cs" />
     <Compile Include="ViewModel\ScheduleVM.cs" />
     <Compile Include="ViewModel\ServiceVM.cs" />
     <Compile Include="ViewModel\TicketVM.cs" />
     <Compile Include="ViewModel\TourDetailsVM.cs" />
     <Compile Include="ViewModel\TourVM.cs" />
+    <Compile Include="ViewModel\TripsStatisticsVM.cs" />
     <Compile Include="ViewModel\TripVM.cs" />
     <Compile Include="ViewModel\ViewScheduleVM.cs" />
     <Compile Include="View\AddBookingWindow.xaml.cs">
@@ -383,6 +391,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\UCSalesStatistics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\UCService.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -408,6 +420,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\UCScheduleItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCTripsStatistics.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
