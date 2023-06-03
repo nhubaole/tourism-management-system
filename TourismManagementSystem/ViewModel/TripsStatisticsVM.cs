@@ -15,7 +15,6 @@ namespace TourismManagementSystem.ViewModel
     internal class TripsStatisticsVM: BaseViewModel
     {
 
-        private string connectionString; // Chuỗi kết nối đến cơ sở dữ liệu
 
         private ObservableCollection<string> _FilterItems1;
         public ObservableCollection<string> FilterItems1
@@ -365,7 +364,6 @@ namespace TourismManagementSystem.ViewModel
                .Where(t => t.TGBATDAU.HasValue && t.TGBATDAU.Value.Year == year )
                .Select(t => t.TGBATDAU.Value.Month)
                .Distinct().ToList();
-
             return months;
         }
     }

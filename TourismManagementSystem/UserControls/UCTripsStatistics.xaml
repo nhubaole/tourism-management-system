@@ -84,9 +84,6 @@
                         </ComboBox>
                     </Grid>
                     <Grid>
-
-
-
                         <Border 
                         Background="{StaticResource Secondary}"
                         Height="3"
