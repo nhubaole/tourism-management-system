@@ -140,7 +140,7 @@ namespace TourismManagementSystem.ViewModel
         {
             foreach (char c in name)
             {
-                if (!char.IsLetter(c))
+                if (!char.IsLetter(c)&&c!=' ')
                 {
                     return false;
                 }
