@@ -73,11 +73,11 @@
                             Margin="0, 0, 0, 0"
                             HorizontalAlignment="Left"/>
                         <ComboBox
-                            Width="50"
-                            materialDesign:HintAssist.Hint="1"
+                            Width="60"
+                            materialDesign:HintAssist.Hint="20xx"
                             FontSize="18"
                             HorizontalAlignment="Left"
-                            Margin="110, 0, 0, 0"
+                            Margin="100, 0, 0, 0"
                             ItemsSource="{Binding FilterYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                             SelectedItem="{Binding Year, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
@@ -145,7 +145,7 @@
                     <TextBlock Text="{Binding TimeOfChart}"
                                        FontSize="18"
                                        VerticalAlignment="Center"
-                                       Margin="420, 0, 0, 0"
+                                       Margin="430, 0, 0, 0"
                                        HorizontalAlignment="Left"/>
                 </Grid>
 

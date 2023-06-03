@@ -47,6 +47,13 @@ namespace TourismManagementSystem.ViewModel
             set
             {
                 _Filter1 = value;
+                seriesCollection1.Clear();
+                TimeOfChart = null;
+                Year = 0; Month = 0;
+                OnPropertyChanged(nameof(seriesCollection1));
+                OnPropertyChanged(nameof(TimeOfChart));
+                OnPropertyChanged(nameof(Year));
+                OnPropertyChanged(nameof(Month));
                 OnPropertyChanged();
                 UpdateFilterYear();
             }
@@ -84,9 +91,10 @@ namespace TourismManagementSystem.ViewModel
                 _Month = value;
                 if (_Month != 0)
                 {
-                    TimeOfChart = "tháng" + _Month.ToString() + "năm" + Year.ToString();
+                    TimeOfChart = "tháng " + _Month.ToString() + " năm " + Year.ToString();
                 }    
                 OnPropertyChanged();
+                DrawChart1();
 
             }
         }
@@ -103,11 +111,14 @@ namespace TourismManagementSystem.ViewModel
                     if (Filter1 == "Tháng")
                     {
                         CanChoseMonth = true;
-                        FilterMonth = GetMonthsForYear(Year);
+                        FilterMonth = new ObservableCollection<int>(GetMonthsForYear(Year));
+                        OnPropertyChanged(nameof(FilterMonth));
+                        ;
                     }
                     else
                     {
-                        TimeOfChart = "năm" + Year.ToString();
+                        TimeOfChart = " năm " + Year.ToString();
+                        DrawChart1();
                     }   
                 }
                 OnPropertyChanged();
@@ -175,12 +186,8 @@ namespace TourismManagementSystem.ViewModel
             FilterItems1 = new ObservableCollection<String>(new List<string> { "Tháng", "Năm" });
             seriesCollection1= new SeriesCollection();
             seriesCollection2 = new SeriesCollection();
+
             Filter1 = "Năm";
-
-
-
-
-            //DrawChart();
         }
         private void UpdateFilterYear()
         {
@@ -195,27 +202,25 @@ namespace TourismManagementSystem.ViewModel
                 
                 CanChoseYear = true;
                 CanChoseMonth = false;
-                // Load danh sách các năm
 
             }
             else
             {
-                // Nếu Filter1 không phải "Tháng" hoặc "Năm", không cần cập nhật danh sách FilterItems2
                 CanChoseYear = false;
                 CanChoseMonth = false;
             }
         }
-        private void DrawChart()
+        private void DrawChart1()
         {
             // Kiểm tra điều kiện để vẽ biểu đồ
             if (Filter1 == "Năm" && Year != 0)
             {
                 // Lấy số lượng chuyến thành công và chuyến bị hủy trong năm được chọn
                 int successCount = DataProvider.Ins.DB.CHUYENs
-                    .Count(t => t.TGBATDAU.HasValue && t.TGBATDAU.Value.Year == Year && t.THANHCONG == 1);
+                    .Count(t => t.TGBATDAU.HasValue && t.TGBATDAU.Value.Year == Year && t.THANHCONG == true);
 
                 int cancelledCount = DataProvider.Ins.DB.CHUYENs
-                    .Count(t => t.TGBATDAU.HasValue && t.TGBATDAU.Value.Year == Year && t.THANHCONG == 0);
+                    .Count(t => t.TGBATDAU.HasValue && t.TGBATDAU.Value.Year == Year && t.THANHCONG == false);
 
                 PieSeries successSeries = new PieSeries
                 {
@@ -243,10 +248,10 @@ namespace TourismManagementSystem.ViewModel
             {
                 // Lấy số lượng chuyến thành công và chuyến bị hủy trong tháng và năm được chọn
                 int successCount = DataProvider.Ins.DB.CHUYENs
-                    .Count(t => t.TGBATDAU.HasValue && t.TGBATDAU.Value.Year == Year && t.TGBATDAU.Value.Month == Month && t.THANHCONG == "Thành công");
+                    .Count(t => t.TGBATDAU.HasValue && t.TGBATDAU.Value.Year == Year && t.TGBATDAU.Value.Month == Month && t.THANHCONG == true);
 
                 int cancelledCount = DataProvider.Ins.DB.CHUYENs
-                    .Count(t => t.TGBATDAU.HasValue && t.TGBATDAU.Value.Year == Year && t.TGBATDAU.Value.Month == Month && t.THANHCONG == "Hủy");
+                    .Count(t => t.TGBATDAU.HasValue && t.TGBATDAU.Value.Year == Year && t.TGBATDAU.Value.Month == Month && t.THANHCONG == false);
 
                 // Tạo chuỗi dữ liệu cho phần trăm chuyến đi thành công
                 PieSeries successSeries = new PieSeries
@@ -274,6 +279,73 @@ namespace TourismManagementSystem.ViewModel
                 seriesCollection1.Add(cancelledSeries);
             }
         }
+        private void DrawChart2()
+        {
+            // Kiểm tra điều kiện để vẽ biểu đồ
+            if (Filter1 == "Năm" && Year != 0)
+            {
+                // Lấy số lượng chuyến thành công và chuyến bị hủy trong năm được chọn
+                int domesticCount = DataProvider.Ins.DB.CHUYENs
+                    .Count(t => t.TGBATDAU.HasValue && t.TGBATDAU.Value.Year == Year && t.TGBATDAU.Value.Month == Month && t.LOAICHUYEN.MALOAI == "DOMESTIC");
+
+                int internationalCount = DataProvider.Ins.DB.CHUYENs
+                    .Count(t => t.TGBATDAU.HasValue && t.TGBATDAU.Value.Year == Year && t.TGBATDAU.Value.Month == Month && t.LOAICHUYEN.MALOAI == "INTERNATIONAL");
+
+                PieSeries domesticSeries = new PieSeries
+                {
+                    Title = "Trong nước",
+                    Values = new ChartValues<double> { domesticCount },
+                    DataLabels = true,
+                    LabelPoint = chartPoint => chartPoint.Y.ToString()
+                };
+                PieSeries internationalSeries = new PieSeries
+                {
+                    Title = "Nước ngoài",
+                    Values = new ChartValues<double> { internationalCount },
+                    DataLabels = true,
+                    LabelPoint = chartPoint => chartPoint.Y.ToString()
+                };
+
+                // Xóa dữ liệu cũ trong biểu đồ
+                seriesCollection1.Clear();
+
+                // Thêm chuỗi dữ liệu vào SeriesCollection
+                seriesCollection1.Add(domesticSeries);
+                seriesCollection1.Add(internationalSeries);
+            }
+            else if (Filter1 == "Tháng" && Year != 0 && Month != 0)
+            {
+                // Lấy số lượng chuyến thành công và chuyến bị hủy trong tháng và năm được chọn
+                int domesticCount = DataProvider.Ins.DB.CHUYENs
+                     .Count(t => t.TGBATDAU.HasValue && t.TGBATDAU.Value.Year == Year && t.TGBATDAU.Value.Month == Month && t.LOAICHUYEN.MALOAI == "DOMESTIC");
+
+                int internationalCount = DataProvider.Ins.DB.CHUYENs
+                    .Count(t => t.TGBATDAU.HasValue && t.TGBATDAU.Value.Year == Year && t.TGBATDAU.Value.Month == Month && t.LOAICHUYEN.MALOAI == "INTERNATIONAL");
+
+                PieSeries domesticSeries = new PieSeries
+                {
+                    Title = "Trong nước",
+                    Values = new ChartValues<double> { domesticCount },
+                    DataLabels = true,
+                    LabelPoint = chartPoint => chartPoint.Y.ToString()
+                };
+                PieSeries internationalSeries = new PieSeries
+                {
+                    Title = "Nước ngoài",
+                    Values = new ChartValues<double> { internationalCount },
+                    DataLabels = true,
+                    LabelPoint = chartPoint => chartPoint.Y.ToString()
+                };
+
+
+                // Xóa dữ liệu cũ trong biểu đồ
+                seriesCollection1.Clear();
+
+                // Thêm chuỗi dữ liệu vào SeriesCollection
+                seriesCollection1.Add(domesticSeries);
+                seriesCollection1.Add(internationalSeries);
+            }
+        }
         public List<int> GetYears()
         {
             List<int> years = new List<int>();
@@ -281,32 +353,18 @@ namespace TourismManagementSystem.ViewModel
                .Where(t => t.TGBATDAU.HasValue)
                .Select(t => t.TGBATDAU.Value.Year)
                .Distinct().ToList();
-
-
             return years;
         }
 
-        public ObservableCollection<int> GetMonthsForYear(int year)
+        public List<int> GetMonthsForYear(int year)
         {
-            ObservableCollection<int> months = new ObservableCollection<int>();
+            List<int> months = new List<int>();
 
             // Lấy tháng hiện tại
-            int currentYear = DateTime.Now.Year;
-            int currentMonth = DateTime.Now.Month;
-
-            if (year == currentYear)
-            {
-                // Nếu là năm hiện tại, chỉ lấy đến tháng hiện tại
-                for (int month = 1; month <= currentMonth; month++)
-                {
-                    months.Add(month);
-                }
-            }
-            else
-            {
-                // Nếu không phải là năm hiện tại, lấy tất cả 12 tháng
-                months = new ObservableCollection<int>(Enumerable.Range(1, 12));
-            }
+            months = DataProvider.Ins.DB.CHUYENs
+               .Where(t => t.TGBATDAU.HasValue && t.TGBATDAU.Value.Year == year )
+               .Select(t => t.TGBATDAU.Value.Month)
+               .Distinct().ToList();
 
             return months;
         }
