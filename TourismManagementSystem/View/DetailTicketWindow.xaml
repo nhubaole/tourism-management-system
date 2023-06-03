@@ -23,8 +23,7 @@
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
-
+        <Grid Grid.Row="0" Name="ticket">
             <Border BorderBrush="Black" 
                     BorderThickness="0.5"  
                     Background="{StaticResource White}" 
@@ -62,7 +61,7 @@
                             <TextBlock FontSize="10"
                                        HorizontalAlignment="Right">
                                 <Run FontWeight="Medium">Email: </Run>
-                                <Run>adventour@gmail.com</Run>
+                                <Run>bookings.adventour@gmail.com</Run>
                             </TextBlock>
                             <TextBlock FontSize="10"
                                        HorizontalAlignment="Right">
@@ -107,7 +106,7 @@
                             <Border BorderBrush="Black" BorderThickness="0.5">
                                 <DataGrid  Background="White" 
                                            AutoGenerateColumns="False"
-                                           GridLinesVisibility="All"
+                                           GridLinesVisibility="None"
                                            ItemsSource="{Binding Ticket}"
                                            HorizontalScrollBarVisibility="Hidden"
                                            VerticalScrollBarVisibility="Hidden"
@@ -142,7 +141,7 @@
                                                             <Border BorderThickness="0,0,0.5,0.5"  
                                                                     BorderBrush="Black"
                                                                     Height="25"
-                                                                    Margin="0,0,-2,0">
+                                                                    Margin="0,0,-1,0">
                                                                 <ContentPresenter HorizontalAlignment="Left"
                                                                                   VerticalAlignment="Center"
                                                                                   Margin="10,0,0,0"/>
@@ -185,13 +184,13 @@
                                             FontWeight="Medium"/>
                             </Border>
                         </Grid>
-                        
+
 
                         <Grid Grid.Row="1" Margin="10,0,10,0">
                             <Border BorderBrush="Black" BorderThickness="0.5">
                                 <DataGrid  Background="White" 
                                            AutoGenerateColumns="False"
-                                           GridLinesVisibility="All"
+                                           GridLinesVisibility="None"
                                            ItemsSource="{Binding Passenger}"
                                            HorizontalScrollBarVisibility="Hidden"
                                            VerticalScrollBarVisibility="Hidden"
@@ -226,7 +225,7 @@
                                                             <Border BorderThickness="0,0,0.5,0.5"  
                                                                     BorderBrush="Black"
                                                                     Height="25"
-                                                                    Margin="0,0,-2,0">
+                                                                    Margin="0,0,-1,0">
                                                                 <ContentPresenter HorizontalAlignment="Left"
                                                                                   VerticalAlignment="Center"
                                                                                   Margin="10,0,0,0"/>
@@ -252,7 +251,7 @@
                         </Grid>
 
                     </Grid>
-                   
+
                     <Grid Grid.Row="4" Margin="0,0,0,15">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="0.75*"/>
@@ -276,7 +275,7 @@
                             <Border BorderBrush="Black" BorderThickness="0.5">
                                 <DataGrid  Background="White" 
                                            AutoGenerateColumns="False"
-                                           GridLinesVisibility="All"
+                                           GridLinesVisibility="None"
                                            ItemsSource="{Binding Trip}"
                                            HorizontalScrollBarVisibility="Hidden"
                                            VerticalScrollBarVisibility="Hidden"
@@ -311,7 +310,7 @@
                                                             <Border BorderThickness="0,0,0.5,0.5" 
                                                                     BorderBrush="Black"
                                                                     Height="25"
-                                                                    Margin="0,0,-2,0">
+                                                                    Margin="0,0,-1,0">
                                                                 <ContentPresenter HorizontalAlignment="Left"
                                                                                   VerticalAlignment="Center"
                                                                                   Margin="10,0,0,0"/>
@@ -404,14 +403,15 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Command="{Binding AddScheduleCommand}"
-                    Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+            <Button Style="{StaticResource MaterialDesignFlatDarkBgButton}"
                     BorderThickness="0"
                     Foreground="White"
                     Background="{StaticResource Primary}"
                     Width="200"
                     Height="40"
-                    materialDesign:ButtonAssist.CornerRadius="20">
+                    materialDesign:ButtonAssist.CornerRadius="20"
+                    Command="{Binding PrintTicketCommand}"
+                    CommandParameter="{Binding ElementName=ticket}">
                 <StackPanel Orientation="Horizontal">
                     <materialDesign:PackIcon Kind="Printer" Width="25" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,20,0"/>
                     <TextBlock Text="In vé"
@@ -419,7 +419,8 @@
                 </StackPanel>
             </Button>
             <Button Grid.Column="1"
-                    Command="{Binding AddScheduleCommand}"
+                    Command="{Binding SendTicket}"
+                    CommandParameter="{Binding ElementName=ticket}"
                     Style="{StaticResource MaterialDesignFlatDarkBgButton}"
                     BorderThickness="0"
                     Foreground="White"
