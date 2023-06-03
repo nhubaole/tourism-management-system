@@ -47,9 +47,11 @@ namespace TourismManagementSystem.ViewModel
             {
                 _Filter1 = value;
                 seriesCollection1.Clear();
+                seriesCollection2.Clear();
                 TimeOfChart = null;
                 Year = 0; Month = 0;
                 OnPropertyChanged(nameof(seriesCollection1));
+                OnPropertyChanged(nameof(seriesCollection2));
                 OnPropertyChanged(nameof(TimeOfChart));
                 OnPropertyChanged(nameof(Year));
                 OnPropertyChanged(nameof(Month));
@@ -94,6 +96,7 @@ namespace TourismManagementSystem.ViewModel
                 }    
                 OnPropertyChanged();
                 DrawChart1();
+                DrawChart2();
 
             }
         }
@@ -118,6 +121,7 @@ namespace TourismManagementSystem.ViewModel
                     {
                         TimeOfChart = " năm " + Year.ToString();
                         DrawChart1();
+                        DrawChart2();
                     }   
                 }
                 OnPropertyChanged();
@@ -135,29 +139,6 @@ namespace TourismManagementSystem.ViewModel
                 OnPropertyChanged();
             }
         }
-
-        private ChartValues<double> _success;
-        public ChartValues<double> success
-        {
-            get { return _success; }
-            set
-            {
-                _success = value;
-                OnPropertyChanged();
-            }
-        }
-
-        private ChartValues<double> _cancelled;
-        public ChartValues<double> cancelled
-        {
-            get { return _cancelled; }
-            set
-            {
-                _cancelled = value;
-                OnPropertyChanged();
-            }
-        }
-
 
         private SeriesCollection _seriesCollection1;
         public SeriesCollection seriesCollection1
@@ -284,11 +265,17 @@ namespace TourismManagementSystem.ViewModel
             if (Filter1 == "Năm" && Year != 0)
             {
                 // Lấy số lượng chuyến thành công và chuyến bị hủy trong năm được chọn
-                int domesticCount = DataProvider.Ins.DB.CHUYENs
-                    .Count(t => t.TGBATDAU.HasValue && t.TGBATDAU.Value.Year == Year && t.TGBATDAU.Value.Month == Month && t.LOAICHUYEN.MALOAI == "DOMESTIC");
+                int domesticCount = (from chuyen in DataProvider.Ins.DB.CHUYENs
+                                     join tuyen in DataProvider.Ins.DB.TUYENs on chuyen.MATUYEN equals tuyen.MATUYEN
+                                     join loaiTuyen in DataProvider.Ins.DB.LOAITUYENs on tuyen.MALOAI equals loaiTuyen.MALOAI
+                                     where loaiTuyen.TENLOAI == "Nước ngoài"
+                                     select chuyen).Count();
 
-                int internationalCount = DataProvider.Ins.DB.CHUYENs
-                    .Count(t => t.TGBATDAU.HasValue && t.TGBATDAU.Value.Year == Year && t.TGBATDAU.Value.Month == Month && t.LOAICHUYEN.MALOAI == "INTERNATIONAL");
+                int internationalCount = (from chuyen in DataProvider.Ins.DB.CHUYENs
+                                          join tuyen in DataProvider.Ins.DB.TUYENs on chuyen.MATUYEN equals tuyen.MATUYEN
+                                          join loaiTuyen in DataProvider.Ins.DB.LOAITUYENs on tuyen.MALOAI equals loaiTuyen.MALOAI
+                                          where loaiTuyen.TENLOAI == "Trong nước"
+                                          select chuyen).Count();
 
                 PieSeries domesticSeries = new PieSeries
                 {

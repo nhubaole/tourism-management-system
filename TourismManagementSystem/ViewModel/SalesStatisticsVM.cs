@@ -3,6 +3,7 @@ using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -36,7 +37,7 @@ namespace TourismManagementSystem.ViewModel
             get { return _FilterYear; }
             set { _FilterYear = value; }
         }
-
+        //chọn tháng hay năm
         private string _Filter1;
         public string Filter1
         {
@@ -86,9 +87,12 @@ namespace TourismManagementSystem.ViewModel
             set
             {
                 _Month = value;
+                dayCollection =  GetDaysInMonth(Year, Month);
+                OnPropertyChanged(nameof(dayCollection));
+
                 if (_Month != 0)
                 {
-                    TimeOfChart = "tháng " + _Month.ToString() + " năm " + Year.ToString();
+                    TimeOfChart = " tháng " + _Month.ToString() + " năm " + Year.ToString();
                 }
                 OnPropertyChanged();
                 DrawChart();
@@ -134,9 +138,7 @@ namespace TourismManagementSystem.ViewModel
             }
         }
 
-        
-
-
+       
         private SeriesCollection _seriesCollection;
         public SeriesCollection seriesCollection
         {
@@ -148,11 +150,22 @@ namespace TourismManagementSystem.ViewModel
             }
         }
 
-        
+        private List<int> _dayCollection;
+        public List<int> dayCollection
+        {
+            get { return _dayCollection; }
+            set
+            {
+                _dayCollection = value;
+                OnPropertyChanged("ThangCollection");
+            }
+        }
+
         public SalesStatisticsVM()
         {
             FilterItems1 = new ObservableCollection<String>(new List<string> { "Tháng", "Năm" });
             seriesCollection = new SeriesCollection();
+            dayCollection = new List<int>();
 
             Filter1 = "Năm";
         }
@@ -198,75 +211,103 @@ namespace TourismManagementSystem.ViewModel
                .Distinct().ToList();
             return months;
         }
+        public static List<int> GetDaysInMonth(int year, int month)
+        {
+            List<int> daysInMonth = new List<int>();
+            if (year != 0 && month != 0)
+            {
+                
+
+                // Xác định ngày đầu tiên của tháng
+                DateTime firstDayOfMonth = new DateTime(year, month, 1);
+
+                // Xác định số ngày trong tháng
+                int numberOfDaysInMonth = DateTime.DaysInMonth(year, month);
+
+                // Thêm các ngày vào danh sách
+                for (int day = 1; day <= numberOfDaysInMonth; day++)
+                {
+                    daysInMonth.Add(day);
+                }
+
+                
+            }
+            return daysInMonth;
+
+        }
+        public List<int> GetMonthsInYear()
+        {
+            List<int> months = Enumerable.Range(1, 12).ToList();
+            return months;
+        }
         private void DrawChart()
         {
+            seriesCollection.Clear();
+
+            
             // Kiểm tra điều kiện để vẽ biểu đồ
-            if (Filter1 == "Năm" && Year != 0)
+            if (Filter1 == "Tháng" && Year != 0 && Month != 0)
             {
-                // Lấy số lượng chuyến thành công và chuyến bị hủy trong năm được chọn
-                int successCount = DataProvider.Ins.DB.CHUYENs
-                    .Count(t => t.TGBATDAU.HasValue && t.TGBATDAU.Value.Year == Year && t.THANHCONG == true);
+                List<int> daysInMonth = GetDaysInMonth(Year, Month);
 
-                int cancelledCount = DataProvider.Ins.DB.CHUYENs
-                    .Count(t => t.TGBATDAU.HasValue && t.TGBATDAU.Value.Year == Year && t.THANHCONG == false);
-
-                PieSeries successSeries = new PieSeries
+                foreach (int day in daysInMonth)
                 {
-                    Title = "Thành công",
-                    Values = new ChartValues<double> { successCount },
-                    DataLabels = true,
-                    LabelPoint = chartPoint => chartPoint.Y.ToString()
-                };
-                PieSeries cancelledSeries = new PieSeries
-                {
-                    Title = "Hủy",
-                    Values = new ChartValues<double> { cancelledCount },
-                    DataLabels = true,
-                    LabelPoint = chartPoint => chartPoint.Y.ToString()
-                };
+                    int revenueValue = GetRevenueForDay(day, Month, Year); // Hàm để lấy doanh thu cho ngày cụ thể
 
-                // Xóa dữ liệu cũ trong biểu đồ
-                seriesCollection.Clear();
+                    ColumnSeries dayRevenueSeries = new ColumnSeries
+                    {
+                        Title = $"{day}",
+                        Values = new ChartValues<int> { revenueValue },
+                        DataLabels = true
+                    };
 
-                // Thêm chuỗi dữ liệu vào SeriesCollection
-                seriesCollection.Add(successSeries);
-                seriesCollection.Add(cancelledSeries);
+                    seriesCollection.Add(dayRevenueSeries);
+                }
+                
             }
-            else if (Filter1 == "Tháng" && Year != 0 && Month != 0)
+            else if (Filter1 == "Năm" && Year != 0)
             {
-                // Lấy số lượng chuyến thành công và chuyến bị hủy trong tháng và năm được chọn
-                int successCount = DataProvider.Ins.DB.CHUYENs
-                    .Count(t => t.TGBATDAU.HasValue && t.TGBATDAU.Value.Year == Year && t.TGBATDAU.Value.Month == Month && t.THANHCONG == true);
-                int cancelledCount = DataProvider.Ins.DB.CHUYENs
-                    .Count(t => t.TGBATDAU.HasValue && t.TGBATDAU.Value.Year == Year && t.TGBATDAU.Value.Month == Month && t.THANHCONG == false);
-
-                // Tạo chuỗi dữ liệu cho phần trăm chuyến đi thành công
-                PieSeries successSeries = new PieSeries
+                List<int> monthsInYear = GetMonthsInYear();
+               
+                // Lấy doanh thu cho từng ngày trong tháng
+                foreach (int month in monthsInYear)
                 {
-                    Title = "Thành công",
-                    Values = new ChartValues<double> { successCount },
-                    DataLabels = true,
-                    LabelPoint = chartPoint => chartPoint.Y.ToString()
-                };
+                    int revenueValue = GetRevenueForMonth(month, Year); // Hàm để lấy doanh thu cho thngs cụ thể
 
-                // Tạo chuỗi dữ liệu cho phần trăm chuyến đi bị hủy
-                PieSeries cancelledSeries = new PieSeries
-                {
-                    Title = "Hủy",
-                    Values = new ChartValues<double> { cancelledCount },
-                    DataLabels = true,
-                    LabelPoint = chartPoint => chartPoint.Y.ToString()
-                };
+                    ColumnSeries MonthRevenueSeries = new ColumnSeries
+                    {
+                        Title = $"{month}",
+                        Values = new ChartValues<int> { revenueValue },
+                        DataLabels = true
+                    };
 
-                // Xóa dữ liệu cũ trong biểu đồ
-                seriesCollection.Clear();
-
-                // Thêm chuỗi dữ liệu vào SeriesCollection
-                seriesCollection.Add(successSeries);
-                seriesCollection.Add(cancelledSeries);
+                    seriesCollection.Add(MonthRevenueSeries);
+                }
             }
         }
-       
-       
+
+        private int GetRevenueForDay(int day, int month, int year)
+        {
+            int Revenue = 0;
+            foreach (var item in DataProvider.Ins.DB.THONGTINTHANHTOANs.Where(item => item.THOIGIAN.Value.Day == day 
+                                                                            && item.THOIGIAN.Value.Month == month
+                                                                            && item.THOIGIAN.Value.Year == Year))
+            {
+                Revenue += (int)item.SOTIEN;
+            }
+
+            return Revenue;
+        }
+        private int GetRevenueForMonth( int month, int year)
+        {
+            int Revenue = 0;
+            foreach (var item in DataProvider.Ins.DB.THONGTINTHANHTOANs.Where(item =>item.THOIGIAN.Value.Month == month
+                                                                            && item.THOIGIAN.Value.Year == Year))
+            {
+                Revenue += (int)item.SOTIEN;
+            }
+
+            return Revenue;
+        }
     }
 }

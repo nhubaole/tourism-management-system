@@ -13,12 +13,16 @@
     <UserControl.DataContext>
         <vm:SalesStatisticsVM/>
     </UserControl.DataContext>
-    
+
     <Grid >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="69*"/>
+            <ColumnDefinition Width="91*"/>
+        </Grid.ColumnDefinitions>
         <Border Width="800"
                 Height="400"
                 Background="White"
-                CornerRadius="25">
+                CornerRadius="25" Grid.ColumnSpan="2" Margin="0,35,0,35">
             <Grid Background="Transparent">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -94,7 +98,6 @@
                     </Grid>
                 </Grid>
                 <Grid Grid.Row="1">
-
                     <lvc:CartesianChart 
                                 Name="TimePowerChart" 
                                 Margin="10, 10, 10, 10" 
@@ -102,16 +105,15 @@
                                 Hoverable="False" 
                                 DataTooltip="{x:Null}">
                         <lvc:CartesianChart.AxisX >
-                            <lvc:Axis Title="Tháng" ></lvc:Axis>
+                            <lvc:Axis Title="Thời gian" ></lvc:Axis>
                         </lvc:CartesianChart.AxisX>
                         <lvc:CartesianChart.AxisY >
                             <lvc:Axis Title="Doanh thu" ></lvc:Axis>
                         </lvc:CartesianChart.AxisY>
                     </lvc:CartesianChart>
-
                 </Grid>
                 <Grid Grid.Row="2">
-                    <Label Content="Biểu đồ thống kê chuyến đi trong "
+                    <Label Content="Biểu đồ thống kê doanh thu trong "
                                        FontSize="18"
                                        VerticalAlignment="Center"
                                        Margin="150, 0, 0, 0"
@@ -119,7 +121,7 @@
                     <TextBlock Text="{Binding TimeOfChart}"
                                        FontSize="18"
                                        VerticalAlignment="Center"
-                                       Margin="430, 0, 0, 0"
+                                       Margin="425, 0, 0, 0"
                                        HorizontalAlignment="Left"/>
                 </Grid>
 
