@@ -65,6 +65,7 @@
                                 VerticalAlignment="Center"
                                 BorderBrush="{StaticResource Primary}"
                                 BorderThickness="1"  
+                                Text="{Binding SearchText}"
                                 HorizontalContentAlignment="Center">
                         </TextBox>
                     </Grid>
@@ -99,7 +100,7 @@
                 <Border BorderBrush="Black" BorderThickness="0"  Background="{StaticResource White}" CornerRadius="20" Margin="30,10,20,10" Padding="0,10,0,20">
 
 
-                    <DataGrid ItemsSource="{Binding ListKhachhang, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedCustomer}" AutoGenerateColumns="False" Background="White">
+                    <DataGrid ItemsSource="{Binding ListKhachhang, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedCustomer, Mode=OneWayToSource}" AutoGenerateColumns="False" Background="White">
                         <DataGrid.Columns >
                             <DataGridTextColumn Header="Mã khách hàng"  Binding="{Binding MAKH, UpdateSourceTrigger=PropertyChanged}" Width ="*" IsReadOnly="True"/>
                             <DataGridTextColumn Header="Tên khách" Binding="{Binding HOTEN, UpdateSourceTrigger=PropertyChanged}" Width ="*"/>
@@ -194,7 +195,7 @@
 
                             <Grid Grid.Column="1">
                                 <TextBox
-                                            Text="{Binding SelectedCustomer.HOTEN}"
+                                            Text="{Binding SelectedCustomer.HOTEN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             Background="{StaticResource Secondary}"
                                             Margin="0,0,10,5"/>
                             </Grid>
@@ -216,10 +217,12 @@
 
                             <Grid Grid.Column="1">
                                 <TextBox
-                                            Text="{Binding SelectedCustomer.CCCD}"
-                                    
+                                            Text="{Binding SelectedCustomer.CCCD, ValidatesOnNotifyDataErrors=True, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                            
                                             Background="{StaticResource Secondary}"
-                                            Margin="0,0,10,5"/>
+                                            Margin="0,0,10,5">
+                                            
+                                </TextBox>
                             </Grid>
                         </Grid>
                         <Grid Grid.Row="4">
@@ -239,7 +242,7 @@
 
                             <Grid Grid.Column="1">
                                 <TextBox
-                                            Text="{Binding SelectedCustomer.SDT}"
+                                            Text="{Binding SelectedCustomer.SDT, ValidatesOnNotifyDataErrors=True,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                     
                                             Background="{StaticResource Secondary}"
                                             Margin="0,0,10,5"/>
@@ -262,7 +265,7 @@
 
                             <Grid Grid.Column="1">
                                 <TextBox
-                                            Text="{Binding SelectedCustomer.EMAIL}"
+                                            Text="{Binding SelectedCustomer.EMAIL,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                     
                                             Background="{StaticResource Secondary}"
                                             Margin="0,0,10,5"/>
@@ -285,7 +288,7 @@
 
                             <Grid Grid.Column="1">
                                 <TextBox
-                                            Text="{Binding SelectedCustomer.DIACHI}"
+                                            Text="{Binding SelectedCustomer.DIACHI,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                             Background="{StaticResource Secondary}"
                                             Margin="0,0,10,5"/>
                             </Grid>
@@ -303,6 +306,7 @@
                             <Border BorderBrush="Black" BorderThickness="0"  Background="{StaticResource White}" CornerRadius="20" >
 
                                 <Label
+                                        Content="{Binding PHIEUDATCHOs}"
                                          Background="{StaticResource Secondary}"
                                             Margin="10,10,10,10"/>
                             </Border>
@@ -326,7 +330,7 @@
                                                 Background="{StaticResource Primary}"
                                                 materialDesign:ButtonAssist.CornerRadius="15"
                                                 ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
-                                                Command="{Binding UpdateDataCommand, UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding SelectedCustomer}"
+                                                Command="{Binding UpdateDataCommand, UpdateSourceTrigger=PropertyChanged,ValidatesOnNotifyDataErrors=True}" CommandParameter="{Binding SelectedCustomer}"
                                                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
                                         <TextBlock
                                                 Text="Cập nhật"

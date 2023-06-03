@@ -80,14 +80,14 @@
                                             Margin="0 , 0, 60, 0"
                                             HorizontalAlignment="Right"
                                             >
-                                    <TextBox
+                                    <TextBlock
                                                 x:Name="tbMaDD"
                                                 Width="280"
                                                 Height="30"
                                                 Background="Transparent"
                                                 Margin="0 , 0, 0, 0"
                                                 HorizontalAlignment="Center"
-                                                Text="{Binding MAKH}"
+                                                Text="{Binding MAKH, UpdateSourceTrigger=PropertyChanged}"
                                                 />
 
                                 </Border>
