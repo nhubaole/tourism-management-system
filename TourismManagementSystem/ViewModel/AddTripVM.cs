@@ -107,29 +107,40 @@ namespace TourismManagementSystem.ViewModel
                     addTripWindow.Close();
                 }
             });
-            AddHDV = new RelayCommand<string>((p) => true, (p) => {
-                if (SelectedHDV != null)
+            AddHDV = new RelayCommand<object>((p) => true, (p) => {
+                if (SelectedHDVMaSo != null)
                 {
-                    string HDV = SelectedHDV;
-                    NewTrip.HUONGDANVIENs.Add((HUONGDANVIEN)DataProvider.Ins.DB.HUONGDANVIENs.Where(t => t.MAHDV.Equals(HDV)));
+                    string HDV = SelectedHDVMaSo;
+                    //NewTrip.HUONGDANVIENs.Add((HUONGDANVIEN)DataProvider.Ins.DB.HUONGDANVIENs.Where(t => t.MAHDV.Equals(HDV)));
+                    NewTrip.HUONGDANVIENs.Add(DataProvider.Ins.DB.HUONGDANVIENs.FirstOrDefault(t => t.MAHDV.Equals(HDV)));
+
                 }
             });
+            RemoveHDV = new RelayCommand<object>((p) => true, (p) => {
+                HUONGDANVIEN hdv = p as HUONGDANVIEN;
+                if (hdv != null)
+                {
+                    NewTrip.HUONGDANVIENs.Remove(hdv);
+                    OnPropertyChanged();
+                }
+            });
+
         }
 
-        private string _selectedHDV;
-        public string SelectedHDV
+        private string _selectedHDVMaSo;
+        public string SelectedHDVMaSo
         {
-            get { return _selectedHDV; }
+            get { return _selectedHDVMaSo; }
             set
             {
-                _selectedHDV = value;
+                _selectedHDVMaSo = value;
                 OnPropertyChanged(); // Implement INotifyPropertyChanged to notify the UI of property changes
             }
         }
         public ICommand AddCommand { get; set; }
 
         public ICommand AddHDV { get; set; }
-        public ICommand ViewHDV { get; set; }
+        public ICommand RemoveHDV { get; set; }
 
         public string ToolTipText { get => _ToolTipText; set { _ToolTipText = value; OnPropertyChanged(); } }
         public static int IsEdit { get => _IsEdit; set => _IsEdit = value; }
