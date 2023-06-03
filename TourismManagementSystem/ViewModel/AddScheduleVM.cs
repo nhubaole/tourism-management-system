@@ -151,19 +151,9 @@ namespace TourismManagementSystem.ViewModel
                     if(IsEdit == 0)
                     {
                         LICHTRINH newLichTrinh = new LICHTRINH();
-                        string formattedID;
-                        ObservableCollection<LICHTRINH> ListLT = new ObservableCollection<LICHTRINH>(DataProvider.Ins.DB.LICHTRINHs);
-                        if (ListLT.Count() == 0)
-                        {
-                            formattedID = string.Format("LT{0:D6}", 1);
-                        }
-                        else
-                        {
-                            string lastID = ListLT.Last().MALT;
-                            int previousNumber = int.Parse(lastID.Substring(2));
-                            int nextNumber = previousNumber + 1;
-                            formattedID = string.Format("LT{0:D6}", nextNumber);
-                        }
+                        Random random = new Random();
+                        int randomDigits = random.Next(0, 999999);
+                        string formattedID = string.Format("LT{0:D6}", randomDigits);
                         newLichTrinh.MALT = formattedID;
                         newLichTrinh.DIADIEM = DDDi;
                         newLichTrinh.DIADIEM1 = DDDen;
