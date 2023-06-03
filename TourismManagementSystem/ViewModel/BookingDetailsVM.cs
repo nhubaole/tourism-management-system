@@ -22,11 +22,11 @@ namespace TourismManagementSystem.ViewModel
         public BookingDetailVM()
         {
             Phieu = _selectedPhieu;
-            ThanhToanCommand = new RelayCommand<object>((p) =>
+            ThanhToanCommand = new RelayCommand<object>((p)=> true, (p) =>
             {
                 //chuyen sang man hinh thanh toan
             });
-            XuatVeCommand = new RelayCommand<object>((p) =>
+            XuatVeCommand = new RelayCommand<object>((p) => true, (p) =>
             {
                 //chuyen sang man hinh xuat ve
             });

@@ -36,7 +36,6 @@ namespace TourismManagementSystem.ViewModel
         private int _soLuong;
         public int SoLuong { get => _soLuong; set { _soLuong = value; OnPropertyChanged(); } }
 
-        private int rowCount;
         private ObservableCollection<HANHKHACH> _listHKOfPhieu;
         public ObservableCollection<HANHKHACH> ListHKOfPhieu
         {
@@ -108,11 +107,11 @@ namespace TourismManagementSystem.ViewModel
                     addPhieuWindow.Close();
                 }
             });
-            AddKhachCommand = new RelayCommand<object>((p)=>
+            AddKhachCommand = new RelayCommand<object>((p)=> true, (p)=>
             {
             //    undone
             });
-            DeleteKhachCommand = new RelayCommand<object>((p) =>
+            DeleteKhachCommand = new RelayCommand<object>((p) => true, (p) =>
             {
                 HANHKHACH selectedHanhKhach = p as HANHKHACH;
                 if (MessageBox.Show("Bạn có muốn xóa hành khách này?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)

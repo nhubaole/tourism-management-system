@@ -107,7 +107,7 @@ namespace TourismManagementSystem.ViewModel
                     addTripWindow.Close();
                 }
             });
-            AddHDV = new RelayCommand<string>((p) => {
+            AddHDV = new RelayCommand<string>((p) => true, (p) => {
                 if (SelectedHDV != null)
                 {
                     string HDV = SelectedHDV;
