@@ -260,7 +260,6 @@
                         <StackPanel Orientation="Horizontal" Height="50">
                             <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
-                                       Width=""
                                    Text="Giá vé"
                                    FontSize="20"
                                    FontWeight="Medium"/>
