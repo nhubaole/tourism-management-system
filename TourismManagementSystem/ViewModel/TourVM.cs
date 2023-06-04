@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using TourismManagementSystem.Model;
 using TourismManagementSystem.View;
@@ -18,9 +19,11 @@ namespace TourismManagementSystem.ViewModel
         private ObservableCollection<string> _FilterCbItems = new ObservableCollection<string>() { "Mã tuyến", "Tên tuyến", "Loại tuyến" };
         private string selectedFilter;
         private bool _IsAdmin;
+        private bool _IsDisplay;
 
         public TourVM()
         {
+            IsDisplay = true;
             IsAdmin = MainVM.AdminRole;
             ListTuyen = new ObservableCollection<TUYEN>(DataProvider.Ins.DB.TUYENs);
             SelectedFilter = FilterCbItems.First();
@@ -67,12 +70,25 @@ namespace TourismManagementSystem.ViewModel
                 TourDetailsWindow tourDetailsWindow = new TourDetailsWindow();
                 tourDetailsWindow.ShowDialog();
             });
+            RadioButtonCommand = new RelayCommand<UserControl>((p) => true, (p) =>
+            {
+                MainWindow mainWindow = Window.GetWindow(p) as MainWindow;
+                if (mainWindow != null)
+                {
+                    MainVM mainVM = mainWindow.DataContext as MainVM;
+                    if (mainVM != null)
+                    {
+                        mainVM.CurrentView = new TripVM();
+                    }
+                }
+            });
         }
 
         public ICommand AddTourCommand { get; set; }
         public ICommand DeleteTourCommand { get; set; }
         public ICommand EditTourCommand { get; set; }
         public ICommand ViewTourCommand { get; set; }
+        public ICommand RadioButtonCommand { get; set; }
         public ObservableCollection<TUYEN> ListTuyen { get => _ListTuyen; set { _ListTuyen = value; OnPropertyChanged(); } }
 
         public string SearchText { 
@@ -98,5 +114,7 @@ namespace TourismManagementSystem.ViewModel
         public string SelectedFilter { get => selectedFilter; set { selectedFilter = value; OnPropertyChanged(); } }
 
         public bool IsAdmin { get => _IsAdmin; set { _IsAdmin = value; OnPropertyChanged(); } }
+
+        public bool IsDisplay { get => _IsDisplay; set { _IsDisplay = value; OnPropertyChanged(); } }
     }
 }

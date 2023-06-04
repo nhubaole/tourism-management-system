@@ -7,7 +7,8 @@
              xmlns:local="clr-namespace:TourismManagementSystem.UserControls"
              mc:Ignorable="d" 
              xmlns:vm="clr-namespace:TourismManagementSystem.ViewModel"
-             d:DesignHeight="550" d:DesignWidth="900">
+             d:DesignHeight="550" d:DesignWidth="900"
+             Name="ucTrip">
     <UserControl.DataContext>
         <vm:TripVM/>
     </UserControl.DataContext>
@@ -19,9 +20,10 @@
         <Grid Grid.Row="0">
             <StackPanel Orientation="Horizontal" Margin="30,0,20,0">
                 <RadioButton Style="{StaticResource BtnStyle2}" 
-                             IsChecked="True" 
                              VerticalAlignment="Center"
-                             Margin="0,0,10,0">
+                             Margin="0,0,10,0"
+                             Command="{Binding RadioButtonCommand}"
+                             CommandParameter="{Binding ElementName=ucTrip}">
                     <TextBlock Text="Tuyến"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
@@ -29,9 +31,9 @@
                                FontWeight="Medium"/>
                 </RadioButton>
                 <RadioButton Style="{StaticResource BtnStyle2}" 
-                             IsChecked="True" 
                              VerticalAlignment="Center"
-                             Margin="0,0,20,0">
+                             Margin="0,0,20,0"
+                             IsChecked="{Binding IsDisplay}">
                     <TextBlock Text="Chuyến"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
