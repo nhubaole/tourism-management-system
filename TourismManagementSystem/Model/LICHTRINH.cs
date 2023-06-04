@@ -27,6 +27,7 @@ namespace TourismManagementSystem.Model
         public string MATUYEN { get; set; }
         public string DDBATDAU { get; set; }
         public string DDKETTHUC { get; set; }
+        public Nullable<int> NGAYTHU { get; set; }
     
         public virtual DIADIEM DIADIEM { get; set; }
         public virtual DIADIEM DIADIEM1 { get; set; }

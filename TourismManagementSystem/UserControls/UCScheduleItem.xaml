@@ -35,17 +35,19 @@
                 </Grid>
             </Border>
             <Button Style="{StaticResource MaterialDesignIconButton}"
-                                            Width="35"
-                                            Height="30">
+                                            Width="30"
+                                            Height="30"
+                    Margin="0,0,5,0">
                 <materialDesign:PackIcon Foreground="#727272" Kind="Eye" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Button>
             <Button Style="{StaticResource MaterialDesignIconButton}"
-                                            Width="35"
-                                            Height="30">
+                                            Width="30"
+                                            Height="30"
+                    Margin="0,0,5,0">
                 <materialDesign:PackIcon Foreground="#727272" Kind="Pencil" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Button>
             <Button Style="{StaticResource MaterialDesignIconButton}"
-                                            Width="35"
+                                            Width="30"
                                             Height="30">
                 <materialDesign:PackIcon Foreground="#727272" Kind="Delete" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </Button>

@@ -12,7 +12,12 @@
         xmlns:uc="clr-namespace:TourismManagementSystem.UserControls"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowStartupLocation="CenterScreen"
-        Background="{StaticResource Secondary}">
+        Background="{StaticResource Secondary}"
+        xmlns:vm="clr-namespace:TourismManagementSystem.ViewModel"
+        Name="scheduleDetailsWindow">
+    <Window.DataContext>
+        <vm:ScheduleDetailsVM/>
+    </Window.DataContext>
     <Grid Margin="50,20,50,20">
         <Border Background="White"
                 CornerRadius="20,20,20,20">
@@ -33,188 +38,163 @@
                                FontSize="22"
                                FontWeight="Medium"/>
                 </Border>
-                <Grid Grid.Row="1" Margin="50,20,20,90">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
+                <Grid Grid.Row="1" Margin="50,20,20,20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="60"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
-                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0"
+                                       Text="Địa điểm đi"
+                                       FontSize="24"
+                                       FontWeight="Bold"
+                                       Foreground="{StaticResource Primary}"
+                                       VerticalAlignment="Bottom"/>
+                                <TextBlock Grid.Row="1"
+                                    Text="{Binding LichTrinh.DIADIEM.TENDD}"
+                                    FontSize="16"
+                                    Margin="0,0,10,0"
+                                    Foreground="{StaticResource Primary}"
+                                    FontWeight="SemiBold"
+                                    VerticalAlignment="Center"/>
+                                <TextBlock Grid.Row="2"
+                                       VerticalAlignment="Bottom"
+                                       Text="Địa điểm đến"
+                                       FontSize="24"
+                                       FontWeight="Bold"
+                                       Foreground="{StaticResource Primary}"/>
+                                <TextBlock Grid.Row="3"
+                                    Text="{Binding LichTrinh.DIADIEM1.TENDD}"
+                                    FontSize="16"
+                                    Margin="0,0,10,0"
+                                    Foreground="{StaticResource Primary}"
+                                    FontWeight="SemiBold"
+                                    VerticalAlignment="Center"/>
+                            </Grid>
+                            <Grid Grid.Row="1" Margin="0,20,0,0">
+                                <Image Source="../Resource/Image/scheduleImg.png"/>
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Column="1" Margin="20,0,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0"
-                                       Text="Địa điểm đi"
-                                       FontSize="28"
-                                       FontWeight="Bold"
-                                       Foreground="{StaticResource Primary}"/>
-                            <Grid Grid.Row="1">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock FontSize="16"
-                                               FontWeight="SemiBold"
-                                               Text="Mã địa điểm đi: "
-                                               Height="20"
-                                               Margin="0,0,10,0"/>
-                                    <TextBlock Text="21039400"
-                                               FontSize="20"
-                                               Margin="0,0,10,0"
-                                               Foreground="{StaticResource Primary}"
-                                               FontWeight="SemiBold"
-                                               VerticalAlignment="Center"/>
-                                    <Button Style="{StaticResource MaterialDesignIconButton}"
-                                            Width="30"
-                                            Height="30">
-                                        <materialDesign:PackIcon Foreground="{StaticResource Primary}" Kind="Eye" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Button>
-                                </StackPanel>
-                            </Grid>
-                            <TextBlock Grid.Row="2"
-                                       Text="Địa điểm đến"
-                                       FontSize="28"
-                                       FontWeight="Bold"
-                                       Foreground="{StaticResource Primary}"/>
-                            <Grid Grid.Row="3">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock FontSize="16"
-                                               FontWeight="SemiBold"
-                                               Text="Mã địa điểm đến: "
-                                               Height="20"
-                                               Margin="0,0,10,0"/>
-                                    <TextBlock Text="21039401"
-                                               FontSize="20"
-                                               Margin="0,0,10,0"
-                                               Foreground="{StaticResource Primary}"
-                                               FontWeight="SemiBold"
-                                               VerticalAlignment="Center"/>
-                                    <Button Style="{StaticResource MaterialDesignIconButton}"
-                                            Width="30"
-                                            Height="30">
-                                        <materialDesign:PackIcon Foreground="{StaticResource Primary}" Kind="Eye" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Button>
-                                </StackPanel>
-                            </Grid>
-                        </Grid>
-                        <Grid Grid.Row="1" Margin="0,20,0,0">
-                            <Image Source="../Resource/Image/scheduleImg.png"/>
-                        </Grid>
-                    </Grid>
-                    <Grid Grid.Column="1" Margin="20,0,0,0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0"
                                    Text="Các dịch vụ"
-                                   FontSize="28"
+                                   FontSize="24"
                                    FontWeight="Bold"
                                    Foreground="{StaticResource Primary}"/>
-                        <Grid Grid.Row="1">
-                            <TextBlock FontSize="16"
+                            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                                <StackPanel Margin="0,0,20,0">
+                                    <TextBlock FontSize="16"
                                            FontWeight="SemiBold"
-                                           Text="Mã phương tiện: "
+                                           Text="Phương tiện: "
                                            Height="25"
                                            Margin="0,0,10,0"
                                            VerticalAlignment="Center"/>
-                        </Grid>
-                        <Grid Grid.Row="2">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="21039400"
-                                               FontSize="20"
-                                               Margin="0,0,10,0"
-                                               Foreground="{StaticResource Primary}"
-                                               FontWeight="SemiBold"
-                                               VerticalAlignment="Center"/>
-                                <Button Style="{StaticResource MaterialDesignIconButton}"
-                                            Width="30"
-                                            Height="30">
-                                    <materialDesign:PackIcon Foreground="{StaticResource Primary}" Kind="Eye" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Button>
-                            </StackPanel>
-                        </Grid>
-                        <Grid Grid.Row="3">
-                            <TextBlock FontSize="16"
+                                    <ItemsControl ItemsSource="{Binding LichTrinh.PHUONGTIENs}" HorizontalContentAlignment="Stretch">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock 
+                                                    Text="{Binding TENPT}"
+                                                    FontSize="16"
+                                                    Margin="0,0,10,0"
+                                                    Foreground="{StaticResource Primary}"
+                                                    FontWeight="SemiBold"
+                                                    VerticalAlignment="Center"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+
+                                    <TextBlock FontSize="16"
                                            FontWeight="SemiBold"
-                                           Text="Mã nhà hàng: "
+                                           Text="Nhà hàng: "
                                            Height="25"
                                            Margin="0,0,10,0"
                                            VerticalAlignment="Center"/>
-                        </Grid>
-                        <Grid Grid.Row="4">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="21039400"
-                                               FontSize="20"
-                                               Margin="0,0,10,0"
-                                               Foreground="{StaticResource Primary}"
-                                               FontWeight="SemiBold"
-                                               VerticalAlignment="Center"/>
-                                <Button Style="{StaticResource MaterialDesignIconButton}"
-                                            Width="30"
-                                            Height="30">
-                                    <materialDesign:PackIcon Foreground="{StaticResource Primary}" Kind="Eye" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Button>
-                            </StackPanel>
-                        </Grid>
-                        <Grid Grid.Row="5">
-                            <TextBlock FontSize="16"
+                                    <ItemsControl ItemsSource="{Binding LichTrinh.NHAHANGs}" HorizontalContentAlignment="Stretch">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding TENNH}"
+                                                    FontSize="16"
+                                                    Margin="0,0,10,0"
+                                                    Foreground="{StaticResource Primary}"
+                                                    FontWeight="SemiBold"
+                                                    VerticalAlignment="Center"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                    <TextBlock FontSize="16"
                                            FontWeight="SemiBold"
-                                           Text="Mã khách sạn: "
+                                           Text="Khách sạn: "
                                            Height="25"
                                            Margin="0,0,10,0"
                                            VerticalAlignment="Center"/>
-                        </Grid>
-                        <Grid Grid.Row="6">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="21039400"
-                                               FontSize="20"
-                                               Margin="0,0,10,0"
-                                               Foreground="{StaticResource Primary}"
-                                               FontWeight="SemiBold"
-                                               VerticalAlignment="Center"/>
-                                <Button Style="{StaticResource MaterialDesignIconButton}"
-                                            Width="30"
-                                            Height="30">
-                                    <materialDesign:PackIcon Foreground="{StaticResource Primary}" Kind="Eye" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Button>
-                            </StackPanel>
-                        </Grid>
-                        <Grid Grid.Row="7">
-                            <TextBlock FontSize="16"
+                                    <ItemsControl ItemsSource="{Binding LichTrinh.KHACHSANs}" HorizontalContentAlignment="Stretch">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding TENKS}"
+                                                    FontSize="16"
+                                                    Margin="0,0,10,0"
+                                                    Foreground="{StaticResource Primary}"
+                                                    FontWeight="SemiBold"
+                                                    VerticalAlignment="Center"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                    <TextBlock FontSize="16"
                                            FontWeight="SemiBold"
-                                           Text="Mã dịch vụ khác: "
+                                           Text="Dịch vụ khác: "
                                            Height="25"
                                            Margin="0,0,10,0"
                                            VerticalAlignment="Center"/>
+                                    <ItemsControl ItemsSource="{Binding LichTrinh.DICHVUKHACs}" HorizontalContentAlignment="Stretch">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding TENDV}"
+                                                    FontSize="16"
+                                                    Margin="0,0,10,0"
+                                                    Foreground="{StaticResource Primary}"
+                                                    FontWeight="SemiBold"
+                                                    VerticalAlignment="Center"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </ScrollViewer>
+
                         </Grid>
-                        <Grid Grid.Row="8">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="21039400"
-                                               FontSize="20"
-                                               Margin="0,0,10,0"
-                                               Foreground="{StaticResource Primary}"
-                                               FontWeight="SemiBold"
-                                               VerticalAlignment="Center"/>
-                                <Button Style="{StaticResource MaterialDesignIconButton}"
-                                            Width="30"
-                                            Height="30">
-                                    <materialDesign:PackIcon Foreground="{StaticResource Primary}" Kind="Eye" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Button>
-                            </StackPanel>
-                        </Grid>
+                        
                     </Grid>
+                    <Button Grid.Row="1" 
+                            VerticalAlignment="Bottom"
+                            Background="{StaticResource Primary}"
+                            Width="400"
+                            Height="35"
+                            BorderBrush="Transparent"
+                            materialDesign:ButtonAssist.CornerRadius="20"
+                            Foreground="White"
+                            FontSize="20"
+                            Content="Quay lại"
+                            Command="{Binding CloseCommand}"
+                            CommandParameter="{Binding ElementName=scheduleDetailsWindow}"/>
                 </Grid>
             </Grid>
         </Border>

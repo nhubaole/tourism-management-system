@@ -11,18 +11,23 @@ namespace TourismManagementSystem.Model
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class PHUONGTIEN
+    using TourismManagementSystem.ViewModel;
+
+    public partial class PHUONGTIEN : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PHUONGTIEN()
         {
             this.LICHTRINHs = new HashSet<LICHTRINH>();
         }
-    
-        public string MAPT { get; set; }
-        public string TENPT { get; set; }
-        public Nullable<int> SLGHE { get; set; }
+
+        private string _MAPT;
+        public string MAPT { get => _MAPT; set { _MAPT = value; OnPropertyChanged(); } }
+
+        private string _TENPT;
+        public string TENPT { get => _TENPT; set { _TENPT = value; OnPropertyChanged(); } }
+        private Nullable<int> _SLGHE;
+        public Nullable<int> SLGHE { get => _SLGHE; set { _SLGHE = value; OnPropertyChanged(); } }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LICHTRINH> LICHTRINHs { get; set; }

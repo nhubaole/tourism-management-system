@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TourismManagementSystem.ViewModel;
 
 namespace TourismManagementSystem.View
 {
@@ -22,6 +23,7 @@ namespace TourismManagementSystem.View
         public DetailTicketWindow()
         {
             InitializeComponent();
+            DataContext = new TicketVM();
         }
     }
 }

@@ -11,7 +11,12 @@
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
         WindowStartupLocation="CenterScreen"
-        Background="{StaticResource Secondary}">
+        Background="{StaticResource Secondary}"
+        xmlns:vm="clr-namespace:TourismManagementSystem.ViewModel"
+        Name="tourDetailsWindow">
+    <Window.DataContext>
+        <vm:TourDetailsVM/>
+    </Window.DataContext>
     <Grid Margin="50,20,50,20">
         <Border Background="White"
                 CornerRadius="20,20,20,20">
@@ -33,15 +38,16 @@
                                FontWeight="Medium"/>
                 </Border>
                 <Grid Grid.Row="1" 
-                      Margin="80,30,80,30">
+                      Margin="80,30,80,20">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
-                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="70"/>
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition Height="50"/>
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <TextBlock VerticalAlignment="Center"
@@ -52,7 +58,7 @@
                         <TextBlock VerticalAlignment="Center"
                                  HorizontalAlignment="Right"
                                  FontSize="20"
-                                 Text="21520082"
+                                 Text="{Binding Tour.MATUYEN}"
                                  Width="400"
                                  Foreground="{StaticResource Primary}"
                                  FontWeight="Medium"/>
@@ -66,8 +72,8 @@
                         <TextBlock VerticalAlignment="Center"
                                  HorizontalAlignment="Right"
                                  FontSize="20"
-                                   TextWrapping="Wrap"
-                                 Text="Du lịch Hà Nội - Hạ Long, 5 ngày 4 đêm, khách sạn 5 sao"
+                                 TextWrapping="Wrap"
+                                 Text="{Binding Tour.TENTUYEN}"
                                  Width="400"
                                  Foreground="{StaticResource Primary}"
                                  FontWeight="Medium"/>
@@ -81,7 +87,7 @@
                         <TextBlock VerticalAlignment="Center"
                                  HorizontalAlignment="Right"
                                  FontSize="20"
-                                 Text="Trong nước"
+                                 Text="{Binding Tour.LOAITUYEN.TENLOAI}"
                                  Width="400"
                                  Foreground="{StaticResource Primary}"
                                  FontWeight="Medium"/>
@@ -95,7 +101,7 @@
                         <TextBlock VerticalAlignment="Center"
                                  HorizontalAlignment="Right"
                                  FontSize="20"
-                                 Text="Sân bay Nội Bài"
+                                 Text="{Binding Tour.DIADIEM.TENDD}"
                                  Width="400"
                                  Foreground="{StaticResource Primary}"
                                  FontWeight="Medium"/>
@@ -109,7 +115,7 @@
                         <TextBlock VerticalAlignment="Center"
                                  HorizontalAlignment="Right"
                                  FontSize="20"
-                                 Text="5 ngày 4 đêm"
+                                 Text="{Binding NumDayNight}"
                                  Width="400"
                                  Foreground="{StaticResource Primary}"
                                  FontWeight="Medium"/>
@@ -122,12 +128,12 @@
                                    FontWeight="Medium"/>
                         <StackPanel Orientation="Horizontal"
                                     VerticalAlignment="Center"
-                                    HorizontalAlignment="Right">
+                                    HorizontalAlignment="Right"
+                                    Width="400">
                             <TextBlock VerticalAlignment="Center"
                                  HorizontalAlignment="Right"
                                  FontSize="20"
-                                 Text="5 600 000"
-                                 Width="360"
+                                 Text="{Binding Tour.GIADUKIEN}"
                                  Foreground="{StaticResource Primary}"
                                  FontWeight="Medium"/>
                             <TextBlock Text="vnđ"
@@ -151,9 +157,21 @@
                                 Width="400"
                                 Height="30"
                                 Background="White"
-                                Foreground="Black">Tùy chỉnh</Button>
+                                Foreground="Black"
+                                Command="{Binding ScheduleOptionCommand}">Xem chi tiết</Button>
                     </Grid>
-
+                    <Button Grid.Row="7" 
+                            VerticalAlignment="Bottom"
+                            Background="{StaticResource Primary}"
+                            Width="400"
+                            Height="35"
+                            BorderBrush="Transparent"
+                            materialDesign:ButtonAssist.CornerRadius="20"
+                            Foreground="White"
+                            FontSize="20"
+                            Content="Quay lại"
+                            Command="{Binding CloseCommand}"
+                            CommandParameter="{Binding ElementName=tourDetailsWindow}"/>
                 </Grid>
             </Grid>
         </Border>

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TourismManagementSystem.ViewModel;
 
 namespace TourismManagementSystem.UserControls
 {
@@ -23,6 +24,7 @@ namespace TourismManagementSystem.UserControls
         public UCTicket()
         {
             InitializeComponent();
+            DataContext = new TicketVM();
         }
     }
 }

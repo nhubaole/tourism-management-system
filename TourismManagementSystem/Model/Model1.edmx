@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TOURMANAGEMENTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TOURMANAGEMENTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CHITIETDVKHAC">
           <Key>
             <PropertyRef Name="MALT" />
@@ -132,6 +132,7 @@
           <Property Name="MATUYEN" Type="varchar" MaxLength="8" />
           <Property Name="DDBATDAU" Type="varchar" MaxLength="8" />
           <Property Name="DDKETTHUC" Type="varchar" MaxLength="8" />
+          <Property Name="NGAYTHU" Type="int" />
         </EntityType>
         <EntityType Name="LOAICHUYEN">
           <Key>
@@ -631,8 +632,7 @@ warning 6013: The table/view 'TOURMANAGEMENT.dbo.THONGBAO' does not have a prima
             <End Role="VE" EntitySet="VE" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TOURMANAGEMENTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -743,6 +743,7 @@ warning 6013: The table/view 'TOURMANAGEMENT.dbo.THONGBAO' does not have a prima
           <NavigationProperty Name="KHACHSANs" Relationship="Self.CHITIETKHACHSAN" FromRole="LICHTRINH" ToRole="KHACHSAN" />
           <NavigationProperty Name="NHAHANGs" Relationship="Self.CHITIETNHAHANG" FromRole="LICHTRINH" ToRole="NHAHANG" />
           <NavigationProperty Name="PHUONGTIENs" Relationship="Self.CHITIETPHUONGTIEN" FromRole="LICHTRINH" ToRole="PHUONGTIEN" />
+          <Property Name="NGAYTHU" Type="Int32" />
         </EntityType>
         <EntityType Name="LOAICHUYEN">
           <Key>
@@ -1222,6 +1223,7 @@ warning 6013: The table/view 'TOURMANAGEMENT.dbo.THONGBAO' does not have a prima
           <EntitySetMapping Name="LICHTRINHs">
             <EntityTypeMapping TypeName="TOURMANAGEMENTModel.LICHTRINH">
               <MappingFragment StoreEntitySet="LICHTRINH">
+                <ScalarProperty Name="NGAYTHU" ColumnName="NGAYTHU" />
                 <ScalarProperty Name="MALT" ColumnName="MALT" />
                 <ScalarProperty Name="MATUYEN" ColumnName="MATUYEN" />
                 <ScalarProperty Name="DDBATDAU" ColumnName="DDBATDAU" />
