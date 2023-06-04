@@ -10,20 +10,21 @@ using System.Windows;
 using TourismManagementSystem.Model;
 using TourismManagementSystem.View;
 using System.Data.Entity.Validation;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using System.Globalization;
+using System.Collections;
 
 namespace TourismManagementSystem.ViewModel
 {
-    internal class PurchaseVM:BaseViewModel
+    internal class PurchaseVM: BaseViewModel
     {
-
+       
         private ObservableCollection<string> _status = new ObservableCollection<string>() { "Chưa thực hiện", "Thành công", "Thất bại","Chờ xử lý" };
 
         private ObservableCollection<string> _method = new ObservableCollection<string>() { "Tiền mặt", "Trả thẻ"};
 
         public ObservableCollection<THONGTINTHANHTOAN> THONGTINTHANHTOANs { get; set; }
         
-
-        public ICommand OnlyNumericCommand { get; private set; }
 
         public ICommand AddDataCommand { get; set; }
       
@@ -61,25 +62,29 @@ namespace TourismManagementSystem.ViewModel
             }
         }
 
-        private int SoTIEN;
-        public int SOTIEN
+        private string SoTIEN;
+        public string SOTIEN
         {
             get => SoTIEN;
             set
             {
+
                 SoTIEN = value;
                 OnPropertyChanged(nameof(SOTIEN));
+                
             }
         }
 
-        private DateTime ThoiGIAN;
-        public DateTime THOIGIAN
+        private System.DateTime ThoiGIAN;
+        
+        public System.DateTime THOIGIAN
         {
             get => ThoiGIAN;
             set
             {
                 ThoiGIAN = value;
                 OnPropertyChanged(nameof(THOIGIAN));
+                
             }
         }
 
@@ -136,11 +141,14 @@ namespace TourismManagementSystem.ViewModel
 
         public PurchaseVM()
         {
-           
+            THOIGIAN = DateTime.Today;
+
             THONGTINTHANHTOANs = new ObservableCollection<THONGTINTHANHTOAN>();
             AddDataCommand = new RelayCommand<object>((p) => {
-                if (PHUONGTHUC==null||TRANGTHAI==null)
+                if (PHUONGTHUC == null || TRANGTHAI == null ||!IsNumeric(SoTIEN)||SoTIEN==null)
                 {
+                   
+
                     return false;
                 }
                 else
@@ -149,73 +157,101 @@ namespace TourismManagementSystem.ViewModel
                 }
             }, (p) =>
             {
-                try
-                {
-                    var temp = new THONGTINTHANHTOAN()
+               
+                
+                    try
                     {
-                        MATT = MATT,
-                        MAPHIEU = MAPHIEU,
-                        SOTIEN = SOTIEN,
-                        THOIGIAN = THOIGIAN,
-                        TRANGTHAI = TRANGTHAI,
-                        PHUONGTHUC = PHUONGTHUC
-                    };
+                        var temp = new THONGTINTHANHTOAN()
+                        {
+                            MATT = GenerateCode(GetLastGeneratedMATT()),
+                            MAPHIEU = MAPHIEU,
+                            SOTIEN = int.Parse(SOTIEN),
+                            THOIGIAN = THOIGIAN,
+                            TRANGTHAI = TRANGTHAI,
+                            PHUONGTHUC = PHUONGTHUC
+                        };
 
-                    DataProvider.Ins.DB.THONGTINTHANHTOANs.Add(temp);
-                    DataProvider.Ins.DB.SaveChanges();
-                    ListTHONGTINTHANHTOAN.Add(temp);
-                    LoadDataGrid();
+                        DataProvider.Ins.DB.THONGTINTHANHTOANs.Add(temp);
+                        DataProvider.Ins.DB.SaveChanges();
+                        ListTHONGTINTHANHTOAN.Add(temp);
+
+                        MessageBox.Show("Đã tạo thông tin thanh toán thành công MATT: " + temp.MATT);
 
 
-
-                    MessageBox.Show("Đã tạo thông tin thanh toán thành công");
-
-
-                }
-                catch (DbEntityValidationException ex)
-                {
-                    foreach (var validationErrors in ex.EntityValidationErrors)
+                    }
+                    catch (Exception ex)
                     {
-                        foreach (var validationError in validationErrors.ValidationErrors)
-                {
-                            MessageBox.Show($"Property: {validationError.PropertyName}");
-                            MessageBox.Show($"Error Message: {validationError.ErrorMessage}");
+                        Exception innerException = ex.InnerException;
+                        while (innerException != null)
+                        {
+                            MessageBox.Show("Inner Exception: " + innerException.Message);
+                            innerException = innerException.InnerException;
+
+
                         }
                     }
-                }
+                
 
-
-            });
-
-
-        
-            OnlyNumericCommand = new RelayCommand<object>((p) =>
-            {
-                return true;
-            },
-           (p) => { OnlyNumericExecute(); });
+            }); 
 
         }
         private void LoadDataGrid()
         {
             ListTHONGTINTHANHTOAN = new ObservableCollection<THONGTINTHANHTOAN>(DataProvider.Ins.DB.THONGTINTHANHTOANs);
         }
-       
-     
-      
-     
-        private void OnlyNumericExecute()
+
+
+
+
+
+        private bool IsNumeric(string value)
         {
-
-
             int result;
-            bool isNumeric = int.TryParse(SOTIEN.ToString(), out result);
-            if (!isNumeric)
+            bool isNumeric = int.TryParse(value, out result);
+
+            return isNumeric;
+        }
+
+
+        public static string GenerateCode(string previousCode)
+        {
+            int newNumber;
+
+            if (previousCode == null)
             {
-                // Reset the SOTIEN property to 0 or any other default value
-                SOTIEN = 0;
-                MessageBox.Show("Please enter a numeric value for SOTIEN.");
+                newNumber = 1;
             }
+            else
+            {
+                
+                int previousNumber = int.Parse(previousCode.Substring(2));
+                newNumber = previousNumber + 1;
+            }
+
+            string temp = "TT";
+
+            string newNumberStr = newNumber.ToString().PadLeft(6, '0');
+            string newCode = temp + newNumberStr;
+
+            return newCode;
+                
+            
+        }
+
+
+      
+        public string GetLastGeneratedMATT()
+        {
+            var lastPurchase = DataProvider.Ins.DB.THONGTINTHANHTOANs
+                .OrderByDescending(p => p.MATT)
+                .FirstOrDefault();
+
+            if (lastPurchase != null)
+            {
+                return lastPurchase.MATT;
+            }
+
+            return null; 
         }
     }
 }
