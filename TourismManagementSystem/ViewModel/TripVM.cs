@@ -69,15 +69,19 @@ namespace TourismManagementSystem.ViewModel
                 OnPropertyChanged();
             }
         }
+        private bool _IsDisplay;
 
         public bool IsDisplay { get => _IsDisplay; set { _IsDisplay = value; OnPropertyChanged(); } }
+        private bool _IsAdmin;
+        public bool IsAdmin { get => _IsAdmin; set { _IsAdmin = value; OnPropertyChanged(); } }
 
-        private bool _IsDisplay;
+        
 
 
         public TripVM()
         {
             IsDisplay = true;
+            IsAdmin = MainVM.AdminRole;
             ChuyenList = new ObservableCollection<CHUYEN>(DataProvider.Ins.DB.CHUYENs);
             AddTripCommand = new RelayCommand<object>((p) => true, (p) =>
             {

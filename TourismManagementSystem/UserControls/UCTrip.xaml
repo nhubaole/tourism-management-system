@@ -50,7 +50,8 @@
                         Background="{StaticResource Primary}"
                         materialDesign:ButtonAssist.CornerRadius="10"
                     BorderThickness="0"
-                    Command="{Binding AddTripCommand}">
+                    Command="{Binding AddTripCommand}"
+                    Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <TextBlock Text="+" FontSize="20"/>
                 </Button>
             </StackPanel>
@@ -222,7 +223,8 @@
                                     Background="Transparent"
                                     BorderBrush="Transparent"
                                     Command="{Binding DataContext.EditTripCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                    CommandParameter="{Binding}">
+                                    CommandParameter="{Binding}"
+                                Visibility="{Binding DataContext.IsAdmin, RelativeSource={RelativeSource AncestorType=DataGrid}, Converter={StaticResource BooleanToVisibilityConverter}}">
                                 <materialDesign:PackIcon Kind="Pencil"
                                                              Foreground ="{StaticResource Primary}"/>
                             </Button>
@@ -240,7 +242,8 @@
                                     Background="Transparent"
                                     BorderBrush="Transparent"
                                     Command="{Binding DataContext.DeleteTripCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                    CommandParameter="{Binding}">
+                                    CommandParameter="{Binding}"
+                                Visibility="{Binding DataContext.IsAdmin, RelativeSource={RelativeSource AncestorType=DataGrid}, Converter={StaticResource BooleanToVisibilityConverter}}">
                                 <materialDesign:PackIcon Kind="Delete"
                                                              Foreground ="{StaticResource Primary}"/>
                             </Button>

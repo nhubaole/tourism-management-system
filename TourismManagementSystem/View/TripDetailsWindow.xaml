@@ -275,7 +275,8 @@
                                    HorizontalAlignment="Left"
                                    Text="Danh sách hành khách:"
                                    FontSize="20"
-                                   FontWeight="Medium" Grid.ColumnSpan="2"/>
+                                   FontWeight="Medium" Grid.ColumnSpan="2"
+                                   Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                         </StackPanel>
                         <StackPanel VerticalAlignment="Center">
                             <DataGrid 
@@ -301,7 +302,7 @@
             ColumnWidth="*"
             IsReadOnly="False"
             GridLinesVisibility="None"
-               >
+            Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}">
                                 <DataGrid.ColumnHeaderStyle>
                                     <Style TargetType="DataGridColumnHeader">
                                         <Setter Property="HorizontalContentAlignment" Value="Center" />
