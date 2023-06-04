@@ -9,10 +9,14 @@
         ResizeMode="NoResize"
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
+        xmlns:vm="clr-namespace:TourismManagementSystem.ViewModel"
         xmlns:uc="clr-namespace:TourismManagementSystem.UserControls"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowStartupLocation="CenterScreen"
         Background="{StaticResource Secondary}">
+    <Window.DataContext>
+        <vm:BookingDetailVM/>
+    </Window.DataContext>
     <Grid Margin="50,20,50,20">
         <Border Background="White"
                 CornerRadius="20,20,20,20">
@@ -26,158 +30,266 @@
                         Height="50"
                         CornerRadius="20,20,0,0"
                         Background="{StaticResource Primary}">
-                    <TextBlock Text="Thêm/cập nhật phiếu"
+                    <TextBlock Text="Thông tin chi tiết chuyến du lịch"
                                VerticalAlignment="Center"
                                Margin="50,0,0,0"
                                Foreground="White"
                                FontSize="22"
                                FontWeight="Medium"/>
                 </Border>
-                <Grid Grid.Row="1" 
-                      Margin="80,5,80,5">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="39*"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="30*"/>
-                        <RowDefinition Height="30*"/>
-                        <RowDefinition Height="59*"/>
-                        <RowDefinition Height="9*"/>
-                        <RowDefinition Height="53*"/>
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
-                        <TextBlock VerticalAlignment="Top"
-                                   HorizontalAlignment="Left"
-                                   Text="Mã Phiếu"
-                                   FontSize="20"
-                                   FontWeight="Medium" Margin="0,25,0,0"/>
-                        <TextBlock VerticalAlignment="Top"
-                                 HorizontalAlignment="Right"
-                                 FontSize="20"
-                                 Text="21521234"
-                                 Width="400"
-                                 Foreground="{StaticResource Primary}"
-                                 FontWeight="Medium" Margin="0,21,0,0" TextAlignment="Right"/>
-                    </Grid>
-                    <Grid Margin="0,58,0,0" Grid.RowSpan="2">
-                        <TextBlock VerticalAlignment="Top"
-                                   HorizontalAlignment="Left"
-                                   Text="Mã Khách Hàng"
-                                   FontSize="20"
-                                   FontWeight="Medium" Margin="0,-3,0,0"/>
-                        <TextBlock VerticalAlignment="Top"
-                                 HorizontalAlignment="Left"
-                                 FontSize="20"
-                                 Text="21521335"
-                                 Width="400"
-                                 Foreground="{StaticResource Primary}"
-                                 FontWeight="Medium" Margin="240,-8,0,0" TextAlignment="Right"/>
-                    </Grid>
-                    <Grid Grid.Row="1" Margin="0,50,0,0" Grid.RowSpan="2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="7*"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"
-                                   Text="Mã Chuyến"
-                                   FontSize="20"
-                                   FontWeight="Medium" Margin="0,-17,0,0" Grid.ColumnSpan="2"/>
-                        <TextBlock VerticalAlignment="Top"
-                                 HorizontalAlignment="Left"
-                                 FontSize="20"
-                                 Width="400"
-                                 Text="23131321"
-                                 Foreground="{StaticResource Primary}"
-                                 FontWeight="Medium" Grid.Column="1" Margin="160,-21,0,0" TextAlignment="Right">
-                        </TextBlock>
-                    </Grid>
-                    <Grid Grid.Row="2" Margin="0,58,0,6" Grid.RowSpan="2">
-                        <TextBlock VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"
-                                   Text="Tình Trạng"
-                                   FontSize="20"
-                                   FontWeight="Medium"/>
-                        <TextBlock VerticalAlignment="Top"
-                                 HorizontalAlignment="Right"
-                                 FontSize="20"
-                                 Width="400"
-                                 Foreground="{StaticResource Primary}"
-                                 FontWeight="Medium" Height="27" Margin="0,-4,0,0"/>
+                <ScrollViewer Grid.Row="1">
+                    <StackPanel Grid.Row="1" 
+            Margin="80,5,80,5">
 
-                    </Grid>
-                    <Grid Grid.Row="3">
-                        <TextBlock VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"
-                                   Text="Tình Trạng"
-                                   FontSize="20"
-                                   FontWeight="Medium"/>
-                        <TextBlock VerticalAlignment="Center"
-                                 HorizontalAlignment="Right"
-                                 FontSize="20"
-                                 Width="400"
-                                   Text="Đã hoàn thành"
-                                 Foreground="{StaticResource Primary}"
-                                 FontWeight="Medium" Height="27" Margin="0,-4,0,0" TextAlignment="Right"/>
+                        <StackPanel Orientation="Horizontal" Height="50">
+                            <TextBlock VerticalAlignment="Center"
+                   HorizontalAlignment="Left"
+                   Text="Mã phiếu"
+                   FontSize="20"
+                   FontWeight="Medium"/>
+                            <TextBlock VerticalAlignment="Center"
+                 HorizontalAlignment="Right"
+                 FontSize="20"
+                 Width="400"
+                 TextAlignment="Right"
+                                     Margin="100,0,0,0"
+                 Foreground="{StaticResource Primary}"
+                 Text="{Binding Phieu.MAPHIEU}"
+                 FontWeight="Medium"/>
+                        </StackPanel>
 
-                    </Grid>
-                    <Grid Grid.Row="4" Margin="0,0,0,41" Grid.RowSpan="2">
-                        <TextBlock VerticalAlignment="Top"
-                                   HorizontalAlignment="Left"
-                                   Text="Ngày Đặt"
-                                   FontSize="20"
-                                   FontWeight="Medium" Margin="0,4,0,0"/>
-                        <TextBlock VerticalAlignment="Center"
-                                 HorizontalAlignment="Right"
-                                 FontSize="20"
-                                 Width="400"
-                                   Text="12/3/2014"
-                                 Foreground="{StaticResource Primary}"
-                                 FontWeight="Medium" Height="27" Margin="0,-4,0,0" TextAlignment="Right"/>
-                    </Grid>
-                    <Grid Grid.Row="5" Margin="0,0,0,58" Grid.RowSpan="2">
-                        <TextBlock VerticalAlignment="Center"
-                                   HorizontalAlignment="Left"
-                                   Text="Số Lượng Hành Khách"
-                                   FontSize="20"
-                                   FontWeight="Medium"/>
-                        <TextBlock VerticalAlignment="Center"
-                                 HorizontalAlignment="Right"
-                                 FontSize="20"
-                                 Width="400"
-                                   Text="2"
-                                 Foreground="{StaticResource Primary}"
-                                 FontWeight="Medium" Height="27" Margin="0,-4,0,0" TextAlignment="Right"/>
-                    </Grid>
-                    <Grid Grid.Row="5" Margin="0,41,0,27" Grid.RowSpan="2">
-                        <TextBlock VerticalAlignment="Top"
-                                   HorizontalAlignment="Left"
-                                   Text="Thông Tin Hành Khách"
-                                   FontSize="20"
-                                   FontWeight="Medium" Margin="0,-5,0,0"/>
-                        <StackPanel Orientation="Horizontal"
-                                    VerticalAlignment="Center"
-                                    HorizontalAlignment="Right"/>
+                        <StackPanel Orientation="Horizontal" Height="50">
+                            <TextBlock VerticalAlignment="Center"
+                   HorizontalAlignment="Left"
+                   Text="Mã khách hàng"
+                   FontSize="20"
+                   FontWeight="Medium" Width="151" />
+                            <TextBlock VerticalAlignment="Center"
+                 HorizontalAlignment="Right"
+                                     Margin="36,0,0,0"
+                 TextAlignment="Right"
+                 FontSize="20"
+                 Width="400"
+                 Foreground="{StaticResource Primary}"
+                 Text="{Binding Phieu.MAKH}"
+                 FontWeight="Medium"/>
 
-                    </Grid>
-                    <Grid Grid.Row="7">
-                        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,0,0,-18"/>
+                        </StackPanel>
 
-                    </Grid>
-                    <Grid Grid.Row="8">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Center"
+                   HorizontalAlignment="Left"
+                   Text="Mã chuyến"
+                   FontSize="20"
+                                       
+                   FontWeight="Medium" Width="125" />
+                            <TextBlock VerticalAlignment="Center"
+                 HorizontalAlignment="Right"
+                 FontSize="20"
+                                      Text="{Binding Phieu.MACHUYEN}"
+                                     Margin="62,0,0,0"
+                 Width="400"
+                 Foreground="{StaticResource Primary}"
+                 FontWeight="Medium"/>
 
-                    </Grid>
-                    <Grid Grid.Row="9">
-                        <Button
-                            Content="Thanh toán"
-                            Style="{DynamicResource PrimaryButton}" Margin="0,30,365,10" Foreground="{DynamicResource White}" FontSize="20" />
-                        <Button
-                            Content="Thêm/Cập nhật"
-                            Style="{DynamicResource SecondaryButton}" Margin="355,30,10,10" Foreground="{DynamicResource Black}" FontSize="20" />
-                    </Grid>
-                </Grid>
+                        </StackPanel>
+
+                        <StackPanel Height="50" Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Center"
+                   HorizontalAlignment="Left"
+                   Text="Tình trạng"
+                   FontSize="20"
+                   FontWeight="Medium"/>
+                            <TextBlock VerticalAlignment="Center"
+                 HorizontalAlignment="Right"
+                 FontSize="20"
+                                      Text="{Binding Phieu.TINHTRANG}"
+                                     Margin="62,0,0,0"
+                 Width="400"
+                 Foreground="{StaticResource Primary}"
+                 FontWeight="Medium"/>
+
+                        </StackPanel>
+
+                        <StackPanel Height="50" Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Center"
+                   HorizontalAlignment="Left"
+                   Text="Ngày đặt"
+                   FontSize="20"
+                   FontWeight="Medium"/>
+                            <TextBlock VerticalAlignment="Center"
+                 HorizontalAlignment="Right"
+                 FontSize="20"
+                                      Text="{Binding Phieu.NGAYDAT}"
+                                     Margin="62,0,0,0"
+                 Width="400"
+                 Foreground="{StaticResource Primary}"
+                 FontWeight="Medium"/>
+                        </StackPanel>
+
+                        <StackPanel Height="50" Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Center"
+                   HorizontalAlignment="Left"
+                   Text="Số lượng khách hàng"
+                   FontSize="20"
+                   FontWeight="Medium"/>
+                            <TextBlock VerticalAlignment="Center"
+                 HorizontalAlignment="Right"
+                 FontSize="20"
+                                     Margin="192,0,0,0"
+                 Width="200"
+                 TextAlignment="Right"
+                 Foreground="{StaticResource Primary}"
+                 Text="{Binding Phieu.SLKHACH}"
+                 FontWeight="Medium"/>
+
+                        </StackPanel>
+
+                        <StackPanel Height="50" Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Center"
+                   HorizontalAlignment="Left"
+                   Text="Danh sách khách hàng"
+                   FontSize="20"
+                   FontWeight="Medium"/>
+                        </StackPanel>
+                        <StackPanel VerticalAlignment="Stretch">
+                            <DataGrid 
+            Grid.Row="1"
+            x:Name="dtgridKH"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Margin="30, 0, 30, 10"
+            ItemsSource="{Binding Phieu.HANHKHACHes, UpdateSourceTrigger=PropertyChanged}"
+            AutoGenerateColumns="False"
+            BorderBrush="#e8a66d"
+            BorderThickness="1.5" 
+            RowDetailsVisibilityMode="VisibleWhenSelected"
+            ScrollViewer.CanContentScroll="True"
+            ScrollViewer.PanningMode="Both"
+            HeadersVisibility="Column"
+            SelectionMode="Single"
+            SelectionUnit="FullRow"
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
+            CanUserReorderColumns="False"
+            CanUserResizeRows="False"
+            ColumnWidth="*"
+            IsReadOnly="False"
+            GridLinesVisibility="None"
+               >
+                                <DataGrid.ColumnHeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="{StaticResource Primary}"/>
+                                        <Setter Property="Margin" Value="0, 10, 0, 10"/>
+                                        <Setter Property="FontSize" Value="14"/>
+                                        <Setter Property="FontWeight" Value="Bold"/>
+
+                                    </Style>
+                                </DataGrid.ColumnHeaderStyle>
+                                <DataGrid.Resources>
+                                    <SolidColorBrush x:Key="DataGridCellFocusBorderBrush" Color="Transparent" />
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="BorderThickness" Value="0" />
+                                                <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
+                                                <Setter Property="Background" Value="Transparent"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                    <Style TargetType="DataGridRow">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="BorderThickness" Value="0" />
+                                                <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
+                                                <Setter Property="Background" Value="#e8a66d"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGrid.Resources>
+                                <DataGrid.Columns >
+                                    <DataGridTextColumn Header="Mã hành khách" Binding="{Binding MAHDV}" Width="*"  IsReadOnly="True" CanUserSort="False">
+
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Họ tên" Binding="{Binding HOTEN}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="TextWrapping" Value="Wrap" />
+                                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                                <Setter Property="VerticalAlignment" Value="Center" />
+                                                <Setter Property="TextAlignment" Value="Center" />
+                                                <Setter Property="Padding" Value="10"/>
+
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Ngày sinh" Binding="{Binding NGSINH}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="TextWrapping" Value="Wrap" />
+                                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                                <Setter Property="VerticalAlignment" Value="Center" />
+                                                <Setter Property="TextAlignment" Value="Center" />
+                                                <Setter Property="Padding" Value="10"/>
+
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Số điện thoại" Binding="{Binding SDT}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="TextWrapping" Value="Wrap" />
+                                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                                <Setter Property="VerticalAlignment" Value="Center" />
+                                                <Setter Property="TextAlignment" Value="Center" />
+                                                <Setter Property="Padding" Value="10"/>
+
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Button     
+                                Command="{Binding ThanhToanCommand}"
+                                Background="{StaticResource Primary}"
+                                Width="300"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Left"
+                                Style="{StaticResource MaterialDesignRaisedDarkButton}"                                
+                                materialDesign:ButtonAssist.CornerRadius="25"
+                                ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
+                                IsEnabled="True">
+                                <TextBlock
+                                  Text="Thanh toán" />
+                            </Button>
+                            <Button
+                                Command="{Binding XuatVeCommand}"
+                                Background="{StaticResource Primary}"
+                                Width="300"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Right"
+                                Style="{StaticResource MaterialDesignRaisedDarkButton}"                                
+                                materialDesign:ButtonAssist.CornerRadius="25"
+                                ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
+                                IsEnabled="True">
+                                <TextBlock
+                                  Text="Xuất vé" />
+                            </Button>
+                        </StackPanel>
+
+                    </StackPanel>
+                </ScrollViewer>
+
             </Grid>
         </Border>
     </Grid>
