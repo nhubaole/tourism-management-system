@@ -29,6 +29,7 @@ namespace TourismManagementSystem.Model
         public Nullable<int> GIAVE { get; set; }
         public string MALOAI { get; set; }
         public string MATUYEN { get; set; }
+        public Nullable<bool> THANHCONG { get; set; }
     
         public virtual LOAICHUYEN LOAICHUYEN { get; set; }
         public virtual TUYEN TUYEN { get; set; }

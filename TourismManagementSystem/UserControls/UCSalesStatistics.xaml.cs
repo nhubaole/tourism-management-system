@@ -1,6 +1,4 @@
-﻿using LiveCharts;
-using LiveCharts.Wpf;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,15 +16,13 @@ using System.Windows.Shapes;
 namespace TourismManagementSystem.UserControls
 {
     /// <summary>
-    /// Interaction logic for UCRevenueStatistics.xaml
+    /// Interaction logic for UCSalesStatistics.xaml
     /// </summary>
-    public partial class UCRevenueStatistics : UserControl
+    public partial class UCSalesStatistics : UserControl
     {
-        public UCRevenueStatistics()
+        public UCSalesStatistics()
         {
             InitializeComponent();
         }
-
     }
-       
 }

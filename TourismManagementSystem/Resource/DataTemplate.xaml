@@ -55,5 +55,13 @@
     <DataTemplate DataType="{x:Type viewmodel:RequireLoginVM}">
         <uc:UCRequireLogin/>
     </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type viewmodel:SalesStatisticsVM}">
+        <uc:UCSalesStatistics/>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type viewmodel:TripsStatisticsVM}">
+        <uc:UCTripsStatistics/>
+    </DataTemplate>
 
 </ResourceDictionary>

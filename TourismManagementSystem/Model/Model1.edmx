@@ -49,6 +49,7 @@
           <Property Name="GIAVE" Type="int" />
           <Property Name="MALOAI" Type="varchar" MaxLength="8" />
           <Property Name="MATUYEN" Type="varchar" MaxLength="8" />
+          <Property Name="THANHCONG" Type="bit" />
         </EntityType>
         <EntityType Name="DIADIEM">
           <Key>
@@ -652,6 +653,7 @@ warning 6013: The table/view 'TOURMANAGEMENT.dbo.THONGBAO' does not have a prima
           <NavigationProperty Name="TUYEN" Relationship="Self.FK__CHUYEN__MATUYEN__4AB81AF0" FromRole="CHUYEN" ToRole="TUYEN" />
           <NavigationProperty Name="PHIEUDATCHOes" Relationship="Self.FK__PHIEUDATC__MACHU__5535A963" FromRole="CHUYEN" ToRole="PHIEUDATCHO" />
           <NavigationProperty Name="HUONGDANVIENs" Relationship="Self.DIEUPHOI" FromRole="CHUYEN" ToRole="HUONGDANVIEN" />
+          <Property Name="THANHCONG" Type="Boolean" />
         </EntityType>
         <EntityType Name="DIADIEM">
           <Key>
@@ -1137,6 +1139,7 @@ warning 6013: The table/view 'TOURMANAGEMENT.dbo.THONGBAO' does not have a prima
           <EntitySetMapping Name="CHUYENs">
             <EntityTypeMapping TypeName="TOURMANAGEMENTModel.CHUYEN">
               <MappingFragment StoreEntitySet="CHUYEN">
+                <ScalarProperty Name="THANHCONG" ColumnName="THANHCONG" />
                 <ScalarProperty Name="MACHUYEN" ColumnName="MACHUYEN" />
                 <ScalarProperty Name="TGBATDAU" ColumnName="TGBATDAU" />
                 <ScalarProperty Name="TGKETTHUC" ColumnName="TGKETTHUC" />
