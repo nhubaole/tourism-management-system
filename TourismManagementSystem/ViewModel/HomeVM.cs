@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TourismManagementSystem.Model;
+using TourismManagementSystem.View;
 
 namespace TourismManagementSystem.ViewModel
 {
@@ -57,6 +58,12 @@ namespace TourismManagementSystem.ViewModel
                     }
                 }
             });
+            TripButtonCommand = new RelayCommand<object>((p) => true, (p) =>
+            {
+                TripDetailVM.SelectedChuyen = p as CHUYEN;
+                TripDetailsWindow tripDetailsWindow = new TripDetailsWindow();
+                tripDetailsWindow.ShowDialog();
+            });
         }
 
         public void init() {
@@ -73,9 +80,10 @@ namespace TourismManagementSystem.ViewModel
             UpComingTrip = new ObservableCollection<CHUYEN>(DataProvider.Ins.DB.CHUYENs
                 .Where(chuyen => DateTime.Compare((DateTime)chuyen.TGBATDAU, dateNow) >= 0)
                 .OrderBy(chuyen => chuyen.TGBATDAU)
-                .Take(3));
+                .Take(5));
         }
         public ICommand RadioButtonCommand { get; set; }
+        public ICommand TripButtonCommand { get; set; }
 
         public int TripNumber { get => _TripNumber; set { _TripNumber = value; OnPropertyChanged(); } }
         public int TicketNumber { get => _TicketNumber; set { _TicketNumber = value; OnPropertyChanged(); } }

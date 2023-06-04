@@ -43,111 +43,105 @@
                 </Border>
                 <ScrollViewer Margin="0,0,0,0" Grid.Row="1">
                     <StackPanel Grid.Row="1" 
-            Margin="80,5,80,5">
+            Margin="80,20,80,20">
 
-                        <StackPanel Orientation="Horizontal" Height="50">
+                        <Grid Height="50">
                             <TextBlock VerticalAlignment="Center"
                    HorizontalAlignment="Left"
                    Text="Mã phiếu"
-                   FontSize="20"
+                   FontSize="18"
                    FontWeight="Medium"/>
                             <TextBox VerticalAlignment="Center"
-                 FontSize="20"
-                 Width="429"
-                 TextAlignment="Right"
+                 FontSize="18"
+                 Width="400"
+                                     IsEnabled="False"
+                                     HorizontalAlignment="Right"
                                      Margin="100,0,0,0"
-                 Foreground="{StaticResource Primary}"
                  Text="{Binding NewBooking.MAPHIEU, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                 FontWeight="Medium"/>
-                        </StackPanel>
+                 />
+                        </Grid>
 
-                        <StackPanel Orientation="Horizontal" Height="50">
+                        <Grid Height="50">
                             <TextBlock VerticalAlignment="Center"
                    HorizontalAlignment="Left"
                    Text="Mã khách hàng"
-                   FontSize="20"
+                   FontSize="18"
                    FontWeight="Medium" Width="151" />
                             <TextBox VerticalAlignment="Center"
-                                     Margin="36,0,0,0"
-                 TextAlignment="Right"
-                 FontSize="20"
-                 Width="423"
-                 Foreground="{StaticResource Primary}"
+                 FontSize="18"
+                 Width="400"
+                                     HorizontalAlignment="Right"
                  Text="{Binding NewBooking.MAKH, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                 FontWeight="Medium"/>
+                 />
 
-                        </StackPanel>
+                        </Grid>
 
-                        <StackPanel Orientation="Horizontal">
+                        <Grid Height="50">
                             <TextBlock VerticalAlignment="Center"
                    HorizontalAlignment="Left"
                    Text="Mã chuyến"
-                   FontSize="20"
+                   FontSize="18"
                                        
                    FontWeight="Medium" Width="125" />
                             <ComboBox VerticalAlignment="Center"
-                 FontSize="20"
+                 FontSize="18"
                                       IsEditable="True"
                 ItemsSource="{Binding ListChuyen}"
                                       SelectedItem="{Binding NewBooking.MACHUYEN}"
-                                     Margin="62,0,0,0"
-                 Width="423"
-                 Foreground="{StaticResource Primary}"
+                 Width="400"
+                                      HorizontalAlignment="Right"
                  Text="{Binding NewBooking.MACHUYEN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                 FontWeight="Medium"/>
+                 />
 
-                        </StackPanel>
+                        </Grid>
 
-                        <StackPanel Height="50" Orientation="Horizontal">
+                        <Grid Height="50">
                             <TextBlock VerticalAlignment="Center"
                    HorizontalAlignment="Left"
                    Text="Tình trạng"
-                   FontSize="20"
+                   FontSize="18"
                    FontWeight="Medium"/>
                             <ComboBox VerticalAlignment="Center"
-                  FontSize="20"
-                  Width="236"
-                                      Margin="280,0,0,0"
+                  FontSize="18"
+                  Width="400"
+                                      HorizontalAlignment="Right"
                   IsEnabled="{Binding IsNew}"
                   ItemsSource="{Binding TinhTrangCbItems}"
                   SelectedItem="{Binding NewBooking.TINHTRANG, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                  Foreground="{StaticResource Primary}"
-                  FontWeight="Medium" />
+                   />
 
-                        </StackPanel>
+                        </Grid>
 
-                        <StackPanel Height="50" Orientation="Horizontal">
+                        <Grid  Height="50" >
                             <TextBlock VerticalAlignment="Center"
                    HorizontalAlignment="Left"
                    Text="Ngày đặt"
-                   FontSize="20"
+                   FontSize="18"
                    FontWeight="Medium"/>
-                            <DatePicker Margin="225,0,0,0" 
-                    SelectedDate="{Binding NewBooking.NGAYDAT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="300"></DatePicker>
-                        </StackPanel>
+                            <DatePicker FontSize="18"
+                    SelectedDate="{Binding NewBooking.NGAYDAT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="400"
+                                HorizontalAlignment="Right"></DatePicker>
+                        </Grid>
 
-                        <StackPanel Height="50" Orientation="Horizontal">
+                        <Grid Height="50" >
                             <TextBlock VerticalAlignment="Center"
                    HorizontalAlignment="Left"
-                   Text="Số lượng khách hàng"
-                   FontSize="20"
+                   Text="Số lượng hành khách"
+                   FontSize="18"
                    FontWeight="Medium"/>
                             <TextBox VerticalAlignment="Center"
-                 FontSize="20"
-                                     Margin="192,0,0,0"
-                 Width="221"
-                 TextAlignment="Right"
-                 Foreground="{StaticResource Primary}"
-                 Text="{Binding Count}"
-                 FontWeight="Medium"/>
+                 FontSize="18"
+                 Width="400"
+                                     HorizontalAlignment="Right"
+                 Text="{Binding Count}"/>
 
-                        </StackPanel>
+                        </Grid>
 
                         <StackPanel Height="50" Orientation="Horizontal">
                             <TextBlock VerticalAlignment="Center"
                    HorizontalAlignment="Left"
-                   Text="Danh sách khách hàng"
-                   FontSize="20"
+                   Text="Danh sách hành khách"
+                   FontSize="18"
                    FontWeight="Medium"/>
                         </StackPanel>
                         <StackPanel VerticalAlignment="Stretch">
@@ -157,7 +151,7 @@
                                         VerticalAlignment="Top"
                 ItemsSource="{Binding ListHKOfPhieu, UpdateSourceTrigger=PropertyChanged}"
                 AutoGenerateColumns="False"
-                BorderBrush="#e8a66d"
+                BorderBrush="{StaticResource Primary2}"
                 BorderThickness="1.5" 
                 RowDetailsVisibilityMode="VisibleWhenSelected"
                 ScrollViewer.CanContentScroll="True"
@@ -204,7 +198,7 @@
                                             <Trigger Property="IsSelected" Value="True">
                                                 <Setter Property="BorderThickness" Value="0" />
                                                 <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
-                                                <Setter Property="Background" Value="#e8a66d"/>
+                                                <Setter Property="Background" Value="{StaticResource Primary2}"/>
                                             </Trigger>
                                         </Style.Triggers>
                                     </Style>
@@ -308,11 +302,17 @@
                         <StackPanel>
                             <Button x:Name="AddButton" 
                             Content="{Binding BtnText}"
-                            Height="40"
                             Command="{Binding AddCommand}"
                             Style="{StaticResource MaterialDesignFlatDarkBgButton}"
-                            Background="{StaticResource Primary}"
-                              FontSize="20" Margin="0,5,0,5">
+                            VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                materialDesign:ButtonAssist.CornerRadius="20"
+                                BorderBrush="Transparent"
+                                Width="500"
+                                Height="40"
+                                FontSize="18"
+                                Background="{StaticResource Primary}"
+                                Foreground="White" Margin="0,20,0,5">
                             </Button>
                         </StackPanel>
 

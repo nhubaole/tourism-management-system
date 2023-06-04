@@ -63,7 +63,20 @@ namespace TourismManagementSystem.ViewModel
             });
 
             LogOutCommand = new RelayCommand<Window>((p) => { return p == null ? false : true; }, (p) => {
-                if (MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if(AdminRole == true)
+                {
+                    if (MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        var w = p as Window;
+                        if (w != null)
+                        {
+                            MainWindow main = new MainWindow();
+                            w.Close();
+                            main.Show();
+                        }
+                    }
+                }
+                else
                 {
                     var w = p as Window;
                     if (w != null)

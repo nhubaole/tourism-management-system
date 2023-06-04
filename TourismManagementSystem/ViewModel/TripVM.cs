@@ -11,6 +11,7 @@ using TourismManagementSystem.Model;
 using System.Windows.Input;
 using TourismManagementSystem.View;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace TourismManagementSystem.ViewModel
 {
@@ -21,6 +22,7 @@ namespace TourismManagementSystem.ViewModel
         public ICommand DeleteTripCommand { get; set; }
         public ICommand EditTripCommand { get; set; }
         public ICommand ViewTripCommand { get; set; }
+        public ICommand RadioButtonCommand { get; set; }
 
         private ObservableCollection<CHUYEN> _ChuyenList;
         public ObservableCollection<CHUYEN> ChuyenList { get => _ChuyenList; set { _ChuyenList = value; OnPropertyChanged(); } }
@@ -67,10 +69,20 @@ namespace TourismManagementSystem.ViewModel
                 OnPropertyChanged();
             }
         }
+        private bool _IsDisplay;
+
+        public bool IsDisplay { get => _IsDisplay; set { _IsDisplay = value; OnPropertyChanged(); } }
+        private bool _IsAdmin;
+        public bool IsAdmin { get => _IsAdmin; set { _IsAdmin = value; OnPropertyChanged(); } }
+
+        
 
 
         public TripVM()
         {
+            SelectedFilter = FilterCbItems[0];
+            IsDisplay = true;
+            IsAdmin = MainVM.AdminRole;
             ChuyenList = new ObservableCollection<CHUYEN>(DataProvider.Ins.DB.CHUYENs);
             AddTripCommand = new RelayCommand<object>((p) => true, (p) =>
             {
@@ -115,6 +127,18 @@ namespace TourismManagementSystem.ViewModel
                 TripDetailVM.SelectedChuyen = SelectedChuyen;
                 TripDetailsWindow tripDetailWindow = new TripDetailsWindow();
                 tripDetailWindow.ShowDialog();
+            });
+            RadioButtonCommand = new RelayCommand<UserControl>((p) => true, (p) =>
+            {
+                MainWindow mainWindow = Window.GetWindow(p) as MainWindow;
+                if (mainWindow != null)
+                {
+                    MainVM mainVM = mainWindow.DataContext as MainVM;
+                    if (mainVM != null)
+                    {
+                        mainVM.CurrentView = new TourVM();
+                    }
+                }
             });
         }
 

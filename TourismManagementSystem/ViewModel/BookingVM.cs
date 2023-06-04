@@ -61,6 +61,7 @@ namespace TourismManagementSystem.ViewModel
 
         public BookingVM()
         {
+            SelectedFilter = FilterCbItems[0];
             BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes);
             DeleteBookingCommand = new RelayCommand<object>((p) => true, (p) =>
             {

@@ -23,8 +23,11 @@ namespace TourismManagementSystem.ViewModel
         }
         private CHUYEN _chuyen;
         public CHUYEN CHUYEN { get => _chuyen; set { _chuyen = value; OnPropertyChanged(); } }
+        private bool _IsAdmin;
+        public bool IsAdmin { get => _IsAdmin; set { _IsAdmin = value; OnPropertyChanged(); } }
         public TripDetailVM()
         {
+            IsAdmin = MainVM.AdminRole;
             CHUYEN = SelectedChuyen;
             ListKhach = new ObservableCollection<HANHKHACH>(DataProvider.Ins.DB.HANHKHACHes.Where(k => k.PHIEUDATCHO.MACHUYEN.Equals(SelectedChuyen.MACHUYEN)));
         }
