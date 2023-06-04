@@ -53,12 +53,12 @@ namespace TourismManagementSystem.ViewModel
                 {
                     errors.Add("Please enter a valid phone number.");
                 }
-                if (!IsNumber(SDT))
+                else if (!IsNumber(SDT))
                 {
                     errors.Add("Please enter a valid phone number.");
 
                 }
-                if (SDT.Length!=10)
+                else if (SDT.Length!=10)
                 {
                     errors.Add("Please enter a valid phone number.");
 
@@ -72,11 +72,11 @@ namespace TourismManagementSystem.ViewModel
                 {
                     errors.Add("Please enter a valid 12-digit number.");
                 }
-                if ( !IsNumber(CCCD))
+                else if ( !IsNumber(CCCD))
                 {
                     errors.Add("Please enter a valid 12-digit number.");
                 }
-                if (cccd.Length != 12)
+                else if (cccd.Length != 12)
                 {
                     errors.Add("Please enter a valid 12-digit number.");
                 }
@@ -349,7 +349,7 @@ namespace TourismManagementSystem.ViewModel
                     string newCode = GenerateCode(GetLastGeneratedMAKH());
                     MAKH = newCode;
                     OnPropertyChanged(nameof(MAKH));
-
+                    
                     var temp = new KHACHHANG()
                     {
                         MAKH = MAKH,
@@ -359,15 +359,19 @@ namespace TourismManagementSystem.ViewModel
                         EMAIL = EMAIL,
                         DIACHI = DIACHI
                     };
-                   
+                        ListKhachhang.Add(temp);
                         DataProvider.Ins.DB.KHACHHANGs.Add(temp);
                         DataProvider.Ins.DB.SaveChanges();
-                        ListKhachhang.Add(temp);
+                       
                         MessageBox.Show(temp.MAKH);
-
+                        
 
                         MessageBox.Show("Đã tạo mới khách hàng thành công");
-
+                    HOTEN = null;
+                    CCCD = null;
+                    SDT = null;
+                    DIACHI=null;
+                    EMAIL = null;
                         
                     //LoadDataGrid();
 
