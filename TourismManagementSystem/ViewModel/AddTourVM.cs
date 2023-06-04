@@ -34,8 +34,20 @@ namespace TourismManagementSystem.ViewModel
                 Title = "Thêm mới tuyến du lịch";
                 BtnText = "Thêm";
                 newTour = new TUYEN();
-                Random random = new Random();
-                NewTour.MATUYEN = random.Next(0, 1000).ToString();
+                string formattedID;
+                ObservableCollection<TUYEN> ListTuyen = new ObservableCollection<TUYEN>(DataProvider.Ins.DB.TUYENs);
+                if (ListTuyen.Count() == 0)
+                {
+                    formattedID = string.Format("T{0:D7}", 1);
+                }
+                else
+                {
+                    string lastID = ListTuyen.Last().MATUYEN;
+                    int previousNumber = int.Parse(lastID.Substring(1));
+                    int nextNumber = previousNumber + 1;
+                    formattedID = string.Format("T{0:D7}", nextNumber);
+                }
+                NewTour.MATUYEN = formattedID;
             }
             else
             {

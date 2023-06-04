@@ -152,7 +152,9 @@ namespace TourismManagementSystem.ViewModel
                     {
                         LICHTRINH newLichTrinh = new LICHTRINH();
                         Random random = new Random();
-                        newLichTrinh.MALT = random.Next(1, 1000).ToString();
+                        int randomDigits = random.Next(0, 999999);
+                        string formattedID = string.Format("LT{0:D6}", randomDigits);
+                        newLichTrinh.MALT = formattedID;
                         newLichTrinh.DIADIEM = DDDi;
                         newLichTrinh.DIADIEM1 = DDDen;
                         foreach (var item in PhuongTienBoxes)
