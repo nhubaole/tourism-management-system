@@ -81,7 +81,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Border Margin="0,0,10,0" 
-                    Background="#23BED0"
+                    Background="#42cc83"
                     Grid.Column="0"
                     Height="140">
                 <Border.Clip>
@@ -115,7 +115,7 @@
                 </Grid>
             </Border>
             <Border Margin="0,0,10,0" 
-                    Background="#F59121"
+                    Background="#5c42cc"
                     Grid.Column="1">
                 <Border.Clip>
                     <RectangleGeometry RadiusX="20" RadiusY="20" Rect="0,0,276,140"/>
@@ -148,7 +148,7 @@
                 </Grid>
             </Border>
             <Border Margin="0,0,10,0" 
-                    Background="#FFD45B"
+                    Background="#cc4273"
                     Grid.Column="2">
                 <Border.Clip>
                     <RectangleGeometry RadiusX="20" RadiusY="20" Rect="0,0,276,140"/>
@@ -188,17 +188,15 @@
             </Grid.ColumnDefinitions>
             <Border Grid.Column="0"
                     CornerRadius="20"
-                    Margin="0,0,15,0">
-                <Border.Background>
-                    <SolidColorBrush Color="White" Opacity="0.5"/>
-                </Border.Background>
+                    Margin="0,0,15,0"
+                    Background="Transparent">
                 <Image Source="../Resource/Image/HomeImg.png" />
             </Border>
             <Border Grid.Column="1" 
                     CornerRadius="20"
                     Margin="0,0,10,0">
                 <Border.Background>
-                    <SolidColorBrush Color="White" Opacity="0.5"/>
+                    <SolidColorBrush Color="White" Opacity="0.8"/>
                 </Border.Background>
                 <StackPanel Orientation="Vertical"
                             Margin="20,10,20,10">
@@ -210,13 +208,15 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid>
-                                    <Border Margin="0,20,0,0"
+                                    <Button Margin="0,20,0,0"
                                             Width="Auto"
                                             Height="60"
                                             Background="{StaticResource Primary}"
-                                            CornerRadius="10">
+                                            materialDesign:ButtonAssist.CornerRadius="10"
+                                            Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                                            Command="{Binding DataContext.TripButtonCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                            CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Self}}">
                                         <StackPanel VerticalAlignment="Center" 
-                                                    Margin="10"
                                                     Orientation="Horizontal">
                                             <materialDesign:PackIcon Kind="Car"
                                                                      Width="50"
@@ -236,7 +236,7 @@
                                                            FontSize="14"/>
                                             </StackPanel>
                                         </StackPanel>
-                                    </Border>
+                                    </Button>
                                 </Grid>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>

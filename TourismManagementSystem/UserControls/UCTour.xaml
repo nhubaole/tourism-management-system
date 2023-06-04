@@ -63,7 +63,8 @@
                     BorderThickness="1" 
                     BorderBrush="Black" 
                     Height="40"
-                    Width="400">
+                    Width="400"
+                        Background="White">
                     <StackPanel Orientation="Horizontal">
                         <TextBox Width="200"
                              HorizontalAlignment="Left"
@@ -91,7 +92,7 @@
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"
                     Height="440"
-                    BorderBrush="#e8a66d"
+                    BorderBrush="{StaticResource Primary2}"
                     BorderThickness="1.5" 
                     RowDetailsVisibilityMode="VisibleWhenSelected"
                     ScrollViewer.CanContentScroll="True"
@@ -140,7 +141,7 @@
                             <Trigger Property="IsSelected" Value="True">
                                 <Setter Property="BorderThickness" Value="0" />
                                 <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
-                                <Setter Property="Background" Value="#e8a66d"/>
+                                <Setter Property="Background" Value="{StaticResource Primary2}"/>
                             </Trigger>
                         </Style.Triggers>
                     </Style>

@@ -19,27 +19,26 @@
     </Window.DataContext>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="600"/>
+            <ColumnDefinition Width="500"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0" Width="600" HorizontalAlignment="Left" Background="White">
             <Image Source="../Resource/Image/loginBackground.png" Margin="0,50,100,0" ></Image>
         </Grid>
-        <Grid Grid.Column="1" Background="{StaticResource Secondary}">
+        <Grid Grid.Column="1" Background="White">
             <StackPanel>
-                <TextBlock Text="Logo" 
-                           HorizontalAlignment="Center"
-                           FontSize="40"
-                           Margin="0,50,0,0"></TextBlock>
+                <Image HorizontalAlignment="Center"
+                       Source="../Resource/Image/logo.png"
+                       Width="200"></Image>
                 <TextBlock Text="Đăng nhập" 
                            HorizontalAlignment="Center"
                            FontSize="30"
+                           Margin="0,-20,0,0"
                            FontWeight="SemiBold"
-                           Margin="0,50,0,0"
                            Foreground="{StaticResource Primary}"></TextBlock>
                 <TextBox Width="300"
                          Style="{StaticResource MaterialDesignOutlinedTextBox}"
-                         Margin="0,50,0,0"
+                         Margin="0,30,0,0"
                          materialDesign:HintAssist.Hint="Tên đăng nhập"
                          FontSize="24"
                          materialDesign:HintAssist.Foreground="{StaticResource Primary}"

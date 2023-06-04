@@ -80,6 +80,7 @@ namespace TourismManagementSystem.ViewModel
 
         public TripVM()
         {
+            SelectedFilter = FilterCbItems[0];
             IsDisplay = true;
             IsAdmin = MainVM.AdminRole;
             ChuyenList = new ObservableCollection<CHUYEN>(DataProvider.Ins.DB.CHUYENs);

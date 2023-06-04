@@ -541,9 +541,6 @@
     <Resource Include="Resource\Image\loginBackground.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resource\Image\scheduleImg.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
@@ -554,8 +551,11 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-    <Resource Include="Resource\Image\HomeImg.png" />
     <Resource Include="Resource\Image\LoginRequireImg.png" />
+    <Resource Include="Resource\Image\logo.png" />
+    <Resource Include="Resource\Image\HomeImg.png" />
+    <Resource Include="Resource\Image\scheduleImg.png" />
+    <Resource Include="Resource\Image\ticketBg.jpg" />
     <Content Include="TourManagement.sql" />
   </ItemGroup>
   <ItemGroup>

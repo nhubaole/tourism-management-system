@@ -65,7 +65,8 @@
                     BorderThickness="1" 
                     BorderBrush="Black" 
                     Height="40"
-                    Width="400">
+                    Width="400"
+                        Background="White">
                     <StackPanel Orientation="Horizontal">
                         <TextBox Width="200"
                              HorizontalAlignment="Left"
@@ -92,12 +93,12 @@
             x:Name="dtgridDD"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
-            Height="400"
-            Margin="30, 0, 30, 10"
+            Height="440"
+            Margin="30,10,30,20"
             ItemsSource="{Binding ChuyenList, UpdateSourceTrigger=PropertyChanged}"
             SelectedItem="{Binding SelectedChuyen, Mode=OneWayToSource}"
             AutoGenerateColumns="False"
-            BorderBrush="#e8a66d"
+            BorderBrush="{StaticResource Primary2}"
             BorderThickness="1.5" 
             RowDetailsVisibilityMode="VisibleWhenSelected"
             ScrollViewer.CanContentScroll="True"
@@ -145,7 +146,7 @@
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="BorderThickness" Value="0" />
                             <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
-                            <Setter Property="Background" Value="#e8a66d"/>
+                            <Setter Property="Background" Value="{StaticResource Primary2}"/>
                         </Trigger>
                     </Style.Triggers>
                 </Style>
@@ -178,7 +179,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Loại chuyến" Binding="{Binding LOAICHUYEN}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                <DataGridTextColumn Header="Loại chuyến" Binding="{Binding LOAICHUYEN.TENLOAI}"  Width="*" IsReadOnly="True" CanUserSort="False">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="TextWrapping" Value="Wrap" />
