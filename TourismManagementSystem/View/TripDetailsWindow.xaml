@@ -38,24 +38,9 @@
                                FontWeight="Medium"/>
                 </Border>
                 <ScrollViewer Grid.Row="1">
-                    <Grid Grid.Row="1" 
+                    <StackPanel Grid.Row="1" 
                       Margin="80,5,80,5" >
-
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30*"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="30*"/>
-                            <RowDefinition Height="30*"/>
-                            <RowDefinition Height="30*"/>
-                            <RowDefinition Height="30*"/>
-                            <RowDefinition Height="30*"/>
-                            <RowDefinition Height="30*"/>
-                            <RowDefinition Height="30*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
+                        <StackPanel Orientation="Horizontal" Height="50">
                             <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Text="Mã chuyến"
@@ -64,13 +49,14 @@
                             <TextBlock VerticalAlignment="Center"
                                  HorizontalAlignment="Right"
                                  FontSize="20"
+                                       Margin="200,0,0,0"
                                  Text="{Binding CHUYEN.MACHUYEN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                 Width="400"
+                                 Width="300"
                                  Foreground="{StaticResource Primary}"
                                  FontWeight="Medium" TextAlignment="Right"/>
-                        </Grid>
-                        <Grid Grid.Row="1">
-                            <TextBlock VerticalAlignment="Top"
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50">
+                            <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Text="Mã tuyến"
                                    FontSize="20"
@@ -79,11 +65,12 @@
                                  HorizontalAlignment="Right"
                                  FontSize="20"
                                  Text="{Binding CHUYEN.MATUYEN,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                 Width="400"
+                                 Width="300"
+                                  Margin="215,0,0,0"
                                  Foreground="{StaticResource Primary}"
                                  FontWeight="Medium" TextAlignment="Right"/>
-                        </Grid>
-                        <Grid Grid.Row="2">
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50">
                             <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Text="Loại chuyến"
@@ -92,21 +79,21 @@
                             <TextBlock VerticalAlignment="Center"
                                  HorizontalAlignment="Right"
                                  FontSize="20"
-                                 Width="400"
+                                 Width="300"
                                  Text="{Binding CHUYEN.LOAICHUYEN,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                  Foreground="{StaticResource Primary}"
-                                 FontWeight="Medium" Grid.Column="1" Margin="160,0,0,0" TextAlignment="Right">
+                                 FontWeight="Medium" Grid.Column="1" Margin="170,0,0,0" TextAlignment="Right">
                             </TextBlock>
-                        </Grid>
-                        <Grid Grid.Row="3" >
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50" >
                             <TextBlock VerticalAlignment="Top"
                                    HorizontalAlignment="Left"
-                                   Text="Mã HDV"
+                                   Text="Danh sách HDV"
                                    FontSize="20"
                                    FontWeight="Medium"/>
 
-                        </Grid>
-                        <Grid Grid.Row="4">
+                        </StackPanel>
+                        <StackPanel VerticalAlignment="Center">
                             <DataGrid 
             Grid.Row="1"
             x:Name="dtgridHDV"
@@ -199,9 +186,9 @@
                                 </DataGrid.Columns>
                             </DataGrid>
 
-                        </Grid>
-                        <Grid Grid.Row="5" >
-                            <TextBlock VerticalAlignment="Top"
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50" >
+                            <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Text="Thời gian bắt đầu"
                                    FontSize="20"
@@ -209,12 +196,15 @@
                             <TextBlock VerticalAlignment="Center"
                                        HorizontalAlignment="Right"
                                  FontSize="20"
+                                Width="200"
+                                       Margin="240,0,0,0"
+
                                  Text="{Binding CHUYEN.TGBATDAU, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                  Foreground="{StaticResource Primary}"
                                  FontWeight="Medium" TextAlignment="Right"/>
-                        </Grid>
-                        <Grid Grid.Row="6">
-                            <TextBlock VerticalAlignment="Top"
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50">
+                            <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Text="Thời gian kết thúc"
                                    FontSize="20"
@@ -222,15 +212,18 @@
                             <TextBlock VerticalAlignment="Center"
                                        HorizontalAlignment="Right"
                                  FontSize="20"
+                                       Width="200"
+                                       Margin="235,0,0,0"
                                  Text="{Binding CHUYEN.TGKETTHUC, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                  Foreground="{StaticResource Primary}"
-                                 FontWeight="Medium" Margin="160,-10,0,0" TextAlignment="Right"/>
-                        </Grid>
-                        <Grid Grid.Row="7">
-                            <TextBlock VerticalAlignment="Top"
+                                 FontWeight="Medium" TextAlignment="Right"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50">
+                            <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Text="Giá vé"
                                    FontSize="20"
+                                       Width="200"
                                    FontWeight="Medium"/>
                             <StackPanel Orientation="Horizontal"
                                     VerticalAlignment="Center"
@@ -247,9 +240,9 @@
                                        Margin="10,0,0,0"/>
                             </StackPanel>
 
-                        </Grid>
-                        <Grid Grid.Row="8">
-                            <TextBlock VerticalAlignment="Top"
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50">
+                            <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Text="Số lượng khách dự kiến"
                                    FontSize="20"
@@ -261,14 +254,14 @@
                                  Width="400"
                                  Foreground="{StaticResource Primary}"
                                  FontWeight="Medium" TextAlignment="Right"/>
-                        </Grid>
-                        <Grid Grid.Row="9">
-                            <TextBlock VerticalAlignment="Top"
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50">
+                            <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Text="Số lượng khách thực tế"
                                    FontSize="20"
                                    FontWeight="Medium" Grid.ColumnSpan="2"/>
-                            <TextBlock VerticalAlignment="Top"
+                            <TextBlock VerticalAlignment="Center"
                                  HorizontalAlignment="Right"
                                  FontSize="20"
                                  Text="{Binding CHUYEN.SLTHUCTE, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
@@ -276,15 +269,15 @@
                                  Foreground="{StaticResource Primary}"
                                  FontWeight="Medium" TextAlignment="Right"/>
 
-                        </Grid>
-                        <Grid Grid.Row="10">
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50">
                             <TextBlock VerticalAlignment="Top"
                                    HorizontalAlignment="Left"
                                    Text="Danh sách hành khách:"
                                    FontSize="20"
                                    FontWeight="Medium" Grid.ColumnSpan="2"/>
-                        </Grid>
-                        <Grid Grid.Row="11">
+                        </StackPanel>
+                        <StackPanel VerticalAlignment="Center">
                             <DataGrid 
             Grid.Row="1"
             x:Name="dtgridDD"
@@ -389,9 +382,8 @@
                                     </DataGridTextColumn>
                                 </DataGrid.Columns>
                             </DataGrid>
-                        </Grid>
-
-                    </Grid>
+                        </StackPanel>
+                    </StackPanel>
                 </ScrollViewer>
             </Grid>
         </Border>

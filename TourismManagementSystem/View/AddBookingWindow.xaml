@@ -52,9 +52,8 @@
                    FontSize="20"
                    FontWeight="Medium"/>
                             <TextBox VerticalAlignment="Center"
-                 HorizontalAlignment="Right"
                  FontSize="20"
-                 Width="400"
+                 Width="429"
                  TextAlignment="Right"
                                      Margin="100,0,0,0"
                  Foreground="{StaticResource Primary}"
@@ -69,11 +68,10 @@
                    FontSize="20"
                    FontWeight="Medium" Width="151" />
                             <TextBox VerticalAlignment="Center"
-                 HorizontalAlignment="Right"
                                      Margin="36,0,0,0"
                  TextAlignment="Right"
                  FontSize="20"
-                 Width="400"
+                 Width="423"
                  Foreground="{StaticResource Primary}"
                  Text="{Binding NewBooking.MAKH, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                  FontWeight="Medium"/>
@@ -88,13 +86,12 @@
                                        
                    FontWeight="Medium" Width="125" />
                             <ComboBox VerticalAlignment="Center"
-                 HorizontalAlignment="Right"
                  FontSize="20"
                                       IsEditable="True"
                 ItemsSource="{Binding ListChuyen}"
                                       SelectedItem="{Binding NewBooking.MACHUYEN}"
                                      Margin="62,0,0,0"
-                 Width="400"
+                 Width="423"
                  Foreground="{StaticResource Primary}"
                  Text="{Binding NewBooking.MACHUYEN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                  FontWeight="Medium"/>
@@ -109,7 +106,7 @@
                    FontWeight="Medium"/>
                             <ComboBox VerticalAlignment="Center"
                   FontSize="20"
-                  Width="211"
+                  Width="236"
                                       Margin="280,0,0,0"
                   IsEnabled="{Binding IsNew}"
                   ItemsSource="{Binding TinhTrangCbItems}"
@@ -125,8 +122,8 @@
                    Text="Ngày đặt"
                    FontSize="20"
                    FontWeight="Medium"/>
-                            <DatePicker Margin="220,0,0,0"
-                    SelectedDate="{Binding NewBooking.NGAYDAT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="282"></DatePicker>
+                            <DatePicker Margin="225,0,0,0" 
+                    SelectedDate="{Binding NewBooking.NGAYDAT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="300"></DatePicker>
                         </StackPanel>
 
                         <StackPanel Height="50" Orientation="Horizontal">
@@ -136,10 +133,9 @@
                    FontSize="20"
                    FontWeight="Medium"/>
                             <TextBox VerticalAlignment="Center"
-                 HorizontalAlignment="Right"
                  FontSize="20"
                                      Margin="192,0,0,0"
-                 Width="200"
+                 Width="221"
                  TextAlignment="Right"
                  Foreground="{StaticResource Primary}"
                  Text="{Binding Count}"
@@ -155,7 +151,7 @@
                    FontWeight="Medium"/>
                         </StackPanel>
                         <StackPanel VerticalAlignment="Stretch">
-                                <DataGrid 
+                            <DataGrid 
                 Grid.Row="1"
                 x:Name="dtgridKH"
                                         VerticalAlignment="Top"
@@ -176,44 +172,44 @@
                 IsReadOnly="False"
                 GridLinesVisibility="None"
                    >
-                                    <DataGrid.ColumnHeaderStyle>
-                                        <Style TargetType="DataGridColumnHeader">
-                                            <Setter Property="HorizontalContentAlignment" Value="Center" />
-                                            <Setter Property="VerticalContentAlignment" Value="Center" />
-                                            <Setter Property="Background" Value="Transparent"/>
-                                            <Setter Property="Foreground" Value="{StaticResource Primary}"/>
-                                            <Setter Property="Margin" Value="0, 10, 0, 10"/>
-                                            <Setter Property="FontSize" Value="14"/>
-                                            <Setter Property="FontWeight" Value="Bold"/>
+                                <DataGrid.ColumnHeaderStyle>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="{StaticResource Primary}"/>
+                                        <Setter Property="Margin" Value="0, 10, 0, 10"/>
+                                        <Setter Property="FontSize" Value="14"/>
+                                        <Setter Property="FontWeight" Value="Bold"/>
 
-                                        </Style>
-                                    </DataGrid.ColumnHeaderStyle>
-                                    <DataGrid.Resources>
-                                        <SolidColorBrush x:Key="DataGridCellFocusBorderBrush" Color="Transparent" />
-                                        <Style TargetType="DataGridCell">
-                                            <Setter Property="HorizontalAlignment" Value="Center" />
-                                            <Setter Property="VerticalAlignment" Value="Center" />
-                                            <Style.Triggers>
-                                                <Trigger Property="IsSelected" Value="True">
-                                                    <Setter Property="BorderThickness" Value="0" />
-                                                    <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
-                                                    <Setter Property="Background" Value="Transparent"/>
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                        <Style TargetType="DataGridRow">
-                                            <Setter Property="HorizontalAlignment" Value="Center" />
-                                            <Setter Property="VerticalAlignment" Value="Center" />
-                                            <Style.Triggers>
-                                                <Trigger Property="IsSelected" Value="True">
-                                                    <Setter Property="BorderThickness" Value="0" />
-                                                    <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
-                                                    <Setter Property="Background" Value="#e8a66d"/>
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </DataGrid.Resources>
-                                    <DataGrid.Columns >
+                                    </Style>
+                                </DataGrid.ColumnHeaderStyle>
+                                <DataGrid.Resources>
+                                    <SolidColorBrush x:Key="DataGridCellFocusBorderBrush" Color="Transparent" />
+                                    <Style TargetType="DataGridCell">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="BorderThickness" Value="0" />
+                                                <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
+                                                <Setter Property="Background" Value="Transparent"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                    <Style TargetType="DataGridRow">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="BorderThickness" Value="0" />
+                                                <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
+                                                <Setter Property="Background" Value="#e8a66d"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGrid.Resources>
+                                <DataGrid.Columns >
                                     <DataGridTemplateColumn Header="Mã hành khách"  Width="100" CanUserSort="False">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
@@ -222,91 +218,91 @@
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
                                     <DataGridTemplateColumn Header="Họ tên"  Width="200" CanUserSort="False">
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <TextBox Width="200" Text="{Binding HOTEN}" />
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
-                                        <DataGridTemplateColumn Header="Giới tính"  Width="100" CanUserSort="False">
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <TextBox Width="100" Text="{Binding GIOITINH}" />
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
-                                        <DataGridTemplateColumn Header="Ngày sinh" Width="100">
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <DatePicker SelectedDate="{Binding NGSINH}" />
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
-                                        <DataGridTemplateColumn Header="Địa chỉ"  Width="200" CanUserSort="False">
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <TextBox Width="200" Text="{Binding DIACHI}" />
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
-                                        <DataGridTemplateColumn Header="Số điện thoại"  Width="150" CanUserSort="False">
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <TextBox Width="150" Text="{Binding SDT}" />
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
-                                        <DataGridTemplateColumn Header="CCCD"  Width="150" CanUserSort="False">
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <TextBox Width="150" Text="{Binding CCCD}" />
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
-                                        <DataGridTemplateColumn Header="Passport"  Width="150" CanUserSort="False">
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <TextBox Width="150" Text="{Binding PASSPORT}" />
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
-                                        <DataGridTemplateColumn Width="200" Header="Ngày hết hạn Passport">
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <DatePicker SelectedDate="{Binding NGAYHETHANPASSPORT}" />
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
-                                        <DataGridTemplateColumn Width="200" Header="Ngày hết hạn Visa">
-                                            <DataGridTemplateColumn.CellTemplate>
-                                                <DataTemplate>
-                                                    <DatePicker SelectedDate="{Binding NGAYHETHANVISA}" />
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn>
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Width="200" Text="{Binding HOTEN}" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Giới tính"  Width="100" CanUserSort="False">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Width="100" Text="{Binding GIOITINH}" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Ngày sinh" Width="100">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <DatePicker SelectedDate="{Binding NGSINH}" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Địa chỉ"  Width="200" CanUserSort="False">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Width="200" Text="{Binding DIACHI}" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Số điện thoại"  Width="150" CanUserSort="False">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Width="150" Text="{Binding SDT}" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="CCCD"  Width="150" CanUserSort="False">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Width="150" Text="{Binding CCCD}" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Header="Passport"  Width="150" CanUserSort="False">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBox Width="150" Text="{Binding PASSPORT}" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Width="200" Header="Ngày hết hạn Passport">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <DatePicker SelectedDate="{Binding NGAYHETHANPASSPORT}" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Width="200" Header="Ngày hết hạn Visa">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <DatePicker SelectedDate="{Binding NGAYHETHANVISA}" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
 
-                                        <!-- Các cột khác -->
-                                        <DataGridTemplateColumn Header="" 
+                                    <!-- Các cột khác -->
+                                    <DataGridTemplateColumn Header="" 
                                             Width="auto"
                                             >
-                                            <DataGridTemplateColumn.CellTemplate >
-                                                <DataTemplate >
-                                                    <Button
+                                        <DataGridTemplateColumn.CellTemplate >
+                                            <DataTemplate >
+                                                <Button
                                         Height="auto"
                                         Width="auto"
                                         Background="Transparent"
                                         BorderBrush="Transparent"
                                         Command="{Binding DataContext.DeleteKhachCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                         CommandParameter="{Binding}">
-                                                        <materialDesign:PackIcon Kind="Delete"
+                                                    <materialDesign:PackIcon Kind="Delete"
                                                                  Foreground ="{StaticResource Primary}"/>
-                                                    </Button>
-                                                </DataTemplate>
-                                            </DataGridTemplateColumn.CellTemplate>
-                                        </DataGridTemplateColumn >
+                                                </Button>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn >
 
-                                    </DataGrid.Columns>
-                                </DataGrid>
+                                </DataGrid.Columns>
+                            </DataGrid>
 
                         </StackPanel>
                         <StackPanel>

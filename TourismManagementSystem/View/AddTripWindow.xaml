@@ -38,76 +38,59 @@
                                FontWeight="Medium"/>
                 </Border>
                 <ScrollViewer Grid.Row="1">
-                    <Grid Grid.Row="1" 
+                    <StackPanel Grid.Row="1" 
                       Margin="80,5,80,5">
-
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
+                        <StackPanel Orientation="Horizontal" Height="50">
                             <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Text="Mã chuyến"
                                    FontSize="20"
                                    FontWeight="Medium"/>
                             <TextBox VerticalAlignment="Center"
-                                 HorizontalAlignment="Right"
                                  FontSize="20"
-                                 Width="400"
+                                 Width="315"
+                                     Margin="185,0,0,0"
+                                     TextAlignment="Right"
                                  Foreground="{StaticResource Primary}"
                                  Text="{Binding NewTrip.MACHUYEN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                  FontWeight="Medium"/>
-                        </Grid>
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="13*"/>
-                                <ColumnDefinition Width="54*"/>
-                                <ColumnDefinition Width="61*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock VerticalAlignment="Top"
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50">
+                            <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Text="Mã tuyến"
                                    FontSize="20"
                                    FontWeight="Medium" Grid.ColumnSpan="2" Width="100" />
                             <ComboBox
+                                Margin="200,0,0,0"
+                                VerticalAlignment="Center"
+                                 HorizontalAlignment="Right"
+                                Width="300"
                                  FontSize="20"
                                  Foreground="{StaticResource Primary}"
                                  ItemsSource="{Binding ListTuyen}"
                                  SelectedItem="{Binding NewTrip.MATUYEN}"
-                                 FontWeight="Medium" Grid.Column="1" Grid.ColumnSpan="2" Margin="175,0,0,0"/>
+                                 FontWeight="Medium" />
 
-                        </Grid>
-                        <Grid Grid.Row="2" >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="7*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock VerticalAlignment="Top"
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50" >
+                            <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Text="Loại chuyến"
                                    FontSize="20"
                                    FontWeight="Medium" Grid.ColumnSpan="2" Width="125" />
                             <ComboBox VerticalAlignment="Center"
-                                 HorizontalAlignment="Left"
+                                 HorizontalAlignment="Right"
                                  FontSize="20"
-                                 Width="400"
+                                    Margin="170,0,0,0"
+                                 Width="300"
                                  Foreground="{StaticResource Primary}"
                                  ItemsSource="{Binding ListLoaiChuyen}"
                                  SelectedItem="{Binding NewTrip.LOAICHUYEN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                 FontWeight="Medium" Grid.Column="1" Margin="160,0,0,0">
+                                 FontWeight="Medium">
                             </ComboBox>
-                        </Grid>
-                        <Grid x:Name="hdvgrid" Grid.Row="3" >
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50" >
                             <TextBlock VerticalAlignment="Top"
                                    HorizontalAlignment="Left"
                                    Text="Mã HDV"
@@ -124,16 +107,16 @@
                         materialDesign:ButtonAssist.CornerRadius="10"
                         BorderThickness="0"
                         Command="{Binding AddHDV}"
-                        CommandParameter="{Binding SelectedHDV}"
-                        Margin="115,0,0,0"   
-                            >
+                        CommandParameter="{Binding SelectedHDVMaSo}"
+                        Margin="50,0,0,0"  >
                                 <TextBlock Text="+" FontSize="20"/>
                             </Button>
 
                             <ComboBox VerticalAlignment="Top"
                                  HorizontalAlignment="Right"
                                  FontSize="20"
-                                 Width="400"
+                                      Margin="140,0,0,0"
+                                 Width="300"
                                  ItemsSource="{Binding ListHDV}"
                                  SelectedItem="{Binding SelectedHDVMaSo, Mode=TwoWay}"
                                   
@@ -141,8 +124,8 @@
                                  FontWeight="Medium" Height="27"/>
                             <Grid HorizontalAlignment="Left" Height="42" Margin="230,0,0,0" VerticalAlignment="Center" Width="410"/>
 
-                        </Grid>
-                        <Grid Grid.Row="4">
+                        </StackPanel>
+                        <StackPanel VerticalAlignment="Stretch">
                             <DataGrid 
             Grid.Row="1"
             x:Name="dtgridPDC"
@@ -254,29 +237,30 @@
                                 </DataGrid.Columns>
                             </DataGrid>
 
-                        </Grid>
-                        <Grid Grid.Row="5" >
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50">
                             <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Text="Thời gian bắt đầu"
                                    FontSize="20"
                                    FontWeight="Medium"/>
-                            <DatePicker Margin="240,0,0,0"
+                            <DatePicker Margin="230,0,0,0" Width="200"
                                     SelectedDate="{Binding NewTrip.TGBATDAU, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></DatePicker>
-                        </Grid>
-                        <Grid Grid.Row="6">
-                            <TextBlock VerticalAlignment="Top"
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50">
+                            <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Text="Thời gian kết thúc"
                                    FontSize="20"
                                    FontWeight="Medium"/>
-                            <DatePicker Margin="240,0,0,0"
+                            <DatePicker Margin="228,0,0,0"  Width="200"
                                     SelectedDate="{Binding NewTrip.TGKETTHUC, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                     ></DatePicker>
-                        </Grid>
-                        <Grid Grid.Row="7">
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50">
                             <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
+                                       Width=""
                                    Text="Giá vé"
                                    FontSize="20"
                                    FontWeight="Medium"/>
@@ -296,38 +280,37 @@
                                        Margin="10,0,0,0"/>
                             </StackPanel>
 
-                        </Grid>
-                        <Grid Grid.Row="8">
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50">
                             <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Text="Số lượng khách dự kiến"
                                    FontSize="20"
                                    FontWeight="Medium"/>
                             <TextBox VerticalAlignment="Center"
-                                 HorizontalAlignment="Right"
                                  FontSize="20"
-                                 Width="400"
+                                 Width="380"
                                  Text="{Binding NewTrip.SLTOITHIEU, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                  Foreground="{StaticResource Primary}"
                                  FontWeight="Medium"/>
-                        </Grid>
-                        <Grid Grid.Row="9">
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Height="50">
                             <TextBlock VerticalAlignment="Center"
                                    HorizontalAlignment="Left"
                                    Text="Số lượng khách thực tế"
                                    FontSize="20"
                                    FontWeight="Medium"/>
                             <TextBox VerticalAlignment="Center"
-                                 HorizontalAlignment="Right"
                                  FontSize="20"
-                                 Width="400"
+                                 Width="394"
                                  Text="{Binding NewTrip.SLTHUCTE, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                  Foreground="{StaticResource Primary}"
                                  FontWeight="Medium"/>
 
-                        </Grid>
-                        <Grid Grid.Row="10">
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" VerticalAlignment="Center"  Height="50">
                             <Button x:Name="AddButton" 
+                                    HorizontalAlignment="Center"
                             Content="{Binding BtnText}"
                             Height="40"
                             Command="{Binding AddCommand}"
@@ -336,8 +319,8 @@
                               FontSize="20" Margin="0,5,0,5">
 
                             </Button>
-                        </Grid>
-                    </Grid>
+                        </StackPanel>
+                    </StackPanel>
                 </ScrollViewer>
             </Grid>
         </Border>
