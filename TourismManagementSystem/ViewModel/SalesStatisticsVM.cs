@@ -87,8 +87,8 @@ namespace TourismManagementSystem.ViewModel
             set
             {
                 _Month = value;
-                dayCollection =  GetDaysInMonth(Year, Month);
-                OnPropertyChanged(nameof(dayCollection));
+                labelCollection =  GetDaysInMonth(Year, Month);
+                OnPropertyChanged(nameof(labelCollection));
 
                 if (_Month != 0)
                 {
@@ -150,14 +150,14 @@ namespace TourismManagementSystem.ViewModel
             }
         }
 
-        private List<int> _dayCollection;
-        public List<int> dayCollection
+        private List<int> _labelCollection;
+        public List<int> labelCollection
         {
-            get { return _dayCollection; }
+            get { return _labelCollection; }
             set
             {
-                _dayCollection = value;
-                OnPropertyChanged("ThangCollection");
+                _labelCollection = value;
+                OnPropertyChanged();
             }
         }
 
@@ -165,7 +165,7 @@ namespace TourismManagementSystem.ViewModel
         {
             FilterItems1 = new ObservableCollection<String>(new List<string> { "Tháng", "Năm" });
             seriesCollection = new SeriesCollection();
-            dayCollection = new List<int>();
+            labelCollection = new List<int>();
 
             Filter1 = "Năm";
         }
