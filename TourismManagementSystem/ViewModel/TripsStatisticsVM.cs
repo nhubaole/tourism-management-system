@@ -293,20 +293,20 @@ namespace TourismManagementSystem.ViewModel
                 };
 
                 // Xóa dữ liệu cũ trong biểu đồ
-                seriesCollection1.Clear();
+                seriesCollection2.Clear();
 
                 // Thêm chuỗi dữ liệu vào SeriesCollection
-                seriesCollection1.Add(domesticSeries);
-                seriesCollection1.Add(internationalSeries);
+                seriesCollection2.Add(domesticSeries);
+                seriesCollection2.Add(internationalSeries);
             }
             else if (Filter1 == "Tháng" && Year != 0 && Month != 0)
             {
                 // Lấy số lượng chuyến thành công và chuyến bị hủy trong tháng và năm được chọn
                 int domesticCount = DataProvider.Ins.DB.CHUYENs
-                     .Count(t => t.TGBATDAU.HasValue && t.TGBATDAU.Value.Year == Year && t.TGBATDAU.Value.Month == Month && t.LOAICHUYEN.MALOAI == "DOMESTIC");
+                     .Count(t => t.TGBATDAU.HasValue && t.TGBATDAU.Value.Year == Year && t.TGBATDAU.Value.Month == Month && t.LOAICHUYEN.MALOAI == "Nước ngoài");
 
                 int internationalCount = DataProvider.Ins.DB.CHUYENs
-                    .Count(t => t.TGBATDAU.HasValue && t.TGBATDAU.Value.Year == Year && t.TGBATDAU.Value.Month == Month && t.LOAICHUYEN.MALOAI == "INTERNATIONAL");
+                    .Count(t => t.TGBATDAU.HasValue && t.TGBATDAU.Value.Year == Year && t.TGBATDAU.Value.Month == Month && t.LOAICHUYEN.MALOAI == "Trong nước");
 
                 PieSeries domesticSeries = new PieSeries
                 {
@@ -323,13 +323,12 @@ namespace TourismManagementSystem.ViewModel
                     LabelPoint = chartPoint => chartPoint.Y.ToString()
                 };
 
-
                 // Xóa dữ liệu cũ trong biểu đồ
-                seriesCollection1.Clear();
+                seriesCollection2.Clear();
 
                 // Thêm chuỗi dữ liệu vào SeriesCollection
-                seriesCollection1.Add(domesticSeries);
-                seriesCollection1.Add(internationalSeries);
+                seriesCollection2.Add(domesticSeries);
+                seriesCollection2.Add(internationalSeries);
             }
         }
         public List<int> GetYears()
