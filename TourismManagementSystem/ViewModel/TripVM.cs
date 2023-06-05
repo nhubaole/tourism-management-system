@@ -137,6 +137,7 @@ namespace TourismManagementSystem.ViewModel
                     if (mainVM != null)
                     {
                         mainVM.CurrentView = new TourVM();
+                        mainVM.PageTitle = "Quản lý tuyến du lịch";
                     }
                 }
             });

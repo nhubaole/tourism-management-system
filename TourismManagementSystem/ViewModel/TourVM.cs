@@ -79,6 +79,7 @@ namespace TourismManagementSystem.ViewModel
                     if (mainVM != null)
                     {
                         mainVM.CurrentView = new TripVM();
+                        mainVM.PageTitle = "Quản lý chuyến du lịch";
                     }
                 }
             });
