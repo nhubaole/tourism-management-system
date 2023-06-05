@@ -1,4 +1,5 @@
-﻿using LiveCharts;
+﻿using iTextSharp.text;
+using LiveCharts;
 using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
@@ -47,11 +48,8 @@ namespace TourismManagementSystem.ViewModel
                 _Filter1 = value;
                 seriesCollection.Clear();
                 TimeOfChart = null;
-                Year = 0; Month = 0;
                 OnPropertyChanged(nameof(seriesCollection));
                 OnPropertyChanged(nameof(TimeOfChart));
-                OnPropertyChanged(nameof(Year));
-                OnPropertyChanged(nameof(Month));
                 OnPropertyChanged();
                 UpdateFilterYear();
             }
@@ -87,7 +85,6 @@ namespace TourismManagementSystem.ViewModel
             set
             {
                 _Month = value;
-                labelCollection =  GetDaysInMonth(Year, Month);
                 OnPropertyChanged(nameof(labelCollection));
 
                 if (_Month != 0)
@@ -107,6 +104,8 @@ namespace TourismManagementSystem.ViewModel
             set
             {
                 _Year = value;
+                Month = 0;
+                OnPropertyChanged(nameof(Month));
                 if (Year != 0)
                 {
                     if (Filter1 == "Tháng")
@@ -150,8 +149,8 @@ namespace TourismManagementSystem.ViewModel
             }
         }
 
-        private List<int> _labelCollection;
-        public List<int> labelCollection
+        private List<string> _labelCollection;
+        public List<string> labelCollection
         {
             get { return _labelCollection; }
             set
@@ -165,7 +164,7 @@ namespace TourismManagementSystem.ViewModel
         {
             FilterItems1 = new ObservableCollection<String>(new List<string> { "Tháng", "Năm" });
             seriesCollection = new SeriesCollection();
-            labelCollection = new List<int>();
+            labelCollection = new List<string>();
 
             Filter1 = "Năm";
         }
@@ -189,6 +188,9 @@ namespace TourismManagementSystem.ViewModel
                 CanChoseYear = false;
                 CanChoseMonth = false;
             }
+            OnPropertyChanged(nameof(CanChoseYear));
+            OnPropertyChanged(nameof(CanChoseMonth));
+
         }
         public List<int> GetYears()
         {
@@ -200,7 +202,7 @@ namespace TourismManagementSystem.ViewModel
             return years;
         }
 
-        public List<int> GetMonthsForYear(int year)
+        public List<int> GetMonthsForYear(int year) // lấy tháng trong database
         {
             List<int> months = new List<int>();
 
@@ -249,40 +251,41 @@ namespace TourismManagementSystem.ViewModel
             if (Filter1 == "Tháng" && Year != 0 && Month != 0)
             {
                 List<int> daysInMonth = GetDaysInMonth(Year, Month);
-
+                ChartValues<int> statistic = new ChartValues<int>();
                 foreach (int day in daysInMonth)
                 {
                     int revenueValue = GetRevenueForDay(day, Month, Year); // Hàm để lấy doanh thu cho ngày cụ thể
-
-                    ColumnSeries dayRevenueSeries = new ColumnSeries
-                    {
-                        Title = $"{day}",
-                        Values = new ChartValues<int> { revenueValue },
-                        DataLabels = true
-                    };
-
-                    seriesCollection.Add(dayRevenueSeries);
+                    statistic.Add(revenueValue);   
+                    labelCollection.Add("Ngày " + day.ToString());
                 }
-                
+                ColumnSeries dayRevenueSeries = new ColumnSeries
+                {
+                    //Title = $"{day}",
+                    Title = "Doanh thu",
+                    Values = statistic,
+                    DataLabels = true
+                };
+                seriesCollection.Add(dayRevenueSeries);
             }
             else if (Filter1 == "Năm" && Year != 0)
             {
                 List<int> monthsInYear = GetMonthsInYear();
-               
-                // Lấy doanh thu cho từng ngày trong tháng
+                ChartValues<int> statistic  = new ChartValues<int> {}; 
                 foreach (int month in monthsInYear)
                 {
                     int revenueValue = GetRevenueForMonth(month, Year); // Hàm để lấy doanh thu cho thngs cụ thể
-
-                    ColumnSeries MonthRevenueSeries = new ColumnSeries
-                    {
-                        Title = $"{month}",
-                        Values = new ChartValues<int> { revenueValue },
-                        DataLabels = true
-                    };
-
-                    seriesCollection.Add(MonthRevenueSeries);
+                    statistic.Add (revenueValue);
+                    labelCollection.Add("Tháng " + month.ToString());
+                    
                 }
+                ColumnSeries MonthRevenueSeries = new ColumnSeries
+                {
+                    Title = "Doanh thu",
+                    Values = statistic,
+                    DataLabels = true
+                };
+
+                seriesCollection.Add(MonthRevenueSeries);
             }
         }
 
@@ -309,5 +312,7 @@ namespace TourismManagementSystem.ViewModel
 
             return Revenue;
         }
+        
     }
+
 }
