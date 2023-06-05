@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using TourismManagementSystem.Model;
@@ -36,7 +37,28 @@ namespace TourismManagementSystem.ViewModel
         public String Filter { get { return _Filter; } set { _Filter = value; OnPropertyChanged(); CanWrite = !string.IsNullOrEmpty(value); } }
 
         private String _SearchTerm;
-        public String SearchTerm { get { return _SearchTerm; } set { _SearchTerm = value; OnPropertyChanged(); } }
+        public String SearchTerm { 
+            get { return _SearchTerm; } 
+            set { 
+                _SearchTerm = value; OnPropertyChanged();
+                if (Filter == cmbItems[0])
+                {
+                    SearchResult = new ObservableCollection<DIADIEM>(DataProvider.Ins.DB.DIADIEMs.Where(t => t.MADD.Contains(SearchTerm)));
+                }
+                else if (Filter == cmbItems[1])
+                {
+                    SearchResult = new ObservableCollection<DIADIEM>(DataProvider.Ins.DB.DIADIEMs.Where(t => t.TENDD.Contains(SearchTerm)));
+                }
+                else if (Filter == cmbItems[2])
+                {
+                    SearchResult = new ObservableCollection<DIADIEM>(DataProvider.Ins.DB.DIADIEMs.Where(t => t.DIACHI.Contains(SearchTerm)));
+                }
+                else if (Filter == cmbItems[3])
+                {
+                    SearchResult = new ObservableCollection<DIADIEM>(DataProvider.Ins.DB.DIADIEMs.Where(t => t.MOTA.Contains(SearchTerm)));
+                }
+            } 
+        }
 
         private DIADIEM _selectedItem;
         public DIADIEM selectedItem { get { return _selectedItem; } set { _selectedItem = value; OnPropertyChanged(); } }
@@ -73,15 +95,18 @@ namespace TourismManagementSystem.ViewModel
             set { _SearchResult = value; OnPropertyChanged(); }
         }
 
+        public bool IsDisplay { get => _IsDisplay; set { _IsDisplay = value; OnPropertyChanged(); } }
 
         public static String MaDD;
         public static String TenDD;
         public static String DcDD;
         public static String MtDD;
+        private bool _IsDisplay;
+        public ICommand RadioButtonCommand { get; set; }
 
         public LocationVM()
         {
-
+            IsDisplay = true;
             diadiem = new ObservableCollection<DIADIEM>(DataProvider.Ins.DB.DIADIEMs);
             SearchResult = new ObservableCollection<DIADIEM>(DataProvider.Ins.DB.DIADIEMs);
 
@@ -235,6 +260,19 @@ namespace TourismManagementSystem.ViewModel
             ResetCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 LoadDatagrid();
+            });
+            RadioButtonCommand = new RelayCommand<UserControl>((p) => true, (p) =>
+            {
+                MainWindow mainWindow = Window.GetWindow(p) as MainWindow;
+                if (mainWindow != null)
+                {
+                    MainVM mainVM = mainWindow.DataContext as MainVM;
+                    if (mainVM != null)
+                    {
+                        mainVM.CurrentView = new ServiceVM();
+                        mainVM.PageTitle = "Quản lý dịch vụ du lịch";
+                    }
+                }
             });
 
         }

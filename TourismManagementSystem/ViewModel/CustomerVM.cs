@@ -167,6 +167,7 @@ namespace TourismManagementSystem.ViewModel
         public ICommand AddDataCommand { get; set; }
         public ICommand DeleteDataCommand { get; set; }
         public ICommand UpdateDataCommand { get; set; }
+        public ICommand BookingButtonCommand { get; set; }
 
         
        
@@ -197,16 +198,6 @@ namespace TourismManagementSystem.ViewModel
                 }
                 OnPropertyChanged(nameof(SelectedCustomer));
 
-            }
-        }
-
-        private ObservableCollection<PHIEUDATCHO> pHIEUDATCHOs=new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes);
-        public ObservableCollection<PHIEUDATCHO> PHIEUDATCHOs
-        {
-            get { return pHIEUDATCHOs; } set
-            {
-                pHIEUDATCHOs = value;
-                OnPropertyChanged(nameof(pHIEUDATCHOs));
             }
         }
 
@@ -279,7 +270,6 @@ namespace TourismManagementSystem.ViewModel
                 OnPropertyChanged(nameof(DIACHI));
             }
         }
-        private string maPhieu;
         
         private string _selectedFilter;
         public string selectedFilter
@@ -325,6 +315,7 @@ namespace TourismManagementSystem.ViewModel
 
         public CustomerVM()
         {
+            selectedFilter = filter[0];
             SwitchWindowCommand = new RelayCommand<object>((p) => {
                
                   return true;
@@ -402,7 +393,13 @@ namespace TourismManagementSystem.ViewModel
             },
             (p) => { DeleteCustomer(); });
 
-          
+            BookingButtonCommand = new RelayCommand<object>((p) => true, (p) =>
+            {
+                BookingDetailVM.SelectedPhieu = p as PHIEUDATCHO;
+                BookingDetailsWindow bookingDetailsWindow = new BookingDetailsWindow();
+                bookingDetailsWindow.ShowDialog();
+            });
+
 
         }
         private void LoadDataGrid()
@@ -437,29 +434,31 @@ namespace TourismManagementSystem.ViewModel
 
         private void UpdateCustomer()
         {
-
-
-                   
-                    SelectedCustomer.HOTEN = HOTEN;
-                    SelectedCustomer.CCCD = CCCD;
-                    SelectedCustomer.SDT = SDT;
-                    SelectedCustomer.EMAIL = EMAIL;
-                    SelectedCustomer.DIACHI = DIACHI;
-
-                    MessageBox.Show("Updated customer information for " + SelectedCustomer.MAKH);
-
-                    DataProvider.Ins.DB.SaveChanges();
-                    // LoadDataGrid();
-                
-            
+            if (SelectedCustomer != null)
+            {
+                if (MessageBox.Show("Bạn có chắc chắn muốn cập nhật khách hàng " + SelectedCustomer.HOTEN + " ?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    var itemToUpdate = DataProvider.Ins.DB.KHACHHANGs.FirstOrDefault(item => item.MAKH == SelectedCustomer.MAKH);
+                    if (itemToUpdate != null)
+                    {
+                        itemToUpdate = SelectedCustomer;
+                        DataProvider.Ins.DB.SaveChanges();
+                        MessageBox.Show("Cập nhật thông tin khách hàng thành công!");
+                    }
+                }
+            }
         }
         private void DeleteCustomer()
         {
-            MessageBox.Show("Bạn muốn xóa khách hàng " +SelectedCustomer.MAKH);
-            DataProvider.Ins.DB.KHACHHANGs.Remove(SelectedCustomer);
-            DataProvider.Ins.DB.SaveChanges();
-            ListKhachhang.Remove(SelectedCustomer);
-            //LoadDataGrid();
+            if(SelectedCustomer != null)
+            {
+                if (MessageBox.Show("Bạn có chắc chắn muốn xóa khách hàng " + SelectedCustomer.HOTEN + " ?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                {
+                    DataProvider.Ins.DB.KHACHHANGs.Remove(SelectedCustomer);
+                    DataProvider.Ins.DB.SaveChanges();
+                    ListKhachhang.Remove(SelectedCustomer);
+                }
+            }
         }
         public static string GenerateCode(string previousCode)
         {
