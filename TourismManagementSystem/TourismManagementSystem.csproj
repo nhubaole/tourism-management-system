@@ -37,6 +37,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="CommonServiceLocator, Version=2.0.2.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.2\lib\net47\CommonServiceLocator.dll</HintPath>
     </Reference>
@@ -48,6 +51,9 @@
     </Reference>
     <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.4.1.0, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.3, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.3\lib\itextsharp.dll</HintPath>
     </Reference>
     <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
       <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
@@ -211,11 +217,17 @@
     <Compile Include="UserControls\UCRevenueStatistics.xaml.cs">
       <DependentUpon>UCRevenueStatistics.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UCSalesStatistics.xaml.cs">
+      <DependentUpon>UCSalesStatistics.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UCService.xaml.cs">
       <DependentUpon>UCService.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCTicket.xaml.cs">
       <DependentUpon>UCTicket.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCTripsStatistics.xaml.cs">
+      <DependentUpon>UCTripsStatistics.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utils\BoolToVisibilityConverter.cs" />
     <Compile Include="Utils\MultiCommandParameterConverter.cs" />
@@ -228,6 +240,7 @@
     <Compile Include="ViewModel\BookingDetailsVM.cs" />
     <Compile Include="ViewModel\BookingVM.cs" />
     <Compile Include="ViewModel\CustomerVM.cs" />
+    <Compile Include="ViewModel\DetailTicketVM.cs" />
     <Compile Include="ViewModel\HomeVM.cs" />
     <Compile Include="ViewModel\InforHotelVM.cs" />
     <Compile Include="ViewModel\InforLocationVM.cs" />
@@ -242,6 +255,7 @@
     <Compile Include="ViewModel\PurchaseVM.cs" />
     <Compile Include="ViewModel\RequireLoginVM.cs" />
     <Compile Include="ViewModel\RevenueStatisticVM.cs" />
+    <Compile Include="ViewModel\SalesStatisticsVM.cs" />
     <Compile Include="ViewModel\ScheduleDetailsVM.cs" />
     <Compile Include="ViewModel\ScheduleVM.cs" />
     <Compile Include="ViewModel\ServiceVM.cs" />
@@ -249,6 +263,7 @@
     <Compile Include="ViewModel\TourDetailsVM.cs" />
     <Compile Include="ViewModel\TourVM.cs" />
     <Compile Include="ViewModel\TripDetailVM.cs" />
+    <Compile Include="ViewModel\TripsStatisticsVM.cs" />
     <Compile Include="ViewModel\TripVM.cs" />
     <Compile Include="ViewModel\ViewScheduleVM.cs" />
     <Compile Include="View\AddBookingWindow.xaml.cs">
@@ -387,6 +402,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\UCSalesStatistics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\UCService.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -412,6 +431,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\UCScheduleItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UCTripsStatistics.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -518,9 +541,6 @@
     <Resource Include="Resource\Image\loginBackground.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resource\Image\scheduleImg.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>
@@ -531,8 +551,11 @@
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-    <Resource Include="Resource\Image\HomeImg.png" />
     <Resource Include="Resource\Image\LoginRequireImg.png" />
+    <Resource Include="Resource\Image\logo.png" />
+    <Resource Include="Resource\Image\HomeImg.png" />
+    <Resource Include="Resource\Image\scheduleImg.png" />
+    <Resource Include="Resource\Image\ticketBg.jpg" />
     <Content Include="TourManagement.sql" />
   </ItemGroup>
   <ItemGroup>

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using TourismManagementSystem.Model;
 
 namespace TourismManagementSystem.ViewModel
 {
@@ -27,7 +29,10 @@ namespace TourismManagementSystem.ViewModel
                     }
                     else
                     {
-                        if (Password == "admin" && Username == "admin")
+                        string pass = MD5Hash(Base64Encode(Password));
+                        var count = DataProvider.Ins.DB.TAIKHOANs.Where(a => a.TENTK == Username && a.MATKHAU == pass).Count();
+
+                        if (count > 0)
                         {
                             IsLogin = true;
                             IsGuest = false;
@@ -56,6 +61,23 @@ namespace TourismManagementSystem.ViewModel
             {
                 Password = p.Password;
             });
+        }
+        public static string Base64Encode(string plainText)
+        {
+            var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
+            return System.Convert.ToBase64String(plainTextBytes);
+        }
+        public static string MD5Hash(string input)
+        {
+            StringBuilder hash = new StringBuilder();
+            MD5CryptoServiceProvider md5provider = new MD5CryptoServiceProvider();
+            byte[] bytes = md5provider.ComputeHash(new UTF8Encoding().GetBytes(input));
+
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                hash.Append(bytes[i].ToString("x2"));
+            }
+            return hash.ToString();
         }
         public bool IsLogin { get; set; }
         public bool IsGuest { get; set; }

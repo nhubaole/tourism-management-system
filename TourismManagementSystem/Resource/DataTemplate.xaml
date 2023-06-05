@@ -37,6 +37,9 @@
     <DataTemplate DataType="{x:Type viewmodel:TourVM}">
         <uc:UCTour/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:TripVM}">
+        <uc:UCTrip/>
+    </DataTemplate>
     
     <DataTemplate DataType="{x:Type viewmodel:InforTrafficVm}">
         <uc:UCInforTrafffic/>
@@ -54,6 +57,14 @@
 
     <DataTemplate DataType="{x:Type viewmodel:RequireLoginVM}">
         <uc:UCRequireLogin/>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type viewmodel:SalesStatisticsVM}">
+        <uc:UCSalesStatistics/>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type viewmodel:TripsStatisticsVM}">
+        <uc:UCTripsStatistics/>
     </DataTemplate>
 
 </ResourceDictionary>

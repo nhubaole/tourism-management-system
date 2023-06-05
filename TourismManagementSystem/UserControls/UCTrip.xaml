@@ -7,7 +7,8 @@
              xmlns:local="clr-namespace:TourismManagementSystem.UserControls"
              mc:Ignorable="d" 
              xmlns:vm="clr-namespace:TourismManagementSystem.ViewModel"
-             d:DesignHeight="550" d:DesignWidth="900">
+             d:DesignHeight="550" d:DesignWidth="900"
+             Name="ucTrip">
     <UserControl.DataContext>
         <vm:TripVM/>
     </UserControl.DataContext>
@@ -19,9 +20,10 @@
         <Grid Grid.Row="0">
             <StackPanel Orientation="Horizontal" Margin="30,0,20,0">
                 <RadioButton Style="{StaticResource BtnStyle2}" 
-                             IsChecked="True" 
                              VerticalAlignment="Center"
-                             Margin="0,0,10,0">
+                             Margin="0,0,10,0"
+                             Command="{Binding RadioButtonCommand}"
+                             CommandParameter="{Binding ElementName=ucTrip}">
                     <TextBlock Text="Tuyến"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
@@ -29,9 +31,9 @@
                                FontWeight="Medium"/>
                 </RadioButton>
                 <RadioButton Style="{StaticResource BtnStyle2}" 
-                             IsChecked="True" 
                              VerticalAlignment="Center"
-                             Margin="0,0,20,0">
+                             Margin="0,0,20,0"
+                             IsChecked="{Binding IsDisplay}">
                     <TextBlock Text="Chuyến"
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
@@ -48,7 +50,8 @@
                         Background="{StaticResource Primary}"
                         materialDesign:ButtonAssist.CornerRadius="10"
                     BorderThickness="0"
-                    Command="{Binding AddTripCommand}">
+                    Command="{Binding AddTripCommand}"
+                    Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}">
                     <TextBlock Text="+" FontSize="20"/>
                 </Button>
             </StackPanel>
@@ -62,7 +65,8 @@
                     BorderThickness="1" 
                     BorderBrush="Black" 
                     Height="40"
-                    Width="400">
+                    Width="400"
+                        Background="White">
                     <StackPanel Orientation="Horizontal">
                         <TextBox Width="200"
                              HorizontalAlignment="Left"
@@ -89,12 +93,12 @@
             x:Name="dtgridDD"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
-            Height="400"
-            Margin="30, 0, 30, 10"
+            Height="440"
+            Margin="30,10,30,20"
             ItemsSource="{Binding ChuyenList, UpdateSourceTrigger=PropertyChanged}"
             SelectedItem="{Binding SelectedChuyen, Mode=OneWayToSource}"
             AutoGenerateColumns="False"
-            BorderBrush="#e8a66d"
+            BorderBrush="{StaticResource Primary2}"
             BorderThickness="1.5" 
             RowDetailsVisibilityMode="VisibleWhenSelected"
             ScrollViewer.CanContentScroll="True"
@@ -142,7 +146,7 @@
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="BorderThickness" Value="0" />
                             <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
-                            <Setter Property="Background" Value="#e8a66d"/>
+                            <Setter Property="Background" Value="{StaticResource Primary2}"/>
                         </Trigger>
                     </Style.Triggers>
                 </Style>
@@ -175,7 +179,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Loại chuyến" Binding="{Binding LOAICHUYEN}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                <DataGridTextColumn Header="Loại chuyến" Binding="{Binding LOAICHUYEN.TENLOAI}"  Width="*" IsReadOnly="True" CanUserSort="False">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="TextWrapping" Value="Wrap" />
@@ -220,7 +224,8 @@
                                     Background="Transparent"
                                     BorderBrush="Transparent"
                                     Command="{Binding DataContext.EditTripCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                    CommandParameter="{Binding}">
+                                    CommandParameter="{Binding}"
+                                Visibility="{Binding DataContext.IsAdmin, RelativeSource={RelativeSource AncestorType=DataGrid}, Converter={StaticResource BooleanToVisibilityConverter}}">
                                 <materialDesign:PackIcon Kind="Pencil"
                                                              Foreground ="{StaticResource Primary}"/>
                             </Button>
@@ -238,7 +243,8 @@
                                     Background="Transparent"
                                     BorderBrush="Transparent"
                                     Command="{Binding DataContext.DeleteTripCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                    CommandParameter="{Binding}">
+                                    CommandParameter="{Binding}"
+                                Visibility="{Binding DataContext.IsAdmin, RelativeSource={RelativeSource AncestorType=DataGrid}, Converter={StaticResource BooleanToVisibilityConverter}}">
                                 <materialDesign:PackIcon Kind="Delete"
                                                              Foreground ="{StaticResource Primary}"/>
                             </Button>

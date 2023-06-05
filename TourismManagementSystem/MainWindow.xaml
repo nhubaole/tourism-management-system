@@ -37,7 +37,7 @@
                     <RowDefinition Height="80"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid HorizontalAlignment="Center" Height="50" VerticalAlignment="Top" Margin="0,10,0,0">
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center">Logo</TextBlock>
+                    <Image Source="./Resource/Image/logo.png" Width="90" Height="90" Margin="0,-5,0,0"/>
                 </Grid>
                 <StackPanel Grid.Row="1">
                     <RadioButton Command="{Binding HomeCommand}"
@@ -88,11 +88,36 @@
                 <RowDefinition Height="70"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <uc:InfoBarUC/>
+            <Grid Background="{StaticResource Secondary}">
+                <TextBlock Text="{Binding PageTitle}"
+                           FontSize="28"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"
+                           Margin="30,0,0,0"
+                           Foreground="{StaticResource Primary}"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,50,0">
+                    <materialDesign:Badged
+                                Badge="3" Margin="0,0,30,0"
+                                VerticalAlignment="Center"
+                                BadgeBackground="OrangeRed"
+                                BadgeForeground="White"
+                                Visibility="{Binding IsDisplay, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <Button Width="40" Height="40" Padding="0"
+                                Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                                materialDesign:ButtonAssist.CornerRadius="20"
+                                Background="{StaticResource Primary}"
+                                BorderThickness="0"
+                                Command="{Binding NotificationCommand}">
+                            <materialDesign:PackIcon Kind="Bell" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="30" Foreground="White" />
+                        </Button>
+                    </materialDesign:Badged>
+                    <materialDesign:PackIcon Kind="AccountCircle" Margin="0,0,10,0" VerticalAlignment="Stretch" Height="60" Width="60" HorizontalAlignment="Right" Foreground="{StaticResource Primary}" />
+                    <Label Content="{Binding AccountTitle}"  FontSize="18" FontWeight="Medium"  HorizontalAlignment="Right" Width="121" VerticalAlignment="Center" Foreground="{StaticResource Primary}"/>
+                </StackPanel>
+            </Grid>
             <Grid Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="900" Height="550">
                 <ContentControl x:Name="Pages" Content="{Binding CurrentView}" />
             </Grid>
-
         </Grid>
     </Grid>
 </Window>

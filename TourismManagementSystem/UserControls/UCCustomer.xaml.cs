@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TourismManagementSystem.ViewModel;
+using TourismManagementSystem.UserControls;
 
 namespace TourismManagementSystem.UserControls
 {
@@ -23,6 +25,7 @@ namespace TourismManagementSystem.UserControls
         public UCCustomer()
         {
             InitializeComponent();
+            DataContext = new CustomerVM();
         }
     }
 }

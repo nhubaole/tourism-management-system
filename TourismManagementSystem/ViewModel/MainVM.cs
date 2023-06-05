@@ -13,6 +13,9 @@ namespace TourismManagementSystem.ViewModel
     {
         public static bool AdminRole;
         private object _currentView;
+        private string _PageTitle;
+        private string _AccountTitle;
+        private bool _IsDisplay;
         public MainVM()
         {
             HomeCommand = new RelayCommand<object>((p) => { return true; }, Home);
@@ -41,12 +44,18 @@ namespace TourismManagementSystem.ViewModel
                     if (loginVM.IsLogin == true)
                     {
                         CurrentView = new HomeVM();
+                        PageTitle = "Trang chủ";
+                        AccountTitle = "Quản trị viên";
+                        IsDisplay = true;
                         AdminRole = true;
                         p.Show();
                     }
                     else if (loginVM.IsGuest == true)
-                        {
+                    {
                         CurrentView = new HomeVM();
+                        PageTitle = "Trang chủ";
+                        AccountTitle = "Khách";
+                        IsDisplay = false;
                         AdminRole = false;
                         p.Show();
                     }
@@ -63,7 +72,20 @@ namespace TourismManagementSystem.ViewModel
             });
 
             LogOutCommand = new RelayCommand<Window>((p) => { return p == null ? false : true; }, (p) => {
-                if (MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if(AdminRole == true)
+                {
+                    if (MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        var w = p as Window;
+                        if (w != null)
+                        {
+                            MainWindow main = new MainWindow();
+                            w.Close();
+                            main.Show();
+                        }
+                    }
+                }
+                else
                 {
                     var w = p as Window;
                     if (w != null)
@@ -97,11 +119,20 @@ namespace TourismManagementSystem.ViewModel
 
         public ICommand LoadedWindowCommand { get; set; }
         public ICommand LogOutCommand { get; set; }
+        public string PageTitle { get => _PageTitle; set { _PageTitle = value; OnPropertyChanged(); } }
 
+        public string AccountTitle { get => _AccountTitle; set { _AccountTitle = value; OnPropertyChanged(); } }
 
-        private void Home(object obj) => CurrentView = new HomeVM();
+        public bool IsDisplay { get => _IsDisplay; set { _IsDisplay = value; OnPropertyChanged(); } }
+
+        private void Home(object obj)
+        {
+            PageTitle = "Trang chủ";
+            CurrentView = new HomeVM();
+        }
         private void Booking(object obj)
         {
+            PageTitle = "Quản lý phiếu đặt chỗ";
             if (AdminRole)
             {
                 CurrentView = new BookingVM();
@@ -113,6 +144,7 @@ namespace TourismManagementSystem.ViewModel
         }
         private void Customer(object obj)
         {
+            PageTitle = "Quản lý khách hàng";
             if (AdminRole)
             {
                 CurrentView = new CustomerVM();
@@ -124,6 +156,7 @@ namespace TourismManagementSystem.ViewModel
         }
         private void Location(object obj)
         {
+            PageTitle = "Quản lý địa điểm du lịch";
             if (AdminRole)
             {
                 CurrentView = new LocationVM();
@@ -135,6 +168,7 @@ namespace TourismManagementSystem.ViewModel
         }
         private void Notification(object obj)
         {
+            PageTitle = "Thông báo";
             if (AdminRole)
             {
                 CurrentView = new NotificationVM();
@@ -146,6 +180,7 @@ namespace TourismManagementSystem.ViewModel
         }
         private void RevenueStatistic(object obj)
         {
+            PageTitle = "Báo cáo thống kê";
             if (AdminRole)
             {
                 CurrentView = new RevenueStatisticVM();
@@ -157,6 +192,7 @@ namespace TourismManagementSystem.ViewModel
         }
         private void Service(object obj)
         {
+            PageTitle = "Quản lý dịch vụ du lịch";
             if (AdminRole)
             {
                 CurrentView = new ServiceVM();
@@ -168,6 +204,7 @@ namespace TourismManagementSystem.ViewModel
         }
         private void Ticket(object obj)
         {
+            PageTitle = "Quản lý vé";
             if (AdminRole)
             {
                 CurrentView = new TicketVM();
@@ -177,8 +214,16 @@ namespace TourismManagementSystem.ViewModel
                 CurrentView = new RequireLoginVM();
             }
         }
-        private void Tour(object obj) => CurrentView = new TourVM();
-        private void Trip(object obj) => CurrentView = new TripVM();
+        private void Tour(object obj)
+        {
+            CurrentView = new TourVM();
+            PageTitle = "Quản lý tuyến du lịch";
+        }
+        private void Trip(object obj)
+        {
+            CurrentView = new TripVM();
+            PageTitle = "Quản lý chuyến du lịch";
+        }
 
     }
 }
