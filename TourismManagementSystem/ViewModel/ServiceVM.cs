@@ -27,7 +27,7 @@ namespace TourismManagementSystem.ViewModel
         public static int SLGhe ;
 
 
-
+        private bool _IsDisplay;
         public bool IsTbEnable
         {
             get { return _IsTbEnable; }
@@ -206,9 +206,11 @@ namespace TourismManagementSystem.ViewModel
         public ICommand ToEditOtherServiceCommand { get; set; }
 
         public ICommand FindServiceCommand { get; set; }
-
+        public ICommand RadioButtonCommand { get; set; }
+        public bool IsDisplay { get => _IsDisplay; set { _IsDisplay = value; OnPropertyChanged(); } }
 
         public ServiceVM() {
+            IsDisplay = true;
             FilterItems1 = new ObservableCollection<String>(new List<string> { "Phương tiện", "Khách sạn", "Nhà hàng", "Dịch vụ khác" });
 
 
@@ -796,6 +798,19 @@ namespace TourismManagementSystem.ViewModel
                 else return;
 
 
+            });
+            RadioButtonCommand = new RelayCommand<UserControl>((p) => true, (p) =>
+            {
+                MainWindow mainWindow = Window.GetWindow(p) as MainWindow;
+                if (mainWindow != null)
+                {
+                    MainVM mainVM = mainWindow.DataContext as MainVM;
+                    if (mainVM != null)
+                    {
+                        mainVM.CurrentView = new LocationVM();
+                        mainVM.PageTitle = "Quản lý địa điểm du lịch";
+                    }
+                }
             });
         }
 
