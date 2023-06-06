@@ -120,7 +120,7 @@ namespace TourismManagementSystem.ViewModel
                         OnPropertyChanged(nameof(FilterMonth));
                         Month = FilterMonth[0];
                         OnPropertyChanged(nameof(Month));
-                        ;
+                        
                     }
                     else
                     {
@@ -275,13 +275,13 @@ namespace TourismManagementSystem.ViewModel
                 int domesticCount = (from chuyen in DataProvider.Ins.DB.CHUYENs
                                      join tuyen in DataProvider.Ins.DB.TUYENs on chuyen.MATUYEN equals tuyen.MATUYEN
                                      join loaiTuyen in DataProvider.Ins.DB.LOAITUYENs on tuyen.MALOAI equals loaiTuyen.MALOAI
-                                     where loaiTuyen.TENLOAI == "Nước ngoài"
+                                     where loaiTuyen.TENLOAI == "Trong nước" && chuyen.TGBATDAU.Value.Year == Year
                                      select chuyen).Count();
 
                 int internationalCount = (from chuyen in DataProvider.Ins.DB.CHUYENs
                                           join tuyen in DataProvider.Ins.DB.TUYENs on chuyen.MATUYEN equals tuyen.MATUYEN
                                           join loaiTuyen in DataProvider.Ins.DB.LOAITUYENs on tuyen.MALOAI equals loaiTuyen.MALOAI
-                                          where loaiTuyen.TENLOAI == "Trong nước"
+                                          where loaiTuyen.TENLOAI == "Nước ngoài" && chuyen.TGBATDAU.Value.Year == Year
                                           select chuyen).Count();
 
                 PieSeries domesticSeries = new PieSeries
@@ -309,11 +309,18 @@ namespace TourismManagementSystem.ViewModel
             else if (Filter1 == "Tháng" && Year != 0 && Month != 0)
             {
                 // Lấy số lượng chuyến thành công và chuyến bị hủy trong tháng và năm được chọn
-                int domesticCount = DataProvider.Ins.DB.CHUYENs
-                     .Count(t => t.TGBATDAU.HasValue && t.TGBATDAU.Value.Year == Year && t.TGBATDAU.Value.Month == Month && t.LOAICHUYEN.MALOAI == "Nước ngoài");
+                int domesticCount = (from chuyen in DataProvider.Ins.DB.CHUYENs
+                                     join tuyen in DataProvider.Ins.DB.TUYENs on chuyen.MATUYEN equals tuyen.MATUYEN
+                                     join loaiTuyen in DataProvider.Ins.DB.LOAITUYENs on tuyen.MALOAI equals loaiTuyen.MALOAI
+                                     where loaiTuyen.TENLOAI == "Trong nước" && chuyen.TGBATDAU.Value.Year == Year && chuyen.TGBATDAU.Value.Month == Month
+                                     select chuyen).Count();
 
-                int internationalCount = DataProvider.Ins.DB.CHUYENs
-                    .Count(t => t.TGBATDAU.HasValue && t.TGBATDAU.Value.Year == Year && t.TGBATDAU.Value.Month == Month && t.LOAICHUYEN.MALOAI == "Trong nước");
+                int internationalCount = (from chuyen in DataProvider.Ins.DB.CHUYENs
+                                          join tuyen in DataProvider.Ins.DB.TUYENs on chuyen.MATUYEN equals tuyen.MATUYEN
+                                          join loaiTuyen in DataProvider.Ins.DB.LOAITUYENs on tuyen.MALOAI equals loaiTuyen.MALOAI
+                                          where loaiTuyen.TENLOAI == "Nước ngoài" && chuyen.TGBATDAU.Value.Year == Year && chuyen.TGBATDAU.Value.Month == Month
+                                          select chuyen).Count();
+
 
                 PieSeries domesticSeries = new PieSeries
                 {
