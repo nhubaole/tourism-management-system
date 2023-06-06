@@ -115,9 +115,19 @@ namespace TourismManagementSystem.ViewModel
                 BtnText = "Thêm phiếu đặt chỗ";
                 NewBooking = new PHIEUDATCHO();
                 NewBooking.TINHTRANG = "Chưa thanh toán";
-                Random random = new Random();
-                int randomDigits = random.Next(0, 999999);
-                string formattedID = string.Format("LT{0:D6}", randomDigits);
+                string formattedID;
+                ObservableCollection<PHIEUDATCHO> ListPhieu = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes);
+                if (ListPhieu.Count() == 0)
+                {
+                    formattedID = string.Format("T{0:D7}", 1);
+                }
+                else
+                {
+                    string lastID = ListPhieu.Last().MAPHIEU;
+                    int previousNumber = int.Parse(lastID.Substring(1));
+                    int nextNumber = previousNumber + 1;
+                    formattedID = string.Format("P{0:D7}", nextNumber);
+                }
                 NewBooking.MAPHIEU = formattedID;
             }
             else

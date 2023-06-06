@@ -45,9 +45,19 @@ namespace TourismManagementSystem.ViewModel
                 Title = "Thêm mới cuyến du lịch";
                 BtnText = "Thêm chuyến du lịch";
                 NewTrip = new CHUYEN();
-                Random random = new Random();
-                int randomDigits = random.Next(0, 999999);
-                string formattedID = string.Format("LT{0:D6}", randomDigits);
+                string formattedID;
+                ObservableCollection<CHUYEN> ListChuyen = new ObservableCollection<CHUYEN>(DataProvider.Ins.DB.CHUYENs);
+                if (ListTuyen.Count() == 0)
+                {
+                    formattedID = string.Format("T{0:D7}", 1);
+                }
+                else
+                {
+                    string lastID = ListChuyen.Last().MACHUYEN;
+                    int previousNumber = int.Parse(lastID.Substring(1));
+                    int nextNumber = previousNumber + 1;
+                    formattedID = string.Format("C{0:D7}", nextNumber);
+                }
                 NewTrip.MACHUYEN = formattedID;
             }
             else
@@ -65,7 +75,6 @@ namespace TourismManagementSystem.ViewModel
                     comboBox.SelectedItem = item;
                     HDVBoxes.Add(comboBox);
                 }
-
             }
 
 
@@ -134,16 +143,16 @@ namespace TourismManagementSystem.ViewModel
                     addTripWindow.Close();
                 }
             });
-            AddHDV = new RelayCommand<object>((p) => true, (p) => {
-                if (SelectedHDVMaSo != null)
-                {
-                    ComboBox comboBox = new ComboBox();
+            AddHDV = new RelayCommand<object>((p) => {
+                return true;
+            }, (p) => {
+                ComboBox comboBox = new ComboBox();
                     comboBox.ItemsSource = ListOfHDV; ;
-                    comboBox.DisplayMemberPath = "TENPT";
+                    comboBox.DisplayMemberPath = "TENHDV";
                     comboBox.Margin = new Thickness(comboBox.Margin.Left, comboBox.Margin.Top, comboBox.Margin.Right, 10);
                     comboBox.FontSize = 16;
                     HDVBoxes.Add(comboBox);
-                }
+                
             });
         }
 
