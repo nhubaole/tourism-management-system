@@ -14,8 +14,8 @@ namespace TourismManagementSystem.ViewModel
     {
         
 
-        private string _IsSaleChecked;
-        public string IsSaleChecked
+        private bool _IsSaleChecked;
+        public bool IsSaleChecked
         {
             get { return _IsSaleChecked; }
             set
@@ -28,8 +28,8 @@ namespace TourismManagementSystem.ViewModel
         }
 
       
-        private string _IsTripCheck;
-        public string IsTripCheck
+        private bool _IsTripCheck;
+        public bool IsTripCheck
         {
             get { return _IsTripCheck; }
             set
@@ -49,18 +49,18 @@ namespace TourismManagementSystem.ViewModel
         }
         public RevenueStatisticVM ()
         {
-            
+            IsSaleChecked = true;
         }
         private void SalesStatistics(object obj) => CurrentView = new SalesStatisticsVM();
         private void TripsStatistics(object obj) => CurrentView = new TripsStatisticsVM();
 
         private void UpdateCurrentView()
         {
-            if (IsSaleChecked == "True")
+            if (IsSaleChecked == true)
             {
                 CurrentView = new SalesStatisticsVM();
             }
-            else if (IsTripCheck == "True")
+            else if (IsTripCheck == true)
             {
                 CurrentView = new TripsStatisticsVM();
             }
