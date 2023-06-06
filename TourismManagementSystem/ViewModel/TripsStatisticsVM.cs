@@ -49,14 +49,15 @@ namespace TourismManagementSystem.ViewModel
                 seriesCollection1.Clear();
                 seriesCollection2.Clear();
                 TimeOfChart = null;
-                Year = 0; Month = 0;
                 OnPropertyChanged(nameof(seriesCollection1));
                 OnPropertyChanged(nameof(seriesCollection2));
                 OnPropertyChanged(nameof(TimeOfChart));
-                OnPropertyChanged(nameof(Year));
-                OnPropertyChanged(nameof(Month));
-                OnPropertyChanged();
+
                 UpdateFilterYear();
+                Year = FilterYear[0];
+                OnPropertyChanged(nameof(Year));
+
+                OnPropertyChanged();
             }
         }
 
@@ -93,7 +94,9 @@ namespace TourismManagementSystem.ViewModel
                 if (_Month != 0)
                 {
                     TimeOfChart = "tháng " + _Month.ToString() + " năm " + Year.ToString();
-                }    
+                    OnPropertyChanged(nameof(TimeOfChart));
+
+                }
                 OnPropertyChanged();
                 DrawChart1();
                 DrawChart2();
@@ -115,11 +118,15 @@ namespace TourismManagementSystem.ViewModel
                         CanChoseMonth = true;
                         FilterMonth = new ObservableCollection<int>(GetMonthsForYear(Year));
                         OnPropertyChanged(nameof(FilterMonth));
+                        Month = FilterMonth[0];
+                        OnPropertyChanged(nameof(Month));
                         ;
                     }
                     else
                     {
                         TimeOfChart = " năm " + Year.ToString();
+                        OnPropertyChanged(nameof(TimeOfChart));
+
                         DrawChart1();
                         DrawChart2();
                     }   

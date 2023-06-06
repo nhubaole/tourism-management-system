@@ -50,8 +50,12 @@ namespace TourismManagementSystem.ViewModel
                 TimeOfChart = null;
                 OnPropertyChanged(nameof(seriesCollection));
                 OnPropertyChanged(nameof(TimeOfChart));
-                OnPropertyChanged();
+
                 UpdateFilterYear();
+                Year = FilterYear[0];
+                OnPropertyChanged(nameof(Year));    
+
+                OnPropertyChanged();
             }
         }
 
@@ -91,6 +95,7 @@ namespace TourismManagementSystem.ViewModel
                 {
                     TimeOfChart = " tháng " + _Month.ToString() + " năm " + Year.ToString();
                 }
+                OnPropertyChanged(nameof(TimeOfChart));
                 OnPropertyChanged();
                 DrawChart();
 
@@ -104,8 +109,6 @@ namespace TourismManagementSystem.ViewModel
             set
             {
                 _Year = value;
-                Month = 0;
-                OnPropertyChanged(nameof(Month));
                 if (Year != 0)
                 {
                     if (Filter1 == "Tháng")
@@ -113,11 +116,15 @@ namespace TourismManagementSystem.ViewModel
                         CanChoseMonth = true;
                         FilterMonth = new ObservableCollection<int>(GetMonthsForYear(Year));
                         OnPropertyChanged(nameof(FilterMonth));
+                        Month = FilterMonth[0];
+                        OnPropertyChanged(nameof(Month));
+
                         ;
                     }
                     else
                     {
                         TimeOfChart = " năm " + Year.ToString();
+                        OnPropertyChanged(nameof(TimeOfChart));
                         DrawChart();
                     }
                 }
@@ -202,7 +209,7 @@ namespace TourismManagementSystem.ViewModel
             return years;
         }
 
-        public List<int> GetMonthsForYear(int year) // lấy tháng trong database
+        public List<int> GetMonthsForYear(int year) // lấy tháng trong database từ thông tin chuyến
         {
             List<int> months = new List<int>();
 
@@ -218,21 +225,14 @@ namespace TourismManagementSystem.ViewModel
             List<int> daysInMonth = new List<int>();
             if (year != 0 && month != 0)
             {
-                
-
-                // Xác định ngày đầu tiên của tháng
-                DateTime firstDayOfMonth = new DateTime(year, month, 1);
-
                 // Xác định số ngày trong tháng
                 int numberOfDaysInMonth = DateTime.DaysInMonth(year, month);
 
-                // Thêm các ngày vào danh sách
                 for (int day = 1; day <= numberOfDaysInMonth; day++)
                 {
                     daysInMonth.Add(day);
                 }
 
-                
             }
             return daysInMonth;
 
