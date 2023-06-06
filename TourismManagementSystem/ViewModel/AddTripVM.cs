@@ -19,7 +19,7 @@ namespace TourismManagementSystem.ViewModel
         public ObservableCollection<LOAICHUYEN> ListLoaiChuyen { get; set; }
         private string _ToolTipText;
 
-        public ObservableCollection<PHUONGTIEN> ListOfHDV;
+        public ObservableCollection<HUONGDANVIEN> ListOfHDV;
         private ObservableCollection<ComboBox> _HDVBoxes = new ObservableCollection<ComboBox>();
         public ObservableCollection<ComboBox> HDVBoxes { get => _HDVBoxes; set { _HDVBoxes = value; OnPropertyChanged(); } }
 
@@ -39,7 +39,7 @@ namespace TourismManagementSystem.ViewModel
             ToolTipText = "Chưa nhập đủ thông tin";
             ListLoaiChuyen = new ObservableCollection<LOAICHUYEN>(DataProvider.Ins.DB.LOAICHUYENs);
             ListTuyen = new ObservableCollection<string>(DataProvider.Ins.DB.TUYENs.Select(t => t.MATUYEN));
-            ListHDV = new ObservableCollection<string>(DataProvider.Ins.DB.HUONGDANVIENs.Select(t => t.MAHDV));
+            ListOfHDV = new ObservableCollection<HUONGDANVIEN>(DataProvider.Ins.DB.HUONGDANVIENs);
             if (IsEdit == 0)
             {
                 Title = "Thêm mới cuyến du lịch";
