@@ -67,11 +67,12 @@
                    Text="Mã khách hàng"
                    FontSize="18"
                    FontWeight="Medium" Width="151" />
-                            <TextBox VerticalAlignment="Center"
+                            <ComboBox VerticalAlignment="Center"
                  FontSize="18"
                  Width="400"
+                                      ItemsSource="{Binding ListMaKhachHang}"
                                      HorizontalAlignment="Right"
-                 Text="{Binding NewBooking.MAKH, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                 SelectedItem="{Binding NewBooking.MAKH, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                  />
 
                         </Grid>

@@ -16,6 +16,7 @@ namespace TourismManagementSystem.ViewModel
         private PHIEUDATCHO _newBooking;
         public PHIEUDATCHO NewBooking { get => _newBooking; set { _newBooking = value; OnPropertyChanged(); } }
         public ObservableCollection<KHACHHANG> ListKhachHang { get; set; }
+        public ObservableCollection<string> ListMaKhachHang { get; set; }
         private string _ToolTipText;
 
         public ObservableCollection<string> ListChuyen { get; set; }
@@ -66,7 +67,12 @@ namespace TourismManagementSystem.ViewModel
                 // Tăng số hàng
                 while (ListHKOfPhieu.Count < Count)
                 {
-                    ListHKOfPhieu.Add(new HANHKHACH());
+                    Random random = new Random();
+                    int randomDigits = random.Next(0, 999999);
+                    string formattedID = string.Format("LT{0:D6}", randomDigits);
+                    HANHKHACH newHK = new HANHKHACH();
+                    newHK.MAHK = formattedID;
+                    ListHKOfPhieu.Add(newHK);
                 }
             }
 
@@ -95,6 +101,7 @@ namespace TourismManagementSystem.ViewModel
         }
         public AddBookingVM()
         {
+            ListMaKhachHang = new ObservableCollection<string>(DataProvider.Ins.DB.KHACHHANGs.Select(t => t.MAKH));
             ListChuyen = new ObservableCollection<string>(DataProvider.Ins.DB.CHUYENs.Select(t => t.MACHUYEN));
             ListHKOfPhieu = new ObservableCollection<HANHKHACH> { };
             IsNew = IsEdit;
@@ -109,8 +116,9 @@ namespace TourismManagementSystem.ViewModel
                 NewBooking = new PHIEUDATCHO();
                 NewBooking.TINHTRANG = "Chưa thanh toán";
                 Random random = new Random();
-                NewBooking.MAPHIEU = random.Next(0, 1000).ToString();
-
+                int randomDigits = random.Next(0, 999999);
+                string formattedID = string.Format("LT{0:D6}", randomDigits);
+                NewBooking.MAPHIEU = formattedID;
             }
             else
             {
@@ -130,6 +138,14 @@ namespace TourismManagementSystem.ViewModel
                     ToolTipText = "Vui lòng nhập đủ các trường thông tin bắt buộc";
                     return false;
                 }
+                foreach (var Item in ListHKOfPhieu)
+                {
+                if (string.IsNullOrEmpty(Item.MAHK) || string.IsNullOrEmpty(Item.HOTEN) || (string.IsNullOrEmpty(Item.GIOITINH) || string.IsNullOrEmpty(Item.DIACHI) || string.IsNullOrEmpty(Item.NGSINH.ToString()) || string.IsNullOrEmpty(Item.CCCD) || string.IsNullOrEmpty(Item.NGAYHETHANVISA.ToString()) || string.IsNullOrEmpty(Item.NGAYHETHANPASSPORT.ToString()) || string.IsNullOrEmpty(Item.SDT) || string.IsNullOrEmpty(Item.PASSPORT) ))
+                    {
+                        ToolTipText = "Vui lòng nhập đủ các trường thông tin bắt buộc";
+                        return false;
+                    }
+                }
                 return true;
             }, (p) =>
             {
@@ -140,12 +156,13 @@ namespace TourismManagementSystem.ViewModel
                     {
                         NewBooking.SLKHACH = Count;
                         NewBooking.TINHTRANG = "Chưa thanh toán";
+                        NewBooking.HANHKHACHes = ListHKOfPhieu;
                         foreach (var t in NewBooking.HANHKHACHes)
                         {
+                            t.PHIEUDATCHO = NewBooking;
                             t.MAPHIEU = NewBooking.MAPHIEU;
                             DataProvider.Ins.DB.HANHKHACHes.Add(t);
                         }
-                        NewBooking.HANHKHACHes = ListHKOfPhieu;
                         NewBooking.CHUYEN = DataProvider.Ins.DB.CHUYENs.FirstOrDefault(t => t.MACHUYEN == NewBooking.MACHUYEN);
                         DataProvider.Ins.DB.PHIEUDATCHOes.Add(NewBooking);
                         DataProvider.Ins.DB.SaveChanges();
@@ -158,6 +175,7 @@ namespace TourismManagementSystem.ViewModel
                         foreach (var t in NewBooking.HANHKHACHes)
                         {
                             t.MAPHIEU = NewBooking.MAPHIEU;
+                            t.PHIEUDATCHO = NewBooking;
                             DataProvider.Ins.DB.HANHKHACHes.Add(t);
                         }
                         NewBooking.CHUYEN = DataProvider.Ins.DB.CHUYENs.FirstOrDefault(t => t.MACHUYEN == NewBooking.MACHUYEN);

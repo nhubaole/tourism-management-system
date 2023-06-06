@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
 using TourismManagementSystem.Model;
+using System.Windows.Controls;
 using TourismManagementSystem.View;
 
 namespace TourismManagementSystem.ViewModel
@@ -17,6 +18,11 @@ namespace TourismManagementSystem.ViewModel
         public CHUYEN NewTrip { get => _newTrip; set { _newTrip= value; OnPropertyChanged(); } }
         public ObservableCollection<LOAICHUYEN> ListLoaiChuyen { get; set; }
         private string _ToolTipText;
+
+        public ObservableCollection<PHUONGTIEN> ListOfHDV;
+        private ObservableCollection<ComboBox> _HDVBoxes = new ObservableCollection<ComboBox>();
+        public ObservableCollection<ComboBox> HDVBoxes { get => _HDVBoxes; set { _HDVBoxes = value; OnPropertyChanged(); } }
+
 
         public ObservableCollection<string> ListTuyen { get; set; }
         public ObservableCollection<string> ListHDV { get; set; }
@@ -40,13 +46,26 @@ namespace TourismManagementSystem.ViewModel
                 BtnText = "Thêm chuyến du lịch";
                 NewTrip = new CHUYEN();
                 Random random = new Random();
-                NewTrip.MACHUYEN = random.Next(0, 1000).ToString();
+                int randomDigits = random.Next(0, 999999);
+                string formattedID = string.Format("LT{0:D6}", randomDigits);
+                NewTrip.MACHUYEN = formattedID;
             }
             else
             {
                 Title = "Cập nhật chuyến du lịch";
                 BtnText = "Cập nhật chuyến du lịch";
                 NewTrip = EditSelectedChuyen;
+                foreach (var item in NewTrip.HUONGDANVIENs)
+                {
+                    ComboBox comboBox = new ComboBox();
+                    comboBox.ItemsSource = ListOfHDV; ;
+                    comboBox.DisplayMemberPath = "TENKS";
+                    comboBox.Margin = new Thickness(comboBox.Margin.Left, comboBox.Margin.Top, comboBox.Margin.Right, 10);
+                    comboBox.FontSize = 16;
+                    comboBox.SelectedItem = item;
+                    HDVBoxes.Add(comboBox);
+                }
+
             }
 
 
@@ -71,6 +90,10 @@ namespace TourismManagementSystem.ViewModel
                     if (IsEdit == 0)
                     {
                         NewTrip.MALOAI = DataProvider.Ins.DB.LOAICHUYENs.Where(t => t.TENLOAI.Equals(NewTrip.LOAICHUYEN)).ToString();
+                        foreach (var t in HDVBoxes)
+                        {
+                            NewTrip.HUONGDANVIENs.Add((HUONGDANVIEN)t.SelectedItem);
+                        }
                         foreach (var item in DataProvider.Ins.DB.HUONGDANVIENs)
                         {
                             foreach (var tripItem in NewTrip.HUONGDANVIENs)
@@ -91,13 +114,17 @@ namespace TourismManagementSystem.ViewModel
                         {
                             NewTrip.MALOAI = DataProvider.Ins.DB.LOAICHUYENs.Where(t => t.TENLOAI.Equals(NewTrip.LOAICHUYEN)).ToString();
                             itemToUpdate = NewTrip;
+                            foreach (var t in HDVBoxes)
+                            {
+                                itemToUpdate.HUONGDANVIENs.Add((HUONGDANVIEN)t.SelectedItem);
+                            }
+
                             foreach (var item in DataProvider.Ins.DB.HUONGDANVIENs)
                             {
-                                foreach (var tripItem in NewTrip.HUONGDANVIENs)
+                                foreach (var tripItem in itemToUpdate.HUONGDANVIENs)
                                 {
                                     if (item.MAHDV.Equals(tripItem.MAHDV))
-                                        item.CHUYENs.Add(NewTrip);
-
+                                        item.CHUYENs.Add(itemToUpdate);
                                 }
                             }
                             DataProvider.Ins.DB.SaveChanges();
@@ -110,21 +137,14 @@ namespace TourismManagementSystem.ViewModel
             AddHDV = new RelayCommand<object>((p) => true, (p) => {
                 if (SelectedHDVMaSo != null)
                 {
-                    string HDV = SelectedHDVMaSo;
-                    //NewTrip.HUONGDANVIENs.Add((HUONGDANVIEN)DataProvider.Ins.DB.HUONGDANVIENs.Where(t => t.MAHDV.Equals(HDV)));
-                    NewTrip.HUONGDANVIENs.Add(DataProvider.Ins.DB.HUONGDANVIENs.FirstOrDefault(t => t.MAHDV.Equals(HDV)));
-
+                    ComboBox comboBox = new ComboBox();
+                    comboBox.ItemsSource = ListOfHDV; ;
+                    comboBox.DisplayMemberPath = "TENPT";
+                    comboBox.Margin = new Thickness(comboBox.Margin.Left, comboBox.Margin.Top, comboBox.Margin.Right, 10);
+                    comboBox.FontSize = 16;
+                    HDVBoxes.Add(comboBox);
                 }
             });
-            RemoveHDV = new RelayCommand<object>((p) => true, (p) => {
-                HUONGDANVIEN hdv = p as HUONGDANVIEN;
-                if (hdv != null)
-                {
-                    NewTrip.HUONGDANVIENs.Remove(hdv);
-                    OnPropertyChanged();
-                }
-            });
-
         }
 
         private string _selectedHDVMaSo;

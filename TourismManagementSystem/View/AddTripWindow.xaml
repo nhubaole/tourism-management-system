@@ -89,7 +89,7 @@
                                         VerticalAlignment="Center">
                                 <TextBlock VerticalAlignment="Top"
                                    HorizontalAlignment="Left"
-                                   Text="Mã HDV"
+                                   Text="HDV"
                                    FontSize="18"
                                    FontWeight="Medium"/>
                                 <Button
@@ -109,129 +109,9 @@
                                 </Button>
                             </StackPanel>
 
-                            <ComboBox VerticalAlignment="Center"
-                                 HorizontalAlignment="Right"
-                                 FontSize="18"
-                                      Margin="140,0,0,0"
-                                 Width="400"
-                                 ItemsSource="{Binding ListHDV}"
-                                 SelectedItem="{Binding SelectedHDVMaSo, Mode=TwoWay}"
-                                 Height="27"/>
-
                         </Grid>
                         <StackPanel VerticalAlignment="Stretch">
-                            <DataGrid 
-            Grid.Row="1"
-            x:Name="dtgridPDC"
-            VerticalAlignment="Center"
-            HorizontalAlignment="Center"
-            Margin="30, 0, 30, 10"
-            Height="100"
-            ItemsSource="{Binding NewTrip.HUONGDANVIENs, UpdateSourceTrigger=PropertyChanged}"
-            AutoGenerateColumns="False"
-            BorderBrush="{StaticResource Primary2}"
-            BorderThickness="1.5" 
-            RowDetailsVisibilityMode="VisibleWhenSelected"
-            ScrollViewer.CanContentScroll="True"
-            ScrollViewer.PanningMode="Both"
-            HeadersVisibility="Column"
-            SelectionMode="Single"
-            SelectionUnit="FullRow"
-            CanUserAddRows="False"
-            CanUserDeleteRows="False"
-            CanUserReorderColumns="False"
-            CanUserResizeRows="False"
-            ColumnWidth="*"
-            IsReadOnly="False"
-            GridLinesVisibility="None"
-               >
-                                <DataGrid.ColumnHeaderStyle>
-                                    <Style TargetType="DataGridColumnHeader">
-                                        <Setter Property="HorizontalContentAlignment" Value="Center" />
-                                        <Setter Property="VerticalContentAlignment" Value="Center" />
-                                        <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="Foreground" Value="{StaticResource Primary}"/>
-                                        <Setter Property="Margin" Value="0, 10, 0, 10"/>
-                                        <Setter Property="FontSize" Value="14"/>
-                                        <Setter Property="FontWeight" Value="Bold"/>
-
-                                    </Style>
-                                </DataGrid.ColumnHeaderStyle>
-                                <DataGrid.Resources>
-                                    <SolidColorBrush x:Key="DataGridCellFocusBorderBrush" Color="Transparent" />
-                                    <Style TargetType="DataGridCell">
-                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                        <Setter Property="VerticalAlignment" Value="Center" />
-                                        <Style.Triggers>
-                                            <Trigger Property="IsSelected" Value="True">
-                                                <Setter Property="BorderThickness" Value="0" />
-                                                <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
-                                                <Setter Property="Background" Value="Transparent"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                    <Style TargetType="DataGridRow">
-                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                        <Setter Property="VerticalAlignment" Value="Center" />
-                                        <Style.Triggers>
-                                            <Trigger Property="IsSelected" Value="True">
-                                                <Setter Property="BorderThickness" Value="0" />
-                                                <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
-                                                <Setter Property="Background" Value="#e8a66d"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </DataGrid.Resources>
-                                <DataGrid.Columns >
-                                    <DataGridTextColumn Header="Mã hướng dẫn viên" Binding="{Binding MAHDV}" Width="*"  IsReadOnly="True" CanUserSort="False">
-
-                                    </DataGridTextColumn>
-                                    <DataGridTextColumn Header="Tên hướng dẫn viên" Binding="{Binding HOTEN}"  Width="*" IsReadOnly="True" CanUserSort="False">
-                                        <DataGridTextColumn.ElementStyle>
-                                            <Style TargetType="TextBlock">
-                                                <Setter Property="TextWrapping" Value="Wrap" />
-                                                <Setter Property="HorizontalAlignment" Value="Center"/>
-                                                <Setter Property="VerticalAlignment" Value="Center" />
-                                                <Setter Property="TextAlignment" Value="Center" />
-                                                <Setter Property="Padding" Value="10"/>
-
-                                            </Style>
-                                        </DataGridTextColumn.ElementStyle>
-                                    </DataGridTextColumn>
-                                    <DataGridTextColumn Header="Số điện thoại" Binding="{Binding SDT}"  Width="*" IsReadOnly="True" CanUserSort="False">
-                                        <DataGridTextColumn.ElementStyle>
-                                            <Style TargetType="TextBlock">
-                                                <Setter Property="TextWrapping" Value="Wrap" />
-                                                <Setter Property="HorizontalAlignment" Value="Center"/>
-                                                <Setter Property="VerticalAlignment" Value="Center" />
-                                                <Setter Property="TextAlignment" Value="Center" />
-                                                <Setter Property="Padding" Value="10"/>
-
-                                            </Style>
-                                        </DataGridTextColumn.ElementStyle>
-                                    </DataGridTextColumn>
-                                    <DataGridTemplateColumn Header="" 
-                                        Width="auto"
-                                        >
-                                        <DataGridTemplateColumn.CellTemplate >
-                                            <DataTemplate >
-                                                <Button
-                                    Height="auto"
-                                    Width="auto"
-                                    Background="Transparent"
-                                    BorderBrush="Transparent"
-                                    Command="{Binding DataContext.RemoveHDV, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                    CommandParameter="{Binding}">
-                                                    <materialDesign:PackIcon Kind="Delete"
-                                                             Foreground ="{StaticResource Primary}"/>
-                                                </Button>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn >
-
-                                </DataGrid.Columns>
-                            </DataGrid>
-
+                            <ItemsControl ItemsSource="{Binding HDVBoxes}" HorizontalContentAlignment="Right"  />
                         </StackPanel>
                         <Grid Height="50">
                             <TextBlock VerticalAlignment="Center"
