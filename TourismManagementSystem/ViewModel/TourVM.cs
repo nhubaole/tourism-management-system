@@ -37,22 +37,29 @@ namespace TourismManagementSystem.ViewModel
             DeleteTourCommand = new RelayCommand<object>((p) => true, (p) =>
             {
                 TUYEN selectedTuyen = p as TUYEN;
-                if (MessageBox.Show("Bạn có chắc chắn muốn xóa tuyến du lịch này?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (selectedTuyen.CHUYENs.Count > 0)
                 {
-                    var ListLichTrinhOfDelTour = DataProvider.Ins.DB.LICHTRINHs.Where(lt => lt.TUYEN.MATUYEN == selectedTuyen.MATUYEN);
-
-                    foreach (var lichTrinh in ListLichTrinhOfDelTour)
+                    MessageBox.Show("Tồn tại chuyến du lịch thuộc tuyến này. Không thể xóa tuyến!");
+                }
+                else
+                {
+                    if (MessageBox.Show("Bạn có chắc chắn muốn xóa tuyến du lịch này?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        lichTrinh.PHUONGTIENs.Clear();
-                        lichTrinh.KHACHSANs.Clear();
-                        lichTrinh.NHAHANGs.Clear();
-                        lichTrinh.DICHVUKHACs.Clear();
-                        DataProvider.Ins.DB.LICHTRINHs.Remove(lichTrinh);
+                        var ListLichTrinhOfDelTour = DataProvider.Ins.DB.LICHTRINHs.Where(lt => lt.TUYEN.MATUYEN == selectedTuyen.MATUYEN);
+
+                        foreach (var lichTrinh in ListLichTrinhOfDelTour)
+                        {
+                            lichTrinh.PHUONGTIENs.Clear();
+                            lichTrinh.KHACHSANs.Clear();
+                            lichTrinh.NHAHANGs.Clear();
+                            lichTrinh.DICHVUKHACs.Clear();
+                            DataProvider.Ins.DB.LICHTRINHs.Remove(lichTrinh);
+                        }
+                        DataProvider.Ins.DB.TUYENs.Remove(selectedTuyen);
+                        DataProvider.Ins.DB.SaveChanges();
+                        ListTuyen = new ObservableCollection<TUYEN>(DataProvider.Ins.DB.TUYENs);
+                        MessageBox.Show("Xóa tuyến du lịch thành công");
                     }
-                    DataProvider.Ins.DB.TUYENs.Remove(selectedTuyen);
-                    DataProvider.Ins.DB.SaveChanges();
-                    ListTuyen = new ObservableCollection<TUYEN>(DataProvider.Ins.DB.TUYENs);
-                    MessageBox.Show("Xóa tuyến du lịch thành công");
                 }
             });
             EditTourCommand = new RelayCommand<object>((p) => true, (p) =>

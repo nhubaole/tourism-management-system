@@ -148,14 +148,14 @@ namespace TourismManagementSystem.ViewModel
                     ToolTipText = "Vui lòng nhập đủ các trường thông tin bắt buộc";
                     return false;
                 }
-                foreach (var Item in ListHKOfPhieu)
-                {
-                    if (string.IsNullOrEmpty(Item.MAHK) || string.IsNullOrEmpty(Item.HOTEN) || (string.IsNullOrEmpty(Item.GIOITINH) || string.IsNullOrEmpty(Item.DIACHI) || string.IsNullOrEmpty(Item.NGSINH.ToString()) || string.IsNullOrEmpty(Item.CCCD) || string.IsNullOrEmpty(Item.NGAYHETHANVISA.ToString()) || string.IsNullOrEmpty(Item.NGAYHETHANPASSPORT.ToString()) || string.IsNullOrEmpty(Item.SDT) || string.IsNullOrEmpty(Item.PASSPORT)))
-                    {
-                        ToolTipText = "Vui lòng nhập đủ các trường thông tin bắt buộc";
-                        return false;
-                    }
-                }
+                //foreach (var Item in ListHKOfPhieu)
+                //{
+                //    if (string.IsNullOrEmpty(Item.MAHK) || string.IsNullOrEmpty(Item.HOTEN) || (string.IsNullOrEmpty(Item.GIOITINH) || string.IsNullOrEmpty(Item.DIACHI) || string.IsNullOrEmpty(Item.NGSINH.ToString()) || string.IsNullOrEmpty(Item.CCCD) || string.IsNullOrEmpty(Item.NGAYHETHANVISA.ToString()) || string.IsNullOrEmpty(Item.NGAYHETHANPASSPORT.ToString()) || string.IsNullOrEmpty(Item.SDT) || string.IsNullOrEmpty(Item.PASSPORT)))
+                //    {
+                //        ToolTipText = "Vui lòng nhập đủ các trường thông tin bắt buộc";
+                //        return false;
+                //    }
+                //}
                 return true;
             }, (p) =>
             {
@@ -180,12 +180,12 @@ namespace TourismManagementSystem.ViewModel
                     else
                     {
                         NewBooking.SLKHACH = Count;
-                        NewBooking.HANHKHACHes = ListHKOfPhieu;
-                        foreach (var t in NewBooking.HANHKHACHes)
-                        {
-                            t.MAPHIEU = NewBooking.MAPHIEU;
-                            t.PHIEUDATCHO = NewBooking;
-                        }
+                        //NewBooking.HANHKHACHes = ListHKOfPhieu;
+                        //foreach (var t in NewBooking.HANHKHACHes)
+                        //{
+                        //    t.MAPHIEU = NewBooking.MAPHIEU;
+                        //    t.PHIEUDATCHO = NewBooking;
+                        //}
                         NewBooking.CHUYEN = DataProvider.Ins.DB.CHUYENs.FirstOrDefault(t => t.MACHUYEN == NewBooking.MACHUYEN);
                         var itemToUpdate = DataProvider.Ins.DB.PHIEUDATCHOes.FirstOrDefault(item => item.MAPHIEU == NewBooking.MAPHIEU);
                         if (itemToUpdate != null)
