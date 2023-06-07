@@ -232,6 +232,7 @@
     <Compile Include="Utils\BoolToVisibilityConverter.cs" />
     <Compile Include="Utils\MultiCommandParameterConverter.cs" />
     <Compile Include="Utils\RadioButtonConverter.cs" />
+    <Compile Include="ViewModel\AddCustomerVM.cs" />
     <Compile Include="ViewModel\AddScheduleVM.cs" />
     <Compile Include="ViewModel\AddTourVM.cs" />
     <Compile Include="ViewModel\AddBookingVM.cs" />

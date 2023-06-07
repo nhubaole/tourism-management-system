@@ -82,7 +82,7 @@
                         <Setter Property="Margin" Value="0, 10, 0, 10"/>
                         <Setter Property="FontSize" Value="14"/>
                         <Setter Property="FontWeight" Value="Bold"/>
-
+                        <Setter Property="Cursor" Value="Hand"/>
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
                 <DataGrid.Resources>
@@ -111,7 +111,7 @@
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Mã vé" Binding="{Binding MAVE}" Width="*" IsReadOnly="True">
+                    <DataGridTextColumn Header="Mã vé" Binding="{Binding MAVE}" Width="*" IsReadOnly="True" CanUserSort="True">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="TextWrapping" Value="Wrap" />
@@ -122,19 +122,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Mã khách hàng" Binding="{Binding MAHK}" Width="*" IsReadOnly="True">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="TextWrapping" Value="Wrap" />
-                                <Setter Property="HorizontalAlignment" Value="Center"/>
-                                <Setter Property="VerticalAlignment" Value="Center" />
-                                <Setter Property="TextAlignment" Value="Center" />
-                                <Setter Property="Padding" Value="10"/>
-
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn Header="Mã phiếu" Binding="{Binding MAPHIEU}" Width="*" IsReadOnly="True">
+                    <DataGridTextColumn Header="Mã khách hàng" Binding="{Binding MAHK}" Width="*" IsReadOnly="True" CanUserSort="True">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="TextWrapping" Value="Wrap" />
@@ -146,7 +134,19 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn  Header="Ngày bán" Binding="{Binding NGAYBAN, StringFormat={}{0:dd/MM/yyyy}}" Width="*" IsReadOnly="True">
+                    <DataGridTextColumn Header="Mã phiếu" Binding="{Binding MAPHIEU}" Width="*" IsReadOnly="True" CanUserSort="True">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap" />
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="TextAlignment" Value="Center" />
+                                <Setter Property="Padding" Value="10"/>
+
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn  Header="Ngày bán" Binding="{Binding NGAYBAN, StringFormat={}{0:dd/MM/yyyy}}" Width="*" IsReadOnly="True" CanUserSort="True">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="TextWrapping" Value="Wrap" />
@@ -157,12 +157,12 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTemplateColumn Header="Trạng thái" Width="*">
+                    <DataGridTemplateColumn Header="Trạng thái" Width="*"  CanUserSort="True">
                         
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <ComboBox ItemsSource="{Binding DataContext.ListStatus, RelativeSource={RelativeSource AncestorType=DataGrid}}" 
-                                          SelectedItem="{Binding TRANGTHAI, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                                          SelectedItem="{Binding TRANGTHAI, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" >
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="SelectionChanged">
                                             <i:InvokeCommandAction Command="{Binding DataContext.UpdateStatusCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourismManagementSystem.View"
         mc:Ignorable="d"
-        Title="AddBookingWindow" Height="550" Width="900"
+        Name="addPhieuWindow"
+        Title="AddBookingWindow" Height="650" Width="1100"
         ResizeMode="NoResize"
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
@@ -17,13 +18,14 @@
     <Window.DataContext>
         <vm:AddBookingVM/>
     </Window.DataContext>
-    <Grid Margin="50,20,50,20">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="37*"/>
-        </Grid.ColumnDefinitions>
+    <Grid Margin="30,20,30,20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
         <Border Background="White"
-                CornerRadius="20,20,20,20" Grid.ColumnSpan="2">
+                Grid.Row="0"
+                CornerRadius="20,20,20,20" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
@@ -41,115 +43,206 @@
                                FontSize="22"
                                FontWeight="Medium"/>
                 </Border>
-                <ScrollViewer Margin="0,0,0,0" Grid.Row="1">
-                    <StackPanel Grid.Row="1" 
-            Margin="80,20,80,20">
-
-                        <Grid Height="50">
-                            <TextBlock VerticalAlignment="Center"
+                <Grid Margin="0,0,0,0" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0"
+            Margin="50,20,50,20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Margin="0,0,20,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid Height="50" Grid.Row="0">
+                                <TextBlock VerticalAlignment="Center"
                    HorizontalAlignment="Left"
                    Text="Mã phiếu"
                    FontSize="18"
                    FontWeight="Medium"/>
-                            <TextBox VerticalAlignment="Center"
-                 FontSize="18"
-                 Width="400"
-                                     IsEnabled="False"
+                                <Border CornerRadius="8"
+                                    Background="{StaticResource Secondary}"
+                                    VerticalAlignment="Center"
                                      HorizontalAlignment="Right"
-                                     Margin="100,0,0,0"
-                 Text="{Binding NewBooking.MAPHIEU, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                 />
-                        </Grid>
+                                         Width="300"
+                                    Height="40"
+                                    Padding="10,0,10,0">
+                                    <TextBox 
+                                         FontSize="18"
+                                     IsEnabled="False"
+                 Text="{Binding NewBooking.MAPHIEU, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                </Border>
+                            </Grid>
 
-                        <Grid Height="50">
-                            <TextBlock VerticalAlignment="Center"
+                            <Grid Height="50" Grid.Row="1">
+                                <TextBlock VerticalAlignment="Center"
                    HorizontalAlignment="Left"
                    Text="Mã khách hàng"
                    FontSize="18"
                    FontWeight="Medium" Width="151" />
-                            <TextBox VerticalAlignment="Center"
-                 FontSize="18"
-                 Width="400"
+                                <Border CornerRadius="8"
+                                    Background="{StaticResource Secondary}"
+                                    VerticalAlignment="Center"
                                      HorizontalAlignment="Right"
-                 Text="{Binding NewBooking.MAKH, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                 />
+                                         Width="300"
+                                    Height="40"
+                                    Padding="10,0,10,0">
+                                    <ComboBox VerticalAlignment="Center"
+                                         FontSize="18"
+                                        ItemsSource="{Binding ListKhachHang}"
+                                              DisplayMemberPath="MAKH"
+                                SelectedItem="{Binding NewBooking.KHACHHANG, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                </Border>
 
-                        </Grid>
+                            </Grid>
 
-                        <Grid Height="50">
-                            <TextBlock VerticalAlignment="Center"
+                            <Grid Height="50" Grid.Row="2">
+                                <TextBlock VerticalAlignment="Center"
                    HorizontalAlignment="Left"
                    Text="Mã chuyến"
                    FontSize="18"
                                        
                    FontWeight="Medium" Width="125" />
-                            <ComboBox VerticalAlignment="Center"
-                 FontSize="18"
-                                      IsEditable="True"
-                ItemsSource="{Binding ListChuyen}"
-                                      SelectedItem="{Binding NewBooking.MACHUYEN}"
-                 Width="400"
-                                      HorizontalAlignment="Right"
-                 Text="{Binding NewBooking.MACHUYEN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                 />
-
+                                <Border CornerRadius="8"
+                                    Background="{StaticResource Secondary}"
+                                    VerticalAlignment="Center"
+                                     HorizontalAlignment="Right"
+                                         Width="300"
+                                    Height="40"
+                                    Padding="10,0,10,0">
+                                    <ComboBox VerticalAlignment="Center"
+                                         FontSize="18"
+                                        ItemsSource="{Binding ListChuyen}"
+                                              DisplayMemberPath="MACHUYEN"
+                                      SelectedItem="{Binding NewBooking.CHUYEN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                </Border>
+                            </Grid>
                         </Grid>
 
-                        <Grid Height="50">
-                            <TextBlock VerticalAlignment="Center"
+                        <Grid Grid.Column="1" Margin="20,0,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid Height="50" Grid.Row="0">
+                                <TextBlock VerticalAlignment="Center"
                    HorizontalAlignment="Left"
                    Text="Tình trạng"
                    FontSize="18"
                    FontWeight="Medium"/>
-                            <ComboBox VerticalAlignment="Center"
-                  FontSize="18"
-                  Width="400"
-                                      HorizontalAlignment="Right"
-                  IsEnabled="{Binding IsNew}"
-                  ItemsSource="{Binding TinhTrangCbItems}"
-                  SelectedItem="{Binding NewBooking.TINHTRANG, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                   />
+                                <Border CornerRadius="8"
+                                    Background="{StaticResource Secondary}"
+                                    VerticalAlignment="Center"
+                                     HorizontalAlignment="Right"
+                                         Width="300"
+                                    Height="40"
+                                    Padding="10,0,10,0">
+                                    <ComboBox 
+                                      FontSize="18"
+                                        IsEnabled="False"
+                                      ItemsSource="{Binding TinhTrangCbItems}"
+                                      SelectedItem="{Binding NewBooking.TINHTRANG, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                                </Border>
 
-                        </Grid>
 
-                        <Grid  Height="50" >
-                            <TextBlock VerticalAlignment="Center"
+                            </Grid>
+
+
+                            <Grid  Height="50" Grid.Row="1">
+                                <TextBlock VerticalAlignment="Center"
                    HorizontalAlignment="Left"
                    Text="Ngày đặt"
                    FontSize="18"
                    FontWeight="Medium"/>
-                            <DatePicker FontSize="18"
-                    SelectedDate="{Binding NewBooking.NGAYDAT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="400"
-                                HorizontalAlignment="Right"></DatePicker>
-                        </Grid>
+                                <Border CornerRadius="8"
+                                    Background="{StaticResource Secondary}"
+                                    VerticalAlignment="Center"
+                                     HorizontalAlignment="Right"
+                                         Width="300"
+                                    Height="40"
+                                    Padding="10,0,10,0">
+                                    <DatePicker FontSize="18"
+                    SelectedDate="{Binding NewBooking.NGAYDAT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                                </Border>
+                            </Grid>
 
-                        <Grid Height="50" >
-                            <TextBlock VerticalAlignment="Center"
+                            <Grid Height="50" Grid.Row="2">
+                                <TextBlock VerticalAlignment="Center"
                    HorizontalAlignment="Left"
                    Text="Số lượng hành khách"
                    FontSize="18"
                    FontWeight="Medium"/>
-                            <TextBox VerticalAlignment="Center"
-                 FontSize="18"
-                 Width="400"
+                                <Border CornerRadius="8"
+                                    Background="{StaticResource Secondary}"
+                                    VerticalAlignment="Center"
                                      HorizontalAlignment="Right"
-                 Text="{Binding Count}"/>
+                                         Width="200"
+                                    Height="40"
+                                    Padding="10,0,10,0">
+                                    <TextBox FontSize="18"
+                                         Text="{Binding Count, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                </Border>
 
+                            </Grid>
                         </Grid>
-
-                        <StackPanel Height="50" Orientation="Horizontal">
-                            <TextBlock VerticalAlignment="Center"
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Button 
+                        VerticalAlignment="Top"
+                                HorizontalAlignment="Center"
+                                materialDesign:ButtonAssist.CornerRadius="20"
+                                BorderBrush="Transparent"
+                                Width="500"
+                                Height="40"
+                                FontSize="18"
+                                 IsEnabled="True"
+                                Background="{StaticResource Primary}"
+                                Foreground="White"
+                                Command="{Binding AddCommand}"
+                                CommandParameter="{Binding ElementName=addPhieuWindow}"
+                                ToolTip="{Binding ToolTipText, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTipService.ShowOnDisabled="True"
+                                Content="{Binding BtnText}">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatDarkBgButton}">
+                                    <Setter Property="IsEnabled" Value="True"/>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <TextBlock VerticalAlignment="Center"
+                   HorizontalAlignment="Right"
+                   Text="{Binding ToolTipText}"
+                   FontSize="12"
+                                   Margin="0,40,30,0"
+                                   Foreground="OrangeRed"
+                   FontWeight="Medium"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Border>
+        <StackPanel Grid.Row="1">
+            <StackPanel Height="50" Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center"
                    HorizontalAlignment="Left"
                    Text="Danh sách hành khách"
                    FontSize="18"
-                   FontWeight="Medium"/>
-                        </StackPanel>
-                        <StackPanel VerticalAlignment="Stretch">
-                            <DataGrid 
+                           Foreground="{StaticResource Primary}"
+                   FontWeight="Bold"/>
+            </StackPanel>
+            <StackPanel VerticalAlignment="Stretch">
+                <DataGrid 
                 Grid.Row="1"
                 x:Name="dtgridKH"
                                         VerticalAlignment="Top"
-                ItemsSource="{Binding ListHKOfPhieu, UpdateSourceTrigger=PropertyChanged}"
+                    Height="180"
+                ItemsSource="{Binding ListHKOfPhieu, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                 AutoGenerateColumns="False"
                 BorderBrush="{StaticResource Primary2}"
                 BorderThickness="1.5" 
@@ -166,159 +259,144 @@
                 IsReadOnly="False"
                 GridLinesVisibility="None"
                    >
-                                <DataGrid.ColumnHeaderStyle>
-                                    <Style TargetType="DataGridColumnHeader">
-                                        <Setter Property="HorizontalContentAlignment" Value="Center" />
-                                        <Setter Property="VerticalContentAlignment" Value="Center" />
-                                        <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="Foreground" Value="{StaticResource Primary}"/>
-                                        <Setter Property="Margin" Value="0, 10, 0, 10"/>
-                                        <Setter Property="FontSize" Value="14"/>
-                                        <Setter Property="FontWeight" Value="Bold"/>
+                    <DataGrid.ColumnHeaderStyle>
+                        <Style TargetType="DataGridColumnHeader">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            <Setter Property="VerticalContentAlignment" Value="Center" />
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Foreground" Value="{StaticResource Primary}"/>
+                            <Setter Property="Margin" Value="0, 10, 0, 10"/>
+                            <Setter Property="FontSize" Value="14"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
 
-                                    </Style>
-                                </DataGrid.ColumnHeaderStyle>
-                                <DataGrid.Resources>
-                                    <SolidColorBrush x:Key="DataGridCellFocusBorderBrush" Color="Transparent" />
-                                    <Style TargetType="DataGridCell">
-                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                        <Setter Property="VerticalAlignment" Value="Center" />
-                                        <Style.Triggers>
-                                            <Trigger Property="IsSelected" Value="True">
-                                                <Setter Property="BorderThickness" Value="0" />
-                                                <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
-                                                <Setter Property="Background" Value="Transparent"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                    <Style TargetType="DataGridRow">
-                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                        <Setter Property="VerticalAlignment" Value="Center" />
-                                        <Style.Triggers>
-                                            <Trigger Property="IsSelected" Value="True">
-                                                <Setter Property="BorderThickness" Value="0" />
-                                                <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
-                                                <Setter Property="Background" Value="{StaticResource Primary2}"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </DataGrid.Resources>
-                                <DataGrid.Columns >
-                                    <DataGridTemplateColumn Header="Mã hành khách"  Width="100" CanUserSort="False">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBox Width="200" Text="{Binding MAHK}" />
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                    <DataGridTemplateColumn Header="Họ tên"  Width="200" CanUserSort="False">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBox Width="200" Text="{Binding HOTEN}" />
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                    <DataGridTemplateColumn Header="Giới tính"  Width="100" CanUserSort="False">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBox Width="100" Text="{Binding GIOITINH}" />
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                    <DataGridTemplateColumn Header="Ngày sinh" Width="100">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <DatePicker SelectedDate="{Binding NGSINH}" />
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                    <DataGridTemplateColumn Header="Địa chỉ"  Width="200" CanUserSort="False">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBox Width="200" Text="{Binding DIACHI}" />
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                    <DataGridTemplateColumn Header="Số điện thoại"  Width="150" CanUserSort="False">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBox Width="150" Text="{Binding SDT}" />
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                    <DataGridTemplateColumn Header="CCCD"  Width="150" CanUserSort="False">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBox Width="150" Text="{Binding CCCD}" />
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                    <DataGridTemplateColumn Header="Passport"  Width="150" CanUserSort="False">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBox Width="150" Text="{Binding PASSPORT}" />
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                    <DataGridTemplateColumn Width="200" Header="Ngày hết hạn Passport">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <DatePicker SelectedDate="{Binding NGAYHETHANPASSPORT}" />
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                    <DataGridTemplateColumn Width="200" Header="Ngày hết hạn Visa">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <DatePicker SelectedDate="{Binding NGAYHETHANVISA}" />
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
+                        </Style>
+                    </DataGrid.ColumnHeaderStyle>
+                    <DataGrid.Resources>
+                        <SolidColorBrush x:Key="DataGridCellFocusBorderBrush" Color="Transparent" />
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="BorderThickness" Value="0" />
+                                    <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
+                                    <Setter Property="Background" Value="Transparent"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="HorizontalAlignment" Value="Center" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="BorderThickness" Value="0" />
+                                    <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
+                                    <Setter Property="Background" Value="{StaticResource Primary2}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns >
+                        <DataGridTemplateColumn Header="Họ tên"  Width="120" CanUserSort="False">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Width="100" Text="{Binding HOTEN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!--<DataGridTemplateColumn Header="Giới tính"  Width="100" CanUserSort="False">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Width="100" Text="{Binding GIOITINH}" >
+                                    </TextBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>-->
+                        <DataGridTemplateColumn Header="Giới tính" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ComboBox Width="100" 
+                                              Text="{Binding GIOITINH, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                                        <ComboBoxItem Content="Nam"/>
+                                        <ComboBoxItem Content="Nữ"/>
+                                    </ComboBox>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Ngày sinh" Width="120">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <DatePicker Width="100" SelectedDate="{Binding NGSINH, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <!--<DataGridTemplateColumn Header="Địa chỉ"  Width="200" CanUserSort="False">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Width="200" Text="{Binding DIACHI}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>-->
+                        <DataGridTemplateColumn Header="SĐT"  Width="120" CanUserSort="False">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Width="100" Text="{Binding SDT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="CCCD"  Width="120" CanUserSort="False">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Width="100" Text="{Binding CCCD, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Header="Passport"  Width="120" CanUserSort="False">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Width="100" Text="{Binding PASSPORT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="120" Header="Hạn Passport">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <DatePicker Width="100" SelectedDate="{Binding NGAYHETHANPASSPORT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn Width="120" Header="Hạn Visa">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <DatePicker Width="100" SelectedDate="{Binding NGAYHETHANVISA, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
-                                    <!-- Các cột khác -->
-                                    <DataGridTemplateColumn Header="" 
+                        <!-- Các cột khác -->
+                        <DataGridTemplateColumn Header="" 
                                             Width="auto"
                                             >
-                                        <DataGridTemplateColumn.CellTemplate >
-                                            <DataTemplate >
-                                                <Button
+                            <DataGridTemplateColumn.CellTemplate >
+                                <DataTemplate >
+                                    <Button
                                         Height="auto"
                                         Width="auto"
                                         Background="Transparent"
                                         BorderBrush="Transparent"
                                         Command="{Binding DataContext.DeleteKhachCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                         CommandParameter="{Binding}">
-                                                    <materialDesign:PackIcon Kind="Delete"
+                                        <materialDesign:PackIcon Kind="Delete"
                                                                  Foreground ="{StaticResource Primary}"/>
-                                                </Button>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn >
+                                    </Button>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn >
 
-                                </DataGrid.Columns>
-                            </DataGrid>
+                    </DataGrid.Columns>
+                </DataGrid>
 
-                        </StackPanel>
-                        <StackPanel>
-                            <Button x:Name="AddButton" 
-                            Content="{Binding BtnText}"
-                            Command="{Binding AddCommand}"
-                            Style="{StaticResource MaterialDesignFlatDarkBgButton}"
-                            VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                materialDesign:ButtonAssist.CornerRadius="20"
-                                BorderBrush="Transparent"
-                                Width="500"
-                                Height="40"
-                                FontSize="18"
-                                Background="{StaticResource Primary}"
-                                Foreground="White" Margin="0,20,0,5">
-                            </Button>
-                        </StackPanel>
-
-                    </StackPanel>
-                </ScrollViewer>
-            </Grid>
-        </Border>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

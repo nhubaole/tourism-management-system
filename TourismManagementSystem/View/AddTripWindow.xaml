@@ -10,8 +10,9 @@
         HorizontalAlignment="Center"
         xmlns:vm="clr-namespace:TourismManagementSystem.ViewModel"
         VerticalAlignment="Center"
+        Name="addTripWindow"
         xmlns:uc="clr-namespace:TourismManagementSystem.UserControls"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         WindowStartupLocation="CenterScreen"
         Background="{StaticResource Secondary}">
     <Window.DataContext>
@@ -65,7 +66,14 @@
                                 Width="400"
                                  FontSize="18"
                                  ItemsSource="{Binding ListTuyen}"
-                                 SelectedItem="{Binding NewTrip.MATUYEN}" />
+                                DisplayMemberPath="MATUYEN"
+                                 SelectedItem="{Binding NewTrip.TUYEN}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectTuyenCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ComboBox>
 
                         </Grid>
                         <Grid Height="50" >
@@ -82,6 +90,11 @@
                                  ItemsSource="{Binding ListLoaiChuyen}"
                                       DisplayMemberPath="TENLOAI"
                                  SelectedItem="{Binding NewTrip.LOAICHUYEN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectLoaiCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
                             </ComboBox>
                         </Grid>
                         <Grid Height="50" >
@@ -89,7 +102,7 @@
                                         VerticalAlignment="Center">
                                 <TextBlock VerticalAlignment="Top"
                                    HorizontalAlignment="Left"
-                                   Text="Mã HDV"
+                                   Text="HDV"
                                    FontSize="18"
                                    FontWeight="Medium"/>
                                 <Button
@@ -109,129 +122,10 @@
                                 </Button>
                             </StackPanel>
 
-                            <ComboBox VerticalAlignment="Center"
-                                 HorizontalAlignment="Right"
-                                 FontSize="18"
-                                      Margin="140,0,0,0"
-                                 Width="400"
-                                 ItemsSource="{Binding ListHDV}"
-                                 SelectedItem="{Binding SelectedHDVMaSo, Mode=TwoWay}"
-                                 Height="27"/>
-
                         </Grid>
-                        <StackPanel VerticalAlignment="Stretch">
-                            <DataGrid 
-            Grid.Row="1"
-            x:Name="dtgridPDC"
-            VerticalAlignment="Center"
-            HorizontalAlignment="Center"
-            Margin="30, 0, 30, 10"
-            Height="100"
-            ItemsSource="{Binding NewTrip.HUONGDANVIENs, UpdateSourceTrigger=PropertyChanged}"
-            AutoGenerateColumns="False"
-            BorderBrush="{StaticResource Primary2}"
-            BorderThickness="1.5" 
-            RowDetailsVisibilityMode="VisibleWhenSelected"
-            ScrollViewer.CanContentScroll="True"
-            ScrollViewer.PanningMode="Both"
-            HeadersVisibility="Column"
-            SelectionMode="Single"
-            SelectionUnit="FullRow"
-            CanUserAddRows="False"
-            CanUserDeleteRows="False"
-            CanUserReorderColumns="False"
-            CanUserResizeRows="False"
-            ColumnWidth="*"
-            IsReadOnly="False"
-            GridLinesVisibility="None"
-               >
-                                <DataGrid.ColumnHeaderStyle>
-                                    <Style TargetType="DataGridColumnHeader">
-                                        <Setter Property="HorizontalContentAlignment" Value="Center" />
-                                        <Setter Property="VerticalContentAlignment" Value="Center" />
-                                        <Setter Property="Background" Value="Transparent"/>
-                                        <Setter Property="Foreground" Value="{StaticResource Primary}"/>
-                                        <Setter Property="Margin" Value="0, 10, 0, 10"/>
-                                        <Setter Property="FontSize" Value="14"/>
-                                        <Setter Property="FontWeight" Value="Bold"/>
-
-                                    </Style>
-                                </DataGrid.ColumnHeaderStyle>
-                                <DataGrid.Resources>
-                                    <SolidColorBrush x:Key="DataGridCellFocusBorderBrush" Color="Transparent" />
-                                    <Style TargetType="DataGridCell">
-                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                        <Setter Property="VerticalAlignment" Value="Center" />
-                                        <Style.Triggers>
-                                            <Trigger Property="IsSelected" Value="True">
-                                                <Setter Property="BorderThickness" Value="0" />
-                                                <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
-                                                <Setter Property="Background" Value="Transparent"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                    <Style TargetType="DataGridRow">
-                                        <Setter Property="HorizontalAlignment" Value="Center" />
-                                        <Setter Property="VerticalAlignment" Value="Center" />
-                                        <Style.Triggers>
-                                            <Trigger Property="IsSelected" Value="True">
-                                                <Setter Property="BorderThickness" Value="0" />
-                                                <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
-                                                <Setter Property="Background" Value="#e8a66d"/>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </DataGrid.Resources>
-                                <DataGrid.Columns >
-                                    <DataGridTextColumn Header="Mã hướng dẫn viên" Binding="{Binding MAHDV}" Width="*"  IsReadOnly="True" CanUserSort="False">
-
-                                    </DataGridTextColumn>
-                                    <DataGridTextColumn Header="Tên hướng dẫn viên" Binding="{Binding HOTEN}"  Width="*" IsReadOnly="True" CanUserSort="False">
-                                        <DataGridTextColumn.ElementStyle>
-                                            <Style TargetType="TextBlock">
-                                                <Setter Property="TextWrapping" Value="Wrap" />
-                                                <Setter Property="HorizontalAlignment" Value="Center"/>
-                                                <Setter Property="VerticalAlignment" Value="Center" />
-                                                <Setter Property="TextAlignment" Value="Center" />
-                                                <Setter Property="Padding" Value="10"/>
-
-                                            </Style>
-                                        </DataGridTextColumn.ElementStyle>
-                                    </DataGridTextColumn>
-                                    <DataGridTextColumn Header="Số điện thoại" Binding="{Binding SDT}"  Width="*" IsReadOnly="True" CanUserSort="False">
-                                        <DataGridTextColumn.ElementStyle>
-                                            <Style TargetType="TextBlock">
-                                                <Setter Property="TextWrapping" Value="Wrap" />
-                                                <Setter Property="HorizontalAlignment" Value="Center"/>
-                                                <Setter Property="VerticalAlignment" Value="Center" />
-                                                <Setter Property="TextAlignment" Value="Center" />
-                                                <Setter Property="Padding" Value="10"/>
-
-                                            </Style>
-                                        </DataGridTextColumn.ElementStyle>
-                                    </DataGridTextColumn>
-                                    <DataGridTemplateColumn Header="" 
-                                        Width="auto"
-                                        >
-                                        <DataGridTemplateColumn.CellTemplate >
-                                            <DataTemplate >
-                                                <Button
-                                    Height="auto"
-                                    Width="auto"
-                                    Background="Transparent"
-                                    BorderBrush="Transparent"
-                                    Command="{Binding DataContext.RemoveHDV, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                    CommandParameter="{Binding}">
-                                                    <materialDesign:PackIcon Kind="Delete"
-                                                             Foreground ="{StaticResource Primary}"/>
-                                                </Button>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn >
-
-                                </DataGrid.Columns>
-                            </DataGrid>
-
+                        <StackPanel Width="400"
+                                    HorizontalAlignment="Right">
+                            <ItemsControl ItemsSource="{Binding HDVBoxes}" HorizontalContentAlignment="Right"  />
                         </StackPanel>
                         <Grid Height="50">
                             <TextBlock VerticalAlignment="Center"
@@ -265,7 +159,8 @@
                                  HorizontalAlignment="Right"
                                  FontSize="18"
                                  Width="360"
-                                 Text="{Binding NewTrip.GIAVE, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                         IsEnabled="False"
+                                 Text="{Binding NewTrip.GIAVE, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                                 <TextBlock Text="vnđ"
                                        VerticalAlignment="Bottom"
                                        FontSize="18"
@@ -292,26 +187,43 @@
                                    FontSize="18"
                                    FontWeight="Medium"/>
                             <TextBox VerticalAlignment="Center"
+                                     IsEnabled="False"
                                  FontSize="18"
                                  Width="300"
                                  HorizontalAlignment="Right"
                                  Text="{Binding NewTrip.SLTHUCTE, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
                         </Grid>
-                        <Button x:Name="AddButton" 
-                                    VerticalAlignment="Center"
+                        <Button VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
                                 materialDesign:ButtonAssist.CornerRadius="20"
                                 BorderBrush="Transparent"
                                 Width="500"
                                 Height="40"
+                                FontSize="18"
+                                Background="{StaticResource Primary}"
                                 Foreground="White"
-                            Content="{Binding BtnText}"
-                            Command="{Binding AddCommand}"
-                            Style="{StaticResource MaterialDesignFlatDarkBgButton}"
-                            Background="{StaticResource Primary}"
-                              FontSize="18" Margin="0,20,0,0">
+                                IsEnabled="True"
+                                Command="{Binding AddCommand}"
+                                CommandParameter="{Binding ElementName=addTripWindow}"
+                                ToolTip="{Binding ToolTipText, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTipService.ShowOnDisabled="True"
+                                Content="{Binding BtnText}">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatDarkBgButton}">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                    <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtNights}" Value="False"/>
+                                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtPrice}" Value="False"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="IsEnabled" Value="True"/>
+                                        </MultiDataTrigger>
+                                    </Style.Triggers>
 
+                                </Style>
+                            </Button.Style>
                         </Button>
                     </StackPanel>
                 </ScrollViewer>

@@ -94,23 +94,30 @@ namespace TourismManagementSystem.ViewModel
             DeleteTripCommand = new RelayCommand<object>((p) => true, (p) =>
             {
                 CHUYEN selectedChuyen = p as CHUYEN;
-                if (MessageBox.Show("Bạn có muốn xóa chuyến du lịch này?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if(selectedChuyen.PHIEUDATCHOes.Count() > 0)
                 {
-                    foreach (var item in DataProvider.Ins.DB.HUONGDANVIENs)
+                    MessageBox.Show("Chuyến du lịch đã có phiếu đặt chỗ. Không thể xóa chuyến");
+                }
+                else
+                {
+                    if (MessageBox.Show("Bạn có muốn xóa chuyến du lịch này?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        foreach (var tripItem in selectedChuyen.HUONGDANVIENs)
+                        foreach (var item in DataProvider.Ins.DB.HUONGDANVIENs)
                         {
-                            if (item.MAHDV.Equals(tripItem.MAHDV))
-                                item.CHUYENs.Remove(selectedChuyen);
+                            foreach (var tripItem in selectedChuyen.HUONGDANVIENs)
+                            {
+                                if (item.MAHDV.Equals(tripItem.MAHDV))
+                                    item.CHUYENs.Remove(selectedChuyen);
 
+                            }
                         }
+
+                        DataProvider.Ins.DB.CHUYENs.Remove(selectedChuyen);
+
+                        DataProvider.Ins.DB.SaveChanges();
+                        ChuyenList = new ObservableCollection<CHUYEN>(DataProvider.Ins.DB.CHUYENs);
+                        MessageBox.Show("Xóa chuyến du lịch thành công");
                     }
-
-                    DataProvider.Ins.DB.CHUYENs.Remove(selectedChuyen);
-
-                    DataProvider.Ins.DB.SaveChanges();
-                    ChuyenList = new ObservableCollection<CHUYEN>(DataProvider.Ins.DB.CHUYENs);
-                    MessageBox.Show("Xóa chuyến du lịch thành công");
                 }
             });
             EditTripCommand = new RelayCommand<object>((p) => true, (p) =>

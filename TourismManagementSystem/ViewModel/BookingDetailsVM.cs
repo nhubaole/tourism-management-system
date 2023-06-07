@@ -22,13 +22,63 @@ namespace TourismManagementSystem.ViewModel
         public BookingDetailVM()
         {
             Phieu = _selectedPhieu;
-            ThanhToanCommand = new RelayCommand<object>((p)=> true, (p) =>
+            ThanhToanCommand = new RelayCommand<object>((p)=>
+            {
+                if (Phieu.TINHTRANG == "Đã thanh toán" || Phieu.TINHTRANG == "Đã xuất vé")
+                    return false;
+                return true;
+            }, (p) =>
             {
                 //chuyen sang man hinh thanh toan
+                PurchaseVM.SelectedPhieu = _selectedPhieu;
+                PurchaseWindow purchaseWindow= new PurchaseWindow();
+                purchaseWindow.ShowDialog();
+                Phieu = PurchaseVM.SelectedPhieu;
             });
-            XuatVeCommand = new RelayCommand<object>((p) => true, (p) =>
+            XuatVeCommand = new RelayCommand<object>((p) =>
+            {
+                if (Phieu.TINHTRANG == "Chưa thanh toán" || Phieu.TINHTRANG == "Đã xuất vé")
+                    return false;
+                return true;
+            }, (p) =>
             {
                 //chuyen sang man hinh xuat ve
+                foreach (var item in Phieu.HANHKHACHes)
+                {
+                    VE ve = new VE();
+                    ve.NGAYBAN = DateTime.Today;
+                    ve.TRANGTHAI = "Chưa sử dụng";
+                    ve.MAHK = item.MAHK;
+                    ve.HANHKHACH = item;
+                    ve.MAPHIEU = Phieu.MAPHIEU;
+                    ve.PHIEUDATCHO = Phieu;
+                    ve.GIAVE = Phieu.CHUYEN.GIAVE;
+                    string formattedID;
+                    ObservableCollection<VE> ListVe = new ObservableCollection<VE>(DataProvider.Ins.DB.VEs);
+                    if (ListVe.Count() == 0)
+                    {
+                        formattedID = string.Format("V{0:D7}", 1);
+                    }
+                    else
+                    {
+                        string lastID = ListVe.Last().MAVE;
+                        int previousNumber = int.Parse(lastID.Substring(1));
+                        int nextNumber = previousNumber + 1;
+                        formattedID = string.Format("V{0:D7}", nextNumber);
+                    }
+                    ve.MAVE = formattedID;
+                    DataProvider.Ins.DB.VEs.Add(ve);
+                    DataProvider.Ins.DB.SaveChanges();
+                }
+                Phieu.TINHTRANG = "Đã xuất vé";
+                OnPropertyChanged(nameof(Phieu.TINHTRANG));
+                var itemToUpdate = DataProvider.Ins.DB.PHIEUDATCHOes.FirstOrDefault(item => item.MAPHIEU == Phieu.MAPHIEU);
+                if (itemToUpdate != null)
+                {
+                    itemToUpdate = Phieu;
+                    DataProvider.Ins.DB.SaveChanges();
+                    MessageBox.Show("Tạo vé thành công!");
+                }
             });
 
         }

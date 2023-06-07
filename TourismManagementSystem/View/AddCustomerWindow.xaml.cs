@@ -23,8 +23,6 @@ namespace TourismManagementSystem.View
         public AddCustomerWindow()
         {
             InitializeComponent();
-            DataContext = new CustomerVM();
-
         }
 
       

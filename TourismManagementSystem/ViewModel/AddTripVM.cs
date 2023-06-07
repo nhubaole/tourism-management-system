@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
 using TourismManagementSystem.Model;
+using System.Windows.Controls;
 using TourismManagementSystem.View;
 
 namespace TourismManagementSystem.ViewModel
@@ -18,7 +19,12 @@ namespace TourismManagementSystem.ViewModel
         public ObservableCollection<LOAICHUYEN> ListLoaiChuyen { get; set; }
         private string _ToolTipText;
 
-        public ObservableCollection<string> ListTuyen { get; set; }
+        public ObservableCollection<HUONGDANVIEN> ListOfHDV;
+        private ObservableCollection<ComboBox> _HDVBoxes = new ObservableCollection<ComboBox>();
+        public ObservableCollection<ComboBox> HDVBoxes { get => _HDVBoxes; set { _HDVBoxes = value; OnPropertyChanged(); } }
+
+
+        public ObservableCollection<TUYEN> ListTuyen { get; set; }
         public ObservableCollection<string> ListHDV { get; set; }
 
         private static CHUYEN _editSelectedChuyen;
@@ -32,27 +38,50 @@ namespace TourismManagementSystem.ViewModel
         {
             ToolTipText = "Chưa nhập đủ thông tin";
             ListLoaiChuyen = new ObservableCollection<LOAICHUYEN>(DataProvider.Ins.DB.LOAICHUYENs);
-            ListTuyen = new ObservableCollection<string>(DataProvider.Ins.DB.TUYENs.Select(t => t.MATUYEN));
-            ListHDV = new ObservableCollection<string>(DataProvider.Ins.DB.HUONGDANVIENs.Select(t => t.MAHDV));
+            ListTuyen = new ObservableCollection<TUYEN>(DataProvider.Ins.DB.TUYENs);
+            ListOfHDV = new ObservableCollection<HUONGDANVIEN>(DataProvider.Ins.DB.HUONGDANVIENs);
             if (IsEdit == 0)
             {
-                Title = "Thêm mới cuyến du lịch";
+                Title = "Thêm mới chuyến du lịch";
                 BtnText = "Thêm chuyến du lịch";
                 NewTrip = new CHUYEN();
-                Random random = new Random();
-                NewTrip.MACHUYEN = random.Next(0, 1000).ToString();
+                NewTrip.SLTHUCTE = 0;
+                string formattedID;
+                ObservableCollection<CHUYEN> ListChuyen = new ObservableCollection<CHUYEN>(DataProvider.Ins.DB.CHUYENs);
+                if (ListTuyen.Count() == 0)
+                {
+                    formattedID = string.Format("T{0:D7}", 1);
+                }
+                else
+                {
+                    string lastID = ListChuyen.Last().MACHUYEN;
+                    int previousNumber = int.Parse(lastID.Substring(1));
+                    int nextNumber = previousNumber + 1;
+                    formattedID = string.Format("C{0:D7}", nextNumber);
+                }
+                NewTrip.MACHUYEN = formattedID;
             }
             else
             {
                 Title = "Cập nhật chuyến du lịch";
                 BtnText = "Cập nhật chuyến du lịch";
                 NewTrip = EditSelectedChuyen;
+                foreach (var item in NewTrip.HUONGDANVIENs)
+                {
+                    ComboBox comboBox = new ComboBox();
+                    comboBox.ItemsSource = ListOfHDV; ;
+                    comboBox.DisplayMemberPath = "HOTEN";
+                    comboBox.Margin = new Thickness(comboBox.Margin.Left, comboBox.Margin.Top, comboBox.Margin.Right, 10);
+                    comboBox.FontSize = 16;
+                    comboBox.SelectedItem = item;
+                    HDVBoxes.Add(comboBox);
+                }
             }
 
 
             AddCommand = new RelayCommand<object>((p) =>
             {
-                if (string.IsNullOrEmpty(NewTrip.MACHUYEN) || NewTrip.MATUYEN == null || NewTrip.LOAICHUYEN == null || NewTrip.HUONGDANVIENs.Count == 0 || NewTrip.TGBATDAU == null || NewTrip.GIAVE == null || NewTrip.TGKETTHUC == null || NewTrip.SLTOITHIEU == null || NewTrip.SLTHUCTE == null)
+                if (string.IsNullOrEmpty(NewTrip.MACHUYEN) || NewTrip.TUYEN == null || NewTrip.LOAICHUYEN == null || NewTrip.TGBATDAU == null )
                 {
                     ToolTipText = "Vui lòng nhập đủ các trường thông tin bắt buộc";
                     return false;
@@ -70,7 +99,11 @@ namespace TourismManagementSystem.ViewModel
                     }
                     if (IsEdit == 0)
                     {
-                        NewTrip.MALOAI = DataProvider.Ins.DB.LOAICHUYENs.Where(t => t.TENLOAI.Equals(NewTrip.LOAICHUYEN)).ToString();
+                        //NewTrip.MALOAI = DataProvider.Ins.DB.LOAICHUYENs.Where(t => t.TENLOAI.Equals(NewTrip.LOAICHUYEN)).ToString();
+                        foreach (var t in HDVBoxes)
+                        {
+                            NewTrip.HUONGDANVIENs.Add((HUONGDANVIEN)t.SelectedItem);
+                        }
                         foreach (var item in DataProvider.Ins.DB.HUONGDANVIENs)
                         {
                             foreach (var tripItem in NewTrip.HUONGDANVIENs)
@@ -89,15 +122,19 @@ namespace TourismManagementSystem.ViewModel
                         var itemToUpdate = DataProvider.Ins.DB.CHUYENs.FirstOrDefault(item => item.MACHUYEN == NewTrip.MACHUYEN);
                         if (itemToUpdate != null)
                         {
-                            NewTrip.MALOAI = DataProvider.Ins.DB.LOAICHUYENs.Where(t => t.TENLOAI.Equals(NewTrip.LOAICHUYEN)).ToString();
+                            //NewTrip.MALOAI = DataProvider.Ins.DB.LOAICHUYENs.Select(t => t.MALOAI.Where(t.TENLOAI.Equals(NewTrip.LOAICHUYEN));
                             itemToUpdate = NewTrip;
+                            foreach (var t in HDVBoxes)
+                            {
+                                itemToUpdate.HUONGDANVIENs.Add((HUONGDANVIEN)t.SelectedItem);
+                            }
+
                             foreach (var item in DataProvider.Ins.DB.HUONGDANVIENs)
                             {
-                                foreach (var tripItem in NewTrip.HUONGDANVIENs)
+                                foreach (var tripItem in itemToUpdate.HUONGDANVIENs)
                                 {
                                     if (item.MAHDV.Equals(tripItem.MAHDV))
-                                        item.CHUYENs.Add(NewTrip);
-
+                                        item.CHUYENs.Add(itemToUpdate);
                                 }
                             }
                             DataProvider.Ins.DB.SaveChanges();
@@ -107,24 +144,47 @@ namespace TourismManagementSystem.ViewModel
                     addTripWindow.Close();
                 }
             });
-            AddHDV = new RelayCommand<object>((p) => true, (p) => {
-                if (SelectedHDVMaSo != null)
-                {
-                    string HDV = SelectedHDVMaSo;
-                    //NewTrip.HUONGDANVIENs.Add((HUONGDANVIEN)DataProvider.Ins.DB.HUONGDANVIENs.Where(t => t.MAHDV.Equals(HDV)));
-                    NewTrip.HUONGDANVIENs.Add(DataProvider.Ins.DB.HUONGDANVIENs.FirstOrDefault(t => t.MAHDV.Equals(HDV)));
-
-                }
-            });
-            RemoveHDV = new RelayCommand<object>((p) => true, (p) => {
-                HUONGDANVIEN hdv = p as HUONGDANVIEN;
-                if (hdv != null)
-                {
-                    NewTrip.HUONGDANVIENs.Remove(hdv);
-                    OnPropertyChanged();
-                }
+            AddHDV = new RelayCommand<object>((p) => {
+                return true;
+            }, (p) => {
+                ComboBox comboBox = new ComboBox();
+                    comboBox.ItemsSource = ListOfHDV; ;
+                    comboBox.DisplayMemberPath = "HOTEN";
+                    comboBox.Margin = new Thickness(comboBox.Margin.Left, comboBox.Margin.Top, comboBox.Margin.Right, 10);
+                    comboBox.FontSize = 16;
+                    HDVBoxes.Add(comboBox);               
             });
 
+            SelectLoaiCommand = new RelayCommand<object>((p) => true, (p) =>
+            {
+                if(NewTrip.TUYEN != null)
+                {
+                    if (NewTrip.LOAICHUYEN.TENLOAI == "Khuyến mãi")
+                    {
+                        NewTrip.GIAVE = (int?)(NewTrip.TUYEN.GIADUKIEN * 0.8);
+                    }
+                    else
+                    {
+                        NewTrip.GIAVE = NewTrip.TUYEN.GIADUKIEN;
+                    }
+                    OnPropertyChanged(nameof(NewTrip.GIAVE));
+                }
+            });
+            SelectTuyenCommand = new RelayCommand<object>((p) => true, (p) =>
+            {
+                if (NewTrip.LOAICHUYEN != null)
+                {
+                    if (NewTrip.LOAICHUYEN.TENLOAI == "Khuyến mãi")
+                    {
+                        NewTrip.GIAVE = (int?)(NewTrip.TUYEN.GIADUKIEN * 0.8);
+                    }
+                    else
+                    {
+                        NewTrip.GIAVE = NewTrip.TUYEN.GIADUKIEN;
+                    }
+                    OnPropertyChanged(nameof(NewTrip.GIAVE));
+                }
+            });
         }
 
         private string _selectedHDVMaSo;
@@ -138,6 +198,8 @@ namespace TourismManagementSystem.ViewModel
             }
         }
         public ICommand AddCommand { get; set; }
+        public ICommand SelectLoaiCommand { get; set; }
+        public ICommand SelectTuyenCommand { get; set; }
 
         public ICommand AddHDV { get; set; }
         public ICommand RemoveHDV { get; set; }

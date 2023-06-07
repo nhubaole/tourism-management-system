@@ -16,109 +16,18 @@ using System.Collections;
 
 namespace TourismManagementSystem.ViewModel
 {
-    internal class PurchaseVM: BaseViewModel
+    internal class PurchaseVM : BaseViewModel
     {
-       
-        private ObservableCollection<string> _status = new ObservableCollection<string>() { "Chưa thực hiện", "Thành công", "Thất bại","Chờ xử lý" };
+        private static PHIEUDATCHO _selectedPhieu;
+        public static PHIEUDATCHO SelectedPhieu { get => _selectedPhieu; set { _selectedPhieu = value; } }
 
-        private ObservableCollection<string> _method = new ObservableCollection<string>() { "Tiền mặt", "Trả thẻ"};
+        private ObservableCollection<string> _method = new ObservableCollection<string>() { "Tiền mặt", "Chuyển khoản", "Thẻ tín dụng", "Thẻ ghi nợ", "Ví điện tử MoMo" };
 
         public ObservableCollection<THONGTINTHANHTOAN> THONGTINTHANHTOANs { get; set; }
-        
 
+        private THONGTINTHANHTOAN _NewPurchase = new THONGTINTHANHTOAN();
         public ICommand AddDataCommand { get; set; }
       
-
-        private THONGTINTHANHTOAN _selectedPurchase;
-        public THONGTINTHANHTOAN SelectedPurchase
-        {
-            get => _selectedPurchase; set
-            {
-                _selectedPurchase = value;
-                OnPropertyChanged(nameof(SelectedPurchase));
-            }
-        }
-
-
-        private string MaTT;
-        public string MATT
-        {
-            get => MaTT;
-            set
-            {
-                MaTT = value;
-                OnPropertyChanged(nameof(MATT));
-            }
-        }
-
-        private string MaPHIEU;
-        public string MAPHIEU
-        {
-            get => MaPHIEU;
-            set
-            {
-                MaPHIEU = value;
-                OnPropertyChanged(nameof(MAPHIEU));
-            }
-        }
-
-        private string SoTIEN;
-        public string SOTIEN
-        {
-            get => SoTIEN;
-            set
-            {
-
-                SoTIEN = value;
-                OnPropertyChanged(nameof(SOTIEN));
-                
-            }
-        }
-
-        private System.DateTime ThoiGIAN;
-        
-        public System.DateTime THOIGIAN
-        {
-            get => ThoiGIAN;
-            set
-            {
-                ThoiGIAN = value;
-                OnPropertyChanged(nameof(THOIGIAN));
-                
-            }
-        }
-
-        private string TrangTHAI;
-        public string TRANGTHAI
-        {
-            get => TrangTHAI;
-            set
-            {
-                TrangTHAI = value;
-                OnPropertyChanged(nameof(TRANGTHAI));
-            }
-        }
-
-        private string PhgTHUC;
-        public string PHUONGTHUC
-        {
-            get => PhgTHUC;
-            set
-            {
-                PhgTHUC = value;
-                OnPropertyChanged(nameof(PHUONGTHUC));
-            }
-        }
-        private string _selectedstatus;
-        public string selectedstatus
-        {
-            get => _selectedstatus;
-            set
-            {
-                _selectedstatus = value;
-                OnPropertyChanged(nameof(selectedstatus));
-            }
-        }
         private string _selectedmethod;
         public string selectedmethod
         {
@@ -129,26 +38,32 @@ namespace TourismManagementSystem.ViewModel
                 OnPropertyChanged(nameof(selectedmethod));
             }
         }
-        public ObservableCollection<string> status { get => _status; set { _status = value; OnPropertyChanged(nameof(status)); } }
         public ObservableCollection<string> method { get => _method; set { _method = value; OnPropertyChanged(nameof(method)); } }
 
-
-
-
-
-        private ObservableCollection<THONGTINTHANHTOAN> _ListTHONGTINTHANHTOAN = new ObservableCollection<THONGTINTHANHTOAN>(DataProvider.Ins.DB.THONGTINTHANHTOANs);
-        public ObservableCollection<THONGTINTHANHTOAN> ListTHONGTINTHANHTOAN { get => _ListTHONGTINTHANHTOAN; set { _ListTHONGTINTHANHTOAN = value; OnPropertyChanged(nameof(DataProvider.Ins.DB.THONGTINTHANHTOANs)); } }
+        public THONGTINTHANHTOAN NewPurchase { get => _NewPurchase; set { _NewPurchase = value; OnPropertyChanged(); } }
 
         public PurchaseVM()
         {
-            THOIGIAN = DateTime.Today;
-
-            THONGTINTHANHTOANs = new ObservableCollection<THONGTINTHANHTOAN>();
+            string formattedID;
+            ObservableCollection<THONGTINTHANHTOAN> ListTT = new ObservableCollection<THONGTINTHANHTOAN>(DataProvider.Ins.DB.THONGTINTHANHTOANs);
+            if (ListTT.Count() == 0)
+            {
+                formattedID = string.Format("TT{0:D6}", 1);
+            }
+            else
+            {
+                string lastID = ListTT.Last().MATT;
+                int previousNumber = int.Parse(lastID.Substring(2));
+                int nextNumber = previousNumber + 1;
+                formattedID = string.Format("TT{0:D6}", nextNumber);
+            }
+            NewPurchase.MATT = formattedID;
+            NewPurchase.THOIGIAN = DateTime.Today;
+            NewPurchase.SOTIEN = SelectedPhieu.CHUYEN.GIAVE * SelectedPhieu.SLKHACH;
+            NewPurchase.PHIEUDATCHO = SelectedPhieu;
             AddDataCommand = new RelayCommand<object>((p) => {
-                if (PHUONGTHUC == null || TRANGTHAI == null ||!IsNumeric(SoTIEN)||SoTIEN==null)
+                if (NewPurchase.PHUONGTHUC == null)
                 {
-                   
-
                     return false;
                 }
                 else
@@ -157,27 +72,22 @@ namespace TourismManagementSystem.ViewModel
                 }
             }, (p) =>
             {
-               
-                
                     try
                     {
-                        var temp = new THONGTINTHANHTOAN()
+                        Window w = p as Window;
+                        if(w != null)
+                    {
+                        SelectedPhieu.THONGTINTHANHTOANs.Add(NewPurchase);
+                        SelectedPhieu.TINHTRANG = "Đã thanh toán";
+                        var itemToUpdate = DataProvider.Ins.DB.PHIEUDATCHOes.FirstOrDefault(item => item.MAPHIEU == SelectedPhieu.MAPHIEU);
+                        if (itemToUpdate != null)
                         {
-                            MATT = GenerateCode(GetLastGeneratedMATT()),
-                            MAPHIEU = MAPHIEU,
-                            SOTIEN = int.Parse(SOTIEN),
-                            THOIGIAN = THOIGIAN,
-                            TRANGTHAI = TRANGTHAI,
-                            PHUONGTHUC = PHUONGTHUC
-                        };
-
-                        DataProvider.Ins.DB.THONGTINTHANHTOANs.Add(temp);
-                        DataProvider.Ins.DB.SaveChanges();
-                        ListTHONGTINTHANHTOAN.Add(temp);
-
-                        MessageBox.Show("Đã tạo thông tin thanh toán thành công MATT: " + temp.MATT);
-
-
+                            itemToUpdate = SelectedPhieu;
+                            DataProvider.Ins.DB.SaveChanges();
+                            MessageBox.Show("Đã tạo thông tin thanh toán thành công");
+                        }
+                        w.Close();
+                    }
                     }
                     catch (Exception ex)
                     {
@@ -186,72 +96,10 @@ namespace TourismManagementSystem.ViewModel
                         {
                             MessageBox.Show("Inner Exception: " + innerException.Message);
                             innerException = innerException.InnerException;
-
-
                         }
                     }
-                
-
             }); 
 
-        }
-        private void LoadDataGrid()
-        {
-            ListTHONGTINTHANHTOAN = new ObservableCollection<THONGTINTHANHTOAN>(DataProvider.Ins.DB.THONGTINTHANHTOANs);
-        }
-
-
-
-
-
-        private bool IsNumeric(string value)
-        {
-            int result;
-            bool isNumeric = int.TryParse(value, out result);
-
-            return isNumeric;
-        }
-
-
-        public static string GenerateCode(string previousCode)
-        {
-            int newNumber;
-
-            if (previousCode == null)
-            {
-                newNumber = 1;
-            }
-            else
-            {
-                
-                int previousNumber = int.Parse(previousCode.Substring(2));
-                newNumber = previousNumber + 1;
-            }
-
-            string temp = "TT";
-
-            string newNumberStr = newNumber.ToString().PadLeft(6, '0');
-            string newCode = temp + newNumberStr;
-
-            return newCode;
-                
-            
-        }
-
-
-      
-        public string GetLastGeneratedMATT()
-        {
-            var lastPurchase = DataProvider.Ins.DB.THONGTINTHANHTOANs
-                .OrderByDescending(p => p.MATT)
-                .FirstOrDefault();
-
-            if (lastPurchase != null)
-            {
-                return lastPurchase.MATT;
-            }
-
-            return null; 
         }
     }
 }

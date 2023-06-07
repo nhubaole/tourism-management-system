@@ -142,7 +142,7 @@
             ColumnWidth="*"
             IsReadOnly="False"
             GridLinesVisibility="None"
-            SelectedItem="{Binding SelectedCustomer, Mode=OneWayToSource}"
+            SelectedItem="{Binding SelectedCustomer}"
                >
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
@@ -153,6 +153,7 @@
                         <Setter Property="Margin" Value="0, 10, 0, 10"/>
                         <Setter Property="FontSize" Value="14"/>
                         <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="Cursor" Value="Hand"/>
 
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
@@ -182,7 +183,7 @@
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.Columns >
-                    <DataGridTextColumn Header="Mã khách hàng" Binding="{Binding MAKH}" Width="*"  IsReadOnly="True" CanUserSort="False">
+                    <DataGridTextColumn Header="Mã khách hàng" Binding="{Binding MAKH}" Width="*"  IsReadOnly="True" CanUserSort="True">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="TextWrapping" Value="Wrap" />
@@ -194,7 +195,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Tên khách hàng" Binding="{Binding HOTEN}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                    <DataGridTextColumn Header="Tên khách hàng" Binding="{Binding HOTEN}"  Width="*" IsReadOnly="True" CanUserSort="True">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="TextWrapping" Value="Wrap" />
@@ -206,7 +207,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Số điện thoại" Binding="{Binding SDT}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                    <DataGridTextColumn Header="Số điện thoại" Binding="{Binding SDT}"  Width="*" IsReadOnly="True" CanUserSort="True">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="TextWrapping" Value="Wrap" />
@@ -284,7 +285,7 @@
                         <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="1.2*"/>
                             </Grid.ColumnDefinitions>
 
                             <Grid Grid.Column="0">
@@ -298,16 +299,20 @@
                                             Margin="20,0,0,0"/>
                             </Grid>
 
-                            <Grid Grid.Column="1">
+                            <Border Grid.Column="1" 
+                                    CornerRadius="8"
+                                    Background="{StaticResource Secondary}"
+                                    Margin="0,0,10,5">
                                 <TextBox IsEnabled="False" FontSize="12"
                                             Text="{Binding SelectedCustomer.MAKH}"
-                                            Margin="0,0,10,5"/>
-                            </Grid>
+                                         Margin="10,0,10,0"
+                                            />
+                            </Border>
                         </Grid>
                         <Grid Grid.Row="2">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="1.2*"/>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
                                 <TextBlock
@@ -320,16 +325,19 @@
                                             Margin="20,0,0,0"/>
                             </Grid>
 
-                            <Grid Grid.Column="1">
+                            <Border Grid.Column="1" 
+                                    CornerRadius="8"
+                                    Background="{StaticResource Secondary}"
+                                    Margin="0,0,10,5">
                                 <TextBox FontSize="12"
-                                            Text="{Binding SelectedCustomer.HOTEN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                            Margin="0,0,10,5"/>
-                            </Grid>
+                                            Text="{Binding HOTEN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Margin="10,0,10,0"/>
+                            </Border>
                         </Grid>
                         <Grid Grid.Row="3">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="1.2*"/>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
                                 <TextBlock
@@ -342,19 +350,22 @@
                                             Margin="20,0,0,0"/>
                             </Grid>
 
-                            <Grid Grid.Column="1">
+                            <Border Grid.Column="1" 
+                                    CornerRadius="8"
+                                    Background="{StaticResource Secondary}"
+                                    Margin="0,0,10,5">
                                 <TextBox 
-                                            Text="{Binding SelectedCustomer.CCCD, ValidatesOnNotifyDataErrors=True, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding CCCD, ValidatesOnNotifyDataErrors=True, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                             FontSize="12"
-                                            Margin="0,0,10,5">
+                                            Margin="10,0,10,0">
                                             
                                 </TextBox>
-                            </Grid>
+                            </Border>
                         </Grid>
                         <Grid Grid.Row="4">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="1.2*"/>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
                                 <TextBlock
@@ -367,17 +378,20 @@
                                             Margin="20,0,0,0"/>
                             </Grid>
 
-                            <Grid Grid.Column="1">
+                            <Border Grid.Column="1" 
+                                    CornerRadius="8"
+                                    Background="{StaticResource Secondary}"
+                                    Margin="0,0,10,5">
                                 <TextBox
-                                            Text="{Binding SelectedCustomer.SDT, ValidatesOnNotifyDataErrors=True,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding SDT, ValidatesOnNotifyDataErrors=True,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                             FontSize="12"
-                                            Margin="0,0,10,5"/>
-                            </Grid>
+                                            Margin="10,0,10,0"/>
+                            </Border>
                         </Grid>
                         <Grid Grid.Row="5">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
                                 <TextBlock
@@ -390,17 +404,20 @@
                                             Margin="20,0,0,0"/>
                             </Grid>
 
-                            <Grid Grid.Column="1">
+                            <Border Grid.Column="1" 
+                                    CornerRadius="8"
+                                    Background="{StaticResource Secondary}"
+                                    Margin="0,0,10,5">
                                 <TextBox
-                                            Text="{Binding SelectedCustomer.EMAIL,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                            Text="{Binding EMAIL,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                             FontSize="12"
-                                            Margin="0,0,10,5"/>
-                            </Grid>
+                                            Margin="10,0,10,0"/>
+                            </Border>
                         </Grid>
                         <Grid Grid.Row="6">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
                                 <ColumnDefinition Width="2*"/>
-                                <ColumnDefinition Width="3*"/>
                             </Grid.ColumnDefinitions>
                             <Grid Grid.Column="0">
                                 <TextBlock
@@ -413,12 +430,15 @@
                                             Margin="20,0,0,0"/>
                             </Grid>
 
-                            <Grid Grid.Column="1">
+                            <Border Grid.Column="1" 
+                                    CornerRadius="8"
+                                    Background="{StaticResource Secondary}"
+                                    Margin="0,0,10,5">
                                 <TextBox
-                                            Text="{Binding SelectedCustomer.DIACHI,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding DIACHI,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                             FontSize="12"
-                                            Margin="0,0,10,5"/>
-                            </Grid>
+                                            Margin="10,0,10,0"/>
+                            </Border>
                         </Grid>
                         <Grid Grid.Row="7">
                             <TextBlock
