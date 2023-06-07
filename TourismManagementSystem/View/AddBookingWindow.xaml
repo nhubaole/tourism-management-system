@@ -51,14 +51,19 @@
                    Text="Mã phiếu"
                    FontSize="18"
                    FontWeight="Medium"/>
-                            <TextBox VerticalAlignment="Center"
-                 FontSize="18"
-                 Width="400"
-                                     IsEnabled="False"
+                            <Border CornerRadius="8"
+                                    Background="{StaticResource Secondary}"
+                                    VerticalAlignment="Center"
                                      HorizontalAlignment="Right"
-                                     Margin="100,0,0,0"
+                                         Width="400"
+                                    Height="40"
+                                    Padding="10,0,10,0">
+                                <TextBox 
+                                         FontSize="18"
+                                     IsEnabled="False"
                  Text="{Binding NewBooking.MAPHIEU, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                  />
+                            </Border>
                         </Grid>
 
                         <Grid Height="50">
@@ -67,12 +72,18 @@
                    Text="Mã khách hàng"
                    FontSize="18"
                    FontWeight="Medium" Width="151" />
-                            <TextBox VerticalAlignment="Center"
-                 FontSize="18"
-                 Width="400"
+                            <Border CornerRadius="8"
+                                    Background="{StaticResource Secondary}"
+                                    VerticalAlignment="Center"
                                      HorizontalAlignment="Right"
+                                         Width="400"
+                                    Height="40"
+                                    Padding="10,0,10,0">
+                                <TextBox 
+                 FontSize="18"
                  Text="{Binding NewBooking.MAKH, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                  />
+                            </Border>
 
                         </Grid>
 
@@ -83,16 +94,20 @@
                    FontSize="18"
                                        
                    FontWeight="Medium" Width="125" />
-                            <ComboBox VerticalAlignment="Center"
-                 FontSize="18"
+                            <Border CornerRadius="8"
+                                    Background="{StaticResource Secondary}"
+                                    VerticalAlignment="Center"
+                                     HorizontalAlignment="Right"
+                                         Width="400"
+                                    Height="40"
+                                    Padding="10,0,10,0">
+                                <ComboBox  
+                                    FontSize="18"
                                       IsEditable="True"
-                ItemsSource="{Binding ListChuyen}"
+                                      ItemsSource="{Binding ListChuyen}"
                                       SelectedItem="{Binding NewBooking.MACHUYEN}"
-                 Width="400"
-                                      HorizontalAlignment="Right"
-                 Text="{Binding NewBooking.MACHUYEN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                 />
-
+                                      Text="{Binding NewBooking.MACHUYEN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                            </Border>
                         </Grid>
 
                         <Grid Height="50">
@@ -101,16 +116,22 @@
                    Text="Tình trạng"
                    FontSize="18"
                    FontWeight="Medium"/>
-                            <ComboBox VerticalAlignment="Center"
-                  FontSize="18"
-                  Width="400"
-                                      HorizontalAlignment="Right"
-                  IsEnabled="{Binding IsNew}"
-                  ItemsSource="{Binding TinhTrangCbItems}"
-                  SelectedItem="{Binding NewBooking.TINHTRANG, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                   />
+                            <Border CornerRadius="8"
+                                    Background="{StaticResource Secondary}"
+                                    VerticalAlignment="Center"
+                                     HorizontalAlignment="Right"
+                                         Width="400"
+                                    Height="40"
+                                    Padding="10,0,10,0">
+                                <ComboBox 
+                                          FontSize="18"
+                                          IsEnabled="{Binding IsNew}"
+                                          ItemsSource="{Binding TinhTrangCbItems}"
+                                          SelectedItem="{Binding NewBooking.TINHTRANG, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                            </Border>
 
                         </Grid>
+                            
 
                         <Grid  Height="50" >
                             <TextBlock VerticalAlignment="Center"
@@ -118,9 +139,16 @@
                    Text="Ngày đặt"
                    FontSize="18"
                    FontWeight="Medium"/>
-                            <DatePicker FontSize="18"
-                    SelectedDate="{Binding NewBooking.NGAYDAT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Width="400"
-                                HorizontalAlignment="Right"></DatePicker>
+                            <Border CornerRadius="8"
+                                    Background="{StaticResource Secondary}"
+                                    VerticalAlignment="Center"
+                                     HorizontalAlignment="Right"
+                                         Width="400"
+                                    Height="40"
+                                    Padding="10,0,10,0">
+                                <DatePicker FontSize="18"
+                    SelectedDate="{Binding NewBooking.NGAYDAT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                            </Border>
                         </Grid>
 
                         <Grid Height="50" >
@@ -129,11 +157,16 @@
                    Text="Số lượng hành khách"
                    FontSize="18"
                    FontWeight="Medium"/>
-                            <TextBox VerticalAlignment="Center"
-                 FontSize="18"
-                 Width="400"
+                            <Border CornerRadius="8"
+                                    Background="{StaticResource Secondary}"
+                                    VerticalAlignment="Center"
                                      HorizontalAlignment="Right"
-                 Text="{Binding Count}"/>
+                                         Width="400"
+                                    Height="40"
+                                    Padding="10,0,10,0">
+                                <TextBox FontSize="18"
+                                         Text="{Binding Count}"/>
+                            </Border>
 
                         </Grid>
 

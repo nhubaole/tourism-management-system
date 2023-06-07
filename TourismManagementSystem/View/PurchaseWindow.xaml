@@ -70,7 +70,7 @@
                                     <ColumnDefinition Width="103*"/>
                                     <ColumnDefinition Width="52*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock
+                                <TextBlock FontWeight="Medium"
                                             Text="Số tiền"
                                             FontSize="16"
                                             VerticalAlignment="Center"
@@ -107,7 +107,7 @@
                                     <ColumnDefinition Width="333*"/>
                                     <ColumnDefinition Width="38*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock
+                                <TextBlock FontWeight="Medium"
                                             Width="100"
                                             Text="Thời gian"
                                             FontSize="16"
@@ -145,7 +145,7 @@
                                     <ColumnDefinition Width="461*"/>
                                     <ColumnDefinition Width="159*"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock
+                                <TextBlock FontWeight="Medium"
                                             Width="100"
                                             Text="Trạng thái"
                                             FontSize="16"
@@ -175,7 +175,7 @@
 
                             </Grid>
                             <Grid Grid.Row="4">
-                                <TextBlock
+                                <TextBlock FontWeight="Medium"
                                             Width="100"
                                             Text="Phương thức"
                                             FontSize="16"
@@ -206,12 +206,15 @@
                             <Grid Grid.Row="5"
                                           >
                                 <Button
-                                            Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                                            Height="33"
-                                            Width="500"
-                                            Background="{StaticResource Primary}"
-                                            materialDesign:ButtonAssist.CornerRadius="25"
-                                            ToolTip="MaterialDesignRaisedDarkButton with Round Corners"
+                                            VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                materialDesign:ButtonAssist.CornerRadius="20"
+                                BorderBrush="Transparent"
+                                Width="300"
+                                Height="40"
+                                FontSize="16"
+                                Background="{StaticResource Primary}"
+                                Foreground="White"
                                             Command="{Binding AddDataCommand, ValidatesOnDataErrors=True}"
                                             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
                                     <TextBlock

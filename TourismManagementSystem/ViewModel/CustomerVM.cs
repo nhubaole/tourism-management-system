@@ -315,6 +315,8 @@ namespace TourismManagementSystem.ViewModel
 
         public CustomerVM()
         {
+            string newCode = GenerateCode(GetLastGeneratedMAKH());
+            MAKH = newCode;
             selectedFilter = filter[0];
             SwitchWindowCommand = new RelayCommand<object>((p) => {
                
@@ -337,8 +339,7 @@ namespace TourismManagementSystem.ViewModel
             {
                 try
                 {
-                    string newCode = GenerateCode(GetLastGeneratedMAKH());
-                    MAKH = newCode;
+                    
                     OnPropertyChanged(nameof(MAKH));
                     
                     var temp = new KHACHHANG()
@@ -353,9 +354,6 @@ namespace TourismManagementSystem.ViewModel
                         ListKhachhang.Add(temp);
                         DataProvider.Ins.DB.KHACHHANGs.Add(temp);
                         DataProvider.Ins.DB.SaveChanges();
-                       
-                        MessageBox.Show(temp.MAKH);
-                        
 
                         MessageBox.Show("Đã tạo mới khách hàng thành công");
                     HOTEN = null;
