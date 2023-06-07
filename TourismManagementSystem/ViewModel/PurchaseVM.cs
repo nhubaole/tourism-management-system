@@ -16,9 +16,10 @@ using System.Collections;
 
 namespace TourismManagementSystem.ViewModel
 {
-    internal class PurchaseVM: BaseViewModel
+    internal class PurchaseVM : BaseViewModel
     {
-       
+        private static PHIEUDATCHO _selectedPhieu;
+        public static PHIEUDATCHO SelectedPhieu { get => _selectedPhieu; set { _selectedPhieu = value; } }
         private ObservableCollection<string> _status = new ObservableCollection<string>() { "Chưa thực hiện", "Thành công", "Thất bại","Chờ xử lý" };
 
         private ObservableCollection<string> _method = new ObservableCollection<string>() { "Tiền mặt", "Trả thẻ"};
@@ -142,7 +143,7 @@ namespace TourismManagementSystem.ViewModel
         public PurchaseVM()
         {
             THOIGIAN = DateTime.Today;
-
+            MAPHIEU = SelectedPhieu.MAPHIEU;
             THONGTINTHANHTOANs = new ObservableCollection<THONGTINTHANHTOAN>();
             AddDataCommand = new RelayCommand<object>((p) => {
                 if (PHUONGTHUC == null || TRANGTHAI == null ||!IsNumeric(SoTIEN)||SoTIEN==null)
@@ -157,8 +158,6 @@ namespace TourismManagementSystem.ViewModel
                 }
             }, (p) =>
             {
-               
-                
                     try
                     {
                         var temp = new THONGTINTHANHTOAN()
@@ -170,7 +169,8 @@ namespace TourismManagementSystem.ViewModel
                             TRANGTHAI = TRANGTHAI,
                             PHUONGTHUC = PHUONGTHUC
                         };
-
+                    SelectedPhieu.TINHTRANG = "Đã thanh toán";
+                        SelectedPhieu.THONGTINTHANHTOANs.Add(temp);
                         DataProvider.Ins.DB.THONGTINTHANHTOANs.Add(temp);
                         DataProvider.Ins.DB.SaveChanges();
                         ListTHONGTINTHANHTOAN.Add(temp);
