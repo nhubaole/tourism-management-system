@@ -65,7 +65,10 @@ namespace TourismManagementSystem.ViewModel
                         formattedID = string.Format("P{0:D7}", nextNumber);
                     }
                     ve.MAVE = formattedID;
-                    DataProvider.Ins.DB.VEs.Add(ve);
+                    if (!DataProvider.Ins.DB.VEs.Contains(ve))
+                    {
+                        DataProvider.Ins.DB.VEs.Add(ve);
+                    }
                     DataProvider.Ins.DB.SaveChanges();
                     MessageBox.Show("Thêm vé thành công!");
                 }
