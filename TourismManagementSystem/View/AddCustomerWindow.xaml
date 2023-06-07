@@ -10,10 +10,13 @@
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:viewmodel="clr-namespace:TourismManagementSystem.ViewModel" 
-        d:DataContext="{d:DesignInstance Type=viewmodel:CustomerVM}"
+        xmlns:viewmodel="clr-namespace:TourismManagementSystem.ViewModel"
         WindowStartupLocation="CenterScreen"
+        Name="addCustomerWindow"
         Background="{StaticResource Secondary}">
+    <Window.DataContext>
+        <viewmodel:AddCustomerVM/>
+    </Window.DataContext>
     
     <Grid >
         <Border Margin="40,20,40,20"
@@ -68,7 +71,6 @@
                                             HorizontalAlignment="Right"
                                             >
                                 <TextBox IsEnabled="False"
-                                                x:Name="tbMaDD"
                                                 Width="280"
                                          FontSize="16"
                                                 Background="Transparent"
@@ -94,10 +96,9 @@
                                             Background="{StaticResource Secondary}"
                                             HorizontalAlignment="Right">
                                 <TextBox FontSize="16"
-                                               x:Name="tbTenDD"
                                                 Width="280"
                                                 Height="30"
-                                                Text="{Binding HOTEN}"
+                                                Text="{Binding HOTEN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                 Background="Transparent"
                                                 HorizontalAlignment="Center"/>
 
@@ -118,11 +119,10 @@
                                             Background="{StaticResource Secondary}"
                                             HorizontalAlignment="Right">
                                 <TextBox FontSize="16"
-                                               x:Name="tbDc"
                                                 Width="280"
                                                 Height="30"
                                                 Background="Transparent"
-                                                Text="{Binding CCCD, ValidatesOnNotifyDataErrors=True}"
+                                                Text="{Binding CCCD, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                 HorizontalAlignment="Center"/>
 
                             </Border>
@@ -142,10 +142,9 @@
                                             Background="{StaticResource Secondary}"
                                             HorizontalAlignment="Right">
                                 <TextBox FontSize="16"
-                                               x:Name="tbMota"
                                                 Width="280"
                                                 Height="30"
-                                                Text="{Binding SDT, ValidatesOnNotifyDataErrors=True}"
+                                                Text="{Binding SDT, ValidatesOnNotifyDataErrors=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                 
                                                 Background="Transparent"
                                                 HorizontalAlignment="Center"
@@ -169,10 +168,9 @@
                                             HorizontalAlignment="Right"
                                             >
                                 <TextBox FontSize="16"
-                                               x:Name="tb"
                                                 Width="280"
                                                 Height="30"
-                                                Text="{Binding EMAIL}"
+                                                Text="{Binding EMAIL, NotifyOnValidationError=True, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                         
                                                 Background="Transparent"
                                                 HorizontalAlignment="Center"/>
@@ -194,10 +192,9 @@
                                             Background="{StaticResource Secondary}"
                                             HorizontalAlignment="Right">
                                 <TextBox FontSize="16"
-                                               x:Name="tbMot"
                                                 Width="280"
                                                 Height="30"
-                                                Text="{Binding DIACHI}"
+                                                Text="{Binding DIACHI, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                 Background="Transparent"
                                                 HorizontalAlignment="Center"/>
 
@@ -222,7 +219,8 @@
                                 FontSize="16"
                                 Background="{StaticResource Primary}"
                                 Foreground="White"
-                                            Command="{Binding AddDataCommand, ValidatesOnNotifyDataErrors=True}" >
+                                            Command="{Binding AddDataCommand, ValidatesOnNotifyDataErrors=True}" 
+                                CommandParameter="{Binding ElementName=addCustomerWindow}">
                                 <TextBlock
                                                 Text="Thêm"
                                                 FontSize="16"/>

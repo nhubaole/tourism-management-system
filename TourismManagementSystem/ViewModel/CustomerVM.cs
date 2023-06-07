@@ -19,147 +19,8 @@ using System.Text.RegularExpressions;
 namespace TourismManagementSystem.ViewModel
 {
     
-    internal class CustomerVM : BaseViewModel,INotifyDataErrorInfo
+    internal class CustomerVM : BaseViewModel
     {
-        private Dictionary<string, List<string>> _errors = new Dictionary<string, List<string>>();
-        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
-
-        public bool HasErrors
-        {
-            get { return _errors.Values.Any(list => list != null && list.Count > 0); }
-        }
-
-        public IEnumerable GetErrors(string propertyName)
-        {
-            if (string.IsNullOrEmpty(propertyName) || !_errors.ContainsKey(propertyName))
-                return null;
-
-            return _errors[propertyName];
-        }
-
-        private void OnErrorsChanged(string propertyName)
-        {
-            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
-        }
-
-
-        private void ValidateProperty(string propertyName)
-        {
-            List<string> errors = new List<string>();
-
-            if (propertyName == nameof(SDT))
-            {
-                if (string.IsNullOrEmpty(SDT))
-                {
-                    errors.Add("Please enter a valid phone number.");
-                }
-                else if (!IsNumber(SDT))
-                {
-                    errors.Add("Please enter a valid phone number.");
-
-                }
-                else if (SDT.Length!=10)
-                {
-                    errors.Add("Please enter a valid phone number.");
-
-                }
-
-            }
-            
-            if (propertyName == nameof(CCCD))
-            {
-                if (string.IsNullOrEmpty(CCCD))
-                {
-                    errors.Add("Please enter a valid 12-digit number.");
-                }
-                else if ( !IsNumber(CCCD))
-                {
-                    errors.Add("Please enter a valid 12-digit number.");
-                }
-                else if (cccd.Length != 12)
-                {
-                    errors.Add("Please enter a valid 12-digit number.");
-                }
-                else
-                {
-                    
-                    var existingCustomer = DataProvider.Ins.DB.KHACHHANGs.FirstOrDefault(c => c.CCCD == CCCD);
-                    if (existingCustomer != null && existingCustomer != SelectedCustomer)
-                    {
-                        errors.Add("This CCCD is already registered for another customer.");
-                    }
-                }
-
-            }
-
-            if (propertyName == nameof(HOTEN))
-            {
-                if (string.IsNullOrEmpty(HOTEN) || !IsNameValid(hoTen))
-                {
-                    errors.Add("Please enter a valid name.");
-                }
-                
-                
-            }
-            if (propertyName == nameof(EMAIL))
-            {
-                if (string.IsNullOrEmpty(EMAIL) || !IsEmailValid(email))
-                {
-                    errors.Add("Please enter a valid email.");
-                }
-
-
-            }
-            if (propertyName == nameof(DIACHI))
-            {
-                if (string.IsNullOrEmpty(DIACHI) )
-                {
-                    errors.Add("Please enter your address");
-                }
-
-
-            }
-
-            if (errors.Count > 0)
-            {
-                _errors[propertyName] = errors;
-            }
-            else
-            {
-                _errors.Remove(propertyName);
-            }
-
-            OnErrorsChanged(propertyName);
-        }
-
-        private bool IsNumber(string value)
-        {
-            return double.TryParse(value, out _);
-        }
-        private bool IsNameValid(string name)
-        {
-            foreach (char c in name)
-            {
-                if (!char.IsLetter(c)&&c!=' ')
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-        private bool IsEmailValid(string email)
-        {
-            if (string.IsNullOrEmpty(email))
-            {
-                return false;
-            }
-
-            // Regular expression pattern for email validation
-            string pattern = @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
-
-            return Regex.IsMatch(email, pattern);
-        }
 
         private ObservableCollection<string> _filter = new ObservableCollection<string>() { "Mã khách hàng", "Tên khách hàng","Số điện thoại" };
         public ObservableCollection<KHACHHANG> KhachHangs { get; set; }
@@ -169,107 +30,17 @@ namespace TourismManagementSystem.ViewModel
         public ICommand UpdateDataCommand { get; set; }
         public ICommand BookingButtonCommand { get; set; }
 
-        
-       
-        
 
         private KHACHHANG _selectedCustomer;
         public KHACHHANG SelectedCustomer { get => _selectedCustomer; set
             {
                 _selectedCustomer = value;
-                if (_selectedCustomer != null)
-                {
-                    HOTEN = _selectedCustomer.HOTEN;
-                    ValidateProperty(nameof(HOTEN));
-                    OnPropertyChanged(nameof(SelectedCustomer.HOTEN));
-                    CCCD = _selectedCustomer.CCCD;
-                    ValidateProperty(nameof(CCCD));
-                    OnPropertyChanged(nameof(SelectedCustomer.CCCD));
-                    SDT = _selectedCustomer.SDT;
-                    ValidateProperty(nameof(SDT));
-                    OnPropertyChanged(nameof(SelectedCustomer.SDT));
-                    EMAIL = _selectedCustomer.EMAIL;
-                    ValidateProperty(nameof(EMAIL));
-                    OnPropertyChanged(nameof(_selectedCustomer.EMAIL));
-                    DIACHI = _selectedCustomer.DIACHI;
-                    ValidateProperty(nameof(DIACHI));
-                    OnPropertyChanged(nameof(SelectedCustomer.DIACHI));
-                   
-                }
                 OnPropertyChanged(nameof(SelectedCustomer));
 
             }
         }
 
-        private string maKH;
-        public string MAKH
-        {
-            get => maKH;
-            set
-            {
-                maKH = value;
-                OnPropertyChanged(nameof(MAKH));
-            }
-        }
-
-        private string hoTen;
-        public string HOTEN
-        {
-            get => hoTen;
-            set
-            {
-                hoTen = value;
-                OnPropertyChanged(nameof(HOTEN));
-                ValidateProperty(nameof(HOTEN));
-            }
-        }
-
-        private string cccd;
-        public string CCCD
-        {
-            get => cccd;
-            set
-            {
-                cccd = value;
-                OnPropertyChanged(nameof(CCCD));
-                ValidateProperty(nameof(CCCD));
-            }
-        }
-
-        private string sdt;
-        public string SDT
-        {
-            get => sdt;
-            set
-            {
-                sdt = value;
-                OnPropertyChanged(nameof(SDT));
-                ValidateProperty(nameof(SDT));
-            }
-        }
-
-        private string email;
-        public string EMAIL
-        {
-            get => email;
-            set
-            {
-                email = value;
-                OnPropertyChanged(nameof(EMAIL));
-                ValidateProperty(nameof(EMAIL));
-            }
-        }
-
-        private string diaChi;
-        public string DIACHI
-        {
-            get => diaChi;
-            set
-            {
-                diaChi = value;
-                OnPropertyChanged(nameof(DIACHI));
-            }
-        }
+        
         
         private string _selectedFilter;
         public string selectedFilter
@@ -315,8 +86,6 @@ namespace TourismManagementSystem.ViewModel
 
         public CustomerVM()
         {
-            string newCode = GenerateCode(GetLastGeneratedMAKH());
-            MAKH = newCode;
             selectedFilter = filter[0];
             SwitchWindowCommand = new RelayCommand<object>((p) => {
                
@@ -326,61 +95,12 @@ namespace TourismManagementSystem.ViewModel
             {SwitchWindow(p);});
 
             KhachHangs = new ObservableCollection<KHACHHANG>();
-            AddDataCommand = new RelayCommand<object>((p) => { 
-                if (HasErrors||DIACHI==null||HOTEN==null||EMAIL==null||SDT==null||CCCD==null)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-            }, (p) =>
-            {
-                try
-                {
-                    
-                    OnPropertyChanged(nameof(MAKH));
-                    
-                    var temp = new KHACHHANG()
-                    {
-                        MAKH = MAKH,
-                        HOTEN = HOTEN,
-                        CCCD = CCCD,
-                        SDT = SDT,
-                        EMAIL = EMAIL,
-                        DIACHI = DIACHI
-                    };
-                        ListKhachhang.Add(temp);
-                        DataProvider.Ins.DB.KHACHHANGs.Add(temp);
-                        DataProvider.Ins.DB.SaveChanges();
-
-                        MessageBox.Show("Đã tạo mới khách hàng thành công");
-                    HOTEN = null;
-                    CCCD = null;
-                    SDT = null;
-                    DIACHI=null;
-                    EMAIL = null;
-                        
-                    //LoadDataGrid();
-
-
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("An error occurred: " + ex.Message);
-                }
-
-
-            });
+            
 
 
             UpdateDataCommand = new RelayCommand<object>((p) =>
             {
-                if (HasErrors||SelectedCustomer==null)
-                { return false; }
-                else
+                
                 return true;
             },
             (p) => { UpdateCustomer(); });
@@ -400,25 +120,13 @@ namespace TourismManagementSystem.ViewModel
 
 
         }
-        private void LoadDataGrid()
-        {
-            ListKhachhang = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs);
-
-        }
         private void SwitchWindow(object parameter)
         {
             try
             {
-
-
                 AddCustomerWindow addCustomerWindow = new AddCustomerWindow();
-                // Assign the generated code to the property here
-                string newCode = GenerateCode(GetLastGeneratedMAKH());
-                MAKH = newCode;
-                OnPropertyChanged(nameof(MAKH));
-                addCustomerWindow.Show();
-                //MessageBox.Show(newCode);
-                
+                addCustomerWindow.ShowDialog();
+                ListKhachhang = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs);
             }
             catch(Exception e)
             {
@@ -458,41 +166,7 @@ namespace TourismManagementSystem.ViewModel
                 }
             }
         }
-        public static string GenerateCode(string previousCode)
-        {
-            int newNumber;
-
-            if (previousCode == null)
-            {
-                newNumber = 1;
-            }
-            else
-            {
-                int previousNumber = int.Parse(previousCode.Substring(2));
-                newNumber = previousNumber + 1;
-            }
-
-            string temp = "KH";
-            string newNumberStr = newNumber.ToString().PadLeft(6, '0'); 
-            string newCode = temp + newNumberStr;
-
-            return newCode;
-
-
-        }
-        public string GetLastGeneratedMAKH()
-        {
-            var lastPurchase = DataProvider.Ins.DB.KHACHHANGs
-                .OrderByDescending(p => p.MAKH)
-                .FirstOrDefault();
-
-            if (lastPurchase != null)
-            {
-                return lastPurchase.MAKH;
-            }
-
-            return null;
-        }
+       
 
 
 
