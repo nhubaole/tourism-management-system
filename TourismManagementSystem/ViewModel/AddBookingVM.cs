@@ -16,6 +16,7 @@ namespace TourismManagementSystem.ViewModel
         private PHIEUDATCHO _newBooking;
         public PHIEUDATCHO NewBooking { get => _newBooking; set { _newBooking = value; OnPropertyChanged(); } }
         public ObservableCollection<KHACHHANG> ListKhachHang { get; set; }
+        public ObservableCollection<string> ListMaKhachHang { get; set; }
         private string _ToolTipText;
 
         public ObservableCollection<string> ListChuyen { get; set; }
@@ -66,7 +67,12 @@ namespace TourismManagementSystem.ViewModel
                 // Tăng số hàng
                 while (ListHKOfPhieu.Count < Count)
                 {
-                    ListHKOfPhieu.Add(new HANHKHACH());
+                    Random random = new Random();
+                    int randomDigits = random.Next(0, 999999);
+                    string formattedID = string.Format("LT{0:D6}", randomDigits);
+                    HANHKHACH newHK = new HANHKHACH();
+                    newHK.MAHK = formattedID;
+                    ListHKOfPhieu.Add(newHK);
                 }
             }
 
@@ -95,6 +101,7 @@ namespace TourismManagementSystem.ViewModel
         }
         public AddBookingVM()
         {
+            ListMaKhachHang = new ObservableCollection<string>(DataProvider.Ins.DB.KHACHHANGs.Select(t => t.MAKH));
             ListChuyen = new ObservableCollection<string>(DataProvider.Ins.DB.CHUYENs.Select(t => t.MACHUYEN));
             ListHKOfPhieu = new ObservableCollection<HANHKHACH> { };
             IsNew = IsEdit;
@@ -104,13 +111,24 @@ namespace TourismManagementSystem.ViewModel
             {
                 Count = 1;
                 Title = "Thêm mới phiếu đặt chỗ";
-                _TinhTrangCbItems = new ObservableCollection<string>() { "Chưa thanh toán" };
+                _TinhTrangCbItems = new ObservableCollection<string>() { "Chưa thanh toán", "Đã thanh toán" };
                 BtnText = "Thêm phiếu đặt chỗ";
                 NewBooking = new PHIEUDATCHO();
                 NewBooking.TINHTRANG = "Chưa thanh toán";
-                Random random = new Random();
-                NewBooking.MAPHIEU = random.Next(0, 1000).ToString();
-
+                string formattedID;
+                ObservableCollection<PHIEUDATCHO> ListPhieu = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes);
+                if (ListPhieu.Count() == 0)
+                {
+                    formattedID = string.Format("T{0:D7}", 1);
+                }
+                else
+                {
+                    string lastID = ListPhieu.Last().MAPHIEU;
+                    int previousNumber = int.Parse(lastID.Substring(1));
+                    int nextNumber = previousNumber + 1;
+                    formattedID = string.Format("P{0:D7}", nextNumber);
+                }
+                NewBooking.MAPHIEU = formattedID;
             }
             else
             {
@@ -125,10 +143,18 @@ namespace TourismManagementSystem.ViewModel
 
             AddCommand = new RelayCommand<object>((p) =>
             {
-                if (string.IsNullOrEmpty(NewBooking.MAPHIEU) || ListHKOfPhieu.Count == 0 || NewBooking.MACHUYEN == null || NewBooking.MAKH == null || NewBooking.NGAYDAT == null || NewBooking.SLKHACH == null || NewBooking.TINHTRANG == null)
+                if (string.IsNullOrEmpty(NewBooking.MAPHIEU) || ListHKOfPhieu.Count == 0 || NewBooking.MACHUYEN == null || NewBooking.MAKH == null || NewBooking.NGAYDAT == null )
                 {
                     ToolTipText = "Vui lòng nhập đủ các trường thông tin bắt buộc";
                     return false;
+                }
+                foreach (var Item in ListHKOfPhieu)
+                {
+                    if (string.IsNullOrEmpty(Item.MAHK) || string.IsNullOrEmpty(Item.HOTEN) || (string.IsNullOrEmpty(Item.GIOITINH) || string.IsNullOrEmpty(Item.DIACHI) || string.IsNullOrEmpty(Item.NGSINH.ToString()) || string.IsNullOrEmpty(Item.CCCD) || string.IsNullOrEmpty(Item.NGAYHETHANVISA.ToString()) || string.IsNullOrEmpty(Item.NGAYHETHANPASSPORT.ToString()) || string.IsNullOrEmpty(Item.SDT) || string.IsNullOrEmpty(Item.PASSPORT)))
+                    {
+                        ToolTipText = "Vui lòng nhập đủ các trường thông tin bắt buộc";
+                        return false;
+                    }
                 }
                 return true;
             }, (p) =>
@@ -140,12 +166,12 @@ namespace TourismManagementSystem.ViewModel
                     {
                         NewBooking.SLKHACH = Count;
                         NewBooking.TINHTRANG = "Chưa thanh toán";
+                        NewBooking.HANHKHACHes = ListHKOfPhieu;
                         foreach (var t in NewBooking.HANHKHACHes)
                         {
+                            t.PHIEUDATCHO = NewBooking;
                             t.MAPHIEU = NewBooking.MAPHIEU;
-                            DataProvider.Ins.DB.HANHKHACHes.Add(t);
                         }
-                        NewBooking.HANHKHACHes = ListHKOfPhieu;
                         NewBooking.CHUYEN = DataProvider.Ins.DB.CHUYENs.FirstOrDefault(t => t.MACHUYEN == NewBooking.MACHUYEN);
                         DataProvider.Ins.DB.PHIEUDATCHOes.Add(NewBooking);
                         DataProvider.Ins.DB.SaveChanges();
@@ -158,7 +184,7 @@ namespace TourismManagementSystem.ViewModel
                         foreach (var t in NewBooking.HANHKHACHes)
                         {
                             t.MAPHIEU = NewBooking.MAPHIEU;
-                            DataProvider.Ins.DB.HANHKHACHes.Add(t);
+                            t.PHIEUDATCHO = NewBooking;
                         }
                         NewBooking.CHUYEN = DataProvider.Ins.DB.CHUYENs.FirstOrDefault(t => t.MACHUYEN == NewBooking.MACHUYEN);
                         var itemToUpdate = DataProvider.Ins.DB.PHIEUDATCHOes.FirstOrDefault(item => item.MAPHIEU == NewBooking.MAPHIEU);
