@@ -111,7 +111,7 @@ namespace TourismManagementSystem.ViewModel
             {
                 Count = 1;
                 Title = "Thêm mới phiếu đặt chỗ";
-                _TinhTrangCbItems = new ObservableCollection<string>() { "Chưa thanh toán" };
+                _TinhTrangCbItems = new ObservableCollection<string>() { "Chưa thanh toán", "Đã thanh toán" };
                 BtnText = "Thêm phiếu đặt chỗ";
                 NewBooking = new PHIEUDATCHO();
                 NewBooking.TINHTRANG = "Chưa thanh toán";
@@ -143,14 +143,14 @@ namespace TourismManagementSystem.ViewModel
 
             AddCommand = new RelayCommand<object>((p) =>
             {
-                if (string.IsNullOrEmpty(NewBooking.MAPHIEU) || ListHKOfPhieu.Count == 0 || NewBooking.MACHUYEN == null || NewBooking.MAKH == null || NewBooking.NGAYDAT == null || NewBooking.SLKHACH == null || NewBooking.TINHTRANG == null)
+                if (string.IsNullOrEmpty(NewBooking.MAPHIEU) || ListHKOfPhieu.Count == 0 || NewBooking.MACHUYEN == null || NewBooking.MAKH == null || NewBooking.NGAYDAT == null )
                 {
                     ToolTipText = "Vui lòng nhập đủ các trường thông tin bắt buộc";
                     return false;
                 }
                 foreach (var Item in ListHKOfPhieu)
                 {
-                if (string.IsNullOrEmpty(Item.MAHK) || string.IsNullOrEmpty(Item.HOTEN) || (string.IsNullOrEmpty(Item.GIOITINH) || string.IsNullOrEmpty(Item.DIACHI) || string.IsNullOrEmpty(Item.NGSINH.ToString()) || string.IsNullOrEmpty(Item.CCCD) || string.IsNullOrEmpty(Item.NGAYHETHANVISA.ToString()) || string.IsNullOrEmpty(Item.NGAYHETHANPASSPORT.ToString()) || string.IsNullOrEmpty(Item.SDT) || string.IsNullOrEmpty(Item.PASSPORT) ))
+                    if (string.IsNullOrEmpty(Item.MAHK) || string.IsNullOrEmpty(Item.HOTEN) || (string.IsNullOrEmpty(Item.GIOITINH) || string.IsNullOrEmpty(Item.DIACHI) || string.IsNullOrEmpty(Item.NGSINH.ToString()) || string.IsNullOrEmpty(Item.CCCD) || string.IsNullOrEmpty(Item.NGAYHETHANVISA.ToString()) || string.IsNullOrEmpty(Item.NGAYHETHANPASSPORT.ToString()) || string.IsNullOrEmpty(Item.SDT) || string.IsNullOrEmpty(Item.PASSPORT)))
                     {
                         ToolTipText = "Vui lòng nhập đủ các trường thông tin bắt buộc";
                         return false;
@@ -171,7 +171,6 @@ namespace TourismManagementSystem.ViewModel
                         {
                             t.PHIEUDATCHO = NewBooking;
                             t.MAPHIEU = NewBooking.MAPHIEU;
-                            DataProvider.Ins.DB.HANHKHACHes.Add(t);
                         }
                         NewBooking.CHUYEN = DataProvider.Ins.DB.CHUYENs.FirstOrDefault(t => t.MACHUYEN == NewBooking.MACHUYEN);
                         DataProvider.Ins.DB.PHIEUDATCHOes.Add(NewBooking);
@@ -186,7 +185,6 @@ namespace TourismManagementSystem.ViewModel
                         {
                             t.MAPHIEU = NewBooking.MAPHIEU;
                             t.PHIEUDATCHO = NewBooking;
-                            DataProvider.Ins.DB.HANHKHACHes.Add(t);
                         }
                         NewBooking.CHUYEN = DataProvider.Ins.DB.CHUYENs.FirstOrDefault(t => t.MACHUYEN == NewBooking.MACHUYEN);
                         var itemToUpdate = DataProvider.Ins.DB.PHIEUDATCHOes.FirstOrDefault(item => item.MAPHIEU == NewBooking.MAPHIEU);

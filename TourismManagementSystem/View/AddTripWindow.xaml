@@ -10,6 +10,7 @@
         HorizontalAlignment="Center"
         xmlns:vm="clr-namespace:TourismManagementSystem.ViewModel"
         VerticalAlignment="Center"
+        Name="addTripWindow"
         xmlns:uc="clr-namespace:TourismManagementSystem.UserControls"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowStartupLocation="CenterScreen"
@@ -178,20 +179,36 @@
                                  Text="{Binding NewTrip.SLTHUCTE, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
                         </Grid>
-                        <Button x:Name="AddButton" 
-                                    VerticalAlignment="Center"
+                        <Button VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
                                 materialDesign:ButtonAssist.CornerRadius="20"
                                 BorderBrush="Transparent"
                                 Width="500"
                                 Height="40"
+                                FontSize="18"
+                                Background="{StaticResource Primary}"
                                 Foreground="White"
-                            Content="{Binding BtnText}"
-                            Command="{Binding AddCommand}"
-                            Style="{StaticResource MaterialDesignFlatDarkBgButton}"
-                            Background="{StaticResource Primary}"
-                              FontSize="18" Margin="0,20,0,0">
+                                IsEnabled="True"
+                                Command="{Binding AddCommand}"
+                                CommandParameter="{Binding ElementName=addTripWindow}"
+                                ToolTip="{Binding ToolTipText, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTipService.ShowOnDisabled="True"
+                                Content="{Binding BtnText}">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatDarkBgButton}">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                    <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtNights}" Value="False"/>
+                                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=txtPrice}" Value="False"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="IsEnabled" Value="True"/>
+                                        </MultiDataTrigger>
+                                    </Style.Triggers>
 
+                                </Style>
+                            </Button.Style>
                         </Button>
                     </StackPanel>
                 </ScrollViewer>

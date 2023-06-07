@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TourismManagementSystem.View"
         mc:Ignorable="d"
+        Name="addPhieuWindow"
         Title="AddBookingWindow" Height="550" Width="900"
         ResizeMode="NoResize"
         HorizontalAlignment="Center"
@@ -86,7 +87,6 @@
                    FontWeight="Medium" Width="125" />
                             <ComboBox VerticalAlignment="Center"
                  FontSize="18"
-                                      IsEditable="True"
                 ItemsSource="{Binding ListChuyen}"
                                       SelectedItem="{Binding NewBooking.MACHUYEN}"
                  Width="400"
@@ -106,7 +106,7 @@
                   FontSize="18"
                   Width="400"
                                       HorizontalAlignment="Right"
-                  IsEnabled="{Binding IsNew}"
+                  
                   ItemsSource="{Binding TinhTrangCbItems}"
                   SelectedItem="{Binding NewBooking.TINHTRANG, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                    />
@@ -222,7 +222,8 @@
                                     <DataGridTemplateColumn Header="Giới tính"  Width="100" CanUserSort="False">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBox Width="100" Text="{Binding GIOITINH}" />
+                                                <TextBox Width="100" Text="{Binding GIOITINH}" >
+                                                </TextBox>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
@@ -301,19 +302,26 @@
 
                         </StackPanel>
                         <StackPanel>
-                            <Button x:Name="AddButton" 
-                            Content="{Binding BtnText}"
-                            Command="{Binding AddCommand}"
-                            Style="{StaticResource MaterialDesignFlatDarkBgButton}"
-                            VerticalAlignment="Center"
+                            <Button VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
                                 materialDesign:ButtonAssist.CornerRadius="20"
                                 BorderBrush="Transparent"
                                 Width="500"
                                 Height="40"
                                 FontSize="18"
+                                 IsEnabled="True"
                                 Background="{StaticResource Primary}"
-                                Foreground="White" Margin="0,20,0,5">
+                                Foreground="White"
+                                Command="{Binding AddCommand}"
+                                CommandParameter="{Binding ElementName=addPhieuWindow}"
+                                ToolTip="{Binding ToolTipText, UpdateSourceTrigger=PropertyChanged}"
+                                ToolTipService.ShowOnDisabled="True"
+                                Content="{Binding BtnText}">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatDarkBgButton}">
+                                        <Setter Property="IsEnabled" Value="True"/>
+                                    </Style>
+                                </Button.Style>
                             </Button>
                         </StackPanel>
 
