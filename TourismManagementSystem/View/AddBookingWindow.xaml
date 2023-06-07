@@ -62,8 +62,7 @@
                                 <TextBox 
                                          FontSize="18"
                                      IsEnabled="False"
-                 Text="{Binding NewBooking.MAPHIEU, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                 />
+                 Text="{Binding NewBooking.MAPHIEU, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                             </Border>
                         </Grid>
 
@@ -76,19 +75,15 @@
                             <Border CornerRadius="8"
                                     Background="{StaticResource Secondary}"
                                     VerticalAlignment="Center"
-                            <ComboBox VerticalAlignment="Center"
-                 FontSize="18"
-                 Width="400"
+                                    HorizontalAlignment="Right"
+                                    Width="400">
+                                <ComboBox 
+                                     FontSize="18"
                                       ItemsSource="{Binding ListMaKhachHang}"
-                                     HorizontalAlignment="Right"
-                                         Width="400"
                                     Height="40"
-                                    Padding="10,0,10,0">
-                                <TextBox 
-                 FontSize="18"
-                 Text="{Binding NewBooking.MAKH, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                 SelectedItem="{Binding NewBooking.MAKH, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                 />
+                                    Padding="10,0,10,0"
+                                SelectedItem="{Binding NewBooking.MAKH, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                                </ComboBox>
                             </Border>
 
                         </Grid>
@@ -107,15 +102,10 @@
                                          Width="400"
                                     Height="40"
                                     Padding="10,0,10,0">
-                                <ComboBox  
-                                    FontSize="18"
-                                      IsEditable="True"
-                                      ItemsSource="{Binding ListChuyen}"
-                            <ComboBox VerticalAlignment="Center"
-                 FontSize="18"
-                ItemsSource="{Binding ListChuyen}"
-                                      SelectedItem="{Binding NewBooking.MACHUYEN}"
-                                      Text="{Binding NewBooking.MACHUYEN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                <ComboBox VerticalAlignment="Center"
+                                         FontSize="18"
+                                        ItemsSource="{Binding ListChuyen}"
+                                      SelectedItem="{Binding NewBooking.MACHUYEN}"/>
                             </Border>
                         </Grid>
 
@@ -133,19 +123,11 @@
                                     Height="40"
                                     Padding="10,0,10,0">
                                 <ComboBox 
-                                          FontSize="18"
-                                          IsEnabled="{Binding IsNew}"
-                                          ItemsSource="{Binding TinhTrangCbItems}"
-                                          SelectedItem="{Binding NewBooking.TINHTRANG, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                      FontSize="18"
+                                      ItemsSource="{Binding TinhTrangCbItems}"
+                                      SelectedItem="{Binding NewBooking.TINHTRANG, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                             </Border>
-                            <ComboBox VerticalAlignment="Center"
-                  FontSize="18"
-                  Width="400"
-                                      HorizontalAlignment="Right"
-                  
-                  ItemsSource="{Binding TinhTrangCbItems}"
-                  SelectedItem="{Binding NewBooking.TINHTRANG, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                   />
+                            
 
                         </Grid>
                             
