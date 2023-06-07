@@ -66,20 +66,37 @@ namespace TourismManagementSystem.ViewModel
             DeleteBookingCommand = new RelayCommand<object>((p) => true, (p) =>
             {
                 PHIEUDATCHO selectedPhieu = p as PHIEUDATCHO;
-                if (MessageBox.Show("Bạn có muốn xóa phiếu này?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if(selectedPhieu.CHUYEN.TGKETTHUC > DateTime.Now && selectedPhieu.TINHTRANG == "Đã thanh toán")
                 {
-                    
-
-                    foreach (var item in selectedPhieu.VEs)
+                    MessageBox.Show("Phiếu đặt chỗ đã thanh toán nhưng chuyến đi chưa diễn ra. Không thể xóa phiếu");
+                }
+                else
+                {
+                    if (MessageBox.Show("Bạn có muốn xóa phiếu này?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        item.TRANGTHAI = "Đã hủy";
+                        var hanhkhachToRemove = selectedPhieu.HANHKHACHes.ToList();
+                        foreach (var item in hanhkhachToRemove)
+                        {
+                            DataProvider.Ins.DB.HANHKHACHes.Remove(item);
+                        }
+                        var veToRemove = selectedPhieu.VEs.ToList();
+                        foreach (var item in veToRemove)
+                        {
+                            DataProvider.Ins.DB.VEs.Remove(item);
+                        }
+
+                        var ttToRemove = selectedPhieu.THONGTINTHANHTOANs.ToList();
+                        foreach (var item in ttToRemove)
+                        {
+                            DataProvider.Ins.DB.THONGTINTHANHTOANs.Remove(item);
+                        }
+
+                        DataProvider.Ins.DB.PHIEUDATCHOes.Remove(selectedPhieu);
+
+                        DataProvider.Ins.DB.SaveChanges();
+                        BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes);
+                        MessageBox.Show("Xóa phiếu thành công");
                     }
-
-                    DataProvider.Ins.DB.PHIEUDATCHOes.Remove(selectedPhieu);
-
-                    DataProvider.Ins.DB.SaveChanges();
-                    BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes);
-                    MessageBox.Show("Xóa phiếu thành công");
                 }
             });
             AddBookingCommand = new RelayCommand<object>((p) => true, (p) =>
