@@ -142,7 +142,7 @@
             ColumnWidth="*"
             IsReadOnly="False"
             GridLinesVisibility="None"
-            SelectedItem="{Binding SelectedCustomer, Mode=OneWayToSource}"
+            SelectedItem="{Binding SelectedCustomer}"
                >
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
@@ -329,7 +329,7 @@
                                     Background="{StaticResource Secondary}"
                                     Margin="0,0,10,5">
                                 <TextBox FontSize="12"
-                                            Text="{Binding SelectedCustomer.HOTEN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding HOTEN, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                             Margin="10,0,10,0"/>
                             </Border>
                         </Grid>
@@ -354,7 +354,7 @@
                                     Background="{StaticResource Secondary}"
                                     Margin="0,0,10,5">
                                 <TextBox 
-                                            Text="{Binding SelectedCustomer.CCCD, ValidatesOnNotifyDataErrors=True, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding CCCD, ValidatesOnNotifyDataErrors=True, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                             FontSize="12"
                                             Margin="10,0,10,0">
                                             
@@ -382,7 +382,7 @@
                                     Background="{StaticResource Secondary}"
                                     Margin="0,0,10,5">
                                 <TextBox
-                                            Text="{Binding SelectedCustomer.SDT, ValidatesOnNotifyDataErrors=True,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding SDT, ValidatesOnNotifyDataErrors=True,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                             FontSize="12"
                                             Margin="10,0,10,0"/>
                             </Border>
@@ -408,7 +408,7 @@
                                     Background="{StaticResource Secondary}"
                                     Margin="0,0,10,5">
                                 <TextBox
-                                            Text="{Binding SelectedCustomer.EMAIL,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                            Text="{Binding EMAIL,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                             FontSize="12"
                                             Margin="10,0,10,0"/>
                             </Border>
@@ -434,7 +434,7 @@
                                     Background="{StaticResource Secondary}"
                                     Margin="0,0,10,5">
                                 <TextBox
-                                            Text="{Binding SelectedCustomer.DIACHI,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                            Text="{Binding DIACHI,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                                             FontSize="12"
                                             Margin="10,0,10,0"/>
                             </Border>

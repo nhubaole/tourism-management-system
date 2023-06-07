@@ -19,11 +19,11 @@ using System.Text.RegularExpressions;
 namespace TourismManagementSystem.ViewModel
 {
     
-    internal class CustomerVM : BaseViewModel
+    internal class CustomerVM : BaseViewModel, INotifyDataErrorInfo
     {
 
         private ObservableCollection<string> _filter = new ObservableCollection<string>() { "Mã khách hàng", "Tên khách hàng","Số điện thoại" };
-        public ObservableCollection<KHACHHANG> KhachHangs { get; set; }
+
         public ICommand SwitchWindowCommand { get; set; }
         public ICommand AddDataCommand { get; set; }
         public ICommand DeleteDataCommand { get; set; }
@@ -35,13 +35,14 @@ namespace TourismManagementSystem.ViewModel
         public KHACHHANG SelectedCustomer { get => _selectedCustomer; set
             {
                 _selectedCustomer = value;
-                OnPropertyChanged(nameof(SelectedCustomer));
-
+                OnPropertyChanged();
+                HOTEN = SelectedCustomer.HOTEN;
+                CCCD = SelectedCustomer.CCCD;
+                SDT = SelectedCustomer.SDT;
+                DIACHI = SelectedCustomer.DIACHI;
+                EMAIL = SelectedCustomer.EMAIL;
             }
         }
-
-        
-        
         private string _selectedFilter;
         public string selectedFilter
         {
@@ -84,6 +85,75 @@ namespace TourismManagementSystem.ViewModel
         private ObservableCollection<KHACHHANG> _ListKhachhang = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs);
         public ObservableCollection<KHACHHANG> ListKhachhang { get => _ListKhachhang; set { _ListKhachhang= value; OnPropertyChanged(nameof(ListKhachhang)); } }
 
+        private string maKH;
+        public string MAKH
+        {
+            get => maKH;
+            set
+            {
+                maKH = value;
+                OnPropertyChanged(nameof(MAKH));
+            }
+        }
+
+        private string hoTen;
+        public string HOTEN
+        {
+            get => hoTen;
+            set
+            {
+                hoTen = value;
+                OnPropertyChanged(nameof(HOTEN));
+                ValidateProperty(nameof(HOTEN));
+            }
+        }
+
+        private string cccd;
+        public string CCCD
+        {
+            get => cccd;
+            set
+            {
+                cccd = value;
+                OnPropertyChanged(nameof(CCCD));
+                ValidateProperty(nameof(CCCD));
+            }
+        }
+
+        private string sdt;
+        public string SDT
+        {
+            get => sdt;
+            set
+            {
+                sdt = value;
+                OnPropertyChanged(nameof(SDT));
+                ValidateProperty(nameof(SDT));
+            }
+        }
+
+        private string email;
+        public string EMAIL
+        {
+            get => email;
+            set
+            {
+                email = value;
+                OnPropertyChanged(nameof(EMAIL));
+                ValidateProperty(nameof(EMAIL));
+            }
+        }
+
+        private string diaChi;
+        public string DIACHI
+        {
+            get => diaChi;
+            set
+            {
+                diaChi = value;
+                OnPropertyChanged(nameof(DIACHI));
+            }
+        }
         public CustomerVM()
         {
             selectedFilter = filter[0];
@@ -94,22 +164,40 @@ namespace TourismManagementSystem.ViewModel
             }, (p) =>
             {SwitchWindow(p);});
 
-            KhachHangs = new ObservableCollection<KHACHHANG>();
-            
-
-
             UpdateDataCommand = new RelayCommand<object>((p) =>
             {
-                
-                return true;
+                if (HasErrors || DIACHI == null || HOTEN == null || EMAIL == null || SDT == null || CCCD == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             },
             (p) => { UpdateCustomer(); });
             DeleteDataCommand = new RelayCommand<object>((p) =>
             {
-              
                 return true;
             },
-            (p) => { DeleteCustomer(); });
+            (p) => {
+                if (SelectedCustomer != null)
+                {
+                    if (SelectedCustomer.PHIEUDATCHOes.Count > 0)
+                    {
+                        MessageBox.Show("Có tồn tại phiếu đặt chỗ của khách hàng này. Không thể xóa!");
+                    }
+                    else
+                    {
+                        if (MessageBox.Show("Bạn có chắc chắn muốn xóa khách hàng " + SelectedCustomer.HOTEN + " ?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                        {
+                            DataProvider.Ins.DB.KHACHHANGs.Remove(SelectedCustomer);
+                            DataProvider.Ins.DB.SaveChanges();
+                            ListKhachhang.Remove(SelectedCustomer);
+                        }
+                    }
+                }
+            });
 
             BookingButtonCommand = new RelayCommand<object>((p) => true, (p) =>
             {
@@ -117,8 +205,6 @@ namespace TourismManagementSystem.ViewModel
                 BookingDetailsWindow bookingDetailsWindow = new BookingDetailsWindow();
                 bookingDetailsWindow.ShowDialog();
             });
-
-
         }
         private void SwitchWindow(object parameter)
         {
@@ -134,8 +220,6 @@ namespace TourismManagementSystem.ViewModel
                 MessageBox.Show(e.Message);
 
             }
-
-
         }
 
         private void UpdateCustomer()
@@ -147,29 +231,158 @@ namespace TourismManagementSystem.ViewModel
                     var itemToUpdate = DataProvider.Ins.DB.KHACHHANGs.FirstOrDefault(item => item.MAKH == SelectedCustomer.MAKH);
                     if (itemToUpdate != null)
                     {
+                        SelectedCustomer.HOTEN = HOTEN;
+                        SelectedCustomer.CCCD = CCCD;
+                        SelectedCustomer.SDT = SDT;
+                        SelectedCustomer.DIACHI = DIACHI;
+                        SelectedCustomer.EMAIL = EMAIL;
                         itemToUpdate = SelectedCustomer;
                         DataProvider.Ins.DB.SaveChanges();
                         MessageBox.Show("Cập nhật thông tin khách hàng thành công!");
+                        ListKhachhang = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs);
                     }
                 }
             }
         }
-        private void DeleteCustomer()
+
+
+        private Dictionary<string, List<string>> _errors = new Dictionary<string, List<string>>();
+        public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
+        public bool HasErrors
         {
-            if(SelectedCustomer != null)
+            get { return _errors.Values.Any(list => list != null && list.Count > 0); }
+        }
+
+
+        public IEnumerable GetErrors(string propertyName)
+        {
+            if (string.IsNullOrEmpty(propertyName) || !_errors.ContainsKey(propertyName))
+                return null;
+
+            return _errors[propertyName];
+        }
+
+        private void OnErrorsChanged(string propertyName)
+        {
+            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
+        }
+
+
+        private void ValidateProperty(string propertyName)
+        {
+            List<string> errors = new List<string>();
+
+            if (propertyName == nameof(SDT))
             {
-                if (MessageBox.Show("Bạn có chắc chắn muốn xóa khách hàng " + SelectedCustomer.HOTEN + " ?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if (string.IsNullOrEmpty(SDT))
                 {
-                    DataProvider.Ins.DB.KHACHHANGs.Remove(SelectedCustomer);
-                    DataProvider.Ins.DB.SaveChanges();
-                    ListKhachhang.Remove(SelectedCustomer);
+                    errors.Add("Vui lòng nhập số điện thoại hợp lệ");
+                }
+                else if (!IsNumber(SDT))
+                {
+                    errors.Add("Vui lòng nhập số điện thoại hợp lệ");
+
+                }
+                else if (SDT.Length != 10)
+                {
+                    errors.Add("Vui lòng nhập số điện thoại hợp lệ");
+
+                }
+
+            }
+
+            if (propertyName == nameof(CCCD))
+            {
+                if (string.IsNullOrEmpty(CCCD))
+                {
+                    errors.Add("Vui lòng nhập số CCCD gồm 12 chữ số");
+                }
+                else if (!IsNumber(CCCD))
+                {
+                    errors.Add("Vui lòng nhập số CCCD gồm 12 chữ số");
+                }
+                else if (cccd.Length != 12)
+                {
+                    errors.Add("Vui lòng nhập số CCCD gồm 12 chữ số");
+                }
+                else
+                {
+                    var existingCustomer = DataProvider.Ins.DB.KHACHHANGs.FirstOrDefault(c => c.CCCD == CCCD);
+                    if (existingCustomer != null && existingCustomer != SelectedCustomer)
+                    {
+                        errors.Add("Số CCCD đã tồn tại. Vui lòng kiểm tra lại");
+                    }
+                }
+
+            }
+
+            if (propertyName == nameof(HOTEN))
+            {
+                if (string.IsNullOrEmpty(HOTEN) || !IsNameValid(hoTen))
+                {
+                    errors.Add("Vui lòng nhập họ và tên hợp lệ");
+                }
+
+
+            }
+            if (propertyName == nameof(EMAIL))
+            {
+                if (string.IsNullOrEmpty(EMAIL) || !IsEmailValid(email))
+                {
+                    errors.Add("Vui lòng nhập email hợp lệ");
+                }
+
+
+            }
+            if (propertyName == nameof(DIACHI))
+            {
+                if (string.IsNullOrEmpty(DIACHI))
+                {
+                    errors.Add("Vui lòng nhập địa chỉ");
+                }
+
+
+            }
+
+            if (errors.Count > 0)
+            {
+                _errors[propertyName] = errors;
+            }
+            else
+            {
+                _errors.Remove(propertyName);
+            }
+
+            OnErrorsChanged(propertyName);
+        }
+
+        private bool IsNumber(string value)
+        {
+            return double.TryParse(value, out _);
+        }
+        private bool IsNameValid(string name)
+        {
+            foreach (char c in name)
+            {
+                if (!char.IsLetter(c) && c != ' ')
+                {
+                    return false;
                 }
             }
+
+            return true;
         }
-       
+        private bool IsEmailValid(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                return false;
+            }
 
+            // Regular expression pattern for email validation
+            string pattern = @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
 
-
-
+            return Regex.IsMatch(email, pattern);
+        }
     }
 }
