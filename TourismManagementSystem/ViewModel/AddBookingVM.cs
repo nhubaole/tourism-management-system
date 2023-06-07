@@ -166,13 +166,15 @@ namespace TourismManagementSystem.ViewModel
                     {
                         NewBooking.SLKHACH = Count;
                         NewBooking.TINHTRANG = "Chưa thanh toán";
-                        NewBooking.HANHKHACHes = ListHKOfPhieu;
-                        foreach (var t in NewBooking.HANHKHACHes)
-                        {
-                            t.PHIEUDATCHO = NewBooking;
-                            t.MAPHIEU = NewBooking.MAPHIEU;
-                        }
+                        //NewBooking.HANHKHACHes = ListHKOfPhieu;
+                        //foreach (var t in NewBooking.HANHKHACHes)
+                        //{
+                        //    t.PHIEUDATCHO = NewBooking;
+                        //    t.MAPHIEU = NewBooking.MAPHIEU;
+                        //}
                         NewBooking.CHUYEN = DataProvider.Ins.DB.CHUYENs.FirstOrDefault(t => t.MACHUYEN == NewBooking.MACHUYEN);
+                        NewBooking.CHUYEN.SLTHUCTE += NewBooking.SLKHACH;
+                        
                         DataProvider.Ins.DB.PHIEUDATCHOes.Add(NewBooking);
                         DataProvider.Ins.DB.SaveChanges();
                         MessageBox.Show("Thêm mới phiếu thành công!");

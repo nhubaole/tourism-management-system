@@ -24,7 +24,7 @@ namespace TourismManagementSystem.ViewModel
         public ObservableCollection<ComboBox> HDVBoxes { get => _HDVBoxes; set { _HDVBoxes = value; OnPropertyChanged(); } }
 
 
-        public ObservableCollection<string> ListTuyen { get; set; }
+        public ObservableCollection<TUYEN> ListTuyen { get; set; }
         public ObservableCollection<string> ListHDV { get; set; }
 
         private static CHUYEN _editSelectedChuyen;
@@ -38,13 +38,14 @@ namespace TourismManagementSystem.ViewModel
         {
             ToolTipText = "Chưa nhập đủ thông tin";
             ListLoaiChuyen = new ObservableCollection<LOAICHUYEN>(DataProvider.Ins.DB.LOAICHUYENs);
-            ListTuyen = new ObservableCollection<string>(DataProvider.Ins.DB.TUYENs.Select(t => t.MATUYEN));
+            ListTuyen = new ObservableCollection<TUYEN>(DataProvider.Ins.DB.TUYENs);
             ListOfHDV = new ObservableCollection<HUONGDANVIEN>(DataProvider.Ins.DB.HUONGDANVIENs);
             if (IsEdit == 0)
             {
-                Title = "Thêm mới cuyến du lịch";
+                Title = "Thêm mới chuyến du lịch";
                 BtnText = "Thêm chuyến du lịch";
                 NewTrip = new CHUYEN();
+                NewTrip.SLTHUCTE = 0;
                 string formattedID;
                 ObservableCollection<CHUYEN> ListChuyen = new ObservableCollection<CHUYEN>(DataProvider.Ins.DB.CHUYENs);
                 if (ListTuyen.Count() == 0)
@@ -80,7 +81,7 @@ namespace TourismManagementSystem.ViewModel
 
             AddCommand = new RelayCommand<object>((p) =>
             {
-                if (string.IsNullOrEmpty(NewTrip.MACHUYEN) || NewTrip.MATUYEN == null || NewTrip.LOAICHUYEN == null || NewTrip.TGBATDAU == null || NewTrip.GIAVE == null || NewTrip.TGKETTHUC == null || NewTrip.SLTOITHIEU == null || NewTrip.SLTHUCTE == null)
+                if (string.IsNullOrEmpty(NewTrip.MACHUYEN) || NewTrip.TUYEN == null || NewTrip.LOAICHUYEN == null || NewTrip.TGBATDAU == null )
                 {
                     ToolTipText = "Vui lòng nhập đủ các trường thông tin bắt buộc";
                     return false;
@@ -153,6 +154,37 @@ namespace TourismManagementSystem.ViewModel
                     comboBox.FontSize = 16;
                     HDVBoxes.Add(comboBox);               
             });
+
+            SelectLoaiCommand = new RelayCommand<object>((p) => true, (p) =>
+            {
+                if(NewTrip.TUYEN != null)
+                {
+                    if (NewTrip.LOAICHUYEN.TENLOAI == "Khuyến mãi")
+                    {
+                        NewTrip.GIAVE = (int?)(NewTrip.TUYEN.GIADUKIEN * 0.8);
+                    }
+                    else
+                    {
+                        NewTrip.GIAVE = NewTrip.TUYEN.GIADUKIEN;
+                    }
+                    OnPropertyChanged(nameof(NewTrip.GIAVE));
+                }
+            });
+            SelectTuyenCommand = new RelayCommand<object>((p) => true, (p) =>
+            {
+                if (NewTrip.LOAICHUYEN != null)
+                {
+                    if (NewTrip.LOAICHUYEN.TENLOAI == "Khuyến mãi")
+                    {
+                        NewTrip.GIAVE = (int?)(NewTrip.TUYEN.GIADUKIEN * 0.8);
+                    }
+                    else
+                    {
+                        NewTrip.GIAVE = NewTrip.TUYEN.GIADUKIEN;
+                    }
+                    OnPropertyChanged(nameof(NewTrip.GIAVE));
+                }
+            });
         }
 
         private string _selectedHDVMaSo;
@@ -166,6 +198,8 @@ namespace TourismManagementSystem.ViewModel
             }
         }
         public ICommand AddCommand { get; set; }
+        public ICommand SelectLoaiCommand { get; set; }
+        public ICommand SelectTuyenCommand { get; set; }
 
         public ICommand AddHDV { get; set; }
         public ICommand RemoveHDV { get; set; }
