@@ -17,8 +17,14 @@
     <Window.DataContext>
         <vm:BookingDetailVM/>
     </Window.DataContext>
+    
     <Grid Margin="50,20,50,20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
         <Border Background="White"
+                Grid.Row="0"
                 CornerRadius="20,20,20,20">
             <Grid>
                 <Grid.RowDefinitions>
@@ -30,7 +36,7 @@
                         Height="50"
                         CornerRadius="20,20,0,0"
                         Background="{StaticResource Primary}">
-                    <TextBlock Text="Thông tin chi tiết chuyến du lịch"
+                    <TextBlock Text="Thông tin chi tiết phiếu đặt chỗ"
                                VerticalAlignment="Center"
                                Margin="50,0,0,0"
                                Foreground="White"
@@ -124,7 +130,7 @@
                         <Grid Height="50" >
                             <TextBlock VerticalAlignment="Center"
                    HorizontalAlignment="Left"
-                   Text="Số lượng khách hàng"
+                   Text="Số lượng hành khách"
                    FontSize="18"
                    FontWeight="Medium"/>
                             <TextBlock VerticalAlignment="Center"
@@ -140,7 +146,7 @@
                         <Grid Height="50" >
                             <TextBlock VerticalAlignment="Center"
                    HorizontalAlignment="Left"
-                   Text="Danh sách khách hàng"
+                   Text="Danh sách hành khách"
                    FontSize="18"
                    FontWeight="Medium"/>
                         </Grid>
@@ -207,9 +213,6 @@
                                     </Style>
                                 </DataGrid.Resources>
                                 <DataGrid.Columns >
-                                    <DataGridTextColumn Header="Mã hành khách" Binding="{Binding MAHDV}" Width="*"  IsReadOnly="True" CanUserSort="False">
-
-                                    </DataGridTextColumn>
                                     <DataGridTextColumn Header="Họ tên" Binding="{Binding HOTEN}"  Width="*" IsReadOnly="True" CanUserSort="False">
                                         <DataGridTextColumn.ElementStyle>
                                             <Style TargetType="TextBlock">
@@ -222,7 +225,19 @@
                                             </Style>
                                         </DataGridTextColumn.ElementStyle>
                                     </DataGridTextColumn>
-                                    <DataGridTextColumn Header="Ngày sinh" Binding="{Binding NGSINH}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                                    <DataGridTextColumn Header="Ngày sinh" Binding="{Binding NGSINH, StringFormat='dd/MM/yyyy'}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="TextWrapping" Value="Wrap" />
+                                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                                <Setter Property="VerticalAlignment" Value="Center" />
+                                                <Setter Property="TextAlignment" Value="Center" />
+                                                <Setter Property="Padding" Value="10"/>
+
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="Giới tính" Binding="{Binding GIOITINH}"  Width="*" IsReadOnly="True" CanUserSort="False">
                                         <DataGridTextColumn.ElementStyle>
                                             <Style TargetType="TextBlock">
                                                 <Setter Property="TextWrapping" Value="Wrap" />
@@ -250,8 +265,13 @@
                                 </DataGrid.Columns>
                             </DataGrid>
                         </StackPanel>
-                        <Grid Margin="50,20,50,0">
-                            <Button     
+                    </StackPanel>
+                </ScrollViewer>
+
+            </Grid>
+        </Border>
+        <Grid Margin="120,20,120,0" Grid.Row="1">
+            <Button     
                                 Command="{Binding ThanhToanCommand}"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Left"
@@ -264,7 +284,7 @@
                                 Foreground="White"
                                 Style="{StaticResource MaterialDesignFlatDarkBgButton}"
                                 Content="Thanh toán"/>
-                            <Button
+            <Button
                                 Command="{Binding XuatVeCommand}"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Right"
@@ -277,12 +297,6 @@
                                 Foreground="White"
                                 Style="{StaticResource MaterialDesignFlatDarkBgButton}"
                                 Content="Xuất vé"/>
-                        </Grid>
-
-                    </StackPanel>
-                </ScrollViewer>
-
-            </Grid>
-        </Border>
+        </Grid>
     </Grid>
 </Window>

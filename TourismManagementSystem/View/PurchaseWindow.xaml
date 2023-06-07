@@ -16,7 +16,8 @@
         xmlns:uc="clr-namespace:TourismManagementSystem.UserControls"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowStartupLocation="CenterScreen"
-        Background="{StaticResource Secondary}">
+        Background="{StaticResource Secondary}"
+        Name="purchaseWindow">
          <Grid>
         <Border 
                     BorderBrush="White" 
@@ -60,7 +61,6 @@
                                 <RowDefinition Height="1*"/>
                                 <RowDefinition Height="1*"/>
                                 <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
                                 <RowDefinition Height="2*"/>
 
                             </Grid.RowDefinitions>
@@ -83,13 +83,13 @@
                                             Margin="260,4,0,4"
                                             HorizontalAlignment="Left" Grid.ColumnSpan="2"
                                             >
-                                    <TextBox
+                                    <TextBox IsEnabled="False"
                                                 x:Name="tbSOTIEN"
                                                 Width="280"
                                                 Height="30"
                                                 Background="Transparent"
                                                 Margin="0 , 0, 0, 0"
-                                                Text="{Binding SOTIEN,UpdateSourceTrigger=PropertyChanged, ValidatesOnNotifyDataErrors=True}"
+                                                Text="{Binding NewPurchase.SOTIEN,UpdateSourceTrigger=PropertyChanged}"
                                                 HorizontalAlignment="Center">
 
                                         
@@ -131,50 +131,16 @@
                                                 Margin="0 , 0, 0, 0"
                                                 HorizontalAlignment="Center"
                                                 SelectedDateFormat="Short"
-                                                SelectedDate="{Binding THOIGIAN}"
+                                                SelectedDate="{Binding NewPurchase.THOIGIAN}"
                                                 Language="en-GB"
                                                 
                                                 />
-                                    
+
 
                                 </Border>
 
                             </Grid>
                             <Grid Grid.Row="3">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="461*"/>
-                                    <ColumnDefinition Width="159*"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock FontWeight="Medium"
-                                            Width="100"
-                                            Text="Trạng thái"
-                                            FontSize="16"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Left"
-                                            Margin="90,0,0,0"/>
-                                <Border
-                                            Width="300"
-                                            Height="30"
-                                            CornerRadius="10"
-                                            Background="{StaticResource Secondary}"
-                                            Margin="260,4,0,4"
-                                            HorizontalAlignment="Left" Grid.ColumnSpan="2"
-                                            >
-                                    <ComboBox
-                                               x:Name="cbTrthai"
-                                                Width="280"
-                                                Height="30"
-                                                Background="Transparent"
-                                                Margin="0 , 0, 0, 0"
-                                                HorizontalAlignment="Center"
-                                                ItemsSource="{Binding status}"
-                                                SelectedItem="{Binding TRANGTHAI}"
-                                                />
-
-                                </Border>
-
-                            </Grid>
-                            <Grid Grid.Row="4">
                                 <TextBlock FontWeight="Medium"
                                             Width="100"
                                             Text="Phương thức"
@@ -197,7 +163,7 @@
                                                 Margin="0 , 0, 0, 0"
                                                 HorizontalAlignment="Center"
                                                 ItemsSource="{Binding method}"
-                                                SelectedItem="{Binding PHUONGTHUC}"
+                                                SelectedItem="{Binding NewPurchase.PHUONGTHUC}"
                                                 />
 
                                 </Border>
@@ -216,7 +182,7 @@
                                 Background="{StaticResource Primary}"
                                 Foreground="White"
                                             Command="{Binding AddDataCommand, ValidatesOnDataErrors=True}"
-                                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}">
+                                    CommandParameter="{Binding ElementName=purchaseWindow}">
                                     <TextBlock
                                                 Text="Xác nhận thanh toán"
                                                 FontSize="18"/>

@@ -110,11 +110,17 @@ namespace TourismManagementSystem.ViewModel
             EditBookingCommand = new RelayCommand<object>((p) => true, (p) =>
             {
                 PHIEUDATCHO selectedPhieu = p as PHIEUDATCHO;
-                AddBookingVM.EditSelectedPhieu = selectedPhieu;
-                AddBookingVM.IsEdit = 1;
-                AddBookingWindow addBookingWindow = new AddBookingWindow();
-                addBookingWindow.ShowDialog();
-                BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes);
+               if(selectedPhieu.TINHTRANG == "Đã xuất vé") {
+                    MessageBox.Show("Không thể sửa thông tin phiếu đã xuất vé");
+                }
+                else
+                {
+                    AddBookingVM.EditSelectedPhieu = selectedPhieu;
+                    AddBookingVM.IsEdit = 1;
+                    AddBookingWindow addBookingWindow = new AddBookingWindow();
+                    addBookingWindow.ShowDialog();
+                    BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes);
+                }
             });
             ViewBookingCommand = new RelayCommand<object>((p) => true, (p) =>
             {
@@ -122,6 +128,7 @@ namespace TourismManagementSystem.ViewModel
                 BookingDetailVM.SelectedPhieu = selectedPhieu;
                 BookingDetailsWindow bookingDetailWindow = new BookingDetailsWindow();
                 bookingDetailWindow.ShowDialog();
+                BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes);
             });
         }
 
