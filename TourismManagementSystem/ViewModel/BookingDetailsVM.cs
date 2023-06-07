@@ -42,6 +42,7 @@ namespace TourismManagementSystem.ViewModel
             }, (p) =>
             {
                 //chuyen sang man hinh xuat ve
+                int i = 0;
                 foreach (var item in Phieu.HANHKHACHes)
                 {
                     VE ve = new VE();
@@ -61,17 +62,16 @@ namespace TourismManagementSystem.ViewModel
                     {
                         string lastID = ListVe.Last().MAVE;
                         int previousNumber = int.Parse(lastID.Substring(1));
-                        int nextNumber = previousNumber + 1;
-                        formattedID = string.Format("P{0:D7}", nextNumber);
+                        int nextNumber = previousNumber + 1 + i;
+                        formattedID = string.Format("V{0:D7}", nextNumber);
                     }
                     ve.MAVE = formattedID;
-                    if (!DataProvider.Ins.DB.VEs.Contains(ve))
-                    {
                         DataProvider.Ins.DB.VEs.Add(ve);
-                    }
-                    DataProvider.Ins.DB.SaveChanges();
-                    MessageBox.Show("Thêm vé thành công!");
+                    i++;
                 }
+                DataProvider.Ins.DB.SaveChanges();
+                MessageBox.Show("Thêm vé thành công!");
+
             });
 
         }
