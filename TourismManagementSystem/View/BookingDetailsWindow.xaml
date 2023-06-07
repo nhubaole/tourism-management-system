@@ -184,6 +184,7 @@
                                         <Setter Property="Margin" Value="0, 10, 0, 10"/>
                                         <Setter Property="FontSize" Value="14"/>
                                         <Setter Property="FontWeight" Value="Bold"/>
+                                        <Setter Property="Cursor" Value="Hand"/>
 
                                     </Style>
                                 </DataGrid.ColumnHeaderStyle>
@@ -213,7 +214,7 @@
                                     </Style>
                                 </DataGrid.Resources>
                                 <DataGrid.Columns >
-                                    <DataGridTextColumn Header="Họ tên" Binding="{Binding HOTEN}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                                    <DataGridTextColumn Header="Họ tên" Binding="{Binding HOTEN}"  Width="*" IsReadOnly="True" CanUserSort="True">
                                         <DataGridTextColumn.ElementStyle>
                                             <Style TargetType="TextBlock">
                                                 <Setter Property="TextWrapping" Value="Wrap" />
@@ -225,7 +226,7 @@
                                             </Style>
                                         </DataGridTextColumn.ElementStyle>
                                     </DataGridTextColumn>
-                                    <DataGridTextColumn Header="Ngày sinh" Binding="{Binding NGSINH, StringFormat='dd/MM/yyyy'}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                                    <DataGridTextColumn Header="Ngày sinh" Binding="{Binding NGSINH, StringFormat='dd/MM/yyyy'}"  Width="*" IsReadOnly="True" CanUserSort="True">
                                         <DataGridTextColumn.ElementStyle>
                                             <Style TargetType="TextBlock">
                                                 <Setter Property="TextWrapping" Value="Wrap" />
@@ -237,7 +238,7 @@
                                             </Style>
                                         </DataGridTextColumn.ElementStyle>
                                     </DataGridTextColumn>
-                                    <DataGridTextColumn Header="Giới tính" Binding="{Binding GIOITINH}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                                    <DataGridTextColumn Header="Giới tính" Binding="{Binding GIOITINH}"  Width="*" IsReadOnly="True" CanUserSort="True">
                                         <DataGridTextColumn.ElementStyle>
                                             <Style TargetType="TextBlock">
                                                 <Setter Property="TextWrapping" Value="Wrap" />
@@ -249,7 +250,7 @@
                                             </Style>
                                         </DataGridTextColumn.ElementStyle>
                                     </DataGridTextColumn>
-                                    <DataGridTextColumn Header="Số điện thoại" Binding="{Binding SDT}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                                    <DataGridTextColumn Header="Số điện thoại" Binding="{Binding SDT}"  Width="*" IsReadOnly="True" CanUserSort="True">
                                         <DataGridTextColumn.ElementStyle>
                                             <Style TargetType="TextBlock">
                                                 <Setter Property="TextWrapping" Value="Wrap" />

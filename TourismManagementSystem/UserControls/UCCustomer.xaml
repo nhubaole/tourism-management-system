@@ -153,6 +153,7 @@
                         <Setter Property="Margin" Value="0, 10, 0, 10"/>
                         <Setter Property="FontSize" Value="14"/>
                         <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="Cursor" Value="Hand"/>
 
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
@@ -182,7 +183,7 @@
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.Columns >
-                    <DataGridTextColumn Header="Mã khách hàng" Binding="{Binding MAKH}" Width="*"  IsReadOnly="True" CanUserSort="False">
+                    <DataGridTextColumn Header="Mã khách hàng" Binding="{Binding MAKH}" Width="*"  IsReadOnly="True" CanUserSort="True">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="TextWrapping" Value="Wrap" />
@@ -194,7 +195,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Tên khách hàng" Binding="{Binding HOTEN}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                    <DataGridTextColumn Header="Tên khách hàng" Binding="{Binding HOTEN}"  Width="*" IsReadOnly="True" CanUserSort="True">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="TextWrapping" Value="Wrap" />
@@ -206,7 +207,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Số điện thoại" Binding="{Binding SDT}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                    <DataGridTextColumn Header="Số điện thoại" Binding="{Binding SDT}"  Width="*" IsReadOnly="True" CanUserSort="True">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="TextWrapping" Value="Wrap" />

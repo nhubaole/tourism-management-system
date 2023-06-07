@@ -123,6 +123,7 @@
                     <Setter Property="Margin" Value="0, 10, 0, 10"/>
                     <Setter Property="FontSize" Value="14"/>
                     <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="Cursor" Value="Hand"/>
 
                 </Style>
             </DataGrid.ColumnHeaderStyle>
@@ -152,10 +153,10 @@
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns >
-                <DataGridTextColumn Header="Mã chuyến" Binding="{Binding MACHUYEN}" Width="*"  IsReadOnly="True" CanUserSort="False">
+                <DataGridTextColumn Header="Mã chuyến" Binding="{Binding MACHUYEN}" Width="*"  IsReadOnly="True" CanUserSort="True">
 
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Mã tuyến" Binding="{Binding MATUYEN}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                <DataGridTextColumn Header="Mã tuyến" Binding="{Binding MATUYEN}"  Width="*" IsReadOnly="True" CanUserSort="True">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="TextWrapping" Value="Wrap" />
@@ -167,7 +168,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Thời gian bắt đầu" Binding="{Binding TGBATDAU}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                <DataGridTextColumn Header="Thời gian bắt đầu" Binding="{Binding TGBATDAU}"  Width="*" IsReadOnly="True" CanUserSort="True">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="TextWrapping" Value="Wrap" />
@@ -179,7 +180,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Loại chuyến" Binding="{Binding LOAICHUYEN.TENLOAI}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                <DataGridTextColumn Header="Loại chuyến" Binding="{Binding LOAICHUYEN.TENLOAI}"  Width="*" IsReadOnly="True" CanUserSort="True">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="TextWrapping" Value="Wrap" />

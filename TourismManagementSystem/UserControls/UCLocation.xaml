@@ -279,7 +279,7 @@
                     <Setter Property="Margin" Value="0, 10, 0, 10"/>
                     <Setter Property="FontSize" Value="14"/>
                     <Setter Property="FontWeight" Value="Bold"/>
-
+                    <Setter Property="Cursor" Value="Hand"/>
                 </Style>
             </DataGrid.ColumnHeaderStyle>
             <DataGrid.Resources>
@@ -308,10 +308,10 @@
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns >
-                <DataGridTextColumn Header="Mã địa điểm" Binding="{Binding MADD}" Width="*"  IsReadOnly="True" CanUserSort="False">
+                <DataGridTextColumn Header="Mã địa điểm" Binding="{Binding MADD}" Width="*"  IsReadOnly="True" CanUserSort="True">
 
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Tên địa điểm" Binding="{Binding TENDD}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                <DataGridTextColumn Header="Tên địa điểm" Binding="{Binding TENDD}"  Width="*" IsReadOnly="True" CanUserSort="True">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="TextWrapping" Value="Wrap" />
@@ -323,7 +323,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Địa chỉ" Binding="{Binding DIACHI}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                <DataGridTextColumn Header="Địa chỉ" Binding="{Binding DIACHI}"  Width="*" IsReadOnly="True" CanUserSort="True">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="TextWrapping" Value="Wrap" />
@@ -335,7 +335,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Mô tả" Binding="{Binding MOTA}"  Width="*" IsReadOnly="True" CanUserSort="False"/>
+                <DataGridTextColumn Header="Mô tả" Binding="{Binding MOTA}"  Width="*" IsReadOnly="True" CanUserSort="True"/>
 
 
                 <DataGridTemplateColumn Header="" 
