@@ -18,7 +18,6 @@
         <EntityTypeShape EntityType="TOURMANAGEMENTModel.NHAHANG" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TOURMANAGEMENTModel.PHIEUDATCHO" Width="1.5" PointX="13.5" PointY="7.375" IsExpanded="true" />
         <EntityTypeShape EntityType="TOURMANAGEMENTModel.PHUONGTIEN" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TOURMANAGEMENTModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TOURMANAGEMENTModel.TAIKHOAN" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TOURMANAGEMENTModel.THONGTINTHANHTOAN" Width="1.5" PointX="15.75" PointY="10" IsExpanded="true" />
         <EntityTypeShape EntityType="TOURMANAGEMENTModel.TUYEN" Width="1.5" PointX="6" PointY="7.5" IsExpanded="true" />
@@ -41,6 +40,7 @@
         <AssociationConnector Association="TOURMANAGEMENTModel.CHITIETNHAHANG" ManuallyRouted="false" />
         <AssociationConnector Association="TOURMANAGEMENTModel.CHITIETPHUONGTIEN" ManuallyRouted="false" />
         <AssociationConnector Association="TOURMANAGEMENTModel.DIEUPHOI" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TOURMANAGEMENTModel.THONGBAO" Width="1.5" PointX="5.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

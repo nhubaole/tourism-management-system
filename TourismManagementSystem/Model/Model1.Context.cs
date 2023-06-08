@@ -38,10 +38,10 @@ namespace TourismManagementSystem.Model
         public virtual DbSet<NHAHANG> NHAHANGs { get; set; }
         public virtual DbSet<PHIEUDATCHO> PHIEUDATCHOes { get; set; }
         public virtual DbSet<PHUONGTIEN> PHUONGTIENs { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<TAIKHOAN> TAIKHOANs { get; set; }
         public virtual DbSet<THONGTINTHANHTOAN> THONGTINTHANHTOANs { get; set; }
         public virtual DbSet<TUYEN> TUYENs { get; set; }
         public virtual DbSet<VE> VEs { get; set; }
+        public virtual DbSet<THONGBAO> THONGBAOs { get; set; }
     }
 }
