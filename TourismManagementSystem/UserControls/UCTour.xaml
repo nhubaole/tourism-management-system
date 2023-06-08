@@ -118,6 +118,7 @@
                         <Setter Property="Margin" Value="0, 10, 0, 10"/>
                         <Setter Property="FontSize" Value="14"/>
                         <Setter Property="FontWeight" Value="Bold"/>
+                        <Setter Property="Cursor" Value="Hand"/>
 
                     </Style>
                 </DataGrid.ColumnHeaderStyle>
@@ -147,7 +148,7 @@
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Mã tuyến" Binding="{Binding MATUYEN}" Width="*" IsReadOnly="True">
+                    <DataGridTextColumn Header="Mã tuyến" Binding="{Binding MATUYEN}" Width="*" IsReadOnly="True" CanUserSort="True">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="TextWrapping" Value="Wrap" />
@@ -158,7 +159,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Tên tuyến" Binding="{Binding TENTUYEN}" Width="*" IsReadOnly="True">
+                    <DataGridTextColumn Header="Tên tuyến" Binding="{Binding TENTUYEN}" Width="*" IsReadOnly="True" CanUserSort="True">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="TextWrapping" Value="Wrap" />
@@ -170,7 +171,7 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn Header="Loại tuyến" Binding="{Binding LOAITUYEN.TENLOAI}" Width="*" IsReadOnly="True">
+                    <DataGridTextColumn Header="Loại tuyến" Binding="{Binding LOAITUYEN.TENLOAI}" Width="*" IsReadOnly="True" CanUserSort="True">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="TextWrapping" Value="Wrap" />

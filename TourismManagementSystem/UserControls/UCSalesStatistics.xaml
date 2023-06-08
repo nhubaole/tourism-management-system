@@ -99,17 +99,21 @@
                 </Grid>
                 <Grid Grid.Row="1">
                     <lvc:CartesianChart 
-                                Name="TimePowerChart" 
-                                Margin="10, 10, 10, 10" 
-                                Series="{Binding seriesCollection}"
-                                Hoverable="False" 
-                                DataTooltip="{x:Null}">
-                        <lvc:CartesianChart.AxisX >
-                            <lvc:Axis Title="Thời gian" ></lvc:Axis>
+                                        Series="{Binding seriesCollection}"
+                                        Margin="10, 10, 10, 10"  
+                                        
+                                        >
+                        <lvc:CartesianChart.AxisX>
+                            <lvc:Axis Title="Thời gian" Labels="{Binding labelCollection}" ShowLabels="True">
+                                <!--<lvc:Axis.Separator>
+                                    <lvc:Separator Step="1" Stroke="Transparent"></lvc:Separator>
+                                </lvc:Axis.Separator>-->
+                            </lvc:Axis>
                         </lvc:CartesianChart.AxisX>
-                        <lvc:CartesianChart.AxisY >
-                            <lvc:Axis Title="Doanh thu" ></lvc:Axis>
+                        <lvc:CartesianChart.AxisY>
+                            <lvc:Axis Title="Doanh thu"></lvc:Axis>
                         </lvc:CartesianChart.AxisY>
+                        
                     </lvc:CartesianChart>
                 </Grid>
                 <Grid Grid.Row="2">

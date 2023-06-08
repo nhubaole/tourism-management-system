@@ -16,12 +16,99 @@
     </UserControl.DataContext>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="8*"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0"
-                  >
-            <Grid.ColumnDefinitions>
+        <Grid Grid.Row="0">
+            <StackPanel Orientation="Horizontal" Margin="30,0,20,0">
+                <RadioButton Style="{StaticResource BtnStyle2}" 
+                             VerticalAlignment="Center"
+                             Margin="0,0,10,0"
+                             IsChecked="{Binding IsDisplay}">
+                    <TextBlock Text="Dịch vụ"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               FontSize="18"
+                               FontWeight="Medium"/>
+                </RadioButton>
+                <RadioButton Style="{StaticResource BtnStyle2}" 
+                             VerticalAlignment="Center"
+                             Margin="0,0,20,0"
+                             Command="{Binding RadioButtonCommand}"
+                             CommandParameter="{Binding ElementName=ucService}">
+                    <TextBlock Text="Địa điểm"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               FontSize="18"
+                               FontWeight="Medium"/>
+                </RadioButton>
+                <Button 
+                        Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                        Width="30"
+                        Height="30"
+                        Padding="0, -3, 0, 0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="{StaticResource Primary}"
+                        materialDesign:ButtonAssist.CornerRadius="10"
+                    BorderThickness="0"
+                    Command="{Binding ToAddServiceCommand}"
+                    CommandParameter="{Binding ElementName=ucService}">
+                    <TextBlock Text="+" FontSize="20"/>
+                </Button>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Right"
+                        Margin="0,0,30,0">
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" >
+                    <TextBlock Text="*Nhấn Enter để bắt đầu tìm kiếm" 
+                           Margin="0,5,70,5"
+                               Foreground="OrangeRed"/>
+                    <TextBlock Text="Loại dịch vụ" 
+                           Margin="0,5,55,5"/>
+                    <TextBlock Text="Tìm kiếm theo" 
+                           Margin="0,5,20,5"/>
+                </StackPanel>
+
+                <Border CornerRadius="20" 
+                    BorderThickness="1" 
+                    BorderBrush="Black" 
+                    Height="40"
+                    Width="530"
+                        Background="White">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Name="tbfilter1"
+                            Width="200"
+                             HorizontalAlignment="Left"
+                             Margin="20,5,0,5"
+                             materialDesign:HintAssist.Hint="Nhập thông tin"
+                             Text="{Binding SearchTerm, UpdateSourceTrigger=PropertyChanged}"
+                             IsEnabled="{Binding IsTbEnable}">
+                            <TextBox.InputBindings>
+                                <KeyBinding Key="Enter" Command="{Binding FindServiceCommand}" CommandParameter="{Binding ElementName=tbfilter1}" />
+                            </TextBox.InputBindings>
+                        </TextBox>
+                        <materialDesign:PackIcon Kind="Magnify" 
+                                                 Height="25"
+                                                 Width="25"
+                                                 VerticalAlignment="Center"
+                                                 Margin="0,0,10,0"/>
+
+                        <Rectangle VerticalAlignment="Stretch" Fill="Black" Width="1" Margin="0,0,10,0"/>
+                        <ComboBox VerticalAlignment="Center" 
+                                  Width="110"
+                                  Margin="0,0,10,0"
+                                  ItemsSource="{Binding FilterItems1}"
+                                  SelectedItem="{Binding Filter1, UpdateSourceTrigger=PropertyChanged}"/>
+                        <Rectangle VerticalAlignment="Stretch" Fill="Black" Width="1" Margin="0,0,10,0"/>
+                        <ComboBox VerticalAlignment="Center" 
+                                  Width="110"
+                                  ItemsSource="{Binding FilterItems2, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedItem="{Binding Filter2, UpdateSourceTrigger=PropertyChanged}"
+                                  IsEnabled="{Binding IsFilter2Enable}"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+            <!--<Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="6*"/>
             </Grid.ColumnDefinitions>
@@ -157,7 +244,7 @@
                     </ComboBox>
                 </Grid>
 
-            </Grid>
+            </Grid>-->
 
         </Grid>
         <Grid Grid.Row="1"
@@ -170,15 +257,13 @@
                         >
                 <StackPanel>
                     <TextBlock 
-                        Width="100"
-                        Height="20"
                         VerticalAlignment="Top"
                         HorizontalAlignment="Left"
                         Text="Phương tiện"
                         Foreground="{StaticResource Primary}"
                         FontWeight="Bold"
-                        FontSize="10"
-                        Margin="30, 10, 0, 0"
+                        FontSize="18"
+                        Margin="30, 10, 0, 10"
                         ></TextBlock>
                     <DataGrid 
                         Grid.Row="1"
@@ -190,7 +275,7 @@
                         ItemsSource="{Binding SearchResultPT, UpdateSourceTrigger=PropertyChanged}"
                         SelectedItem="{Binding selectedItemPT, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                         AutoGenerateColumns="False"
-                        BorderBrush="#e8a66d"
+                        BorderBrush="{StaticResource Primary2}"
                         BorderThickness="1.5" 
                         RowDetailsVisibilityMode="VisibleWhenSelected"
                         ScrollViewer.CanContentScroll="True"
@@ -216,7 +301,7 @@
                                 <Setter Property="Margin" Value="0, 10, 0, 10"/>
                                 <Setter Property="FontSize" Value="14"/>
                                 <Setter Property="FontWeight" Value="Bold"/>
-
+                                <Setter Property="Cursor" Value="Hand"/>
                             </Style>
                         </DataGrid.ColumnHeaderStyle>
                         <DataGrid.Resources>
@@ -239,16 +324,16 @@
                                     <Trigger Property="IsSelected" Value="True">
                                         <Setter Property="BorderThickness" Value="0" />
                                         <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
-                                        <Setter Property="Background" Value="#e8a66d"/>
+                                        <Setter Property="Background" Value="{StaticResource Primary2}"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
                         </DataGrid.Resources>
                         <DataGrid.Columns >
-                            <DataGridTextColumn Header="Mã phương tiện" Binding="{Binding MAPT}" Width="*"  IsReadOnly="True" CanUserSort="False">
+                            <DataGridTextColumn Header="Mã phương tiện" Binding="{Binding MAPT}" Width="*"  IsReadOnly="True" CanUserSort="True">
 
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Tên Phương tiện" Binding="{Binding TENPT}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                            <DataGridTextColumn Header="Tên Phương tiện" Binding="{Binding TENPT}"  Width="*" IsReadOnly="True" CanUserSort="True">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap" />
@@ -260,7 +345,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Số lượng ghế" Binding="{Binding SLGHE}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                            <DataGridTextColumn Header="Số lượng ghế" Binding="{Binding SLGHE}"  Width="*" IsReadOnly="True" CanUserSort="True">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap" />
@@ -288,7 +373,7 @@
                                         CommandParameter="{Binding}"
                                     >
                                             <materialDesign:PackIcon 
-                                            Kind="LeadPencil"
+                                            Kind="Pencil"
                                             Foreground ="{StaticResource Primary}"
                                          />
                                         </Button>
@@ -316,15 +401,13 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <TextBlock 
-                                Width="100"
-                                Height="20"
                                 VerticalAlignment="Top"
                                 HorizontalAlignment="Left"
                                 Text="Khách sạn"
                                 Foreground="{StaticResource Primary}"
                                 FontWeight="Bold"
-                                FontSize="10"
-                                Margin="30, 10, 0, 0"
+                                FontSize="18"
+                        Margin="30, 10, 0, 10"
                                 ></TextBlock>
 
                     <DataGrid 
@@ -337,7 +420,7 @@
                         ItemsSource="{Binding SearchResultKS, UpdateSourceTrigger=PropertyChanged}"
                         SelectedItem="{Binding selectedItemKS, Mode=OneWayToSource}"
                         AutoGenerateColumns="False"
-                        BorderBrush="#e8a66d"
+                        BorderBrush="{StaticResource Primary2}"
                         BorderThickness="1.5" 
                         RowDetailsVisibilityMode="VisibleWhenSelected"
                         ScrollViewer.CanContentScroll="True"
@@ -362,7 +445,7 @@
                                 <Setter Property="Margin" Value="0, 10, 0, 10"/>
                                 <Setter Property="FontSize" Value="14"/>
                                 <Setter Property="FontWeight" Value="Bold"/>
-
+                                <Setter Property="Cursor" Value="Hand"/>
                             </Style>
                         </DataGrid.ColumnHeaderStyle>
                         <DataGrid.Resources>
@@ -385,16 +468,16 @@
                                     <Trigger Property="IsSelected" Value="True">
                                         <Setter Property="BorderThickness" Value="0" />
                                         <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
-                                        <Setter Property="Background" Value="#e8a66d"/>
+                                        <Setter Property="Background" Value="{StaticResource Primary2}"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
                         </DataGrid.Resources>
                         <DataGrid.Columns >
-                            <DataGridTextColumn Header="Mã khách sạn" Binding="{Binding MAKS}" Width="*"  IsReadOnly="True" CanUserSort="False">
+                            <DataGridTextColumn Header="Mã khách sạn" Binding="{Binding MAKS}" Width="*"  IsReadOnly="True" CanUserSort="True">
 
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Tên khách sạn" Binding="{Binding TENKS}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                            <DataGridTextColumn Header="Tên khách sạn" Binding="{Binding TENKS}"  Width="*" IsReadOnly="True" CanUserSort="True">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap" />
@@ -406,7 +489,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Địa chỉ" Binding="{Binding DIACHI}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                            <DataGridTextColumn Header="Địa chỉ" Binding="{Binding DIACHI}"  Width="*" IsReadOnly="True" CanUserSort="True">
                                 <!--<DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap" />
@@ -418,9 +501,9 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>-->
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Số điện thoại" Binding="{Binding SDT}"  Width="*" IsReadOnly="True" CanUserSort="False"/>
-                            <DataGridTextColumn Header="Số sao" Binding="{Binding SOSAO}"  Width="*" IsReadOnly="True" CanUserSort="False"/>
-                            <DataGridTextColumn Header="Sức chứa" Binding="{Binding SUCCHUA}"  Width="*" IsReadOnly="True" CanUserSort="False"/>
+                            <DataGridTextColumn Header="Số điện thoại" Binding="{Binding SDT}"  Width="*" IsReadOnly="True" CanUserSort="True"/>
+                            <DataGridTextColumn Header="Số sao" Binding="{Binding SOSAO}"  Width="*" IsReadOnly="True" CanUserSort="True"/>
+                            <DataGridTextColumn Header="Sức chứa" Binding="{Binding SUCCHUA}"  Width="*" IsReadOnly="True" CanUserSort="True"/>
                             <DataGridTemplateColumn Header="" 
                                         Width="auto"
                                         >
@@ -436,7 +519,7 @@
                                     CommandParameter="{Binding}"
                                     >
                                             <materialDesign:PackIcon 
-                                        Kind="LeadPencil"
+                                        Kind="Pencil"
                                         Foreground ="{StaticResource Primary}"
                                          />
                                         </Button>
@@ -465,15 +548,13 @@
                     </DataGrid>
 
                     <TextBlock 
-                                Width="100"
-                                Height="20"
                                 VerticalAlignment="Top"
                                 HorizontalAlignment="Left"
                                 Text="Nhà hàng"
                                 Foreground="{StaticResource Primary}"
                                 FontWeight="Bold"
-                                FontSize="10"
-                                Margin="30, 10, 0, 0"
+                                FontSize="18"
+                                Margin="30, 10, 0, 10"
                             ></TextBlock>
                     <DataGrid 
                         Grid.Row="1"
@@ -485,7 +566,7 @@
                         ItemsSource="{Binding SearchResultNH, UpdateSourceTrigger=PropertyChanged}"
                         SelectedItem="{Binding selectedItemNH, Mode=OneWayToSource}"
                         AutoGenerateColumns="False"
-                        BorderBrush="#e8a66d"
+                        BorderBrush="{StaticResource Primary2}"
                         BorderThickness="1.5" 
                         RowDetailsVisibilityMode="VisibleWhenSelected"
                         ScrollViewer.CanContentScroll="True"
@@ -510,7 +591,7 @@
                                 <Setter Property="Margin" Value="0, 10, 0, 10"/>
                                 <Setter Property="FontSize" Value="14"/>
                                 <Setter Property="FontWeight" Value="Bold"/>
-
+                                <Setter Property="Cursor" Value="Hand"/>
                             </Style>
                         </DataGrid.ColumnHeaderStyle>
                         <DataGrid.Resources>
@@ -533,16 +614,16 @@
                                     <Trigger Property="IsSelected" Value="True">
                                         <Setter Property="BorderThickness" Value="0" />
                                         <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
-                                        <Setter Property="Background" Value="#e8a66d"/>
+                                        <Setter Property="Background" Value="{StaticResource Primary2}"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
                         </DataGrid.Resources>
                         <DataGrid.Columns >
-                            <DataGridTextColumn Header="Mã nhà hàng" Binding="{Binding MANH}" Width="*"  IsReadOnly="True" CanUserSort="False">
+                            <DataGridTextColumn Header="Mã nhà hàng" Binding="{Binding MANH}" Width="*"  IsReadOnly="True" CanUserSort="True">
 
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Tên nhà hàng" Binding="{Binding TENNH}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                            <DataGridTextColumn Header="Tên nhà hàng" Binding="{Binding TENNH}"  Width="*" IsReadOnly="True" CanUserSort="True">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap" />
@@ -554,7 +635,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Số điện thoại" Binding="{Binding SDT}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                            <DataGridTextColumn Header="Số điện thoại" Binding="{Binding SDT}"  Width="*" IsReadOnly="True" CanUserSort="True">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap" />
@@ -566,7 +647,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Mô tả" Binding="{Binding MOTA}"  Width="*" IsReadOnly="True" CanUserSort="False"/>
+                            <DataGridTextColumn Header="Mô tả" Binding="{Binding MOTA}"  Width="*" IsReadOnly="True" CanUserSort="True"/>
                             <DataGridTemplateColumn Header="" 
                                         Width="auto"
                                         >
@@ -582,7 +663,7 @@
                                     CommandParameter="{Binding}"
                                     >
                                             <materialDesign:PackIcon 
-                                        Kind="LeadPencil"
+                                        Kind="Pencil"
                                         Foreground ="{StaticResource Primary}"
                                          />
                                         </Button>
@@ -610,15 +691,13 @@
                         </DataGrid.Columns>
                     </DataGrid>
                     <TextBlock 
-                                Width="100"
-                                Height="20"
                                 VerticalAlignment="Top"
                                 HorizontalAlignment="Left"
-                                Text="Dich vụ khác"
+                                Text="Dịch vụ khác"
                                 Foreground="{StaticResource Primary}"
                                 FontWeight="Bold"
-                                FontSize="10"
-                                Margin="30, 10, 0, 0"
+                                FontSize="18"
+                                Margin="30, 10, 0, 10"
                              ></TextBlock>
                     <DataGrid 
                         Grid.Row="1"
@@ -630,7 +709,7 @@
                         ItemsSource="{Binding SearchResultDVK, UpdateSourceTrigger=PropertyChanged}"
                         SelectedItem="{Binding selectedItemDVK, Mode=OneWayToSource}"
                         AutoGenerateColumns="False"
-                        BorderBrush="#e8a66d"
+                        BorderBrush="{StaticResource Primary2}"
                         BorderThickness="1.5" 
                         RowDetailsVisibilityMode="VisibleWhenSelected"
                         ScrollViewer.CanContentScroll="True"
@@ -655,7 +734,7 @@
                                 <Setter Property="Margin" Value="0, 10, 0, 10"/>
                                 <Setter Property="FontSize" Value="14"/>
                                 <Setter Property="FontWeight" Value="Bold"/>
-
+                                <Setter Property="Cursor" Value="Hand"/>
                             </Style>
                         </DataGrid.ColumnHeaderStyle>
                         <DataGrid.Resources>
@@ -678,16 +757,16 @@
                                     <Trigger Property="IsSelected" Value="True">
                                         <Setter Property="BorderThickness" Value="0" />
                                         <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
-                                        <Setter Property="Background" Value="#e8a66d"/>
+                                        <Setter Property="Background" Value="{StaticResource Primary2}"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
                         </DataGrid.Resources>
                         <DataGrid.Columns >
-                            <DataGridTextColumn Header="Mã dịch vụ" Binding="{Binding MADV}" Width="*"  IsReadOnly="True" CanUserSort="False">
+                            <DataGridTextColumn Header="Mã dịch vụ" Binding="{Binding MADV}" Width="*"  IsReadOnly="True" CanUserSort="True">
 
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Tên dịch vụ" Binding="{Binding TENDV}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                            <DataGridTextColumn Header="Tên dịch vụ" Binding="{Binding TENDV}"  Width="*" IsReadOnly="True" CanUserSort="True">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap" />
@@ -699,7 +778,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn Header="Mô tả" Binding="{Binding MOTA}"  Width="*" IsReadOnly="True" CanUserSort="False">
+                            <DataGridTextColumn Header="Mô tả" Binding="{Binding MOTA}"  Width="*" IsReadOnly="True" CanUserSort="True">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap" />
@@ -727,7 +806,7 @@
                                             CommandParameter="{Binding}"
                                     >
                                             <materialDesign:PackIcon 
-                                                Kind="LeadPencil"
+                                                Kind="Pencil"
                                                 Foreground ="{StaticResource Primary}"
                                          />
                                         </Button>

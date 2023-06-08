@@ -11,8 +11,9 @@ namespace TourismManagementSystem.Model
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class CHUYEN
+    using TourismManagementSystem.ViewModel;
+
+    public partial class CHUYEN : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CHUYEN()
@@ -26,7 +27,7 @@ namespace TourismManagementSystem.Model
         public Nullable<System.DateTime> TGKETTHUC { get; set; }
         public Nullable<int> SLTOITHIEU { get; set; }
         public Nullable<int> SLTHUCTE { get; set; }
-        public Nullable<int> GIAVE { get; set; }
+        private Nullable<int> _GIAVE;
         public string MALOAI { get; set; }
         public string MATUYEN { get; set; }
         public Nullable<bool> THANHCONG { get; set; }
@@ -37,5 +38,6 @@ namespace TourismManagementSystem.Model
         public virtual ICollection<PHIEUDATCHO> PHIEUDATCHOes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HUONGDANVIEN> HUONGDANVIENs { get; set; }
+        public int? GIAVE { get => _GIAVE; set { _GIAVE = value; OnPropertyChanged(); } }
     }
 }

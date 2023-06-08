@@ -11,8 +11,9 @@ namespace TourismManagementSystem.Model
 {
     using System;
     using System.Collections.Generic;
-    
-    public partial class PHIEUDATCHO
+    using TourismManagementSystem.ViewModel;
+
+    public partial class PHIEUDATCHO : BaseViewModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PHIEUDATCHO()
@@ -24,7 +25,7 @@ namespace TourismManagementSystem.Model
     
         public string MAPHIEU { get; set; }
         public Nullable<System.DateTime> NGAYDAT { get; set; }
-        public string TINHTRANG { get; set; }
+        private string _TINHTRANG;
         public Nullable<int> SLKHACH { get; set; }
         public Nullable<int> TONGTIEN { get; set; }
         public Nullable<int> SOTIENDATHANHTOAN { get; set; }
@@ -39,5 +40,6 @@ namespace TourismManagementSystem.Model
         public virtual ICollection<THONGTINTHANHTOAN> THONGTINTHANHTOANs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VE> VEs { get; set; }
+        public string TINHTRANG { get => _TINHTRANG; set { _TINHTRANG = value; OnPropertyChanged(); } }
     }
 }

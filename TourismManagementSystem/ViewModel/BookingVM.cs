@@ -66,20 +66,37 @@ namespace TourismManagementSystem.ViewModel
             DeleteBookingCommand = new RelayCommand<object>((p) => true, (p) =>
             {
                 PHIEUDATCHO selectedPhieu = p as PHIEUDATCHO;
-                if (MessageBox.Show("Bạn có muốn xóa phiếu này?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                if(selectedPhieu.CHUYEN.TGKETTHUC > DateTime.Now && selectedPhieu.TINHTRANG == "Đã thanh toán")
                 {
-                    
-
-                    foreach (var item in selectedPhieu.VEs)
+                    MessageBox.Show("Phiếu đặt chỗ đã thanh toán nhưng chuyến đi chưa diễn ra. Không thể xóa phiếu");
+                }
+                else
+                {
+                    if (MessageBox.Show("Bạn có muốn xóa phiếu này?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
-                        item.TRANGTHAI = "Đã hủy";
+                        var hanhkhachToRemove = selectedPhieu.HANHKHACHes.ToList();
+                        foreach (var item in hanhkhachToRemove)
+                        {
+                            DataProvider.Ins.DB.HANHKHACHes.Remove(item);
+                        }
+                        var veToRemove = selectedPhieu.VEs.ToList();
+                        foreach (var item in veToRemove)
+                        {
+                            DataProvider.Ins.DB.VEs.Remove(item);
+                        }
+
+                        var ttToRemove = selectedPhieu.THONGTINTHANHTOANs.ToList();
+                        foreach (var item in ttToRemove)
+                        {
+                            DataProvider.Ins.DB.THONGTINTHANHTOANs.Remove(item);
+                        }
+
+                        DataProvider.Ins.DB.PHIEUDATCHOes.Remove(selectedPhieu);
+
+                        DataProvider.Ins.DB.SaveChanges();
+                        BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes);
+                        MessageBox.Show("Xóa phiếu thành công");
                     }
-
-                    DataProvider.Ins.DB.PHIEUDATCHOes.Remove(selectedPhieu);
-
-                    DataProvider.Ins.DB.SaveChanges();
-                    BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes);
-                    MessageBox.Show("Xóa phiếu thành công");
                 }
             });
             AddBookingCommand = new RelayCommand<object>((p) => true, (p) =>
@@ -93,11 +110,17 @@ namespace TourismManagementSystem.ViewModel
             EditBookingCommand = new RelayCommand<object>((p) => true, (p) =>
             {
                 PHIEUDATCHO selectedPhieu = p as PHIEUDATCHO;
-                AddBookingVM.EditSelectedPhieu = selectedPhieu;
-                AddBookingVM.IsEdit = 1;
-                AddBookingWindow addBookingWindow = new AddBookingWindow();
-                addBookingWindow.ShowDialog();
-                BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes);
+               if(selectedPhieu.TINHTRANG == "Đã xuất vé") {
+                    MessageBox.Show("Không thể sửa thông tin phiếu đã xuất vé");
+                }
+                else
+                {
+                    AddBookingVM.EditSelectedPhieu = selectedPhieu;
+                    AddBookingVM.IsEdit = 1;
+                    AddBookingWindow addBookingWindow = new AddBookingWindow();
+                    addBookingWindow.ShowDialog();
+                    BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes);
+                }
             });
             ViewBookingCommand = new RelayCommand<object>((p) => true, (p) =>
             {
@@ -105,6 +128,7 @@ namespace TourismManagementSystem.ViewModel
                 BookingDetailVM.SelectedPhieu = selectedPhieu;
                 BookingDetailsWindow bookingDetailWindow = new BookingDetailsWindow();
                 bookingDetailWindow.ShowDialog();
+                BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes);
             });
         }
 

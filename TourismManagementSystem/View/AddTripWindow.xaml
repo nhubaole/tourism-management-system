@@ -12,7 +12,7 @@
         VerticalAlignment="Center"
         Name="addTripWindow"
         xmlns:uc="clr-namespace:TourismManagementSystem.UserControls"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         WindowStartupLocation="CenterScreen"
         Background="{StaticResource Secondary}">
     <Window.DataContext>
@@ -66,7 +66,14 @@
                                 Width="400"
                                  FontSize="18"
                                  ItemsSource="{Binding ListTuyen}"
-                                 SelectedItem="{Binding NewTrip.MATUYEN}" />
+                                DisplayMemberPath="MATUYEN"
+                                 SelectedItem="{Binding NewTrip.TUYEN}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectTuyenCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ComboBox>
 
                         </Grid>
                         <Grid Height="50" >
@@ -83,6 +90,11 @@
                                  ItemsSource="{Binding ListLoaiChuyen}"
                                       DisplayMemberPath="TENLOAI"
                                  SelectedItem="{Binding NewTrip.LOAICHUYEN, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding SelectLoaiCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
                             </ComboBox>
                         </Grid>
                         <Grid Height="50" >
@@ -111,7 +123,8 @@
                             </StackPanel>
 
                         </Grid>
-                        <StackPanel VerticalAlignment="Stretch">
+                        <StackPanel Width="400"
+                                    HorizontalAlignment="Right">
                             <ItemsControl ItemsSource="{Binding HDVBoxes}" HorizontalContentAlignment="Right"  />
                         </StackPanel>
                         <Grid Height="50">
@@ -146,7 +159,8 @@
                                  HorizontalAlignment="Right"
                                  FontSize="18"
                                  Width="360"
-                                 Text="{Binding NewTrip.GIAVE, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                         IsEnabled="False"
+                                 Text="{Binding NewTrip.GIAVE, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                                 <TextBlock Text="vnđ"
                                        VerticalAlignment="Bottom"
                                        FontSize="18"
@@ -173,6 +187,7 @@
                                    FontSize="18"
                                    FontWeight="Medium"/>
                             <TextBox VerticalAlignment="Center"
+                                     IsEnabled="False"
                                  FontSize="18"
                                  Width="300"
                                  HorizontalAlignment="Right"
