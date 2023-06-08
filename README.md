@@ -125,7 +125,7 @@
 | 1   | 21520082 | [Lê Bảo Như](https://github.com/nhubaole)          | KTPM2021 | 
 | 2   | 21522423 | [Huỳnh Ngọc Ý Nhi](https://github.com/Nhongnhong-0101)             | KTPM2021 | 
 | 4   | 21521335 | [Phù Đức Quân](https://github.com/WuanDuc) | KTPM2021 | 
-| 3   | 21522810 | [Huỳnh Thị Nhật Vy]() | KTPM2021 | 
+| 3   | 21522810 | [Huỳnh Thị Nhật Vy](https://github.com/vy-htn?fbclid=IwAR0-RBZlh_zqV2FkZu5jSgomYxCHmAoDJe1fK1YTXQszTBYwqiDPolrm-84) | KTPM2021 | 
 *	Sinh viên khoa Công nghệ Phần mềm, trường Đại học Công nghệ Thông tin, Đại học Quốc gia thành phố Hồ Chí Minh.
 
 ## Giảng viên hướng dẫn
@@ -137,9 +137,9 @@
 - Download phần mềm tại [https://github.com/nhubaole/tourism-management-system.git](https://github.com/nhubaole/tourism-management-system.git)
   - Clone về với git.
   - Hoặc Download ZIP và giải nén.
-- Tìm file **DB.sql** và mở trong **Microsoft SQL Server Management Studio**. 
+- Tìm file **TourManagement.sql** và mở trong **Microsoft SQL Server Management Studio**. 
 - Chọn tất cả nội dung file. Chọn **Execute** để khởi tạo database trên nhánh **master**.
-- Mở file **MusicPlayer.sln**. Nhấn **Ctrl+F5** để chạy.
+- Mở file **TourismManagementSystem.sln**. Nhấn **Ctrl+F5** để chạy.
 - Tài khoản mặc định:
   - Tên đăng nhập: admin
   - Mật khẩu: admin
@@ -149,14 +149,92 @@
   <summary>Màn hình đăng nhập</summary>
   
   - Nhập đầy đủ thông tin đăng nhập gồm **tên tài khoản** và **mật khẩu**
-  - Ấn nút **ĐĂNG NHẬP** để đăng nhập vào tài khoản của mình 
-
+  - Ấn nút **ĐĂNG NHẬP** để đăng nhập vào tài khoản của mình
+  - Nếu bạn là không có tài khoản, bạn có thể chọn **"Tiếp tục dưới vai trò khách"**
+ ![Màn hình đăng nhập](https://i.imgur.com/1SeDk36.png)
+ 
   </details>
   <details>
   <summary>Màn hình trang chủ</summary>
   
   - Sau khi đăng nhập thành công sẽ được chuyển sang màn hình trang chủ
+  - Tranh chủ sẽ hiện thống tin các tuyến, thống kê các chuyến , số vé bán ra, doanh thu theo **Ngày**, **Tháng**, **Năm**. 
+  - Bạn có thể chọn các chức năng từ thanh công cụ.
+ ![Màn hình trang chủ](https://i.imgur.com/QNNjBA1.png)
+
+ 
+  </details>
+   <details>
+  <summary>Màn hình quản lý tuyến</summary>
   
+  - Màn hình sẽ hiển thị danh sách các tuyến trong hệ thống
+![Màn hình quản lý tuyến](https://i.imgur.com/x3UBA1v.png)
+  - Bạn có thể thêm mới một tuyến khi ấn nút ![Nút thêm](https://i.imgur.com/4j2ay5Z.png)
+  - Bạn có thể xem thông tin tuyến khi ấn nút ![Nút xem](https://i.imgur.com/tgaJF7D.png), chỉnh sửa ![Nút chỉnh sửa](https://i.imgur.com/ljHcAeV.png) hoặc xóa ![Nút xóa](https://i.imgur.com/YIjQafF.png)
+  - **Lưu ý**: Khi bạn đăng nhập dưới vai trò khách, bạn chỉ có thể xem thông tin mà không có quyền chỉnh sử hoặc xóa.
+
+  </details>
+  
+  <details>
+  <summary>Màn hình quản lý chuyến</summary>
+  - Màn hình sẽ hiển thị danh sách các chuyến trong hệ thống tương tự như màn hình quản lý tuyến.
+  </details>
+  
+  <details>
+  <summary>Màn hình quản lý địa điểm</summary>
+  
+  - Màn hình sẽ hiển thị danh sách các địa điểm trong hệ thống
+![Màn hình quản lý địa điểm](https://i.imgur.com/ll4MVQL.png)
+  - Bạn có thể thêm mới một địa điểm khi ấn nút ![Nút thêm](https://i.imgur.com/4j2ay5Z.png)
+  - Bạn có thể xem thông tin địa điểm khi ấn nút ![Nút xem](https://i.imgur.com/tgaJF7D.png), chỉnh sửa ![Nút chỉnh sửa](https://i.imgur.com/ljHcAeV.png) hoặc xóa ![Nút xóa](https://i.imgur.com/YIjQafF.png)
+  - **Lưu ý**: Khi bạn đăng nhập dưới vai trò khách, bạn chỉ có thể xem thông tin mà không có quyền chỉnh sử hoặc xóa.
+
+  </details>
+  
+  <details>
+  <summary>Màn hình quản lý dịch vụ</summary>
+  - Màn hình sẽ hiển thị danh sách các dịch vụ trong hệ thống
+![Màn hình quản lý dịch vụ]()
+  - Bạn có thể xem thông tin dịch vụ khi ấn nút ![Nút xem](https://i.imgur.com/tgaJF7D.png), chỉnh sửa ![Nút chỉnh sửa](https://i.imgur.com/ljHcAeV.png) hoặc xóa ![Nút xóa](https://i.imgur.com/YIjQafF.png)
+  - **Lưu ý**: Khi bạn đăng nhập dưới vai trò khách, bạn chỉ có thể xem thông tin mà không có quyền chỉnh sử hoặc xóa.
+
+  </details>
+  
+  
+  <details>
+  <summary>Màn hình quản lý thông tin khách hàng</summary>
+  
+  
+  </details>
+  
+  
+  <details>
+  <summary>Màn hình quản lý phiếu đặt chỗ</summary>
+  </details>
+  
+  <details>
+  <summary>Màn hình thông báo</summary>
+ 
+ - Bạn có thể xem thông báo khi ấn vào biểu tượng ![Imgur](https://i.imgur.com/fvwRUOn.png)
+ - Thông báo bao gồm những thông tin đã bị xóa, các chuyến đi sắp xuất phát nhưng chưa đủ số lượng hành khách quy định.
+ ![Màn hình thông báo](https://i.imgur.com/C6Bcfbl.png)
+  </details>
+   
+  <details>
+  <summary>Màn hình thống kê doanh thu</summary>
+ 
+ - Màn hình thống kê doanh thu theo **Tháng** hoặc **Năm**, bạn có thể tùy chọn tháng hoặc năm cụ thể.
+ - **Lưu ý**: Bạn phải đăng nhập để sử dụng chức năng này.
+ ![Màn hình thống kê daonh thu](https://i.imgur.com/TsAFPSK.png)
+  </details>
+  
+  <details>
+  <summary>Màn hình thống kê chuyến đi</summary>
+ 
+ - Màn hính thống kê chuyến đi theo **Tháng** hoặc **Năm**, bạn có thể tùy chọn tháng hoặc năm cụ thể.
+ - **Lưu ý**: Bạn phải đăng nhập để sử dụng chức năng này.
+ ![Màn hình thống kê chuyến đi](https://i.imgur.com/3rLvfig.png)
+  </details>
   </details>
   
   ## Phản hồi
