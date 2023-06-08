@@ -93,7 +93,9 @@ namespace TourismManagementSystem.ViewModel
             });
             DeleteTripCommand = new RelayCommand<object>((p) => true, (p) =>
             {
-                CHUYEN selectedChuyen = p as CHUYEN;
+                var values = (object[])p;
+                MainWindow mainWindow = Window.GetWindow((DependencyObject)values[1]) as MainWindow;
+                CHUYEN selectedChuyen = values[0] as CHUYEN;
                 if(selectedChuyen.PHIEUDATCHOes.Count() > 0)
                 {
                     MessageBox.Show("Chuyến du lịch đã có phiếu đặt chỗ. Không thể xóa chuyến");
@@ -109,6 +111,34 @@ namespace TourismManagementSystem.ViewModel
                                 if (item.MAHDV.Equals(tripItem.MAHDV))
                                     item.CHUYENs.Remove(selectedChuyen);
 
+                            }
+                        }
+                        THONGBAO newTB = new THONGBAO();
+                        string formattedID;
+                        ObservableCollection<THONGBAO> ListTB = new ObservableCollection<THONGBAO>(DataProvider.Ins.DB.THONGBAOs);
+                        if (ListTB.Count() == 0)
+                        {
+                            formattedID = string.Format("TB{0:D6}", 1);
+                        }
+                        else
+                        {
+                            string lastID = ListTB.Last().MATB;
+                            int previousNumber = int.Parse(lastID.Substring(2));
+                            int nextNumber = previousNumber + 1;
+                            formattedID = string.Format("TB{0:D6}", nextNumber);
+                        }
+                        newTB.MATB = formattedID;
+                        newTB.THONGBAO1 = "Chuyến du lịch \"" + selectedChuyen.TUYEN.TENTUYEN + "\" diễn ra vào ngày " + ((DateTime)selectedChuyen.TGBATDAU).ToString("MM/dd/yyyy") + " đã được xóa \nMã chuyến: " + selectedChuyen.MACHUYEN;
+                        newTB.THOIGIAN = DateTime.Now;
+                        newTB.DADOC = false;
+                        DataProvider.Ins.DB.THONGBAOs.Add(newTB);
+                        DataProvider.Ins.DB.SaveChanges();
+                        if (mainWindow != null)
+                        {
+                            MainVM mainVM = mainWindow.DataContext as MainVM;
+                            if (mainVM != null)
+                            {
+                                mainVM.UnreadNotificationCount = DataProvider.Ins.DB.THONGBAOs.Where(t => t.DADOC == false).Count();
                             }
                         }
 

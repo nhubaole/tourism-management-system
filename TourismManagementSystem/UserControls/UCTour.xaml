@@ -226,8 +226,13 @@
                                                 Background="Transparent"
                                                 BorderBrush="Transparent"
                                                 Command="{Binding DataContext.DeleteTourCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                                CommandParameter="{Binding .}"
                                                 Visibility="{Binding DataContext.IsAdmin, RelativeSource={RelativeSource AncestorType=DataGrid}, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                    <Button.CommandParameter>
+                                        <MultiBinding Converter="{StaticResource MultiCommandParameterConverter}">
+                                            <Binding />
+                                            <Binding ElementName="ucTour"/>
+                                        </MultiBinding>
+                                    </Button.CommandParameter>
                                     <materialDesign:PackIcon Foreground="{StaticResource Primary}" Kind="Delete" />
                                 </Button>
                             </DataTemplate>

@@ -166,10 +166,10 @@
     <Compile Include="Model\PHUONGTIEN.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\sysdiagram.cs">
+    <Compile Include="Model\TAIKHOAN.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\TAIKHOAN.cs">
+    <Compile Include="Model\THONGBAO.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\THONGTINTHANHTOAN.cs">
@@ -542,21 +542,21 @@
     <Resource Include="Resource\Image\loginBackground.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resource\Image\LoginRequireImg.png" />
+    <Resource Include="Resource\Image\logo.png" />
+    <Resource Include="Resource\Image\HomeImg.png" />
+    <Resource Include="Resource\Image\scheduleImg.png" />
+    <Resource Include="Resource\Image\ticketBg.jpg" />
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
       <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Model\Model1.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
-    <Resource Include="Resource\Image\LoginRequireImg.png" />
-    <Resource Include="Resource\Image\logo.png" />
-    <Resource Include="Resource\Image\HomeImg.png" />
-    <Resource Include="Resource\Image\scheduleImg.png" />
-    <Resource Include="Resource\Image\ticketBg.jpg" />
     <Content Include="TourManagement.sql" />
   </ItemGroup>
   <ItemGroup>

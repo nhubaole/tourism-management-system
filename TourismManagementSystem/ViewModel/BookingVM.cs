@@ -65,7 +65,9 @@ namespace TourismManagementSystem.ViewModel
             BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes);
             DeleteBookingCommand = new RelayCommand<object>((p) => true, (p) =>
             {
-                PHIEUDATCHO selectedPhieu = p as PHIEUDATCHO;
+                var values = (object[])p;
+                MainWindow mainWindow = Window.GetWindow((DependencyObject)values[1]) as MainWindow;
+                PHIEUDATCHO selectedPhieu = values[0] as PHIEUDATCHO;
                 if(selectedPhieu.CHUYEN.TGKETTHUC > DateTime.Now && selectedPhieu.TINHTRANG == "Đã thanh toán")
                 {
                     MessageBox.Show("Phiếu đặt chỗ đã thanh toán nhưng chuyến đi chưa diễn ra. Không thể xóa phiếu");
@@ -89,6 +91,35 @@ namespace TourismManagementSystem.ViewModel
                         foreach (var item in ttToRemove)
                         {
                             DataProvider.Ins.DB.THONGTINTHANHTOANs.Remove(item);
+                        }
+
+                        THONGBAO newTB = new THONGBAO();
+                        string formattedID;
+                        ObservableCollection<THONGBAO> ListTB = new ObservableCollection<THONGBAO>(DataProvider.Ins.DB.THONGBAOs);
+                        if (ListTB.Count() == 0)
+                        {
+                            formattedID = string.Format("TB{0:D6}", 1);
+                        }
+                        else
+                        {
+                            string lastID = ListTB.Last().MATB;
+                            int previousNumber = int.Parse(lastID.Substring(2));
+                            int nextNumber = previousNumber + 1;
+                            formattedID = string.Format("TB{0:D6}", nextNumber);
+                        }
+                        newTB.MATB = formattedID;
+                        newTB.THONGBAO1 = "Phiếu đặt chỗ " + selectedPhieu.MAPHIEU + " đã được xóa";
+                        newTB.THOIGIAN = DateTime.Now;
+                        newTB.DADOC = false;
+                        DataProvider.Ins.DB.THONGBAOs.Add(newTB);
+                        DataProvider.Ins.DB.SaveChanges();
+                        if (mainWindow != null)
+                        {
+                            MainVM mainVM = mainWindow.DataContext as MainVM;
+                            if (mainVM != null)
+                            {
+                                mainVM.UnreadNotificationCount = DataProvider.Ins.DB.THONGBAOs.Where(t => t.DADOC == false).Count();
+                            }
                         }
 
                         DataProvider.Ins.DB.PHIEUDATCHOes.Remove(selectedPhieu);

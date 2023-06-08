@@ -183,16 +183,6 @@
           <Property Name="TENPT" Type="nvarchar(max)" />
           <Property Name="SLGHE" Type="int" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="TAIKHOAN">
           <Key>
             <PropertyRef Name="TENTK" />
@@ -200,12 +190,15 @@
           <Property Name="TENTK" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="MATKHAU" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'TOURMANAGEMENT.dbo.THONGBAO' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="THONGBAO">
-          <Property Name="MATB" Type="varchar" MaxLength="8" />
+          <Key>
+            <PropertyRef Name="MATB" />
+          </Key>
+          <Property Name="MATB" Type="varchar" MaxLength="8" Nullable="false" />
           <Property Name="THONGBAO" Type="nvarchar(max)" />
-        </EntityType>-->
+          <Property Name="THOIGIAN" Type="datetime" />
+          <Property Name="DADOC" Type="bit" />
+        </EntityType>
         <EntityType Name="THONGTINTHANHTOAN">
           <Key>
             <PropertyRef Name="MATT" />
@@ -535,8 +528,8 @@ warning 6013: The table/view 'TOURMANAGEMENT.dbo.THONGBAO' does not have a prima
           <EntitySet Name="NHAHANG" EntityType="Self.NHAHANG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PHIEUDATCHO" EntityType="Self.PHIEUDATCHO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PHUONGTIEN" EntityType="Self.PHUONGTIEN" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TAIKHOAN" EntityType="Self.TAIKHOAN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="THONGBAO" EntityType="Self.THONGBAO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="THONGTINTHANHTOAN" EntityType="Self.THONGTINTHANHTOAN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TUYEN" EntityType="Self.TUYEN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VE" EntityType="Self.VE" Schema="dbo" store:Type="Tables" />
@@ -804,16 +797,6 @@ warning 6013: The table/view 'TOURMANAGEMENT.dbo.THONGBAO' does not have a prima
           <Property Name="SLGHE" Type="Int32" />
           <NavigationProperty Name="LICHTRINHs" Relationship="Self.CHITIETPHUONGTIEN" FromRole="PHUONGTIEN" ToRole="LICHTRINH" />
         </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
         <EntityType Name="TAIKHOAN">
           <Key>
             <PropertyRef Name="TENTK" />
@@ -1052,7 +1035,6 @@ warning 6013: The table/view 'TOURMANAGEMENT.dbo.THONGBAO' does not have a prima
           <EntitySet Name="NHAHANGs" EntityType="Self.NHAHANG" />
           <EntitySet Name="PHIEUDATCHOes" EntityType="Self.PHIEUDATCHO" />
           <EntitySet Name="PHUONGTIENs" EntityType="Self.PHUONGTIEN" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="TAIKHOANs" EntityType="Self.TAIKHOAN" />
           <EntitySet Name="THONGTINTHANHTOANs" EntityType="Self.THONGTINTHANHTOAN" />
           <EntitySet Name="TUYENs" EntityType="Self.TUYEN" />
@@ -1129,7 +1111,17 @@ warning 6013: The table/view 'TOURMANAGEMENT.dbo.THONGBAO' does not have a prima
             <End Role="CHUYEN" EntitySet="CHUYENs" />
             <End Role="HUONGDANVIEN" EntitySet="HUONGDANVIENs" />
           </AssociationSet>
+          <EntitySet Name="THONGBAOs" EntityType="TOURMANAGEMENTModel.THONGBAO" />
         </EntityContainer>
+        <EntityType Name="THONGBAO">
+          <Key>
+            <PropertyRef Name="MATB" />
+          </Key>
+          <Property Name="MATB" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="THONGBAO1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="THOIGIAN" Type="DateTime" Precision="3" />
+          <Property Name="DADOC" Type="Boolean" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1287,17 +1279,6 @@ warning 6013: The table/view 'TOURMANAGEMENT.dbo.THONGBAO' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="TOURMANAGEMENTModel.sysdiagram">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TAIKHOANs">
             <EntityTypeMapping TypeName="TOURMANAGEMENTModel.TAIKHOAN">
               <MappingFragment StoreEntitySet="TAIKHOAN">
@@ -1383,6 +1364,16 @@ warning 6013: The table/view 'TOURMANAGEMENT.dbo.THONGBAO' does not have a prima
               <ScalarProperty Name="MAHDV" ColumnName="MAHDV" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="THONGBAOs">
+            <EntityTypeMapping TypeName="TOURMANAGEMENTModel.THONGBAO">
+              <MappingFragment StoreEntitySet="THONGBAO">
+                <ScalarProperty Name="DADOC" ColumnName="DADOC" />
+                <ScalarProperty Name="THOIGIAN" ColumnName="THOIGIAN" />
+                <ScalarProperty Name="THONGBAO1" ColumnName="THONGBAO" />
+                <ScalarProperty Name="MATB" ColumnName="MATB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
