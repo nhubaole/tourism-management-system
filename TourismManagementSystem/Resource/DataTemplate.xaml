@@ -1,0 +1,70 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:uc="clr-namespace:TourismManagementSystem.UserControls"
+                    xmlns:viewmodel="clr-namespace:TourismManagementSystem.ViewModel">
+    <DataTemplate DataType="{x:Type viewmodel:HomeVM}">
+        <uc:UCHome/>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type viewmodel:BookingVM}">
+        <uc:UCBooking/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewmodel:CustomerVM}">
+        <uc:UCCustomer/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewmodel:LocationVM}">
+        <uc:UCLocation/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewmodel:NotificationVM}">
+        <uc:UCNotification/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewmodel:RevenueStatisticVM}">
+        <uc:UCRevenueStatistics/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewmodel:ServiceVM}">
+        <uc:UCService/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewmodel:TicketVM}">
+        <uc:UCTicket/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewmodel:TourVM}">
+        <uc:UCTour/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:TripVM}">
+        <uc:UCTrip/>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type viewmodel:InforTrafficVm}">
+        <uc:UCInforTrafffic/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewmodel:InforRestaurantVm}">
+        <uc:UCInforRestaurant/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:InforHotelVM}">
+        <uc:UCInforHotel/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewmodel:InforOTherServiceVM}">
+        <uc:UCInforOtherService/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewmodel:RequireLoginVM}">
+        <uc:UCRequireLogin/>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type viewmodel:SalesStatisticsVM}">
+        <uc:UCSalesStatistics/>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type viewmodel:TripsStatisticsVM}">
+        <uc:UCTripsStatistics/>
+    </DataTemplate>
+
+</ResourceDictionary>

@@ -1,0 +1,23 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:viewmodel="clr-namespace:TourismManagementSystem.ViewModel"
+                    xmlns:ut="clr-namespace:TourismManagementSystem.Utils">
+
+    <viewmodel:BookingVM x:Key="BookingVM"/>
+    <viewmodel:CustomerVM x:Key="CustomerVM"/>
+    <viewmodel:HomeVM x:Key="HomeVM"/>
+    <viewmodel:LocationVM x:Key="LocationVM"/>
+    <viewmodel:NotificationVM x:Key="NotificationVM"/>
+    <viewmodel:RevenueStatisticVM x:Key="RevenueStatisticVM"/>
+    <viewmodel:ServiceVM x:Key="ServiceVM"/>
+    <viewmodel:TicketVM x:Key="TicketVM"/>
+    <viewmodel:TourVM x:Key="TourVM"/>
+    <viewmodel:TripVM x:Key="TripVM"/>
+    <viewmodel:InforLocationVM x:Key="InforLocationVM"/>
+
+    <viewmodel:RequireLoginVM x:Key="RequireLoginVM"/>
+    <ut:MultiCommandParameterConverter x:Key="MultiCommandParameterConverter"/>
+    <ut:RadioButtonConverter x:Key="RadioButtonConverter"/>
+    <ut:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+
+</ResourceDictionary>

@@ -1,0 +1,387 @@
+﻿<UserControl x:Class="TourismManagementSystem.UserControls.UCLocation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:TourismManagementSystem.UserControls"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="900"
+             xmlns:vm="clr-namespace:TourismManagementSystem.ViewModel"
+             Background="{StaticResource Secondary}"
+             x:Name="ucLocation"
+             >
+    <UserControl.DataContext >
+        <vm:LocationVM/>
+    </UserControl.DataContext>
+   
+    <Grid Grid.Column="1"
+                  Background="{StaticResource Secondary}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid Grid.Row="0">
+                <StackPanel Orientation="Horizontal" Margin="30,0,20,0">
+                    <RadioButton Style="{StaticResource BtnStyle2}" 
+                             VerticalAlignment="Center"
+                             Margin="0,0,10,0"
+                             Command="{Binding RadioButtonCommand}"
+                             CommandParameter="{Binding ElementName=ucLocation}">
+                        <TextBlock Text="Dịch vụ"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               FontSize="18"
+                               FontWeight="Medium"/>
+                    </RadioButton>
+                    <RadioButton Style="{StaticResource BtnStyle2}" 
+                             VerticalAlignment="Center"
+                             Margin="0,0,20,0"
+                             IsChecked="{Binding IsDisplay}">
+                        <TextBlock Text="Địa điểm"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               FontSize="18"
+                               FontWeight="Medium"/>
+                    </RadioButton>
+                    <Button Visibility="{Binding IsAdmin, Converter={StaticResource BooleanToVisibilityConverter}}"
+                        Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                        Width="30"
+                        Height="30"
+                        Padding="0, -3, 0, 0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Background="{StaticResource Primary}"
+                        materialDesign:ButtonAssist.CornerRadius="10"
+                    BorderThickness="0"
+                    ToolTip="Nhấn để thêm thông tin mới"
+                            Command="{Binding ToAddLocationCommand}"
+                            CommandParameter="{Binding ElementName=ucLocation}">
+                        <TextBlock Text="+" FontSize="20"/>
+                    </Button>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Right"
+                        Margin="0,0,30,0">
+                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" >
+                        <TextBlock Text="Tìm kiếm theo" 
+                           Margin="0,5,20,5"/>
+                    </StackPanel>
+
+                    <Border CornerRadius="20" 
+                    BorderThickness="1" 
+                    BorderBrush="Black" 
+                    Height="40"
+                    Width="400"
+                        Background="White">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Width="200"
+                             HorizontalAlignment="Left"
+                             Margin="20,5,0,5"
+                             materialDesign:HintAssist.Hint="Nhập thông tin"
+                             Text="{Binding SearchTerm, UpdateSourceTrigger=PropertyChanged}"
+                            IsEnabled="{Binding CanWrite}">
+                            </TextBox>
+                            <materialDesign:PackIcon Kind="Magnify" 
+                                                 Height="25"
+                                                 Width="25"
+                                                 VerticalAlignment="Center"
+                                                 Margin="0,0,10,0"/>
+
+                            <Rectangle VerticalAlignment="Stretch" Fill="Black" Width="1" Margin="0,0,10,0"/>
+                            <ComboBox VerticalAlignment="Center" 
+                                  Width="110"
+                                  ItemsSource="{Binding cmbItems}"
+                                  SelectedItem="{Binding Filter, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <!--<Grid Grid.Row="0"
+                  >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <RadioButton Style="{StaticResource BtnStyle2}" 
+                             IsChecked="{Binding IsSaleChecked}" 
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Left"
+                             Margin="50,0,10,0">
+                    <TextBlock Text="Dịch vụ"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               FontSize="18"
+                               FontWeight="Medium"/>
+                </RadioButton>
+                <RadioButton Style="{StaticResource BtnStyle2}" 
+                             IsChecked="{Binding IsTripCheck}" 
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Left"
+                             Margin="180,0,10,0">
+                    <TextBlock Text="Địa điểm"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               FontSize="18"
+                               FontWeight="Medium"/>
+                </RadioButton>
+                <Button
+                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Width="30"
+                            Height="30"
+                            Padding="-2, -3, 0, 0"
+                            HorizontalAlignment="Right"
+                            Margin="0 ,0 , 15, 5"
+                            Background="{StaticResource Primary}"
+                            materialDesign:ButtonAssist.CornerRadius="10"
+                            ToolTip="Nhấn để thêm thông tin mới"
+                            Command="{Binding ToAddLocationCommand}"
+                            CommandParameter="{Binding ElementName=ucLocation}"
+                            VerticalAlignment="Bottom">
+                               
+                    <TextBlock
+                                Text="+" 
+                                FontSize="20"/>
+                </Button>
+
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions >
+
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <TextBlock
+                        Width="100"
+                        Text="*Nhấn Enter để bắt đầu tìm kiếm"
+                        FontSize="10"
+                        Foreground="IndianRed"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Center"
+                        TextWrapping="Wrap"
+                        Margin="-150,0, 0, 0" 
+                        >
+
+                    </TextBlock>
+                    <materialDesign:PackIcon 
+                                Kind="Magnify"
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Right"
+                                Margin="0, 0, 5, 4" 
+                                Panel.ZIndex="1"/>
+                    <TextBox
+                        x:Name="tbfilter1"
+                        Width="200"
+                        Height="30"
+                        FontSize="13"
+                        materialDesign:HintAssist.Hint="Nhập thông tin"
+                        HorizontalAlignment="Right"
+                        Background="White"
+                        VerticalAlignment="Bottom"
+                        BorderBrush="{StaticResource Primary}"
+                        BorderThickness="1"  
+                        HorizontalContentAlignment="Center"
+                        Text="{Binding SearchTerm, UpdateSourceTrigger=PropertyChanged}"
+                        IsEnabled="{Binding CanWrite}"
+                            >
+                        <TextBox.InputBindings>
+                            <KeyBinding Key="Enter" Command="{Binding FindLocationnCommand}" CommandParameter="{Binding ElementName=tbfilter1}" />
+                        </TextBox.InputBindings>
+                    </TextBox>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <Button
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        Width="30"
+                        Height="30"
+                        Padding="-1, -1, 0, 0"
+                        Margin="0,0,20,0"
+                        Background="{StaticResource Primary}"
+                        materialDesign:ButtonAssist.CornerRadius="10"
+                        ToolTip="MaterialDesignRaisedButton with Round Corners"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Command="{Binding ResetCommand}">
+                        <materialDesign:PackIcon Kind="Autorenew"
+                                                 Width="22"
+                                                 Height="22"/>
+                    </Button>
+
+                </Grid>
+                <Grid Grid.Column="1"
+                              >
+                    <Label Content="Tìm kiếm theo"
+                                   FontSize="10"
+                                   Padding="-4"
+                                    VerticalAlignment="Center"
+                                   />
+                    <ComboBox
+                        materialDesign:HintAssist.Hint="Mã địa điểm"
+                        Height="30"
+                        Width="150"
+                        FontSize="13"
+                        materialDesign:HintAssist.HelperTextFontSize="10"
+                        materialDesign:HintAssist.FloatingHintHorizontalAlignment="Center"
+                        MinWidth="65"
+                        Background="White"
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Left"
+                        BorderBrush="{StaticResource Primary}"
+                        BorderThickness="1"
+                        HorizontalContentAlignment="Center"
+                        ItemsSource="{Binding cmbItems}"
+                        SelectedItem="{Binding Filter, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                        materialDesign:TextFieldAssist.HasClearButton="True"
+                        Padding="10, 5, 0,0">
+                    </ComboBox>
+                </Grid>
+
+            </Grid>
+
+        </Grid>-->
+        <DataGrid 
+            Grid.Row="1"
+            x:Name="dtgridDD"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Height="400"
+            Margin="30, 0, 30, 10"
+            ItemsSource="{Binding SearchResult, UpdateSourceTrigger=PropertyChanged}"
+            SelectedItem="{Binding selectedItem, Mode=OneWayToSource}"
+            AutoGenerateColumns="False"
+            BorderBrush="{StaticResource Primary2}"
+            BorderThickness="1.5" 
+            RowDetailsVisibilityMode="VisibleWhenSelected"
+            ScrollViewer.CanContentScroll="True"
+            ScrollViewer.PanningMode="Both"
+            HeadersVisibility="Column"
+            SelectionMode="Single"
+            SelectionUnit="FullRow"
+            CanUserAddRows="False"
+            CanUserDeleteRows="False"
+            CanUserReorderColumns="False"
+            CanUserResizeRows="False"
+            ColumnWidth="*"
+            IsReadOnly="False"
+            GridLinesVisibility="None"
+               >
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="{StaticResource Primary}"/>
+                    <Setter Property="Margin" Value="0, 10, 0, 10"/>
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="Cursor" Value="Hand"/>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+            <DataGrid.Resources>
+                <SolidColorBrush x:Key="DataGridCellFocusBorderBrush" Color="Transparent" />
+                <Style TargetType="DataGridCell">
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="BorderThickness" Value="0" />
+                            <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
+                            <Setter Property="Background" Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="HorizontalAlignment" Value="Center" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="BorderThickness" Value="0" />
+                            <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
+                            <Setter Property="Background" Value="{StaticResource Primary2}"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="Mã địa điểm" Binding="{Binding MADD}" Width="*"  IsReadOnly="True" CanUserSort="True">
+
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Tên địa điểm" Binding="{Binding TENDD}"  Width="*" IsReadOnly="True" CanUserSort="True">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextWrapping" Value="Wrap" />
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="TextAlignment" Value="Center" />
+                            <Setter Property="Padding" Value="10"/>
+
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Địa chỉ" Binding="{Binding DIACHI}"  Width="*" IsReadOnly="True" CanUserSort="True">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextWrapping" Value="Wrap" />
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="TextAlignment" Value="Center" />
+                            <Setter Property="Padding" Value="10"/>
+
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Mô tả" Binding="{Binding MOTA}"  Width="*" IsReadOnly="True" CanUserSort="True"/>
+
+
+                <DataGridTemplateColumn Header="" 
+                                        Width="auto"
+
+                                        >
+                    <DataGridTemplateColumn.CellTemplate >
+                        <DataTemplate >
+                            <Button
+                                    x:Name="btnEdit"
+                                    Height="auto"
+                                    Width="auto"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding DataContext.ToEditLocationCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    CommandParameter="{Binding}"
+                                    >
+                                <materialDesign:PackIcon 
+                                        Kind="Pencil"
+                                        Foreground ="{StaticResource Primary}"
+                                         />
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn >
+                <DataGridTemplateColumn Header="" 
+                                        Width="auto"
+                                        >
+                    <DataGridTemplateColumn.CellTemplate >
+                        <DataTemplate >
+                            <Button
+                                    Height="auto"
+                                    Width="auto"
+                                    Background="Transparent"
+                                    BorderBrush="Transparent"
+                                    Command="{Binding DataContext.DeleteLocationCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    CommandParameter="{Binding}">
+                                <materialDesign:PackIcon Kind="Delete"
+                                                             Foreground ="{StaticResource Primary}"/>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn >
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+    </Grid>
+</UserControl>

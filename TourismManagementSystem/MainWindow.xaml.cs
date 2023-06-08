@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TourismManagementSystem.View;
 
 namespace TourismManagementSystem
 {
@@ -22,6 +23,7 @@ namespace TourismManagementSystem
     {
         public MainWindow()
         {
+        
             InitializeComponent();
         }
     }

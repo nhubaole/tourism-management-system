@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="91d2ddaa7d5d43008bdf8008ab0b6aab" Name="Diagram1" ZoomLevel="70">
+        <EntityTypeShape EntityType="TOURMANAGEMENTModel.CHUYEN" Width="1.5" PointX="8.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TOURMANAGEMENTModel.DIADIEM" Width="1.5" PointX="0.75" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TOURMANAGEMENTModel.DICHVUKHAC" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TOURMANAGEMENTModel.HANHKHACH" Width="1.5" PointX="15.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TOURMANAGEMENTModel.HUONGDANVIEN" Width="1.5" PointX="10.5" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TOURMANAGEMENTModel.KHACHHANG" Width="1.5" PointX="11.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TOURMANAGEMENTModel.KHACHSAN" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TOURMANAGEMENTModel.LICHTRINH" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TOURMANAGEMENTModel.LOAICHUYEN" Width="1.5" PointX="6" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TOURMANAGEMENTModel.LOAITUYEN" Width="1.5" PointX="3.75" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="TOURMANAGEMENTModel.NHAHANG" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TOURMANAGEMENTModel.PHIEUDATCHO" Width="1.5" PointX="13.5" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="TOURMANAGEMENTModel.PHUONGTIEN" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TOURMANAGEMENTModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TOURMANAGEMENTModel.TAIKHOAN" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TOURMANAGEMENTModel.THONGTINTHANHTOAN" Width="1.5" PointX="15.75" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="TOURMANAGEMENTModel.TUYEN" Width="1.5" PointX="6" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TOURMANAGEMENTModel.VE" Width="1.5" PointX="18" PointY="7" IsExpanded="true" />
+        <AssociationConnector Association="TOURMANAGEMENTModel.FK__CHUYEN__MALOAI__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="TOURMANAGEMENTModel.FK__CHUYEN__MATUYEN__4AB81AF0" ManuallyRouted="false" />
+        <AssociationConnector Association="TOURMANAGEMENTModel.FK__PHIEUDATC__MACHU__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="TOURMANAGEMENTModel.FK__LICHTRINH__DDBAT__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="TOURMANAGEMENTModel.FK__LICHTRINH__DDKET__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="TOURMANAGEMENTModel.FK__TUYEN__DDXUATPHA__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="TOURMANAGEMENTModel.FK__HANHKHACH__MAPHI__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="TOURMANAGEMENTModel.FK__VE__MAHK__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="TOURMANAGEMENTModel.FK__PHIEUDATCH__MAKH__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="TOURMANAGEMENTModel.FK__LICHTRINH__MATUY__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="TOURMANAGEMENTModel.FK__TUYEN__MALOAI__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="TOURMANAGEMENTModel.FK__THONGTINT__MAPHI__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="TOURMANAGEMENTModel.FK__VE__MAPHIEU__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="TOURMANAGEMENTModel.CHITIETDVKHAC" ManuallyRouted="false" />
+        <AssociationConnector Association="TOURMANAGEMENTModel.CHITIETKHACHSAN" ManuallyRouted="false" />
+        <AssociationConnector Association="TOURMANAGEMENTModel.CHITIETNHAHANG" ManuallyRouted="false" />
+        <AssociationConnector Association="TOURMANAGEMENTModel.CHITIETPHUONGTIEN" ManuallyRouted="false" />
+        <AssociationConnector Association="TOURMANAGEMENTModel.DIEUPHOI" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

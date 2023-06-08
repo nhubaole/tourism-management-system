@@ -1,0 +1,186 @@
+﻿<Window x:Class="TourismManagementSystem.View.AddScheduleWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TourismManagementSystem.View"
+        mc:Ignorable="d"
+        Title="AddScheduleWindow" Height="550" Width="900"
+        ResizeMode="NoResize"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center"
+        xmlns:uc="clr-namespace:TourismManagementSystem.UserControls"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource Secondary}"
+        xmlns:vm="clr-namespace:TourismManagementSystem.ViewModel"
+        Name="addScheduleWindow">
+    <Window.DataContext>
+        <vm:AddScheduleVM/>
+    </Window.DataContext>
+    <Grid Margin="50,20,50,20">
+        <Border Background="White"
+                CornerRadius="20,20,20,20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0"
+                        VerticalAlignment="Top"
+                        Height="50"
+                        CornerRadius="20,20,0,0"
+                        Background="{StaticResource Primary}">
+                    <TextBlock Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}"
+                               VerticalAlignment="Center"
+                               Margin="50,0,0,0"
+                               Foreground="White"
+                               FontSize="22"
+                               FontWeight="Medium"/>
+                </Border>
+                <Grid Grid.Row="1" Margin="50,20,20,90">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0"
+                                       Text="Địa điểm đi"
+                                       FontSize="24"
+                                       FontWeight="Bold"
+                                       Foreground="{StaticResource Primary}"
+                                       VerticalAlignment="Bottom"/>
+                            <ComboBox Width="Auto" Grid.Row="1"
+                                    Height="40"
+                                    FontSize="16"
+                                    Margin="0,0,10,0"
+                                    ItemsSource="{Binding ListDiaDiem}"
+                                      DisplayMemberPath="TENDD"
+                                      SelectedItem="{Binding DDDi}"/>
+                            <TextBlock Grid.Row="2"
+                                       Text="Địa điểm đến"
+                                       FontSize="24"
+                                       FontWeight="Bold"
+                                       Foreground="{StaticResource Primary}"
+                                       VerticalAlignment="Bottom"/>
+                            <ComboBox Width="Auto" Grid.Row="3"
+                                    Height="40"
+                                    FontSize="16"
+                                    Margin="0,0,10,0"
+                                    ItemsSource="{Binding Path=ListDiaDiem}"
+                                    DisplayMemberPath="TENDD"
+                                      SelectedItem="{Binding DDDen}"/>
+                        </Grid>
+                        <Grid Grid.Row="1" Margin="0,-40,0,-30">
+                            <Image Source="../Resource/Image/scheduleImg.png" Width="300" Height="300"/>
+                        </Grid>
+                    </Grid>
+                    <Grid Grid.Column="1" Margin="20,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0"
+                                   Text="Các dịch vụ"
+                                   FontSize="24"
+                                   FontWeight="Bold"
+                                   Foreground="{StaticResource Primary}"/>
+                        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                            <StackPanel Margin="0,0,20,0">
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                    <TextBlock FontSize="16"
+                                           FontWeight="SemiBold"
+                                           Text="Phương tiện: "
+                                           Height="25"
+                                           Margin="0,0,10,0"
+                                           VerticalAlignment="Center"/>
+                                    <Button VerticalAlignment="Center" Style="{StaticResource MaterialDesignIconButton}"
+                                            Width="30"
+                                            Height="30"
+                                        Command="{Binding AddPTBoxCommand}">
+                                        <materialDesign:PackIcon Foreground="{StaticResource Primary}" Kind="AddBox" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Button>
+                                </StackPanel>
+                                <ItemsControl ItemsSource="{Binding PhuongTienBoxes}" HorizontalContentAlignment="Stretch" />
+
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                    <TextBlock FontSize="16"
+                                           FontWeight="SemiBold"
+                                           Text="Nhà hàng: "
+                                           Height="25"
+                                           Margin="0,0,10,0"
+                                           VerticalAlignment="Center"/>
+                                    <Button VerticalAlignment="Center" Style="{StaticResource MaterialDesignIconButton}"
+                                            Width="30"
+                                            Height="30"
+                                        Command="{Binding AddNHBoxCommand}">
+                                        <materialDesign:PackIcon Foreground="{StaticResource Primary}" Kind="AddBox" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Button>
+                                </StackPanel>
+                                <ItemsControl ItemsSource="{Binding NhaHangBoxes}" HorizontalContentAlignment="Stretch" />
+
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                    <TextBlock FontSize="16"
+                                           FontWeight="SemiBold"
+                                           Text="Khách sạn: "
+                                           Height="25"
+                                           Margin="0,0,10,0"
+                                           VerticalAlignment="Center"/>
+                                    <Button VerticalAlignment="Center" Style="{StaticResource MaterialDesignIconButton}"
+                                            Width="30"
+                                            Height="30"
+                                        Command="{Binding AddKSBoxCommand}">
+                                        <materialDesign:PackIcon Foreground="{StaticResource Primary}" Kind="AddBox" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Button>
+                                </StackPanel>
+                                <ItemsControl ItemsSource="{Binding KhachSanBoxes}" HorizontalContentAlignment="Stretch" />
+
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                    <TextBlock FontSize="16"
+                                           FontWeight="SemiBold"
+                                           Text="Dịch vụ khác: "
+                                           Height="25"
+                                           Margin="0,0,10,0"
+                                           VerticalAlignment="Center"/>
+                                    <Button VerticalAlignment="Center" Style="{StaticResource MaterialDesignIconButton}"
+                                            Width="30"
+                                            Height="30"
+                                        Command="{Binding AddDVBoxCommand}">
+                                        <materialDesign:PackIcon Foreground="{StaticResource Primary}" Kind="AddBox" Width="20" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Button>
+                                </StackPanel>
+                                <ItemsControl ItemsSource="{Binding DVKhacBoxes}" HorizontalContentAlignment="Stretch" />
+
+                            </StackPanel>
+                        </ScrollViewer>
+                        
+                    </Grid>
+                </Grid>
+                <Button Grid.Row="1" 
+                        VerticalAlignment="Bottom"
+                        Margin="0,0,0,20"
+                        Background="{StaticResource Primary}"
+                        Width="400"
+                        Height="35"
+                        BorderBrush="Transparent"
+                        materialDesign:ButtonAssist.CornerRadius="20"
+                        Foreground="White"
+                        FontSize="20"
+                        Command="{Binding AddScheduleCommand}"
+                        CommandParameter="{Binding ElementName=addScheduleWindow}"
+                        Content="{Binding BtnText, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
