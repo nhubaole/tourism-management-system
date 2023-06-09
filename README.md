@@ -69,7 +69,7 @@
   <details>
   <summary>Quản lý dịch vụ</summary>
   
-  - Thêm mới đdịch vụ.
+  - Thêm mới dịch vụ.
   - Tra cứu dịch vụ.
   - Xóad ịch vụ.
   - Cập nhập thông tin dịch vụ. 
@@ -158,58 +158,102 @@
   <summary>Màn hình trang chủ</summary>
   
   - Sau khi đăng nhập thành công sẽ được chuyển sang màn hình trang chủ
-  - Tranh chủ sẽ hiện thống tin các tuyến, thống kê các chuyến , số vé bán ra, doanh thu theo **Ngày**, **Tháng**, **Năm**. 
+  - Trang chủ sẽ hiện thống tin các tuyến, thống kê các chuyến , số vé bán ra, doanh thu theo **Ngày**, **Tháng**, **Năm**. 
   - Bạn có thể chọn các chức năng từ thanh công cụ.
  ![Màn hình trang chủ](https://i.imgur.com/QNNjBA1.png)
+ - **Lưu ý**: Khi bạn đăng nhập dưới vai trò khách, bạn chỉ có thể xem thông tin các chuyến du lịch sắp khởi hành.
 
- 
+
   </details>
    <details>
   <summary>Màn hình quản lý tuyến</summary>
   
   - Màn hình sẽ hiển thị danh sách các tuyến trong hệ thống
+  - Bạn có thể tra cứu các tuyến theo trường thông tin thích hợp.
 ![Màn hình quản lý tuyến](https://i.imgur.com/x3UBA1v.png)
   - Bạn có thể thêm mới một tuyến khi ấn nút ![Nút thêm](https://i.imgur.com/4j2ay5Z.png)
-  - Bạn có thể xem thông tin tuyến khi ấn nút ![Nút xem](https://i.imgur.com/tgaJF7D.png), chỉnh sửa ![Nút chỉnh sửa](https://i.imgur.com/ljHcAeV.png) hoặc xóa ![Nút xóa](https://i.imgur.com/YIjQafF.png)
+  - Bạn có thể xem thông tin chi tiết một tuyến khi ấn nút ![Nút xem](https://i.imgur.com/tgaJF7D.png), chỉnh sửa ![Nút chỉnh sửa](https://i.imgur.com/ljHcAeV.png) hoặc xóa ![Nút xóa](https://i.imgur.com/YIjQafF.png)
+ ![Màn hình chi tiết tuyến](https://i.imgur.com/PUIHKma.png)
   - **Lưu ý**: Khi bạn đăng nhập dưới vai trò khách, bạn chỉ có thể xem thông tin mà không có quyền chỉnh sử hoặc xóa.
 
   </details>
   
   <details>
   <summary>Màn hình quản lý chuyến</summary>
+ 
   - Màn hình sẽ hiển thị danh sách các chuyến trong hệ thống tương tự như màn hình quản lý tuyến.
+  - Bạn có thể tra cứu chuyến theo những trường thông tin thích hợp.
+  ![Màn hình quản lý chuyến](https://i.imgur.com/8zWnVsQ.png)
+  - Bạn có thể thêm mới một chuyến khi ấn nút ![Nút thêm](https://i.imgur.com/4j2ay5Z.png)
+  - Bạn có thể xem thông tin cho tiết mộtchuyến khi ấn nút ![Nút xem](https://i.imgur.com/tgaJF7D.png), chỉnh sửa ![Nút chỉnh sửa](https://i.imgur.com/ljHcAeV.png) hoặc xóa ![Nút xóa](https://i.imgur.com/YIjQafF.png)
+  ![Màn hình chi tiết chuyến](https://i.imgur.com/nJMbLF4.png)
+  - **Lưu ý**: Khi bạn đăng nhập dưới vai trò khách, bạn chỉ có thể xem thông tin mà không có quyền chỉnh sử hoặc xóa.
+
   </details>
   
   <details>
   <summary>Màn hình quản lý địa điểm</summary>
   
   - Màn hình sẽ hiển thị danh sách các địa điểm trong hệ thống
+  - Bạn có thể tra cứu địa điểm theo trường thông tin thích hợp.
 ![Màn hình quản lý địa điểm](https://i.imgur.com/ll4MVQL.png)
   - Bạn có thể thêm mới một địa điểm khi ấn nút ![Nút thêm](https://i.imgur.com/4j2ay5Z.png)
-  - Bạn có thể xem thông tin địa điểm khi ấn nút ![Nút xem](https://i.imgur.com/tgaJF7D.png), chỉnh sửa ![Nút chỉnh sửa](https://i.imgur.com/ljHcAeV.png) hoặc xóa ![Nút xóa](https://i.imgur.com/YIjQafF.png)
-  - **Lưu ý**: Khi bạn đăng nhập dưới vai trò khách, bạn chỉ có thể xem thông tin mà không có quyền chỉnh sử hoặc xóa.
+  - Bạn có thể xem thông tin địa điểm hoặc chỉnh sửa khi ấn nút ![Nút chỉnh sửa](https://i.imgur.com/ljHcAeV.png) hoặc xóa ![Nút xóa](https://i.imgur.com/YIjQafF.png)
+  ![Màn hình chi tiết địa điểm](https://i.imgur.com/kYYDTbh.png)
+  - **Lưu ý**: Bạn phải đăng nhập để sử dụng chức năng này.
 
   </details>
   
   <details>
   <summary>Màn hình quản lý dịch vụ</summary>
+ 
   - Màn hình sẽ hiển thị danh sách các dịch vụ trong hệ thống
-![Màn hình quản lý dịch vụ]()
+  - Bạn có thể tra cứu dịch vụ theo các trường thông tin thích hợp.
+![Màn hình quản lý dịch vụ](https://i.imgur.com/21UmnhJ.png)
   - Bạn có thể xem thông tin dịch vụ khi ấn nút ![Nút xem](https://i.imgur.com/tgaJF7D.png), chỉnh sửa ![Nút chỉnh sửa](https://i.imgur.com/ljHcAeV.png) hoặc xóa ![Nút xóa](https://i.imgur.com/YIjQafF.png)
-  - **Lưu ý**: Khi bạn đăng nhập dưới vai trò khách, bạn chỉ có thể xem thông tin mà không có quyền chỉnh sử hoặc xóa.
+![Màn hình chi tiết dịch vụ](https://i.imgur.com/A7jf7YU.png)
+  - **Lưu ý**: Bạn phải đăng nhập để sử dụng chức năng này.
 
   </details>
   
   
   <details>
   <summary>Màn hình quản lý thông tin khách hàng</summary>
-  
-  
+ 
+  - Màn hình hiển thị danh sách khách hàng trong hệ thống ở bảng bên trái và thông tin chi tiết khách hàng được chọn ở bảng bên phải
+  - Bạn có thể tra cứu thông tin khách hàng theo các trường thông tin thích hợp hoặc thêm mới một khách hàng bằng cách ấn nút **Thêm**
+  - Thông tin khách hàng có thể được **Cập nhập** hoặc **Xóa** trực tiếp bằng thao tác với bảng thông tin chi tiết.
+ ![Màn hình quản lý thông tin khách hàng](https://i.imgur.com/VIBz9iu.png)
+  - **Lưu ý**: Bạn phải đăng nhập để sử dụng chức năng này.
   </details>
   
   
   <details>
   <summary>Màn hình quản lý phiếu đặt chỗ</summary>
+ 
+  - Màn hình sẽ hiển thị danh sách các phiểu đặt chỗ được ghi nhận.
+  - Bạn có thể tra cứu phiếu đặt chỗ theo trường thông tin thích hợp.
+![Màn hình quản lý phiếu đặt chỗ](https://i.imgur.com/3oPFX4v.png)
+  - Bạn có thể thêm mới một phiếu đặt chỗ khi ấn nút ![Nút thêm](https://i.imgur.com/4j2ay5Z.png)
+  - Bạn có thể xem thông tin chi tiết phiếu khi ấn nút ![Nút xem](https://i.imgur.com/tgaJF7D.png), chỉnh sửa ![Nút chỉnh sửa](https://i.imgur.com/ljHcAeV.png) hoặc xóa ![Nút xóa](https://i.imgur.com/YIjQafF.png)
+![Màn hình chi tiết phiếu đặt chỗ](https://i.imgur.com/kQUZsHS.png)
+  - **Lưu ý**:
+    - Phiếu đặt chỗ khi sau khi thanh toán đầy đủ có thể xuất thành vé.
+    - Bạn phải đăng nhập để sử dụng chức năng này.
+ 
+  </details>
+  
+  <details>
+  <summary>Màn hình quản lý vé</summary>
+ 
+  - Màn hình sẽ hiển thị danh sách các vé trong hệ thống.
+  - Bạn có thể tra cứu vé theo trường thông tin thích hợp.
+![Màn hình quản lý vé](https://i.imgur.com/UD086Wd.png)
+  - Bạn có thể xem thông tin chi tiết vé khi ấn nút ![Nút xem](https://i.imgur.com/tgaJF7D.png).
+  - **Lưu ý**: Không thể **Xóa** một vé mà chỉ được cập nhập trạng thái thành **Đã hủy**
+ ![Màn hình chi tiết vé](https://i.imgur.com/lDkjrB7.png)
+  - Bạn có thể chọn **In vé** hoặc **Gửi vé điện tử** qua email.
+ - **Lưu ý**: Bạn phải đăng nhập để sử dụng chức năng này.
   </details>
   
   <details>
@@ -218,6 +262,7 @@
  - Bạn có thể xem thông báo khi ấn vào biểu tượng ![Imgur](https://i.imgur.com/fvwRUOn.png)
  - Thông báo bao gồm những thông tin đã bị xóa, các chuyến đi sắp xuất phát nhưng chưa đủ số lượng hành khách quy định.
  ![Màn hình thông báo](https://i.imgur.com/C6Bcfbl.png)
+ - **Lưu ý**: Bạn phải đăng nhập để sử dụng chức năng này.
   </details>
    
   <details>
@@ -238,4 +283,4 @@
   </details>
   
   ## Phản hồi
-* Mọi phản hồi của mọi người sau khi trải nghiệm hãy tạo ở mục Issues. Phản hồi của các bạn sẽ là động lực và lời khuyên quý giá giúp chúng tôi cải thiện ứng dụng tốt hơn. Cảm ơn mọi người đã dành thời gian trải nghiệm ứng dụng của chúng tôi.
+* Mọi phản hồi của các bạn sau khi trải nghiệm ứng dụng hãy tạo ở mục Issues. Phản hồi của các bạn sẽ là động lực và lời khuyên quý giá giúp chúng tôi cải thiện ứng dụng tốt hơn. Cảm ơn các bạn đã dành thời gian trải nghiệm ứng dụng của chúng tôi.
