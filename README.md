@@ -210,7 +210,7 @@
   - Màn hình sẽ hiển thị danh sách các dịch vụ trong hệ thống
   - Bạn có thể tra cứu dịch vụ theo các trường thông tin thích hợp.
 ![Màn hình quản lý dịch vụ](https://i.imgur.com/21UmnhJ.png)
-  - Bạn có thể xem thông tin dịch vụ khi ấn nút ![Nút xem](https://i.imgur.com/tgaJF7D.png), chỉnh sửa ![Nút chỉnh sửa](https://i.imgur.com/ljHcAeV.png) hoặc xóa ![Nút xóa](https://i.imgur.com/YIjQafF.png)
+  - Bạn có thể xem thông tin dịch vụ hoặc chỉnh sửa khi ấn nút ![Nút chỉnh sửa](https://i.imgur.com/ljHcAeV.png) hoặc xóa ![Nút xóa](https://i.imgur.com/YIjQafF.png)
 ![Màn hình chi tiết dịch vụ](https://i.imgur.com/A7jf7YU.png)
   - **Lưu ý**: Bạn phải đăng nhập để sử dụng chức năng này.
 
@@ -220,9 +220,9 @@
   <details>
   <summary>Màn hình quản lý thông tin khách hàng</summary>
  
-  - Màn hình hiển thị danh sách khách hàng trong hệ thống ở bảng bên trái và thông tin chi tiết khách hàng được chọn ở bảng bên phải
+  - Màn hình hiển thị danh sách khách hàng trong hệ thống ở bảng bên trái và thông tin **Thanh toán** được chọn ở bảng bên phải
   - Bạn có thể tra cứu thông tin khách hàng theo các trường thông tin thích hợp hoặc thêm mới một khách hàng bằng cách ấn nút **Thêm**
-  - Thông tin khách hàng có thể được **Cập nhập** hoặc **Xóa** trực tiếp bằng thao tác với bảng thông tin chi tiết.
+  - Thông tin khách hàng có thể được **Cập nhập** hoặc **Xóa** trực tiếp bằng thao tác với bảng thông tin bên phải.
  ![Màn hình quản lý thông tin khách hàng](https://i.imgur.com/VIBz9iu.png)
   - **Lưu ý**: Bạn phải đăng nhập để sử dụng chức năng này.
   </details>
