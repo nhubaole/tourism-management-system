@@ -73,7 +73,8 @@
                     IsReadOnly="False"
                     GridLinesVisibility="None"
                     ItemsSource="{Binding ListVE}"
-                    AutoGenerateColumns="False">
+                    AutoGenerateColumns="False"
+                VirtualizingPanel.IsVirtualizing="False">
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="HorizontalContentAlignment" Value="Center" />

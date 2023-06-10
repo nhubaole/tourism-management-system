@@ -33,9 +33,13 @@ namespace TourismManagementSystem.ViewModel
                 }
                 else if (SelectedFilter == FilterCbItems[1])
                 {
-                    BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes.Where(t => t.KHACHHANG.HOTEN.Contains(Search)));
+                    BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes.Where(t => t.MACHUYEN.Contains(Search)));
                 }
                 else if (SelectedFilter == FilterCbItems[2])
+                {
+                    BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes.Where(t => t.KHACHHANG.HOTEN.Contains(Search)));
+                }
+                else if (SelectedFilter == FilterCbItems[3])
                 {
                     BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes.Where(t => t.TINHTRANG.Contains(Search)));
                 }
@@ -45,7 +49,7 @@ namespace TourismManagementSystem.ViewModel
         private string selectedFilter;
         public string SelectedFilter { get => selectedFilter; set { selectedFilter = value; OnPropertyChanged(); } }
 
-        private ObservableCollection<string> _FilterCbItems = new ObservableCollection<string>() { "Mã phiếu", "Họ tên", "Tình trạng"};
+        private ObservableCollection<string> _FilterCbItems = new ObservableCollection<string>() { "Mã phiếu", "Mã chuyến", "Họ tên", "Tình trạng"};
         public ObservableCollection<string> FilterCbItems { get => _FilterCbItems; set => _FilterCbItems = value; }
 
         private CHUYEN _selectedPhieu;

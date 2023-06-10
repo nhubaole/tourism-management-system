@@ -148,7 +148,12 @@ namespace TourismManagementSystem.ViewModel
                 var addScheduleWindow = p as Window;
                 if (addScheduleWindow != null)
                 {
-                    if(IsEdit == 0)
+                    if (DDDi == DDDen)
+                    {
+                        MessageBox.Show("Địa điểm đến không được trùng địa điểm đi!");
+                        return;
+                    }
+                    if (IsEdit == 0)
                     {
                         LICHTRINH newLichTrinh = new LICHTRINH();
                         Random random = new Random();

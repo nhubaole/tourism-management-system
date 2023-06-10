@@ -131,7 +131,31 @@
                 <DataGridTextColumn Header="Mã phiếu" Binding="{Binding MAPHIEU}" Width="*"  IsReadOnly="True" CanUserSort="True">
 
                 </DataGridTextColumn>
+                <DataGridTextColumn Header="Mã chuyến" Binding="{Binding MACHUYEN}"  Width="*" IsReadOnly="True" CanUserSort="True">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextWrapping" Value="Wrap" />
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="TextAlignment" Value="Center" />
+                            <Setter Property="Padding" Value="10"/>
+
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
                 <DataGridTextColumn Header="Tên khách hàng" Binding="{Binding KHACHHANG.HOTEN}"  Width="*" IsReadOnly="True" CanUserSort="True">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextWrapping" Value="Wrap" />
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="TextAlignment" Value="Center" />
+                            <Setter Property="Padding" Value="10"/>
+
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Ngày đặt" Binding="{Binding NGAYDAT, StringFormat='dd/MM/yyyy'}"  Width="*" IsReadOnly="True" CanUserSort="True">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="TextWrapping" Value="Wrap" />
