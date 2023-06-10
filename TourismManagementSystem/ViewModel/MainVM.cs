@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using TourismManagementSystem.Model;
 using TourismManagementSystem.View;
 
 namespace TourismManagementSystem.ViewModel
@@ -16,8 +18,11 @@ namespace TourismManagementSystem.ViewModel
         private string _PageTitle;
         private string _AccountTitle;
         private bool _IsDisplay;
+        private int _UnreadNotificationCount;
+       
         public MainVM()
         {
+            UnreadNotificationCount = DataProvider.Ins.DB.THONGBAOs.Where(t => t.DADOC == false).Count();
             HomeCommand = new RelayCommand<object>((p) => { return true; }, Home);
             BookingCommand = new RelayCommand<object>((p) => { return true; }, Booking);
             CustomerCommand = new RelayCommand<object>((p) => { return true; }, Customer);
@@ -96,6 +101,9 @@ namespace TourismManagementSystem.ViewModel
                     }
                 }
             });
+
+            WarnTrip();
+
         }
 
         public bool IsLoaded = false;
@@ -103,7 +111,19 @@ namespace TourismManagementSystem.ViewModel
         public object CurrentView
         {
             get => _currentView;
-            set { _currentView = value; OnPropertyChanged(); }
+            set {
+                if (_currentView != null && _currentView.GetType() == typeof(TourismManagementSystem.ViewModel.NotificationVM))
+                {
+                    foreach (var thongBao in DataProvider.Ins.DB.THONGBAOs)
+                    {
+                        thongBao.DADOC = true;
+                    }
+
+                    DataProvider.Ins.DB.SaveChanges();
+                    UnreadNotificationCount = 0;
+                }
+                _currentView = value; OnPropertyChanged();
+            }
         }
 
         public ICommand HomeCommand { get; set; }
@@ -124,7 +144,54 @@ namespace TourismManagementSystem.ViewModel
         public string AccountTitle { get => _AccountTitle; set { _AccountTitle = value; OnPropertyChanged(); } }
 
         public bool IsDisplay { get => _IsDisplay; set { _IsDisplay = value; OnPropertyChanged(); } }
+        public int UnreadNotificationCount
+        {
+            get { return _UnreadNotificationCount; }
+            set
+            {
+                _UnreadNotificationCount = value;
+                OnPropertyChanged();
+            }
+        }
 
+        public object ObsevableCollection { get; private set; }
+
+        public void WarnTrip()
+        {
+            ObservableCollection<CHUYEN> ListChuyen = new ObservableCollection<CHUYEN>(DataProvider.Ins.DB.CHUYENs);
+
+            foreach(var item in ListChuyen)
+            {
+                TimeSpan timeSpan = item.TGBATDAU.Value - DateTime.Now;
+
+                int numberOfDays = timeSpan.Days;
+                if (timeSpan <= TimeSpan.FromDays(30) && DateTime.Now.Date < item.TGBATDAU.Value.Date && item.SLTHUCTE < item.SLTOITHIEU)
+                {
+                    THONGBAO newTB = new THONGBAO();
+                    string formattedID;
+                    ObservableCollection<THONGBAO> ListTB = new ObservableCollection<THONGBAO>(DataProvider.Ins.DB.THONGBAOs);
+                    if (ListTB.Count() == 0)
+                    {
+                        formattedID = string.Format("TB{0:D6}", 1);
+                    }
+                    else
+                    {
+                        string lastID = ListTB.Last().MATB;
+                        int previousNumber = int.Parse(lastID.Substring(2));
+                        int nextNumber = previousNumber + 1;
+                        formattedID = string.Format("TB{0:D6}", nextNumber);
+                    }
+                    newTB.MATB = formattedID;
+                    newTB.THONGBAO1 = "Chuyến đi " + item.MACHUYEN + " sẽ bắt đầu trong " + timeSpan.Days + " ngày nữa nhưng chưa đạt số lượng tối thiểu!";
+                    newTB.THOIGIAN = DateTime.Now;
+                    newTB.DADOC = false;
+                    DataProvider.Ins.DB.THONGBAOs.Add(newTB);
+                    DataProvider.Ins.DB.SaveChanges();
+                }
+            }
+            UnreadNotificationCount = DataProvider.Ins.DB.THONGBAOs.Where(t => t.DADOC == false).Count();
+
+        }
         private void Home(object obj)
         {
             PageTitle = "Trang chủ";
@@ -166,18 +233,6 @@ namespace TourismManagementSystem.ViewModel
                 CurrentView = new RequireLoginVM();
             }
         }
-        private void Notification(object obj)
-        {
-            PageTitle = "Thông báo";
-            if (AdminRole)
-            {
-                CurrentView = new NotificationVM();
-            }
-            else
-            {
-                CurrentView = new RequireLoginVM();
-            }
-        }
         private void RevenueStatistic(object obj)
         {
             PageTitle = "Báo cáo thống kê";
@@ -196,6 +251,18 @@ namespace TourismManagementSystem.ViewModel
             if (AdminRole)
             {
                 CurrentView = new ServiceVM();
+            }
+            else
+            {
+                CurrentView = new RequireLoginVM();
+            }
+        }
+        private void Notification(object obj)
+        {
+            PageTitle = "Thông báo";
+            if (AdminRole)
+            {
+                CurrentView = new NotificationVM();
             }
             else
             {

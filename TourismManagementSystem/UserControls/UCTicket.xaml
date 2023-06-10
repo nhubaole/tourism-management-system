@@ -9,7 +9,8 @@
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=viewmodel:TicketVM}"
-             d:DesignHeight="550" d:DesignWidth="900">
+             d:DesignHeight="550" d:DesignWidth="900"
+             Name="ucTicket">
    
     <Grid Background="{StaticResource Secondary}">
         <Grid.RowDefinitions>
@@ -72,7 +73,8 @@
                     IsReadOnly="False"
                     GridLinesVisibility="None"
                     ItemsSource="{Binding ListVE}"
-                    AutoGenerateColumns="False">
+                    AutoGenerateColumns="False"
+                VirtualizingPanel.IsVirtualizing="False">
                 <DataGrid.ColumnHeaderStyle>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -165,8 +167,14 @@
                                           SelectedItem="{Binding TRANGTHAI, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" >
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="SelectionChanged">
-                                            <i:InvokeCommandAction Command="{Binding DataContext.UpdateStatusCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                                                   CommandParameter="{Binding .}"/>
+                                            <i:InvokeCommandAction Command="{Binding DataContext.UpdateStatusCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}">
+                                                <i:InvokeCommandAction.CommandParameter>
+                                                    <MultiBinding Converter="{StaticResource MultiCommandParameterConverter}">
+                                                        <Binding />
+                                                        <Binding ElementName="ucTicket"/>
+                                                    </MultiBinding>
+                                                </i:InvokeCommandAction.CommandParameter>
+                                            </i:InvokeCommandAction>
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </ComboBox>

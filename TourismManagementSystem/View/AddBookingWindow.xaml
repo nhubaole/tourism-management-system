@@ -10,6 +10,7 @@
         ResizeMode="NoResize"
         HorizontalAlignment="Center"
         VerticalAlignment="Center"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:vm="clr-namespace:TourismManagementSystem.ViewModel"
         xmlns:uc="clr-namespace:TourismManagementSystem.UserControls"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -169,6 +170,7 @@
                                     Height="40"
                                     Padding="10,0,10,0">
                                     <DatePicker FontSize="18"
+                                                DisplayDateStart="{Binding Mode=OneWay, Source={x:Static sys:DateTime.Today}}" 
                     SelectedDate="{Binding NewBooking.NGAYDAT, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                                 </Border>
                             </Grid>
@@ -281,6 +283,7 @@
                                     <Setter Property="BorderThickness" Value="0" />
                                     <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
                                     <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="Foreground" Value="{StaticResource Primary}"/>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
@@ -291,7 +294,7 @@
                                 <Trigger Property="IsSelected" Value="True">
                                     <Setter Property="BorderThickness" Value="0" />
                                     <Setter Property="BorderBrush" Value="{StaticResource DataGridCellFocusBorderBrush}" />
-                                    <Setter Property="Background" Value="{StaticResource Primary2}"/>
+                                    <Setter Property="Foreground" Value="{StaticResource Primary}"/>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>

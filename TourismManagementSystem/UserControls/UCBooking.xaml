@@ -7,7 +7,8 @@
              xmlns:vm="clr-namespace:TourismManagementSystem.ViewModel"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="TourismManagementSystem.UserControls.UCBooking"
              mc:Ignorable="d" 
-             d:DesignHeight="550" d:DesignWidth="900">
+             d:DesignHeight="550" d:DesignWidth="900"
+             Name="ucBooking">
     <UserControl.DataContext>
         <vm:BookingVM/>
     </UserControl.DataContext>
@@ -130,7 +131,31 @@
                 <DataGridTextColumn Header="Mã phiếu" Binding="{Binding MAPHIEU}" Width="*"  IsReadOnly="True" CanUserSort="True">
 
                 </DataGridTextColumn>
+                <DataGridTextColumn Header="Mã chuyến" Binding="{Binding MACHUYEN}"  Width="*" IsReadOnly="True" CanUserSort="True">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextWrapping" Value="Wrap" />
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="TextAlignment" Value="Center" />
+                            <Setter Property="Padding" Value="10"/>
+
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
                 <DataGridTextColumn Header="Tên khách hàng" Binding="{Binding KHACHHANG.HOTEN}"  Width="*" IsReadOnly="True" CanUserSort="True">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextWrapping" Value="Wrap" />
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center" />
+                            <Setter Property="TextAlignment" Value="Center" />
+                            <Setter Property="Padding" Value="10"/>
+
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Ngày đặt" Binding="{Binding NGAYDAT, StringFormat='dd/MM/yyyy'}"  Width="*" IsReadOnly="True" CanUserSort="True">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="TextWrapping" Value="Wrap" />
@@ -205,8 +230,13 @@
                                     Width="auto"
                                     Background="Transparent"
                                     BorderBrush="Transparent"
-                                    Command="{Binding DataContext.DeleteBookingCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                    CommandParameter="{Binding}">
+                                    Command="{Binding DataContext.DeleteBookingCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}">
+                                <Button.CommandParameter>
+                                    <MultiBinding Converter="{StaticResource MultiCommandParameterConverter}">
+                                        <Binding />
+                                        <Binding ElementName="ucBooking"/>
+                                    </MultiBinding>
+                                </Button.CommandParameter>
                                 <materialDesign:PackIcon Kind="Delete"
                                                              Foreground ="{StaticResource Primary}"/>
                             </Button>

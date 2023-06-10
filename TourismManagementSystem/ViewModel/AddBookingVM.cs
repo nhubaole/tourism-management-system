@@ -102,10 +102,11 @@ namespace TourismManagementSystem.ViewModel
         }
         public AddBookingVM()
         {
-            ListChuyen = new ObservableCollection<CHUYEN>(DataProvider.Ins.DB.CHUYENs);
+            ListChuyen = new ObservableCollection<CHUYEN>(DataProvider.Ins.DB.CHUYENs.Where(c => c.SLTHUCTE < c.SLTOITHIEU));
             ListHKOfPhieu = new ObservableCollection<HANHKHACH> { };
             IsNew = IsEdit;
             ToolTipText = "Chưa nhập đủ thông tin";
+            
             ListKhachHang = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs);
             if (IsEdit == 0)
             {
@@ -113,6 +114,7 @@ namespace TourismManagementSystem.ViewModel
                 _TinhTrangCbItems = new ObservableCollection<string>() { "Chưa thanh toán", "Đã thanh toán" };
                 BtnText = "Thêm phiếu đặt chỗ";
                 NewBooking = new PHIEUDATCHO();
+                NewBooking.NGAYDAT = DateTime.Now;
                 NewBooking.TINHTRANG = "Chưa thanh toán";
                 string formattedID;
                 ObservableCollection<PHIEUDATCHO> ListPhieu = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes);

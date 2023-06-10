@@ -48,9 +48,9 @@ namespace TourismManagementSystem.ViewModel
                 NewTrip.SLTHUCTE = 0;
                 string formattedID;
                 ObservableCollection<CHUYEN> ListChuyen = new ObservableCollection<CHUYEN>(DataProvider.Ins.DB.CHUYENs);
-                if (ListTuyen.Count() == 0)
+                if (ListChuyen.Count() == 0)
                 {
-                    formattedID = string.Format("T{0:D7}", 1);
+                    formattedID = string.Format("C{0:D7}", 1);
                 }
                 else
                 {
@@ -95,6 +95,11 @@ namespace TourismManagementSystem.ViewModel
                     if (NewTrip.TGBATDAU > NewTrip.TGKETTHUC)
                     {
                         MessageBox.Show("Thời gian không hợp lệ");
+                        return;
+                    }
+                    if (HDVBoxes.Count() != 0 && !AreComboBoxValuesUnique())
+                    {
+                        MessageBox.Show("Huấn luyện viên không được trùng nhau");
                         return;
                     }
                     if (IsEdit == 0)
@@ -185,6 +190,29 @@ namespace TourismManagementSystem.ViewModel
                     OnPropertyChanged(nameof(NewTrip.GIAVE));
                 }
             });
+        }
+
+        public bool AreComboBoxValuesUnique()
+        {
+            if (HDVBoxes == null || HDVBoxes.Count == 0)
+            {
+                return false;
+            }
+
+            HashSet<string> uniqueValues = new HashSet<string>();
+
+            foreach (ComboBox item in HDVBoxes)
+            {
+                string value = ((HUONGDANVIEN)item.SelectedItem).MAHDV;
+                if (uniqueValues.Contains(value))
+                {
+                    return false;
+                }
+
+                uniqueValues.Add(value);
+            }
+
+            return true;
         }
 
         private string _selectedHDVMaSo;

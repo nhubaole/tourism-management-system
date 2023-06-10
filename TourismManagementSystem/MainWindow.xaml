@@ -97,7 +97,7 @@
                            Foreground="{StaticResource Primary}"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,50,0">
                     <materialDesign:Badged
-                                Badge="3" Margin="0,0,30,0"
+                                Badge="{Binding UnreadNotificationCount}" Margin="0,0,30,0"
                                 VerticalAlignment="Center"
                                 BadgeBackground="OrangeRed"
                                 BadgeForeground="White"
