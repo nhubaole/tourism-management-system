@@ -1,4 +1,5 @@
-﻿using TourismManagementSystem.ViewModel;
+﻿using TourismManagementSystem.Model;
+using TourismManagementSystem.ViewModel;
 namespace TestDoAn
 {
     [TestClass]
@@ -38,4 +39,6 @@ namespace TestDoAn
         
         }
     }
+
+
 }
