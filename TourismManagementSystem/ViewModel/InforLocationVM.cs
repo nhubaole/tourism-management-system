@@ -11,7 +11,7 @@ using TourismManagementSystem.View;
 
 namespace TourismManagementSystem.ViewModel
 {
-    internal class InforLocationVM:BaseViewModel
+    public class InforLocationVM:BaseViewModel
     {
         public static bool IsNew ; //xác định là tạo mới hay cập nhập
 
@@ -81,7 +81,6 @@ namespace TourismManagementSystem.ViewModel
                 }
                 else//cập nhập
                 {
-                   
                     EditLocation();
                 }
 
