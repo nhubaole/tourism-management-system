@@ -42,7 +42,6 @@ namespace TestDoAn
 
             Assert.AreEqual(tile, lc.TILEHOANTRA);
 
-
         }
 
         [TestMethod]

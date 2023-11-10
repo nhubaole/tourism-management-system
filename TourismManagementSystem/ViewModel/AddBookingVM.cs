@@ -11,7 +11,7 @@ using TourismManagementSystem.View;
 
 namespace TourismManagementSystem.ViewModel
 {
-    internal class AddBookingVM : BaseViewModel
+    public class AddBookingVM : BaseViewModel
     {
         private PHIEUDATCHO _newBooking;
         public PHIEUDATCHO NewBooking { get => _newBooking; set { _newBooking = value; OnPropertyChanged(); } }
@@ -52,7 +52,7 @@ namespace TourismManagementSystem.ViewModel
         public int Count { get => _count; set { _count = value; OnPropertyChanged(nameof(Count)); UpdateList();  } }
 
 
-        private void UpdateList()
+        public void UpdateList()
         {
             int currentRowCount = ListHKOfPhieu.Count;
             if (Count < currentRowCount)
