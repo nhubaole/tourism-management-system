@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TourismManagementSystem.ViewModel
 {
-    internal class InforOTherServiceVM: BaseViewModel
+    public class InforOTherServiceVM: BaseViewModel
     {
         private String _maDVK;
 

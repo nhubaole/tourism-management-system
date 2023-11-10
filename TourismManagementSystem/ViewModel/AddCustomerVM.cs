@@ -13,7 +13,7 @@ using TourismManagementSystem.Model;
 
 namespace TourismManagementSystem.ViewModel
 {
-    internal class AddCustomerVM : BaseViewModel, INotifyDataErrorInfo
+    public class AddCustomerVM : BaseViewModel, INotifyDataErrorInfo
     {
         private KHACHHANG NewCustomer;
 
@@ -256,11 +256,11 @@ namespace TourismManagementSystem.ViewModel
             OnErrorsChanged(propertyName);
         }
 
-        private bool IsNumber(string value)
+        public bool IsNumber(string value)
         {
             return double.TryParse(value, out _);
         }
-        private bool IsNameValid(string name)
+        public bool IsNameValid(string name)
         {
             foreach (char c in name)
             {
@@ -272,7 +272,7 @@ namespace TourismManagementSystem.ViewModel
 
             return true;
         }
-        private bool IsEmailValid(string email)
+        public bool IsEmailValid(string email)
         {
             if (string.IsNullOrEmpty(email))
             {

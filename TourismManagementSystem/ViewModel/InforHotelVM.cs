@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TourismManagementSystem.ViewModel
 {
-    internal class InforHotelVM : BaseViewModel
+    public class InforHotelVM : BaseViewModel
     {
         private String _maKS;
 
@@ -38,7 +38,6 @@ namespace TourismManagementSystem.ViewModel
             soSao = InforServiceVM.SoSaoKS;
             sucChua = InforServiceVM.SucChuaKS;
             
-
             PropertyChanged += InforHotelVM_PropertyChanged;
         }
 
