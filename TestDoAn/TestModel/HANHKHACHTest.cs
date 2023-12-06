@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TourismManagementSystem.Model;
 
-namespace TestDoAn
+namespace TestDoAn.TestModel
 {
     [TestClass]
     public class HANHKHACHTest
@@ -60,7 +60,7 @@ namespace TestDoAn
             var hk = new HANHKHACH();
             string dc = "01 Nguyễn Văn Bá";
             hk.DIACHI = dc;
-            Assert.AreEqual (dc, hk.DIACHI);
+            Assert.AreEqual(dc, hk.DIACHI);
         }
 
         [TestMethod]

@@ -107,7 +107,7 @@ namespace TourismManagementSystem.ViewModel
         public LocationVM()
         {
             IsDisplay = true;
-            diadiem = new ObservableCollection<DIADIEM>(DataProvider.Ins.DB.DIADIEMs);
+            diadiem = new ObservableCollection<DIADIEM>(DataProvider.Ins.DB.DIADIEMs); //+. viết lacation: 
             SearchResult = new ObservableCollection<DIADIEM>(DataProvider.Ins.DB.DIADIEMs);
 
             cmbItems = new ObservableCollection<String>(new List<string> { "Mã địa điểm", "Tên địa điểm", "Địa chỉ", "Mô tả" });

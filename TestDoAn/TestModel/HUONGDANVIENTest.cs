@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TourismManagementSystem.Model;
-namespace TestDoAn
+namespace TestDoAn.TestModel
 {
     [TestClass]
     public class HUONGDANVIENTest
@@ -50,7 +50,7 @@ namespace TestDoAn
             string sdt = "09004343234";
             hdv.SDT = sdt;
 
-            Assert.AreEqual (sdt, hdv.SDT);
+            Assert.AreEqual(sdt, hdv.SDT);
         }
         [TestMethod]
 
@@ -58,9 +58,9 @@ namespace TestDoAn
         {
             var hdv = new HUONGDANVIEN();
             string dc = "01 Nguyễn Văn BÁ";
-            hdv.DIACHI = dc;    
+            hdv.DIACHI = dc;
 
-            Assert.AreEqual (@dc, hdv.DIACHI);  
+            Assert.AreEqual(@dc, hdv.DIACHI);
         }
 
         [TestMethod]
@@ -71,7 +71,7 @@ namespace TestDoAn
 
             hdv.NGSINH = DateTime.Now;
 
-            Assert.IsNotNull (hdv.NGSINH);  
+            Assert.IsNotNull(hdv.NGSINH);
         }
 
         [TestMethod]
@@ -82,9 +82,9 @@ namespace TestDoAn
             var hdv = new HUONGDANVIEN();
             var chuyen = new CHUYEN();
 
-            hdv.CHUYENs.Add (chuyen);
+            hdv.CHUYENs.Add(chuyen);
 
-            Assert.IsTrue(hdv.CHUYENs.Contains (chuyen));
+            Assert.IsTrue(hdv.CHUYENs.Contains(chuyen));
 
         }
     }

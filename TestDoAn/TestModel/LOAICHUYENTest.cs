@@ -5,20 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using TourismManagementSystem.Model;
 
-namespace TestDoAn
+namespace TestDoAn.TestModel
 {
     [TestClass]
     public class LOAICHUYENTest
     {
         [TestMethod]
-        public void TestMALOAIProperty ()
+        public void TestMALOAIProperty()
         {
             var lc = new LOAICHUYEN();
             string ma = "LC0000001";
 
             lc.MALOAI = ma;
 
-            Assert.AreEqual (ma, lc.MALOAI);    
+            Assert.AreEqual(ma, lc.MALOAI);
 
         }
 

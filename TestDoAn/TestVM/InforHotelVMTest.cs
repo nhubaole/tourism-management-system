@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TourismManagementSystem.ViewModel;
 
-namespace TestDoAn
+namespace TestDoAn.TestVM
 {
     [TestClass]
     public class InforHotelVMTest

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TourismManagementSystem.Model;
 
-namespace TestDoAn
+namespace TestDoAn.TestModel
 {
     [TestClass]
     public class TUYENTest
@@ -24,7 +24,7 @@ namespace TestDoAn
         public void TestTENTUYENProperty()
         {
             var t = new TUYEN();
-            string ten= "Nha Trang - Đà Lạt";
+            string ten = "Nha Trang - Đà Lạt";
             t.TENTUYEN = ten;
 
             Assert.AreEqual(ten, t.TENTUYEN);
@@ -55,7 +55,7 @@ namespace TestDoAn
         {
             var t = new TUYEN();
             int sn = 4;
-            t.SONGAY = sn ;
+            t.SONGAY = sn;
 
             Assert.AreEqual(sn, t.SONGAY);
         }
@@ -94,7 +94,7 @@ namespace TestDoAn
         public void TestDIADIEMProperty()
         {
             var t = new TUYEN();
-            DIADIEM dd= new DIADIEM();
+            DIADIEM dd = new DIADIEM();
             t.DIADIEM = dd;
 
             Assert.AreEqual(dd, t.DIADIEM);

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TourismManagementSystem.Model;
 
-namespace TestDoAn
+namespace TestDoAn.TestModel
 {
     [TestClass]
     public class LOAITUYENTest
@@ -33,7 +33,7 @@ namespace TestDoAn
         [TestMethod]
         public void TestTGMUATRUOCKHOIHANHProperty()
         {
-            var lt= new LOAITUYEN();
+            var lt = new LOAITUYEN();
             int tgmuatruockhoihanh = 24;
             lt.TGMUATRUOCKHOIHANH = tgmuatruockhoihanh;
 

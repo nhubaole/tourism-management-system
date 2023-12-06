@@ -87,11 +87,68 @@ namespace TourismManagementSystem.ViewModel
             }
         }
 
+        private ObservableCollection<KHACHHANG> ListKH;
         public AddCustomerVM()
         {
             NewCustomer = new KHACHHANG();
             string formattedID;
-            ObservableCollection<KHACHHANG> ListKH = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs);
+            ListKH = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs);
+            if (ListKH.Count() == 0)
+            {
+                formattedID = string.Format("KH{0:D6}", 1);
+            }
+            else
+            {
+                string lastID = ListKH.Last().MAKH;
+                int previousNumber = int.Parse(lastID.Substring(2));
+                int nextNumber = previousNumber + 1;
+                formattedID = string.Format("KH{0:D6}", nextNumber);
+            }
+            MAKH = formattedID;
+
+            AddDataCommand = new RelayCommand<object>((p) => {
+                if (HasErrors || DIACHI == null || HOTEN == null || EMAIL == null || SDT == null || CCCD == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }, (p) =>
+            {
+                try
+                {
+                    Window w = p as Window;
+                    if (w != null)
+                    {
+                        NewCustomer.MAKH = MAKH;
+                        NewCustomer.HOTEN = HOTEN;
+                        NewCustomer.EMAIL = EMAIL;
+                        NewCustomer.SDT = SDT;
+                        NewCustomer.DIACHI = DIACHI;
+                        NewCustomer.CCCD = CCCD;
+                        DataProvider.Ins.DB.KHACHHANGs.Add(NewCustomer);
+                        DataProvider.Ins.DB.SaveChanges();
+
+                        MessageBox.Show("Đã tạo mới khách hàng thành công");
+                        w.Close();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Đã xảy ra lỗi: " + ex.Message);
+                }
+
+
+            });
+        }
+        public AddCustomerVM(ObservableCollection<KHACHHANG> customListOfCustomers)
+        {
+            ListKH = customListOfCustomers;
+            string formattedID;
+            // Các dòng code khác trong constructor không thay đổi
+
             if (ListKH.Count() == 0)
             {
                 formattedID = string.Format("KH{0:D6}", 1);
@@ -168,7 +225,7 @@ namespace TourismManagementSystem.ViewModel
         }
 
 
-        private void ValidateProperty(string propertyName)
+        public void ValidateProperty(string propertyName)
         {
             List<string> errors = new List<string>();
 

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TourismManagementSystem.Model;
 
-namespace TestDoAn
+namespace TestDoAn.TestModel
 {
     [TestClass]
     public class TAIKHOANTest
@@ -17,7 +17,7 @@ namespace TestDoAn
             string ten = "USER0001";
             tk.TENTK = ten;
 
-            Assert.AreEqual(ten,tk.TENTK);
+            Assert.AreEqual(ten, tk.TENTK);
         }
 
         [TestMethod]

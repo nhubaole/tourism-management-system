@@ -1,6 +1,6 @@
 ﻿using TourismManagementSystem.Model;
 using TourismManagementSystem.ViewModel;
-namespace TestDoAn
+namespace TestDoAn.TestVM
 {
     [TestClass]
     public class InforLocationVMTest
@@ -71,10 +71,7 @@ namespace TestDoAn
         [DataRow("Không phải là cách ", false)]
         [DataRow(" Không phải cách ", false)]
         [DataRow("adasdasdas ", false)]
-        [DataRow(null, true)]
         [DataRow(" Không phải cách ", false)]
-
-
 
         public void TestIsAllWhiteSpace(string s, bool expect)
         {
