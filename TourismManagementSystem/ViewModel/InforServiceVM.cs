@@ -377,8 +377,6 @@ namespace TourismManagementSystem.ViewModel
 
             });
         }
-
-       
         private void Traffic(object obj) => CurrentView = new InforTrafficVm();
         private void Restaurant(object obj) => CurrentView = new InforRestaurantVm();
         private void Hotel(object obj) => CurrentView = new InforHotelVM();

@@ -11,7 +11,7 @@ using System.Windows;
 using System.Configuration;
 using System.Collections.ObjectModel;
 using System.Collections;
-namespace TourismManagementSystem.Tests
+namespace TestDoAn.TestVM
 {
     [TestClass]
     public class AddCustomerVMTest

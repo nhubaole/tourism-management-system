@@ -78,27 +78,7 @@ namespace TourismManagementSystem.ViewModel
             }
 
 
-            //if (Count > currentRowCount)
-            //{
-            //    int itemsToAdd = Count - currentRowCount;
-
-            //    for (int i = 0; i < itemsToAdd; i++)
-            //    {
-            //        HANHKHACH n = new HANHKHACH();
-            //        Random random = new Random();
-            //        n.MAHK = random.Next(0,1000).ToString();
-            //        ListHKOfPhieu.Add(new HANHKHACH());
-            //    }
-            //}
-            //else if (Count < currentRowCount)
-            //{
-            //    int itemsToRemove = currentRowCount - Count;
-
-            //    for (int i = 0; i < itemsToRemove; i++)
-            //    {
-            //        ListHKOfPhieu.RemoveAt(ListHKOfPhieu.Count - 1);
-            //    }
-            //}
+ 
         }
         public AddBookingVM()
         {
