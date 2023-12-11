@@ -9,7 +9,7 @@ using TourismManagementSystem.Model;
 
 namespace TourismManagementSystem.ViewModel
 {
-    internal class InforTrafficVm: BaseViewModel
+    public class InforTrafficVm: BaseViewModel
     {
         public static bool IsNew; //xác định là tạo mới hay cập nhập
         public static PHUONGTIEN d = null;
@@ -23,8 +23,8 @@ namespace TourismManagementSystem.ViewModel
         public String tenPT { get { return _tenPT; } set { _tenPT = value; OnPropertyChanged(); } }
 
 
-        private String _dcPT;
-        public String dcPT { get { return _dcPT; } set { _dcPT = value; OnPropertyChanged(); } }
+        //private String _dcPT;
+        //public String dcPT { get { return _dcPT; } set { _dcPT = value; OnPropertyChanged(); } }
          
         private int _SLGhe;
         public int SLGhe { get { return _SLGhe; } set { _SLGhe = value; OnPropertyChanged(); } }
@@ -32,10 +32,7 @@ namespace TourismManagementSystem.ViewModel
 
         public InforTrafficVm()
         {
-
-
             //lấy thông tin từ Inforservice
-
             maPT = InforServiceVM.MaPT;
             tenPT = InforServiceVM.TenPT;
             SLGhe = InforServiceVM.SLG;
@@ -62,7 +59,6 @@ namespace TourismManagementSystem.ViewModel
                     InforServiceVM.SLG = SLGhe;
                     break;
                 default:
-                    // Xử lý cho các thuộc tính khác (nếu cần)
                     break;
             }
         }

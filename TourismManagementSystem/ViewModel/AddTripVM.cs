@@ -104,7 +104,6 @@ namespace TourismManagementSystem.ViewModel
                     }
                     if (IsEdit == 0)
                     {
-                        //NewTrip.MALOAI = DataProvider.Ins.DB.LOAICHUYENs.Where(t => t.TENLOAI.Equals(NewTrip.LOAICHUYEN)).ToString();
                         foreach (var t in HDVBoxes)
                         {
                             NewTrip.HUONGDANVIENs.Add((HUONGDANVIEN)t.SelectedItem);
@@ -127,7 +126,6 @@ namespace TourismManagementSystem.ViewModel
                         var itemToUpdate = DataProvider.Ins.DB.CHUYENs.FirstOrDefault(item => item.MACHUYEN == NewTrip.MACHUYEN);
                         if (itemToUpdate != null)
                         {
-                            //NewTrip.MALOAI = DataProvider.Ins.DB.LOAICHUYENs.Select(t => t.MALOAI.Where(t.TENLOAI.Equals(NewTrip.LOAICHUYEN));
                             itemToUpdate = NewTrip;
                             foreach (var t in HDVBoxes)
                             {
@@ -222,7 +220,7 @@ namespace TourismManagementSystem.ViewModel
             set
             {
                 _selectedHDVMaSo = value;
-                OnPropertyChanged(); // Implement INotifyPropertyChanged to notify the UI of property changes
+                OnPropertyChanged(); 
             }
         }
         public ICommand AddCommand { get; set; }

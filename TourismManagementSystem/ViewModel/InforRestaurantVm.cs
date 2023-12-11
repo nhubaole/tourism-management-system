@@ -7,15 +7,9 @@ using TourismManagementSystem.Model;
 
 namespace TourismManagementSystem.ViewModel
 {
-    internal class InforRestaurantVm : BaseViewModel
+    public class InforRestaurantVm : BaseViewModel
 
     {
-
-        public static String MaNH;
-        public static String TenNH;
-        public static String SDT;
-        public static String MoTa;
-
         private String _maNH;
 
         public String maNH { get { return _maNH; } set { _maNH = value; OnPropertyChanged(); } }
@@ -33,8 +27,6 @@ namespace TourismManagementSystem.ViewModel
 
         public InforRestaurantVm()
         {
-
-
             //nhận các thông tin từ InforService
             maNH = InforServiceVM.MaNH;
             tenNH = InforServiceVM.TenNH;
