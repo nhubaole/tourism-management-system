@@ -154,7 +154,7 @@ namespace TourismManagementSystem.ViewModel
             }
         }
 
-        public object ObsevableCollection { get; private set; }
+        //public object ObsevableCollection { get; private set; }
 
         public void WarnTrip()
         {

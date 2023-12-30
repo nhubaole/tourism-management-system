@@ -14,8 +14,8 @@ namespace TourismManagementSystem.ViewModel
     public class BookingVM : BaseViewModel
     {
         public ICommand AddBookingCommand { get; set; }
-        public ICommand DeleteBookingCommand { get; set; }
-        public ICommand EditBookingCommand { get; set; }
+        //public ICommand DeleteBookingCommand { get; set; }
+        //public ICommand EditBookingCommand { get; set; }
         public ICommand ViewBookingCommand { get; set; }
 
         private ObservableCollection<PHIEUDATCHO> _bookingList;
@@ -27,22 +27,22 @@ namespace TourismManagementSystem.ViewModel
             set
             {
                 _Search = value;
-                if (SelectedFilter == FilterCbItems[0])
-                {
-                    BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes.Where(t => t.MAPHIEU.Contains(Search)));
-                }
-                else if (SelectedFilter == FilterCbItems[1])
-                {
-                    BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes.Where(t => t.MACHUYEN.Contains(Search)));
-                }
-                else if (SelectedFilter == FilterCbItems[2])
-                {
-                    BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes.Where(t => t.KHACHHANG.HOTEN.Contains(Search)));
-                }
-                else if (SelectedFilter == FilterCbItems[3])
-                {
-                    BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes.Where(t => t.TINHTRANG.Contains(Search)));
-                }
+                //if (SelectedFilter == FilterCbItems[0])
+                //{
+                //    BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes.Where(t => t.MAPHIEU.Contains(Search)));
+                //}
+                //else if (SelectedFilter == FilterCbItems[1])
+                //{
+                //    BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes.Where(t => t.MACHUYEN.Contains(Search)));
+                //}
+                //else if (SelectedFilter == FilterCbItems[2])
+                //{
+                //    BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes.Where(t => t.KHACHHANG.HOTEN.Contains(Search)));
+                //}
+                //else if (SelectedFilter == FilterCbItems[3])
+                //{
+                //    BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes.Where(t => t.TINHTRANG.Contains(Search)));
+                //}
                 OnPropertyChanged();
             }
         }
@@ -67,73 +67,73 @@ namespace TourismManagementSystem.ViewModel
         {
             SelectedFilter = FilterCbItems[0];
             BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes);
-            DeleteBookingCommand = new RelayCommand<object>((p) => true, (p) =>
-            {
-                var values = (object[])p;
-                MainWindow mainWindow = Window.GetWindow((DependencyObject)values[1]) as MainWindow;
-                PHIEUDATCHO selectedPhieu = values[0] as PHIEUDATCHO;
-                if(selectedPhieu.CHUYEN.TGKETTHUC > DateTime.Now && selectedPhieu.TINHTRANG == "Đã thanh toán")
-                {
-                    MessageBox.Show("Phiếu đặt chỗ đã thanh toán nhưng chuyến đi chưa diễn ra. Không thể xóa phiếu");
-                }
-                else
-                {
-                    if (MessageBox.Show("Bạn có muốn xóa phiếu này?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                    {
-                        var hanhkhachToRemove = selectedPhieu.HANHKHACHes.ToList();
-                        foreach (var item in hanhkhachToRemove)
-                        {
-                            DataProvider.Ins.DB.HANHKHACHes.Remove(item);
-                        }
-                        var veToRemove = selectedPhieu.VEs.ToList();
-                        foreach (var item in veToRemove)
-                        {
-                            DataProvider.Ins.DB.VEs.Remove(item);
-                        }
+            //DeleteBookingCommand = new RelayCommand<object>((p) => true, (p) =>
+            //{
+            //    var values = (object[])p;
+            //    MainWindow mainWindow = Window.GetWindow((DependencyObject)values[1]) as MainWindow;
+            //    PHIEUDATCHO selectedPhieu = values[0] as PHIEUDATCHO;
+            //    if(selectedPhieu.CHUYEN.TGKETTHUC > DateTime.Now && selectedPhieu.TINHTRANG == "Đã thanh toán")
+            //    {
+            //        MessageBox.Show("Phiếu đặt chỗ đã thanh toán nhưng chuyến đi chưa diễn ra. Không thể xóa phiếu");
+            //    }
+            //    else
+            //    {
+            //        if (MessageBox.Show("Bạn có muốn xóa phiếu này?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            //        {
+            //            var hanhkhachToRemove = selectedPhieu.HANHKHACHes.ToList();
+            //            foreach (var item in hanhkhachToRemove)
+            //            {
+            //                DataProvider.Ins.DB.HANHKHACHes.Remove(item);
+            //            }
+            //            var veToRemove = selectedPhieu.VEs.ToList();
+            //            foreach (var item in veToRemove)
+            //            {
+            //                DataProvider.Ins.DB.VEs.Remove(item);
+            //            }
 
-                        var ttToRemove = selectedPhieu.THONGTINTHANHTOANs.ToList();
-                        foreach (var item in ttToRemove)
-                        {
-                            DataProvider.Ins.DB.THONGTINTHANHTOANs.Remove(item);
-                        }
+            //            var ttToRemove = selectedPhieu.THONGTINTHANHTOANs.ToList();
+            //            foreach (var item in ttToRemove)
+            //            {
+            //                DataProvider.Ins.DB.THONGTINTHANHTOANs.Remove(item);
+            //            }
 
-                        THONGBAO newTB = new THONGBAO();
-                        string formattedID;
-                        ObservableCollection<THONGBAO> ListTB = new ObservableCollection<THONGBAO>(DataProvider.Ins.DB.THONGBAOs);
-                        if (ListTB.Count() == 0)
-                        {
-                            formattedID = string.Format("TB{0:D6}", 1);
-                        }
-                        else
-                        {
-                            string lastID = ListTB.Last().MATB;
-                            int previousNumber = int.Parse(lastID.Substring(2));
-                            int nextNumber = previousNumber + 1;
-                            formattedID = string.Format("TB{0:D6}", nextNumber);
-                        }
-                        newTB.MATB = formattedID;
-                        newTB.THONGBAO1 = "Phiếu đặt chỗ " + selectedPhieu.MAPHIEU + " đã được xóa";
-                        newTB.THOIGIAN = DateTime.Now;
-                        newTB.DADOC = false;
-                        DataProvider.Ins.DB.THONGBAOs.Add(newTB);
-                        DataProvider.Ins.DB.SaveChanges();
-                        if (mainWindow != null)
-                        {
-                            MainVM mainVM = mainWindow.DataContext as MainVM;
-                            if (mainVM != null)
-                            {
-                                mainVM.UnreadNotificationCount = DataProvider.Ins.DB.THONGBAOs.Where(t => t.DADOC == false).Count();
-                            }
-                        }
+            //            THONGBAO newTB = new THONGBAO();
+            //            string formattedID;
+            //            ObservableCollection<THONGBAO> ListTB = new ObservableCollection<THONGBAO>(DataProvider.Ins.DB.THONGBAOs);
+            //            if (ListTB.Count() == 0)
+            //            {
+            //                formattedID = string.Format("TB{0:D6}", 1);
+            //            }
+            //            else
+            //            {
+            //                string lastID = ListTB.Last().MATB;
+            //                int previousNumber = int.Parse(lastID.Substring(2));
+            //                int nextNumber = previousNumber + 1;
+            //                formattedID = string.Format("TB{0:D6}", nextNumber);
+            //            }
+            //            newTB.MATB = formattedID;
+            //            newTB.THONGBAO1 = "Phiếu đặt chỗ " + selectedPhieu.MAPHIEU + " đã được xóa";
+            //            newTB.THOIGIAN = DateTime.Now;
+            //            newTB.DADOC = false;
+            //            DataProvider.Ins.DB.THONGBAOs.Add(newTB);
+            //            DataProvider.Ins.DB.SaveChanges();
+            //            if (mainWindow != null)
+            //            {
+            //                MainVM mainVM = mainWindow.DataContext as MainVM;
+            //                if (mainVM != null)
+            //                {
+            //                    mainVM.UnreadNotificationCount = DataProvider.Ins.DB.THONGBAOs.Where(t => t.DADOC == false).Count();
+            //                }
+            //            }
 
-                        DataProvider.Ins.DB.PHIEUDATCHOes.Remove(selectedPhieu);
+            //            DataProvider.Ins.DB.PHIEUDATCHOes.Remove(selectedPhieu);
 
-                        DataProvider.Ins.DB.SaveChanges();
-                        BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes);
-                        MessageBox.Show("Xóa phiếu thành công");
-                    }
-                }
-            });
+            //            DataProvider.Ins.DB.SaveChanges();
+            //            BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes);
+            //            MessageBox.Show("Xóa phiếu thành công");
+            //        }
+            //    }
+            //});
             AddBookingCommand = new RelayCommand<object>((p) => true, (p) =>
             {
                 AddBookingVM.IsEdit = 0;
@@ -142,21 +142,21 @@ namespace TourismManagementSystem.ViewModel
                 BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes);
             });
 
-            EditBookingCommand = new RelayCommand<object>((p) => true, (p) =>
-            {
-                PHIEUDATCHO selectedPhieu = p as PHIEUDATCHO;
-               if(selectedPhieu.TINHTRANG == "Đã xuất vé") {
-                    MessageBox.Show("Không thể sửa thông tin phiếu đã xuất vé");
-                }
-                else
-                {
-                    AddBookingVM.EditSelectedPhieu = selectedPhieu;
-                    AddBookingVM.IsEdit = 1;
-                    AddBookingWindow addBookingWindow = new AddBookingWindow();
-                    addBookingWindow.ShowDialog();
-                    BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes);
-                }
-            });
+            //EditBookingCommand = new RelayCommand<object>((p) => true, (p) =>
+            //{
+            //    PHIEUDATCHO selectedPhieu = p as PHIEUDATCHO;
+            //   if(selectedPhieu.TINHTRANG == "Đã xuất vé") {
+            //        MessageBox.Show("Không thể sửa thông tin phiếu đã xuất vé");
+            //    }
+            //    else
+            //    {
+            //        AddBookingVM.EditSelectedPhieu = selectedPhieu;
+            //        AddBookingVM.IsEdit = 1;
+            //        AddBookingWindow addBookingWindow = new AddBookingWindow();
+            //        addBookingWindow.ShowDialog();
+            //        BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes);
+            //    }
+            //});
             ViewBookingCommand = new RelayCommand<object>((p) => true, (p) =>
             {
                 PHIEUDATCHO selectedPhieu = p as PHIEUDATCHO;
@@ -171,97 +171,97 @@ namespace TourismManagementSystem.ViewModel
         {
             SelectedFilter = FilterCbItems[0];
             BookingList =  listPDC;
-            DeleteBookingCommand = new RelayCommand<object>((p) => true, (p) =>
-            {
-                var values = (object[])p;
-                MainWindow mainWindow = Window.GetWindow((DependencyObject)values[1]) as MainWindow;
-                PHIEUDATCHO selectedPhieu = values[0] as PHIEUDATCHO;
-                if (selectedPhieu.CHUYEN.TGKETTHUC > DateTime.Now && selectedPhieu.TINHTRANG == "Đã thanh toán")
-                {
-                    MessageBox.Show("Phiếu đặt chỗ đã thanh toán nhưng chuyến đi chưa diễn ra. Không thể xóa phiếu");
-                }
-                else
-                {
-                    if (MessageBox.Show("Bạn có muốn xóa phiếu này?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                    {
-                        var hanhkhachToRemove = selectedPhieu.HANHKHACHes.ToList();
-                        foreach (var item in hanhkhachToRemove)
-                        {
-                            DataProvider.Ins.DB.HANHKHACHes.Remove(item);
-                        }
-                        var veToRemove = selectedPhieu.VEs.ToList();
-                        foreach (var item in veToRemove)
-                        {
-                            DataProvider.Ins.DB.VEs.Remove(item);
-                        }
+            //DeleteBookingCommand = new RelayCommand<object>((p) => true, (p) =>
+            //{
+            //    var values = (object[])p;
+            //    MainWindow mainWindow = Window.GetWindow((DependencyObject)values[1]) as MainWindow;
+            //    PHIEUDATCHO selectedPhieu = values[0] as PHIEUDATCHO;
+            //    if (selectedPhieu.CHUYEN.TGKETTHUC > DateTime.Now && selectedPhieu.TINHTRANG == "Đã thanh toán")
+            //    {
+            //        MessageBox.Show("Phiếu đặt chỗ đã thanh toán nhưng chuyến đi chưa diễn ra. Không thể xóa phiếu");
+            //    }
+            //    else
+            //    {
+            //        if (MessageBox.Show("Bạn có muốn xóa phiếu này?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            //        {
+            //            var hanhkhachToRemove = selectedPhieu.HANHKHACHes.ToList();
+            //            foreach (var item in hanhkhachToRemove)
+            //            {
+            //                DataProvider.Ins.DB.HANHKHACHes.Remove(item);
+            //            }
+            //            var veToRemove = selectedPhieu.VEs.ToList();
+            //            foreach (var item in veToRemove)
+            //            {
+            //                DataProvider.Ins.DB.VEs.Remove(item);
+            //            }
 
-                        var ttToRemove = selectedPhieu.THONGTINTHANHTOANs.ToList();
-                        foreach (var item in ttToRemove)
-                        {
-                            DataProvider.Ins.DB.THONGTINTHANHTOANs.Remove(item);
-                        }
+            //            var ttToRemove = selectedPhieu.THONGTINTHANHTOANs.ToList();
+            //            foreach (var item in ttToRemove)
+            //            {
+            //                DataProvider.Ins.DB.THONGTINTHANHTOANs.Remove(item);
+            //            }
 
-                        THONGBAO newTB = new THONGBAO();
-                        string formattedID;
-                        ObservableCollection<THONGBAO> ListTB = new ObservableCollection<THONGBAO>(DataProvider.Ins.DB.THONGBAOs);
-                        if (ListTB.Count() == 0)
-                        {
-                            formattedID = string.Format("TB{0:D6}", 1);
-                        }
-                        else
-                        {
-                            string lastID = ListTB.Last().MATB;
-                            int previousNumber = int.Parse(lastID.Substring(2));
-                            int nextNumber = previousNumber + 1;
-                            formattedID = string.Format("TB{0:D6}", nextNumber);
-                        }
-                        newTB.MATB = formattedID;
-                        newTB.THONGBAO1 = "Phiếu đặt chỗ " + selectedPhieu.MAPHIEU + " đã được xóa";
-                        newTB.THOIGIAN = DateTime.Now;
-                        newTB.DADOC = false;
-                        DataProvider.Ins.DB.THONGBAOs.Add(newTB);
-                        DataProvider.Ins.DB.SaveChanges();
-                        if (mainWindow != null)
-                        {
-                            MainVM mainVM = mainWindow.DataContext as MainVM;
-                            if (mainVM != null)
-                            {
-                                mainVM.UnreadNotificationCount = DataProvider.Ins.DB.THONGBAOs.Where(t => t.DADOC == false).Count();
-                            }
-                        }
+            //            THONGBAO newTB = new THONGBAO();
+            //            string formattedID;
+            //            ObservableCollection<THONGBAO> ListTB = new ObservableCollection<THONGBAO>(DataProvider.Ins.DB.THONGBAOs);
+            //            if (ListTB.Count() == 0)
+            //            {
+            //                formattedID = string.Format("TB{0:D6}", 1);
+            //            }
+            //            else
+            //            {
+            //                string lastID = ListTB.Last().MATB;
+            //                int previousNumber = int.Parse(lastID.Substring(2));
+            //                int nextNumber = previousNumber + 1;
+            //                formattedID = string.Format("TB{0:D6}", nextNumber);
+            //            }
+            //            newTB.MATB = formattedID;
+            //            newTB.THONGBAO1 = "Phiếu đặt chỗ " + selectedPhieu.MAPHIEU + " đã được xóa";
+            //            newTB.THOIGIAN = DateTime.Now;
+            //            newTB.DADOC = false;
+            //            DataProvider.Ins.DB.THONGBAOs.Add(newTB);
+            //            DataProvider.Ins.DB.SaveChanges();
+            //            if (mainWindow != null)
+            //            {
+            //                MainVM mainVM = mainWindow.DataContext as MainVM;
+            //                if (mainVM != null)
+            //                {
+            //                    mainVM.UnreadNotificationCount = DataProvider.Ins.DB.THONGBAOs.Where(t => t.DADOC == false).Count();
+            //                }
+            //            }
 
-                        DataProvider.Ins.DB.PHIEUDATCHOes.Remove(selectedPhieu);
+            //            DataProvider.Ins.DB.PHIEUDATCHOes.Remove(selectedPhieu);
 
-                        DataProvider.Ins.DB.SaveChanges();
-                        BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes);
-                        MessageBox.Show("Xóa phiếu thành công");
-                    }
-                }
-            });
-            AddBookingCommand = new RelayCommand<object>((p) => true, (p) =>
-            {
-                AddBookingVM.IsEdit = 0;
-                AddBookingWindow addBookingWindow = new AddBookingWindow();
-                addBookingWindow.ShowDialog();
-                BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes);
-            });
+            //            DataProvider.Ins.DB.SaveChanges();
+            //            BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes);
+            //            MessageBox.Show("Xóa phiếu thành công");
+            //        }
+            //    }
+            //});
+            //AddBookingCommand = new RelayCommand<object>((p) => true, (p) =>
+            //{
+            //    AddBookingVM.IsEdit = 0;
+            //    AddBookingWindow addBookingWindow = new AddBookingWindow();
+            //    addBookingWindow.ShowDialog();
+            //    BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes);
+            //});
 
-            EditBookingCommand = new RelayCommand<object>((p) => true, (p) =>
-            {
-                PHIEUDATCHO selectedPhieu = p as PHIEUDATCHO;
-                if (selectedPhieu.TINHTRANG == "Đã xuất vé")
-                {
-                    MessageBox.Show("Không thể sửa thông tin phiếu đã xuất vé");
-                }
-                else
-                {
-                    AddBookingVM.EditSelectedPhieu = selectedPhieu;
-                    AddBookingVM.IsEdit = 1;
-                    AddBookingWindow addBookingWindow = new AddBookingWindow();
-                    addBookingWindow.ShowDialog();
-                    BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes);
-                }
-            });
+            //EditBookingCommand = new RelayCommand<object>((p) => true, (p) =>
+            //{
+            //    PHIEUDATCHO selectedPhieu = p as PHIEUDATCHO;
+            //    if (selectedPhieu.TINHTRANG == "Đã xuất vé")
+            //    {
+            //        MessageBox.Show("Không thể sửa thông tin phiếu đã xuất vé");
+            //    }
+            //    else
+            //    {
+            //        AddBookingVM.EditSelectedPhieu = selectedPhieu;
+            //        AddBookingVM.IsEdit = 1;
+            //        AddBookingWindow addBookingWindow = new AddBookingWindow();
+            //        addBookingWindow.ShowDialog();
+            //        BookingList = new ObservableCollection<PHIEUDATCHO>(DataProvider.Ins.DB.PHIEUDATCHOes);
+            //    }
+            //});
             ViewBookingCommand = new RelayCommand<object>((p) => true, (p) =>
             {
                 PHIEUDATCHO selectedPhieu = p as PHIEUDATCHO;
