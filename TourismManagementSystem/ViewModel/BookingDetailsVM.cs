@@ -11,7 +11,7 @@ using TourismManagementSystem.View;
 
 namespace TourismManagementSystem.ViewModel
 {
-    internal class BookingDetailVM : BaseViewModel
+    public class BookingDetailVM : BaseViewModel
     {
         private static PHIEUDATCHO _selectedPhieu;
         public static PHIEUDATCHO SelectedPhieu { get => _selectedPhieu; set { _selectedPhieu = value; } }

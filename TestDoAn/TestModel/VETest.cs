@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TourismManagementSystem.Model;
 
-namespace TestDoAn
+namespace TestDoAn.TestModel
 {
     [TestClass]
     public class VETest
@@ -74,7 +74,7 @@ namespace TestDoAn
         public void TestHANHKHACHProperty()
         {
             var ve = new VE();
-            HANHKHACH hk= new HANHKHACH();
+            HANHKHACH hk = new HANHKHACH();
             ve.HANHKHACH = hk;
 
             Assert.AreEqual(hk, ve.HANHKHACH);

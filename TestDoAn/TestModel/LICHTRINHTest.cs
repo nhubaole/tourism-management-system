@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TourismManagementSystem.Model;
 
-namespace TestDoAn
+namespace TestDoAn.TestModel
 {
     [TestClass]
     public class LICHTRINHTest
@@ -18,7 +18,7 @@ namespace TestDoAn
 
             lt.MALT = ma;
 
-            Assert.AreEqual(ma, lt.MALT);       
+            Assert.AreEqual(ma, lt.MALT);
 
         }
 
@@ -117,11 +117,11 @@ namespace TestDoAn
         public void TestKHACHSANsProperty()
         {
             var lt = new LICHTRINH();
-            var ks = new KHACHSAN();   
+            var ks = new KHACHSAN();
 
             lt.KHACHSANs.Add(ks);
 
-            Assert.IsTrue(lt.KHACHSANs.Contains(ks));   
+            Assert.IsTrue(lt.KHACHSANs.Contains(ks));
 
         }
 
@@ -133,7 +133,7 @@ namespace TestDoAn
 
             lt.NHAHANGs.Add(nh);
 
-            Assert.IsTrue(lt.NHAHANGs.Contains(nh));    
+            Assert.IsTrue(lt.NHAHANGs.Contains(nh));
 
         }
 
@@ -143,7 +143,7 @@ namespace TestDoAn
             var lt = new LICHTRINH();
             var pt = new PHUONGTIEN();
 
-            lt.PHUONGTIENs.Add(pt); 
+            lt.PHUONGTIENs.Add(pt);
 
             Assert.IsTrue(lt.PHUONGTIENs.Contains(pt));
 

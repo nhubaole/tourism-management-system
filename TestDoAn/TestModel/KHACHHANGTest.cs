@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TourismManagementSystem.Model;
 
-namespace TestDoAn
+namespace TestDoAn.TestModel
 {
     [TestClass]
     public class KHACHHANGTest
@@ -55,9 +55,9 @@ namespace TestDoAn
         {
             var kh = new KHACHHANG();
             string email = "abinh@gmail.com";
-            kh.EMAIL = email;   
+            kh.EMAIL = email;
 
-            Assert.AreEqual(email, kh.EMAIL);   
+            Assert.AreEqual(email, kh.EMAIL);
         }
 
         [TestMethod]
@@ -66,7 +66,7 @@ namespace TestDoAn
             var kh = new KHACHHANG();
             string dc = "01 Dương Văn Nga";
 
-            kh.DIACHI = dc; 
+            kh.DIACHI = dc;
 
             Assert.AreEqual(dc, kh.DIACHI);
         }
@@ -76,13 +76,13 @@ namespace TestDoAn
         public void TestPHIEUDATCHOsProperty()
         {
             var kh = new KHACHHANG();
-            var phieu = new PHIEUDATCHO();  
+            var phieu = new PHIEUDATCHO();
 
             kh.PHIEUDATCHOes.Add(phieu);
 
-            Assert.IsTrue(kh.PHIEUDATCHOes.Contains(phieu));    
+            Assert.IsTrue(kh.PHIEUDATCHOes.Contains(phieu));
         }
     }
 
-    
+
 }

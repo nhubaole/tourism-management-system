@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TourismManagementSystem.Model;
 
-namespace TestDoAn
+namespace TestDoAn.TestModel
 {
     [TestClass]
     public class DICHVUKHACTest
@@ -34,13 +34,13 @@ namespace TestDoAn
         }
 
         [TestMethod]
-        public void TestMOTAProperty() 
+        public void TestMOTAProperty()
         {
             var dv = new DICHVUKHAC();
             string mota = "tối đa 40 người";
             dv.MOTA = mota;
 
-           Assert.AreEqual(mota, dv.MOTA);
+            Assert.AreEqual(mota, dv.MOTA);
 
         }
 

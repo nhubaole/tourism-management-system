@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using TourismManagementSystem.Model;
 
-namespace TestDoAn
+namespace TestDoAn.TestModel
 {
     [TestClass]
     public class KHACHSANTest
     {
         [TestMethod]
-        public void TestMAKSProperty ()
+        public void TestMAKSProperty()
         {
             var ks = new KHACHSAN();
             string ma = "KS000001";
@@ -29,7 +29,7 @@ namespace TestDoAn
 
             ks.TENKS = ten;
 
-            Assert.AreEqual(ten, ks.TENKS); 
+            Assert.AreEqual(ten, ks.TENKS);
 
         }
 
@@ -53,7 +53,7 @@ namespace TestDoAn
 
             ks.DIACHI = dc;
 
-            Assert.AreEqual (dc, ks.DIACHI);    
+            Assert.AreEqual(dc, ks.DIACHI);
         }
 
         [TestMethod]
@@ -85,10 +85,10 @@ namespace TestDoAn
 
             ks.LICHTRINHs.Add(lich);
 
-            Assert.IsTrue(ks.LICHTRINHs.Contains(lich));    
+            Assert.IsTrue(ks.LICHTRINHs.Contains(lich));
 
         }
 
-        
+
     }
 }

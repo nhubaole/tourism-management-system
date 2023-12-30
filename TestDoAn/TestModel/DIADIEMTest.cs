@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TourismManagementSystem.Model;
 
-namespace TestDoAn
+namespace TestDoAn.TestModel
 {
     [TestClass]
     public class DIADIEMTest
@@ -53,8 +53,8 @@ namespace TestDoAn
             Assert.AreEqual("Phù hợp 50 người", d.MOTA);
         }
 
-        [TestMethod]    
-        public void TestLICHTRINHsProperty() 
+        [TestMethod]
+        public void TestLICHTRINHsProperty()
         {
             var d = new DIADIEM();
             var lich = new LICHTRINH();
@@ -64,7 +64,7 @@ namespace TestDoAn
         }
 
         [TestMethod]
-        public void TestLICHTRINH1sProperty() 
+        public void TestLICHTRINH1sProperty()
         {
             var d = new DIADIEM();
             var lich1 = new LICHTRINH();
@@ -78,7 +78,7 @@ namespace TestDoAn
         {
             var d = new DIADIEM();
 
-            var tuyen = new TUYEN();    
+            var tuyen = new TUYEN();
 
             d.TUYENs.Add(tuyen);
 

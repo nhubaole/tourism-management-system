@@ -7,11 +7,15 @@ using System.Windows;
 using System.Windows.Input;
 using TourismManagementSystem.View;
 using TourismManagementSystem.Model;
+using Org.BouncyCastle.Utilities.Collections;
 using System.Collections.ObjectModel;
+using System.Runtime.Remoting.Contexts;
+using TourismManagementSystem.ViewModel;
+
 
 namespace TourismManagementSystem.ViewModel
 {
-    internal class AddTourVM : BaseViewModel
+    public class AddTourVM : BaseViewModel
     {
         private TUYEN newTour;
         public ObservableCollection<DIADIEM> ListDiaDiem { get; set; }
@@ -115,6 +119,41 @@ namespace TourismManagementSystem.ViewModel
                     addTourWindow.Close();
                 }
             });
+        }
+
+        public AddTourVM(ObservableCollection<DIADIEM> listDD, ObservableCollection<LOAITUYEN> listLT, ObservableCollection<TUYEN> Tuyen)
+        {
+            ToolTipText = "Vui lòng nhập đủ các trường thông tin bắt buộc";
+            ListDiaDiem = listDD;
+            ListLoaiTuyen = listLT;
+            if (IsEdit == 0)
+            {
+                Title = "Thêm mới tuyến du lịch";
+                BtnText = "Thêm";
+                newTour = new TUYEN();
+                string formattedID;
+                ObservableCollection<TUYEN> ListTuyen = Tuyen;
+                if (ListTuyen.Count() == 0)
+                {
+                    formattedID = string.Format("T{0:D7}", 1);
+                }
+                else
+                {
+                    string lastID = ListTuyen.Last().MATUYEN;
+                    int previousNumber = int.Parse(lastID.Substring(1));
+                    int nextNumber = previousNumber + 1;
+                    formattedID = string.Format("T{0:D7}", nextNumber);
+                }
+                NewTour.MATUYEN = formattedID;
+            }
+            else
+            {
+                Title = "Cập nhật tuyến du lịch";
+                BtnText = "Cập nhật";
+                newTour = EditSelectedTuyen;
+            }
+
+           
         }
 
         public ICommand ScheduleOptionCommand { get; set; }

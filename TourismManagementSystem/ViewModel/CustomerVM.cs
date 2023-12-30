@@ -19,7 +19,7 @@ using System.Text.RegularExpressions;
 namespace TourismManagementSystem.ViewModel
 {
     
-    internal class CustomerVM : BaseViewModel, INotifyDataErrorInfo
+    public class CustomerVM : BaseViewModel, INotifyDataErrorInfo
     {
 
         private ObservableCollection<string> _filter = new ObservableCollection<string>() { "Mã khách hàng", "Tên khách hàng","Số điện thoại" };
@@ -82,7 +82,8 @@ namespace TourismManagementSystem.ViewModel
 
 
 
-        private ObservableCollection<KHACHHANG> _ListKhachhang = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs);
+        //private ObservableCollection<KHACHHANG> _ListKhachhang = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs);
+        private ObservableCollection<KHACHHANG> _ListKhachhang;
         public ObservableCollection<KHACHHANG> ListKhachhang { get => _ListKhachhang; set { _ListKhachhang= value; OnPropertyChanged(nameof(ListKhachhang)); } }
 
         private string maKH;
@@ -156,6 +157,7 @@ namespace TourismManagementSystem.ViewModel
         }
         public CustomerVM()
         {
+            ListKhachhang = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs);
             selectedFilter = filter[0];
             SwitchWindowCommand = new RelayCommand<object>((p) => {
                
@@ -194,6 +196,59 @@ namespace TourismManagementSystem.ViewModel
                             DataProvider.Ins.DB.KHACHHANGs.Remove(SelectedCustomer);
                             DataProvider.Ins.DB.SaveChanges();
                             ListKhachhang.Remove(SelectedCustomer);
+                        }
+                    }
+                }
+            });
+
+            BookingButtonCommand = new RelayCommand<object>((p) => true, (p) =>
+            {
+                BookingDetailVM.SelectedPhieu = p as PHIEUDATCHO;
+                BookingDetailsWindow bookingDetailsWindow = new BookingDetailsWindow();
+                bookingDetailsWindow.ShowDialog();
+            });
+        }
+        
+        //đẻ test
+        public CustomerVM(ObservableCollection<KHACHHANG> ListKHTest)
+        {
+            ListKhachhang = ListKHTest;
+            selectedFilter = filter[0];
+            SwitchWindowCommand = new RelayCommand<object>((p) => {
+
+                return true;
+
+            }, (p) =>
+            { SwitchWindow(p); });
+
+            UpdateDataCommand = new RelayCommand<object>((p) =>
+            {
+                if (HasErrors || DIACHI == null || HOTEN == null || EMAIL == null || SDT == null || CCCD == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            },
+            (p) => { UpdateCustomer(); });
+            DeleteDataCommand = new RelayCommand<object>((p) =>
+            {
+                return true;
+            },
+            (p) => {
+                if (SelectedCustomer != null)
+                {
+                    if (SelectedCustomer.PHIEUDATCHOes.Count > 0)
+                    {
+                        MessageBox.Show("Có tồn tại phiếu đặt chỗ của khách hàng này. Không thể xóa!");
+                    }
+                    else
+                    {
+                        if (MessageBox.Show("Bạn có chắc chắn muốn xóa khách hàng " + SelectedCustomer.HOTEN + " ?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                        {
+                            ListKHTest.Remove(SelectedCustomer);
                         }
                     }
                 }
@@ -245,7 +300,6 @@ namespace TourismManagementSystem.ViewModel
             }
         }
 
-
         private Dictionary<string, List<string>> _errors = new Dictionary<string, List<string>>();
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
         public bool HasErrors
@@ -268,7 +322,7 @@ namespace TourismManagementSystem.ViewModel
         }
 
 
-        private void ValidateProperty(string propertyName)
+        public void ValidateProperty(string propertyName)
         {
             List<string> errors = new List<string>();
 
@@ -356,11 +410,11 @@ namespace TourismManagementSystem.ViewModel
             OnErrorsChanged(propertyName);
         }
 
-        private bool IsNumber(string value)
+        public bool IsNumber(string value)
         {
             return double.TryParse(value, out _);
         }
-        private bool IsNameValid(string name)
+        public bool IsNameValid(string name)
         {
             foreach (char c in name)
             {
@@ -372,7 +426,7 @@ namespace TourismManagementSystem.ViewModel
 
             return true;
         }
-        private bool IsEmailValid(string email)
+        public bool IsEmailValid(string email)
         {
             if (string.IsNullOrEmpty(email))
             {
