@@ -16,31 +16,30 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        include:
-          - os: ubuntu-latest
-            backend_version: "Node.js 14.x"
-          - os: windows-latest
-            backend_version: "Node.js 14.x"
-          - os: macos-latest
-            backend_version: "Node.js 14.x"
+        
+        dotnet_version: ["5.0", "3.1", "2.1"] 
 
     steps:
 
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Node.js ${{ matrix.backend_version }}
-        uses: actions/setup-node@v2-beta
+      - name: Set up .NET Core SDK 
+        uses: actions/setup-dotnet@v1
         with:
-          node-version: ${{ matrix.backend_version }}
-
+          dotnet_version: ${{ matrix.dotnet_version }} 
+          
+      - name: Restore NuGet packages
+        run: dotnet restore
+        
       - name: Install dependencies
-        run: npm install # or yarn install
+        run: dotnet restore # or yarn install
 
       - name: Build project
-        run: npm run build #```
+        run: dotnet build 
+        
       - name: Run tests
-        run: npm run test # or yarn test
+        run: dotnet test # or yarn test
 
       - name: Run mutation testing
-        run: npm run mutation-test # or yarn mutation-test
+        run: dotnet run mutation-test # or yarn mutation-test
