@@ -1,0 +1,46 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        include:
+          - os: ubuntu-latest
+            backend_version: "Node.js 14.x"
+          - os: windows-latest
+            backend_version: "Node.js 14.x"
+          - os: macos-latest
+            backend_version: "Node.js 14.x"
+
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js ${{ matrix.backend_version }}
+        uses: actions/setup-node@v2-beta
+        with:
+          node-version: ${{ matrix.backend_version }}
+
+      - name: Install dependencies
+        run: npm install # or yarn install
+
+      - name: Build project
+        run: npm run build #```
+      - name: Run tests
+        run: npm run test # or yarn test
+
+      - name: Run mutation testing
+        run: npm run mutation-test # or yarn mutation-test
