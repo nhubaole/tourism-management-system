@@ -8,23 +8,20 @@ on:
 jobs:
   build-and-test:
 
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]        
+    runs-on: windows-latest       
 
     steps:
 
       - name: Check out code
         uses: actions/checkout@v3
         
-      - name: Set up .Net 5
+      - name: Set up .Net Core
         uses: actions/setup-dotnet@v3
         with:
-            dotnet-version: '5.0.x'
+            dotnet-version: ${{ env.BACKEND_VERSION }}
       
-      - name: Build app
-        run: dotnet build 
+      - name: Restore dependencies
+        run: dotnet restore
+
 
       
