@@ -23,5 +23,11 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
+      - name: Build application
+        run: dotnet build --configuration Release
+      
+      # - name: Run test and mutation testing 
+        # run: |
+         # dotnet test --configuration Release --logger 
 
       
