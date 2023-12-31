@@ -30,51 +30,51 @@ namespace TourismManagementSystem.ViewModel
                 detailTicketWindow.Show();
             });
 
-            UpdateStatusCommand = new RelayCommand<object>((p) => true, (p) =>
-            {
-                var values = (object[])p;
-                MainWindow mainWindow = Window.GetWindow((DependencyObject)values[1]) as MainWindow;
-                VE selectedVe = values[0] as VE;
-                var itemToUpdate = DataProvider.Ins.DB.VEs.FirstOrDefault(item => item.MAVE == selectedVe.MAVE);
-                if (itemToUpdate != null)
-                {
-                    itemToUpdate = selectedVe;
-                    DataProvider.Ins.DB.SaveChanges();
-                    MessageBox.Show("Cập nhật trạng thái vé thành công!");
+            //UpdateStatusCommand = new RelayCommand<object>((p) => true, (p) =>
+            //{
+            //    var values = (object[])p;
+            //    MainWindow mainWindow = Window.GetWindow((DependencyObject)values[1]) as MainWindow;
+            //    VE selectedVe = values[0] as VE;
+            //    var itemToUpdate = DataProvider.Ins.DB.VEs.FirstOrDefault(item => item.MAVE == selectedVe.MAVE);
+            //    if (itemToUpdate != null)
+            //    {
+            //        itemToUpdate = selectedVe;
+            //        DataProvider.Ins.DB.SaveChanges();
+            //        MessageBox.Show("Cập nhật trạng thái vé thành công!");
 
-                    if(selectedVe.TRANGTHAI == "Đã hủy")
-                    {
-                        THONGBAO newTB = new THONGBAO();
-                        string formattedID;
-                        ObservableCollection<THONGBAO> ListTB = new ObservableCollection<THONGBAO>(DataProvider.Ins.DB.THONGBAOs);
-                        if (ListTB.Count() == 0)
-                        {
-                            formattedID = string.Format("TB{0:D6}", 1);
-                        }
-                        else
-                        {
-                            string lastID = ListTB.Last().MATB;
-                            int previousNumber = int.Parse(lastID.Substring(2));
-                            int nextNumber = previousNumber + 1;
-                            formattedID = string.Format("TB{0:D6}", nextNumber);
-                        }
-                        newTB.MATB = formattedID;
-                        newTB.THONGBAO1 = "Vé du lịch " + selectedVe.MAVE + " đã được hủy";
-                        newTB.THOIGIAN = DateTime.Now;
-                        newTB.DADOC = false;
-                        DataProvider.Ins.DB.THONGBAOs.Add(newTB);
-                        DataProvider.Ins.DB.SaveChanges();
-                        if (mainWindow != null)
-                        {
-                            MainVM mainVM = mainWindow.DataContext as MainVM;
-                            if (mainVM != null)
-                            {
-                                mainVM.UnreadNotificationCount = DataProvider.Ins.DB.THONGBAOs.Where(t => t.DADOC == false).Count();
-                            }
-                        }
-                    }
-                }
-            });
+            //        if (selectedVe.TRANGTHAI == "Đã hủy")
+            //        {
+            //            THONGBAO newTB = new THONGBAO();
+            //            string formattedID;
+            //            ObservableCollection<THONGBAO> ListTB = new ObservableCollection<THONGBAO>(DataProvider.Ins.DB.THONGBAOs);
+            //            if (ListTB.Count() == 0)
+            //            {
+            //                formattedID = string.Format("TB{0:D6}", 1);
+            //            }
+            //            else
+            //            {
+            //                string lastID = ListTB.Last().MATB;
+            //                int previousNumber = int.Parse(lastID.Substring(2));
+            //                int nextNumber = previousNumber + 1;
+            //                formattedID = string.Format("TB{0:D6}", nextNumber);
+            //            }
+            //            newTB.MATB = formattedID;
+            //            newTB.THONGBAO1 = "Vé du lịch " + selectedVe.MAVE + " đã được hủy";
+            //            newTB.THOIGIAN = DateTime.Now;
+            //            newTB.DADOC = false;
+            //            DataProvider.Ins.DB.THONGBAOs.Add(newTB);
+            //            DataProvider.Ins.DB.SaveChanges();
+            //            if (mainWindow != null)
+            //            {
+            //                MainVM mainVM = mainWindow.DataContext as MainVM;
+            //                if (mainVM != null)
+            //                {
+            //                    mainVM.UnreadNotificationCount = DataProvider.Ins.DB.THONGBAOs.Where(t => t.DADOC == false).Count();
+            //                }
+            //            }
+            //        }
+            //    }
+            //});
         }
 
 
@@ -91,26 +91,26 @@ namespace TourismManagementSystem.ViewModel
             set
             {
                 _SearchText = value;
-                if (SelectedFilter == FilterCbItems[0])
-                {
-                    ListVE = new ObservableCollection<VE>(DataProvider.Ins.DB.VEs.Where(t => t.MAVE.Contains(SearchText)));
-                }
-                else if (SelectedFilter == FilterCbItems[1])
-                {
-                    ListVE = new ObservableCollection<VE>(DataProvider.Ins.DB.VEs.Where(t => t.MAHK.Contains(SearchText)));
-                }
-                else if (SelectedFilter == FilterCbItems[2])
-                {
-                    ListVE = new ObservableCollection<VE>(DataProvider.Ins.DB.VEs.Where(t => t.MAPHIEU.Contains(SearchText)));
-                }
-                else if (SelectedFilter == FilterCbItems[3])
-                {
-                    ListVE = new ObservableCollection<VE>(DataProvider.Ins.DB.VEs.Where(t => t.NGAYBAN.ToString().Contains(SearchText)));
-                }
-                else if (SelectedFilter == FilterCbItems[4])
-                {
-                    ListVE = new ObservableCollection<VE>(DataProvider.Ins.DB.VEs.Where(t => t.TRANGTHAI.Contains(SearchText)));
-                }
+                //if (SelectedFilter == FilterCbItems[0])
+                //{
+                //    ListVE = new ObservableCollection<VE>(DataProvider.Ins.DB.VEs.Where(t => t.MAVE.Contains(SearchText)));
+                //}
+                //else if (SelectedFilter == FilterCbItems[1])
+                //{
+                //    ListVE = new ObservableCollection<VE>(DataProvider.Ins.DB.VEs.Where(t => t.MAHK.Contains(SearchText)));
+                //}
+                //else if (SelectedFilter == FilterCbItems[2])
+                //{
+                //    ListVE = new ObservableCollection<VE>(DataProvider.Ins.DB.VEs.Where(t => t.MAPHIEU.Contains(SearchText)));
+                //}
+                //else if (SelectedFilter == FilterCbItems[3])
+                //{
+                //    ListVE = new ObservableCollection<VE>(DataProvider.Ins.DB.VEs.Where(t => t.NGAYBAN.ToString().Contains(SearchText)));
+                //}
+                //else if (SelectedFilter == FilterCbItems[4])
+                //{
+                //    ListVE = new ObservableCollection<VE>(DataProvider.Ins.DB.VEs.Where(t => t.TRANGTHAI.Contains(SearchText)));
+                //}
                 OnPropertyChanged();
             }
         }

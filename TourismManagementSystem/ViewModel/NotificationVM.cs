@@ -10,9 +10,11 @@ using TourismManagementSystem.Model;
 
 namespace TourismManagementSystem.ViewModel
 {
-    internal class NotificationVM : BaseViewModel
+    public class NotificationVM : BaseViewModel
     {
-        private ObservableCollection<THONGBAO> _ListThongBao = new ObservableCollection<THONGBAO>(DataProvider.Ins.DB.THONGBAOs.OrderByDescending(tb => tb.MATB).Take(4));
+        private ObservableCollection<THONGBAO> _ListThongBao = new ObservableCollection<THONGBAO>(
+            //DataProvider.Ins.DB.THONGBAOs.OrderByDescending(tb => tb.MATB).Take(4)
+        );
         public NotificationVM()
         {
 

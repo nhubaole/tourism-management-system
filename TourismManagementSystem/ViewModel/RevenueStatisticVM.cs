@@ -10,9 +10,9 @@ using System.Windows.Media;
 
 namespace TourismManagementSystem.ViewModel
 {
-    internal class RevenueStatisticVM : BaseViewModel
+    public class RevenueStatisticVM : BaseViewModel
     {
-        
+
 
         private bool _IsSaleChecked;
         public bool IsSaleChecked
@@ -23,11 +23,11 @@ namespace TourismManagementSystem.ViewModel
                 _IsSaleChecked = value;
 
                 OnPropertyChanged();
-                UpdateCurrentView();
+                //UpdateCurrentView();
             }
         }
 
-      
+
         private bool _IsTripCheck;
         public bool IsTripCheck
         {
@@ -36,7 +36,7 @@ namespace TourismManagementSystem.ViewModel
             {
                 _IsTripCheck = value;
                 OnPropertyChanged();
-                UpdateCurrentView();
+                //UpdateCurrentView();
 
             }
         }
@@ -47,28 +47,28 @@ namespace TourismManagementSystem.ViewModel
             get => _currentView;
             set { _currentView = value; OnPropertyChanged(); }
         }
-        public RevenueStatisticVM ()
+        public RevenueStatisticVM()
         {
             IsSaleChecked = true;
         }
-        private void SalesStatistics(object obj) => CurrentView = new SalesStatisticsVM();
-        private void TripsStatistics(object obj) => CurrentView = new TripsStatisticsVM();
+        public void SalesStatistics(object obj) => CurrentView = new SalesStatisticsVM();
+        public void TripsStatistics(object obj) => CurrentView = new TripsStatisticsVM();
 
-        private void UpdateCurrentView()
-        {
-            if (IsSaleChecked == true)
-            {
-                CurrentView = new SalesStatisticsVM();
-            }
-            else if (IsTripCheck == true)
-            {
-                CurrentView = new TripsStatisticsVM();
-            }
-            else
-            {
-                // Không có lựa chọn nào được chọn, đặt CurrentView thành null hoặc giá trị mặc định
-                CurrentView = null;
-            }
-        }
+        //private void UpdateCurrentView()
+        //{
+        //    if (IsSaleChecked == true)
+        //    {
+        //        CurrentView = new SalesStatisticsVM();
+        //    }
+        //    else if (IsTripCheck == true)
+        //    {
+        //        CurrentView = new TripsStatisticsVM();
+        //    }
+        //    else
+        //    {
+        //        // Không có lựa chọn nào được chọn, đặt CurrentView thành null hoặc giá trị mặc định
+        //        CurrentView = null;
+        //    }
+        //}
     }
 }

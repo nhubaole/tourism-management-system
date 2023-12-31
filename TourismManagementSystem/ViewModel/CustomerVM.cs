@@ -25,9 +25,9 @@ namespace TourismManagementSystem.ViewModel
         private ObservableCollection<string> _filter = new ObservableCollection<string>() { "Mã khách hàng", "Tên khách hàng","Số điện thoại" };
 
         public ICommand SwitchWindowCommand { get; set; }
-        public ICommand AddDataCommand { get; set; }
-        public ICommand DeleteDataCommand { get; set; }
-        public ICommand UpdateDataCommand { get; set; }
+        //public ICommand AddDataCommand { get; set; }
+        //public ICommand DeleteDataCommand { get; set; }
+        //public ICommand UpdateDataCommand { get; set; }
         public ICommand BookingButtonCommand { get; set; }
 
 
@@ -63,18 +63,18 @@ namespace TourismManagementSystem.ViewModel
             set
             {
                 _SearchText = value;
-                if (selectedFilter == filter[0])
-                {
-                    ListKhachhang = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs.Where(t => t.MAKH.Contains(SearchText)));
-                }
-                else if (selectedFilter == filter[1])
-                {
-                    ListKhachhang = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs.Where(t => t.HOTEN.Contains(SearchText)));
-                }
-                else if (selectedFilter == filter[2])
-                {
-                    ListKhachhang = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs.Where(t => t.SDT.Contains(SearchText)));
-                }
+                //if (selectedFilter == filter[0])
+                //{
+                //    ListKhachhang = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs.Where(t => t.MAKH.Contains(SearchText)));
+                //}
+                //else if (selectedFilter == filter[1])
+                //{
+                //    ListKhachhang = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs.Where(t => t.HOTEN.Contains(SearchText)));
+                //}
+                //else if (selectedFilter == filter[2])
+                //{
+                //    ListKhachhang = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs.Where(t => t.SDT.Contains(SearchText)));
+                //}
               
                 OnPropertyChanged();
             }
@@ -166,40 +166,40 @@ namespace TourismManagementSystem.ViewModel
             }, (p) =>
             {SwitchWindow(p);});
 
-            UpdateDataCommand = new RelayCommand<object>((p) =>
-            {
-                if (HasErrors || DIACHI == null || HOTEN == null || EMAIL == null || SDT == null || CCCD == null)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-            },
-            (p) => { UpdateCustomer(); });
-            DeleteDataCommand = new RelayCommand<object>((p) =>
-            {
-                return true;
-            },
-            (p) => {
-                if (SelectedCustomer != null)
-                {
-                    if (SelectedCustomer.PHIEUDATCHOes.Count > 0)
-                    {
-                        MessageBox.Show("Có tồn tại phiếu đặt chỗ của khách hàng này. Không thể xóa!");
-                    }
-                    else
-                    {
-                        if (MessageBox.Show("Bạn có chắc chắn muốn xóa khách hàng " + SelectedCustomer.HOTEN + " ?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                        {
-                            DataProvider.Ins.DB.KHACHHANGs.Remove(SelectedCustomer);
-                            DataProvider.Ins.DB.SaveChanges();
-                            ListKhachhang.Remove(SelectedCustomer);
-                        }
-                    }
-                }
-            });
+            //UpdateDataCommand = new RelayCommand<object>((p) =>
+            //{
+            //    if (HasErrors || DIACHI == null || HOTEN == null || EMAIL == null || SDT == null || CCCD == null)
+            //    {
+            //        return false;
+            //    }
+            //    else
+            //    {
+            //        return true;
+            //    }
+            //},
+            //(p) => { UpdateCustomer(); });
+            //DeleteDataCommand = new RelayCommand<object>((p) =>
+            //{
+            //    return true;
+            //},
+            //(p) => {
+            //    if (SelectedCustomer != null)
+            //    {
+            //        if (SelectedCustomer.PHIEUDATCHOes.Count > 0)
+            //        {
+            //            MessageBox.Show("Có tồn tại phiếu đặt chỗ của khách hàng này. Không thể xóa!");
+            //        }
+            //        else
+            //        {
+            //            if (MessageBox.Show("Bạn có chắc chắn muốn xóa khách hàng " + SelectedCustomer.HOTEN + " ?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            //            {
+            //                DataProvider.Ins.DB.KHACHHANGs.Remove(SelectedCustomer);
+            //                DataProvider.Ins.DB.SaveChanges();
+            //                ListKhachhang.Remove(SelectedCustomer);
+            //            }
+            //        }
+            //    }
+            //});
 
             BookingButtonCommand = new RelayCommand<object>((p) => true, (p) =>
             {
@@ -221,38 +221,38 @@ namespace TourismManagementSystem.ViewModel
             }, (p) =>
             { SwitchWindow(p); });
 
-            UpdateDataCommand = new RelayCommand<object>((p) =>
-            {
-                if (HasErrors || DIACHI == null || HOTEN == null || EMAIL == null || SDT == null || CCCD == null)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-            },
-            (p) => { UpdateCustomer(); });
-            DeleteDataCommand = new RelayCommand<object>((p) =>
-            {
-                return true;
-            },
-            (p) => {
-                if (SelectedCustomer != null)
-                {
-                    if (SelectedCustomer.PHIEUDATCHOes.Count > 0)
-                    {
-                        MessageBox.Show("Có tồn tại phiếu đặt chỗ của khách hàng này. Không thể xóa!");
-                    }
-                    else
-                    {
-                        if (MessageBox.Show("Bạn có chắc chắn muốn xóa khách hàng " + SelectedCustomer.HOTEN + " ?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                        {
-                            ListKHTest.Remove(SelectedCustomer);
-                        }
-                    }
-                }
-            });
+            //UpdateDataCommand = new RelayCommand<object>((p) =>
+            //{
+            //    if (HasErrors || DIACHI == null || HOTEN == null || EMAIL == null || SDT == null || CCCD == null)
+            //    {
+            //        return false;
+            //    }
+            //    else
+            //    {
+            //        return true;
+            //    }
+            //},
+            //(p) => { UpdateCustomer(); });
+            //DeleteDataCommand = new RelayCommand<object>((p) =>
+            //{
+            //    return true;
+            //},
+            //(p) => {
+            //    if (SelectedCustomer != null)
+            //    {
+            //        if (SelectedCustomer.PHIEUDATCHOes.Count > 0)
+            //        {
+            //            MessageBox.Show("Có tồn tại phiếu đặt chỗ của khách hàng này. Không thể xóa!");
+            //        }
+            //        else
+            //        {
+            //            if (MessageBox.Show("Bạn có chắc chắn muốn xóa khách hàng " + SelectedCustomer.HOTEN + " ?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            //            {
+            //                ListKHTest.Remove(SelectedCustomer);
+            //            }
+            //        }
+            //    }
+            //});
 
             BookingButtonCommand = new RelayCommand<object>((p) => true, (p) =>
             {
@@ -271,34 +271,32 @@ namespace TourismManagementSystem.ViewModel
             }
             catch(Exception e)
             {
-               
                 MessageBox.Show(e.Message);
-
             }
         }
 
-        private void UpdateCustomer()
-        {
-            if (SelectedCustomer != null)
-            {
-                if (MessageBox.Show("Bạn có chắc chắn muốn cập nhật khách hàng " + SelectedCustomer.HOTEN + " ?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                {
-                    var itemToUpdate = DataProvider.Ins.DB.KHACHHANGs.FirstOrDefault(item => item.MAKH == SelectedCustomer.MAKH);
-                    if (itemToUpdate != null)
-                    {
-                        SelectedCustomer.HOTEN = HOTEN;
-                        SelectedCustomer.CCCD = CCCD;
-                        SelectedCustomer.SDT = SDT;
-                        SelectedCustomer.DIACHI = DIACHI;
-                        SelectedCustomer.EMAIL = EMAIL;
-                        itemToUpdate = SelectedCustomer;
-                        DataProvider.Ins.DB.SaveChanges();
-                        MessageBox.Show("Cập nhật thông tin khách hàng thành công!");
-                        ListKhachhang = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs);
-                    }
-                }
-            }
-        }
+        //private void UpdateCustomer()
+        //{
+        //    if (SelectedCustomer != null)
+        //    {
+        //        if (MessageBox.Show("Bạn có chắc chắn muốn cập nhật khách hàng " + SelectedCustomer.HOTEN + " ?", "Xác nhận", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+        //        {
+        //            var itemToUpdate = DataProvider.Ins.DB.KHACHHANGs.FirstOrDefault(item => item.MAKH == SelectedCustomer.MAKH);
+        //            if (itemToUpdate != null)
+        //            {
+        //                SelectedCustomer.HOTEN = HOTEN;
+        //                SelectedCustomer.CCCD = CCCD;
+        //                SelectedCustomer.SDT = SDT;
+        //                SelectedCustomer.DIACHI = DIACHI;
+        //                SelectedCustomer.EMAIL = EMAIL;
+        //                itemToUpdate = SelectedCustomer;
+        //                DataProvider.Ins.DB.SaveChanges();
+        //                MessageBox.Show("Cập nhật thông tin khách hàng thành công!");
+        //                ListKhachhang = new ObservableCollection<KHACHHANG>(DataProvider.Ins.DB.KHACHHANGs);
+        //            }
+        //        }
+        //    }
+        //}
 
         private Dictionary<string, List<string>> _errors = new Dictionary<string, List<string>>();
         public event EventHandler<DataErrorsChangedEventArgs> ErrorsChanged;
