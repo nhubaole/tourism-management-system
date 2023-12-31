@@ -25,6 +25,6 @@ jobs:
             dotnet-version: '5.0.x'
       
       - name: Build app
-        run: dotnet build tourism-management-system
+        run: dotnet build <tourism-management-system>
 
       
