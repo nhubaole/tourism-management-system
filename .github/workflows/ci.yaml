@@ -24,18 +24,10 @@ jobs:
         run: dotnet restore
 
       - name: Setup MSBuild
-        env:
-          PATH_FILE: ./.env
-        run: |
-          echo "##[command]Importing environment from $PATH_FILE"
-          cat $PATH_FILE | while read entry || [ -n "$entry" ];
-          do
-            echo "Adding path entry '$entry' to PATH..."
-            echo "::add-path::$entry"
-          done
+        run: microsoft/setup-msbuild@v1.0.5
 
       - name: Build with MSBuild
-        run: msbuild /t:Rebuild
+        run: msbuild /t:Build /p:Configuration=Release
       
       # - name: Run test and mutation testing 
         # run: |
