@@ -24,7 +24,15 @@ jobs:
         run: dotnet restore
 
       - name: Setup MSBuild
-        uses: microsoft/setup-msbuild@v1.0.1
+        env:
+          PATH_FILE: ./.env
+        run: |
+          echo "##[command]Importing environment from $PATH_FILE"
+          cat $PATH_FILE | while read entry || [ -n "$entry" ];
+          do
+            echo "Adding path entry '$entry' to PATH..."
+            echo "::add-path::$entry"
+          done
 
       - name: Build with MSBuild
         run: msbuild /t:Rebuild
