@@ -5,9 +5,6 @@ on:
     branches:
       - branch_Test
 
-env:
-    PROJECT_PATH: TourismManagementSystem/TourismManagementSystem.csproj
-
 jobs:
   build-and-test:
 
@@ -21,16 +18,16 @@ jobs:
       - name: Set up .Net Core
         uses: actions/setup-dotnet@v1
         with:
-            dotnet-version: "3.1.x"
+            dotnet-version: "5.0.x"
       
       - name: Restore dependencies
-        run: dotnet restore ${{ env.PROJECT_PATH }}
+        run: dotnet restore 
 
       # - name: Setup MSBuild
         # run: microsoft/setup-msbuild@v1.1
 
       - name: Build app
-        run: dotnet Build ${{ env.PROJECT_PATH }} -c Release --no-restore
+        run: MSBuild /t:"Clean"
       
       # - name: Run test and mutation testing 
         # run: |
