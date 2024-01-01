@@ -23,8 +23,11 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
-      - name: build application
-        run: dotnet build 
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.0.1
+
+      - name: Build with MSBuild
+        run: msbuild /t:Rebuild
       
       # - name: Run test and mutation testing 
         # run: |
