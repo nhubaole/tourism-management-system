@@ -26,11 +26,11 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore ${{ env.PROJECT_PATH }}
 
-      # - name: Setup MSBuild
-        # run: microsoft/setup-msbuild@v1.1
+      - name: Setup MSBuild
+        run: microsoft/setup-msbuild@v1.1
 
       - name: Build app
-        run: MSBuild /t:"Clean"
+        run: msBuild /t:"Clean"
       
       # - name: Run test and mutation testing 
         # run: |
