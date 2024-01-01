@@ -18,13 +18,13 @@ jobs:
       - name: Set up .Net Core
         uses: actions/setup-dotnet@v3
         with:
-            dotnet-version: ${{ env.BACKEND_VERSION }}
+            dotnet-version: "5.0.x"
       
       - name: Restore dependencies
         run: dotnet restore
 
-      - name: Build application
-        run: dotnet build --configuration Release
+      - name: build application
+        run: dotnet build 
       
       # - name: Run test and mutation testing 
         # run: |
