@@ -5,6 +5,9 @@ on:
     branches:
       - branch_Test
 
+env:
+    PROJECT_PATH: TourismManagementSystem/TourismManagementSystem.csproj
+
 jobs:
   build-and-test:
 
@@ -21,7 +24,7 @@ jobs:
             dotnet-version: "5.0.x"
       
       - name: Restore dependencies
-        run: dotnet restore 
+        run: dotnet restore ${{ env.PROJECT_PATH }}
 
       # - name: Setup MSBuild
         # run: microsoft/setup-msbuild@v1.1
