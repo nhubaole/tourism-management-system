@@ -8,7 +8,12 @@ on:
 jobs:
   build-and-test:
 
-    runs-on: windows-latest       
+    strategy:
+      matrix:
+        os: [windows-latest]
+        architecture: [x64]
+        
+    runs-on: ${{ matrix.os }}      
 
     steps:
 
