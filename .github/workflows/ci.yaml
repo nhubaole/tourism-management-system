@@ -32,7 +32,5 @@ jobs:
         uses: microsoft/setup-msbuild@v1.1
 
       - name: Build app for release
-        run: msbuild ${{ env.GITHUB_WORKSPACE }}/src/tourism-management-system.csproj -t:rebuild -verbosity:diag -property:Configuration=Release
-      
-
+        run: msbuild src\tourism-management-system.csproj -t:rebuild -verbosity:diag -property:Configuration=Release
       
