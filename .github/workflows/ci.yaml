@@ -32,13 +32,7 @@ jobs:
         uses: microsoft/setup-msbuild@v1.1
 
       - name: Build app for release
-        run: msbuild C:\Users\DELL\Source\Repos\tourism-management-system_\TourismManagementSystem.sln -t:rebuild -verbosity:diag -property:Configuration=Release
-
-      # - name: Build app
-        # run: msBuild /t:"Clean"
+        run: msbuild ${{ env.GITHUB_WORKSPACE }}/src/tourism-management-system.csproj -t:rebuild -verbosity:diag -property:Configuration=Release
       
-      # - name: Run test and mutation testing 
-        # run: |
-         # dotnet test --configuration Release --logger 
 
       
