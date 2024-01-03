@@ -26,11 +26,7 @@ jobs:
             dotnet-version: "6.0.x"
       
       - name: Restore dependencies
-        run: nuget restore
-
-      - name: Add msbuild to PATH
-        uses: microsoft/setup-msbuild@v1.1
+        run: dotnet restore
 
       - name: Build app for release
-        run: msbuild Repos\tourism-management-system_.csproj -t:rebuild -verbosity:diag -property:Configuration=Release
-      
+        run: dotnet build --configuration Release
