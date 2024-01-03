@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using TourismManagementSystem.ViewModel;
 using System.Collections.ObjectModel;
-using Moq;
 using TourismManagementSystem.Model;
 using TourismManagementSystem.View;
 

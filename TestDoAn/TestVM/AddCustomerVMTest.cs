@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using TourismManagementSystem.Model;
 using TourismManagementSystem.ViewModel;
 using System.Windows;
