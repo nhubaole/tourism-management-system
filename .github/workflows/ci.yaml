@@ -32,5 +32,5 @@ jobs:
         uses: microsoft/setup-msbuild@v1.1
 
       - name: Build app for release
-        run: msbuild src\tourism-management-system -t:rebuild -verbosity:diag -property:Configuration=Release
+        run: msbuild Repos\tourism-management-system_.csproj -t:rebuild -verbosity:diag -property:Configuration=Release
       
