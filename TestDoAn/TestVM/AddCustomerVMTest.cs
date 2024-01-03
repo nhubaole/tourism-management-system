@@ -13,6 +13,7 @@ using System.Collections;
 namespace TestDoAn.TestVM
 {
     [TestClass]
+    //thay đổi gì đó
     public class AddCustomerVMTest
     {
         ObservableCollection<KHACHHANG> customers = new ObservableCollection<KHACHHANG>
