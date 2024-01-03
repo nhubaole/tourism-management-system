@@ -29,7 +29,7 @@ jobs:
             dotnet-version: "6.0.x" 
       
       - name: Restore dependencies
-        run:  dotnet restore ${{ env.PROJECT_PATH }}
+        run:  dotnet restore 
         
       - name: Build app 
-        run: dotnet build ${{ env.PROJECT_PATH }} -c Release 
+        run: dotnet build ${{ env.PROJECT_PATH }} -c Release --no-restore
