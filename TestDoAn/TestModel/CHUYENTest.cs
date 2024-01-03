@@ -8,7 +8,7 @@ using TourismManagementSystem.Model;
 namespace TestDoAn.TestModel
 {
     [TestClass]
-    //test12
+    //test123
 
     public class CHUYENTest
     {
