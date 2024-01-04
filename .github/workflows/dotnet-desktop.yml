@@ -75,7 +75,9 @@ jobs:
 
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v1.0.2
+      uses: microsoft/setup-msbuild@v1.0.2      
+      with: 
+        msbuild-architecture: 'x64'
      
     # Restore NuGet packages
     - name: Installing dependency command
@@ -83,7 +85,7 @@ jobs:
 
     # Build command
     - name: Build command
-      run: dotnet build
+      run: dotnet build 
       
     # Execute all unit tests in the solution
     #- name: Execute unit tests
