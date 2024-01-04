@@ -610,12 +610,8 @@
     <Error Condition="!Exists('..\packages\Microsoft.Build.Locator.1.6.10\build\Microsoft.Build.Locator.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Build.Locator.1.6.10\build\Microsoft.Build.Locator.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.Build.Locator.1.6.10\build\Microsoft.Build.Locator.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Build.Locator.1.6.10\build\Microsoft.Build.Locator.targets'))" />
   </Target>
-  <Target Name="RunTests">
-	  <Exec Command="msbuild /p:Configuration=Release " />
-  </Target>
-  <Target Name="RunMutationTests">
-	  <Exec Command="msbuild /p:Configuration=Release " />
-  </Target>
+  <Target Name="RunTests"></Target>
+  <Target Name="RunMutationTests"></Target>
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <Import Project="..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.9.0\build\MaterialDesignThemes.targets')" />
   <Import Project="..\packages\Microsoft.Build.Locator.1.6.10\build\Microsoft.Build.Locator.targets" Condition="Exists('..\packages\Microsoft.Build.Locator.1.6.10\build\Microsoft.Build.Locator.targets')" />
