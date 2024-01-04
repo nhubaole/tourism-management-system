@@ -79,7 +79,7 @@ jobs:
      
     # Restore NuGet packages
     - name: Installing dependency command
-      run: nuget restore 
+      run: dotnet restore 
       
     # Execute all unit tests in the solution
     - name: Execute unit tests
