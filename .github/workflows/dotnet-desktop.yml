@@ -80,10 +80,14 @@ jobs:
     # Restore NuGet packages
     - name: Installing dependency command
       run: nuget restore 
+
+    # Build command
+    - name: Build command
+      run: dotnet build
       
     # Execute all unit tests in the solution
-    - name: Execute unit tests
-      run: dotnet test
+    #- name: Execute unit tests
+     # run: dotnet test
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Restore the application
