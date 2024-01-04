@@ -40,9 +40,9 @@ name: .NET Core Desktop
 
 on:
   push:
-    branches: [ "branch_Test" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "branch_Test" ]
+    branches: [ "master" ]
 
 jobs:
 
