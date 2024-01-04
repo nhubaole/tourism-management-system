@@ -77,7 +77,7 @@ jobs:
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1.0.2      
       with: 
-        msbuild-architecture: 'x86'
+        msbuild-architecture: 'x64'
      
     # Restore NuGet packages
     - name: Installing dependency command
@@ -85,11 +85,11 @@ jobs:
 
     # Build command
     - name: Build command
-      run: dotnet build 
+      run: msbuild /p:Configuration=Release 
       
     # Execute all unit tests in the solution
     - name: Execute unit tests
-      run: dotnet test
+      run: msbuild /t:Test
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Restore the application
