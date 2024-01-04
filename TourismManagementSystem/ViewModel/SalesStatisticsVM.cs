@@ -38,26 +38,26 @@ namespace TourismManagementSystem.ViewModel
             get { return _FilterYear; }
             set { _FilterYear = value; }
         }
-        //chọn tháng hay năm
-        private string _Filter1;
-        public string Filter1
-        {
-            get { return _Filter1; }
-            set
-            {
-                _Filter1 = value;
-                seriesCollection.Clear();
-                TimeOfChart = null;
-                OnPropertyChanged(nameof(seriesCollection));
-                OnPropertyChanged(nameof(TimeOfChart));
+        ////chọn tháng hay năm
+        //private string _Filter1;
+        //public string Filter1
+        //{
+        //    get { return _Filter1; }
+        //    set
+        //    {
+        //        _Filter1 = value;
+        //        seriesCollection.Clear();
+        //        TimeOfChart = null;
+        //        OnPropertyChanged(nameof(seriesCollection));
+        //        OnPropertyChanged(nameof(TimeOfChart));
 
-                UpdateFilterYear();
-                Year = FilterYear[0];
-                OnPropertyChanged(nameof(Year));    
+        //        UpdateFilterYear();
+        //        Year = FilterYear[0];
+        //        OnPropertyChanged(nameof(Year));
 
-                OnPropertyChanged();
-            }
-        }
+        //        OnPropertyChanged();
+        //    }
+        //}
 
         private bool _CanChoseMonth;
         public bool CanChoseMonth
@@ -82,55 +82,55 @@ namespace TourismManagementSystem.ViewModel
         }
 
 
-        private int _Month;
-        public int Month
-        {
-            get { return _Month; }
-            set
-            {
-                _Month = value;
-                OnPropertyChanged(nameof(labelCollection));
+        //private int _Month;
+        //public int Month
+        //{
+        //    get { return _Month; }
+        //    set
+        //    {
+        //        _Month = value;
+        //        OnPropertyChanged(nameof(labelCollection));
 
-                if (_Month != 0)
-                {
-                    TimeOfChart = " tháng " + _Month.ToString() + " năm " + Year.ToString();
-                }
-                OnPropertyChanged(nameof(TimeOfChart));
-                OnPropertyChanged();
-                DrawChart();
+        //        if (_Month != 0)
+        //        {
+        //            TimeOfChart = " tháng " + _Month.ToString() + " năm " + Year.ToString();
+        //        }
+        //        OnPropertyChanged(nameof(TimeOfChart));
+        //        OnPropertyChanged();
+        //        DrawChart();
 
-            }
-        }
+        //    }
+        //}
 
-        private int _Year;
-        public int Year
-        {
-            get { return _Year; }
-            set
-            {
-                _Year = value;
-                if (Year != 0)
-                {
-                    if (Filter1 == "Tháng")
-                    {
-                        CanChoseMonth = true;
-                        FilterMonth = new ObservableCollection<int>(GetMonthsForYear(Year));
-                        OnPropertyChanged(nameof(FilterMonth));
-                        Month = FilterMonth[0];
-                        OnPropertyChanged(nameof(Month));
+        //private int _Year;
+        //public int Year
+        //{
+        //    get { return _Year; }
+        //    set
+        //    {
+        //        _Year = value;
+        //        if (Year != 0)
+        //        {
+        //            if (Filter1 == "Tháng")
+        //            {
+        //                CanChoseMonth = true;
+        //                FilterMonth = new ObservableCollection<int>(GetMonthsForYear(Year));
+        //                OnPropertyChanged(nameof(FilterMonth));
+        //                Month = FilterMonth[0];
+        //                OnPropertyChanged(nameof(Month));
 
-                        ;
-                    }
-                    else
-                    {
-                        TimeOfChart = " năm " + Year.ToString();
-                        OnPropertyChanged(nameof(TimeOfChart));
-                        DrawChart();
-                    }
-                }
-                OnPropertyChanged();
-            }
-        }
+        //                ;
+        //            }
+        //            else
+        //            {
+        //                TimeOfChart = " năm " + Year.ToString();
+        //                OnPropertyChanged(nameof(TimeOfChart));
+        //                DrawChart();
+        //            }
+        //        }
+        //        OnPropertyChanged();
+        //    }
+        //}
 
         private string _TimeOfChart;
         public string TimeOfChart
@@ -144,175 +144,181 @@ namespace TourismManagementSystem.ViewModel
             }
         }
 
-       
-        private SeriesCollection _seriesCollection;
-        public SeriesCollection seriesCollection
-        {
-            get { return _seriesCollection; }
-            set
-            {
-                _seriesCollection = value;
-                OnPropertyChanged();
-            }
-        }
 
-        private List<string> _labelCollection;
-        public List<string> labelCollection
-        {
-            get { return _labelCollection; }
-            set
-            {
-                _labelCollection = value;
-                OnPropertyChanged();
-            }
-        }
+        //private SeriesCollection _seriesCollection;
+        //public SeriesCollection seriesCollection
+        //{
+        //    get { return _seriesCollection; }
+        //    set
+        //    {
+        //        _seriesCollection = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
+
+        //private List<string> _labelCollection;
+        //public List<string> labelCollection
+        //{
+        //    get { return _labelCollection; }
+        //    set
+        //    {
+        //        _labelCollection = value;
+        //        OnPropertyChanged();
+        //    }
+        //}
 
         public SalesStatisticsVM()
         {
-            FilterItems1 = new ObservableCollection<String>(new List<string> { "Tháng", "Năm" });
-            seriesCollection = new SeriesCollection();
-            labelCollection = new List<string>();
+            //FilterItems1 = new ObservableCollection<String>(new List<string> { "Tháng", "Năm" });
+            //seriesCollection = new SeriesCollection();
+            //labelCollection = new List<string>();
 
-            Filter1 = "Năm";
+            //Filter1 = "Năm";
         }
-        private void UpdateFilterYear()
-        {
-            FilterYear = new ObservableCollection<int>(GetYears());
+        //private void UpdateFilterYear()
+        //{
+        //    FilterYear = new ObservableCollection<int>(GetYears());
 
-            if (Filter1 == "Tháng")
-            {
-                CanChoseYear = true;
-            }
-            else if (Filter1 == "Năm")
-            {
+        //    if (Filter1 == "Tháng")
+        //    {
+        //        CanChoseYear = true;
+        //    }
+        //    else if (Filter1 == "Năm")
+        //    {
 
-                CanChoseYear = true;
-                CanChoseMonth = false;
+        //        CanChoseYear = true;
+        //        CanChoseMonth = false;
 
-            }
-            else
-            {
-                CanChoseYear = false;
-                CanChoseMonth = false;
-            }
-            OnPropertyChanged(nameof(CanChoseYear));
-            OnPropertyChanged(nameof(CanChoseMonth));
+        //    }
+        //    else
+        //    {
+        //        CanChoseYear = false;
+        //        CanChoseMonth = false;
+        //    }
+        //    OnPropertyChanged(nameof(CanChoseYear));
+        //    OnPropertyChanged(nameof(CanChoseMonth));
 
-        }
-        public List<int> GetYears()
-        {
-            List<int> years = new List<int>();
-            years = DataProvider.Ins.DB.CHUYENs
-               .Where(t => t.TGBATDAU.HasValue)
-               .Select(t => t.TGBATDAU.Value.Year)
-               .Distinct().ToList();
-            return years;
-        }
+        //}
+        //public List<int> GetYears()
+        //{
+        //    List<int> years = new List<int>();
 
-        public List<int> GetMonthsForYear(int year) // lấy tháng trong database từ thông tin chuyến
-        {
-            List<int> months = new List<int>();
+        //    //years.Add(2023);
 
-            // Lấy tháng hiện tại
-            months = DataProvider.Ins.DB.CHUYENs
-               .Where(t => t.TGBATDAU.HasValue && t.TGBATDAU.Value.Year == year)
-               .Select(t => t.TGBATDAU.Value.Month)
-               .Distinct().ToList();
-            return months;
-        }
-        public static List<int> GetDaysInMonth(int year, int month)
-        {
-            List<int> daysInMonth = new List<int>();
-            if (year != 0 && month != 0)
-            {
-                // Xác định số ngày trong tháng
-                int numberOfDaysInMonth = DateTime.DaysInMonth(year, month);
+        //    years = DataProvider.Ins.DB.CHUYENs
+        //       .Where(t => t.TGBATDAU.HasValue)
+        //       .Select(t => t.TGBATDAU.Value.Year)
+        //       .Distinct().ToList();
+        //    return years;
+        //}
 
-                for (int day = 1; day <= numberOfDaysInMonth; day++)
-                {
-                    daysInMonth.Add(day);
-                }
+        //public List<int> GetMonthsForYear(int year) // lấy tháng trong database từ thông tin chuyến
+        //{
+        //    List<int> months = new List<int>();
 
-            }
-            return daysInMonth;
+        //   // months.Add(12);
 
-        }
-        public List<int> GetMonthsInYear()
-        {
-            List<int> months = Enumerable.Range(1, 12).ToList();
-            return months;
-        }
-        private void DrawChart()
-        {
-            seriesCollection.Clear();
+        //    // Lấy tháng hiện tại
+        //    months = DataProvider.Ins.DB.CHUYENs
+        //       .Where(t => t.TGBATDAU.HasValue && t.TGBATDAU.Value.Year == year)
+        //       .Select(t => t.TGBATDAU.Value.Month)
+        //       .Distinct().ToList();
+        //    return months;
+        //}
+        //public static List<int> GetDaysInMonth(int year, int month)
+        //{
+        //    List<int> daysInMonth = new List<int>();
+        //    if (year != 0 && month != 0)
+        //    {
+        //        // Xác định số ngày trong tháng
+        //        int numberOfDaysInMonth = DateTime.DaysInMonth(year, month);
 
-            
-            // Kiểm tra điều kiện để vẽ biểu đồ
-            if (Filter1 == "Tháng" && Year != 0 && Month != 0)
-            {
-                List<int> daysInMonth = GetDaysInMonth(Year, Month);
-                ChartValues<int> statistic = new ChartValues<int>();
-                foreach (int day in daysInMonth)
-                {
-                    int revenueValue = GetRevenueForDay(day, Month, Year); // Hàm để lấy doanh thu cho ngày cụ thể
-                    statistic.Add(revenueValue);   
-                    labelCollection.Add("Ngày " + day.ToString());
-                }
-                ColumnSeries dayRevenueSeries = new ColumnSeries
-                {
-                    //Title = $"{day}",
-                    Title = "Doanh thu",
-                    Values = statistic,
-                    DataLabels = true
-                };
-                seriesCollection.Add(dayRevenueSeries);
-            }
-            else if (Filter1 == "Năm" && Year != 0)
-            {
-                List<int> monthsInYear = GetMonthsInYear();
-                ChartValues<int> statistic  = new ChartValues<int> {}; 
-                foreach (int month in monthsInYear)
-                {
-                    int revenueValue = GetRevenueForMonth(month, Year); // Hàm để lấy doanh thu cho thngs cụ thể
-                    statistic.Add (revenueValue);
-                    labelCollection.Add("Tháng " + month.ToString());
-                    
-                }
-                ColumnSeries MonthRevenueSeries = new ColumnSeries
-                {
-                    Title = "Doanh thu",
-                    Values = statistic,
-                    DataLabels = true
-                };
+        //        for (int day = 1; day <= numberOfDaysInMonth; day++)
+        //        {
+        //            daysInMonth.Add(day);
+        //        }
 
-                seriesCollection.Add(MonthRevenueSeries);
-            }
-        }
+        //    }
+        //    return daysInMonth;
 
-        private int GetRevenueForDay(int day, int month, int year)
-        {
-            int Revenue = 0;
-            foreach (var item in DataProvider.Ins.DB.THONGTINTHANHTOANs.Where(item => item.THOIGIAN.Value.Day == day 
-                                                                            && item.THOIGIAN.Value.Month == month
-                                                                            && item.THOIGIAN.Value.Year == Year))
-            {
-                Revenue += (int)item.SOTIEN;
-            }
+        //}
+        //public List<int> GetMonthsInYear()
+        //{
+        //    List<int> months = Enumerable.Range(1, 12).ToList();
+        //    return months;
+        //}
+        //private void DrawChart()
+        //{
+        //    seriesCollection.Clear();
 
-            return Revenue;
-        }
-        private int GetRevenueForMonth( int month, int year)
-        {
-            int Revenue = 0;
-            foreach (var item in DataProvider.Ins.DB.THONGTINTHANHTOANs.Where(item =>item.THOIGIAN.Value.Month == month
-                                                                            && item.THOIGIAN.Value.Year == Year))
-            {
-                Revenue += (int)item.SOTIEN;
-            }
 
-            return Revenue;
-        }
-        
+        //    // Kiểm tra điều kiện để vẽ biểu đồ
+        //    if (Filter1 == "Tháng" && Year != 0 && Month != 0)
+        //    {
+        //        List<int> daysInMonth = GetDaysInMonth(Year, Month);
+        //        ChartValues<int> statistic = new ChartValues<int>();
+        //        foreach (int day in daysInMonth)
+        //        {
+        //            int revenueValue = GetRevenueForDay(day, Month, Year); // Hàm để lấy doanh thu cho ngày cụ thể
+        //            statistic.Add(revenueValue);
+        //            labelCollection.Add("Ngày " + day.ToString());
+        //        }
+        //        ColumnSeries dayRevenueSeries = new ColumnSeries
+        //        {
+        //            //Title = $"{day}",
+        //            Title = "Doanh thu",
+        //            Values = statistic,
+        //            DataLabels = true
+        //        };
+        //        seriesCollection.Add(dayRevenueSeries);
+        //    }
+        //    else if (Filter1 == "Năm" && Year != 0)
+        //    {
+        //        List<int> monthsInYear = GetMonthsInYear();
+        //        ChartValues<int> statistic = new ChartValues<int> { };
+        //        foreach (int month in monthsInYear)
+        //        {
+        //            int revenueValue = GetRevenueForMonth(month, Year); // Hàm để lấy doanh thu cho thngs cụ thể
+        //            statistic.Add(revenueValue);
+        //            labelCollection.Add("Tháng " + month.ToString());
+
+        //        }
+        //        ColumnSeries MonthRevenueSeries = new ColumnSeries
+        //        {
+        //            Title = "Doanh thu",
+        //            Values = statistic,
+        //            DataLabels = true
+        //        };
+
+        //        seriesCollection.Add(MonthRevenueSeries);
+        //    }
+        //}
+
+        //private int GetRevenueForDay(int day, int month, int year)
+        //{
+        //    int Revenue = 0;
+
+        //    foreach (var item in DataProvider.Ins.DB.THONGTINTHANHTOANs.Where(item => item.THOIGIAN.Value.Day == day
+        //                                                                    && item.THOIGIAN.Value.Month == month
+        //                                                                    && item.THOIGIAN.Value.Year == Year))
+        //    {
+        //        Revenue += (int)item.SOTIEN;
+        //    }
+
+        //    return Revenue;
+        //}
+        //private int GetRevenueForMonth(int month, int year)
+        //{
+        //    int Revenue = 0;
+        //    foreach (var item in DataProvider.Ins.DB.THONGTINTHANHTOANs.Where(item => item.THOIGIAN.Value.Month == month
+        //                                                                    && item.THOIGIAN.Value.Year == Year))
+        //    {
+        //        Revenue += (int)item.SOTIEN;
+        //    }
+
+        //    return Revenue;
+        //}
+
     }
 
 }

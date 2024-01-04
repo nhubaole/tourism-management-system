@@ -10,7 +10,7 @@ using TourismManagementSystem.Model;
 
 namespace TourismManagementSystem.ViewModel
 {
-    internal class TripDetailVM : BaseViewModel
+    public class TripDetailVM : BaseViewModel
     {
 
         private ObservableCollection<HANHKHACH> _ListKhach;
@@ -33,20 +33,20 @@ namespace TourismManagementSystem.ViewModel
             get => _SearchText; 
             set {
                 _SearchText = value;
-                if (SelectedFilter == FilterCbItems[0])
-                {
-                    ListKhach = new ObservableCollection<HANHKHACH>(DataProvider.Ins.DB.HANHKHACHes.Where(k => k.PHIEUDATCHO.MACHUYEN.Equals(SelectedChuyen.MACHUYEN) && k.CCCD.Contains(SearchText)));
-                }
-                else if (SelectedFilter == FilterCbItems[1])
-                {
-                    ListKhach = new ObservableCollection<HANHKHACH>(DataProvider.Ins.DB.HANHKHACHes.Where(k => k.PHIEUDATCHO.MACHUYEN.Equals(SelectedChuyen.MACHUYEN) && k.HOTEN.Contains(SearchText)));
+                //if (SelectedFilter == FilterCbItems[0])
+                //{
+                //    ListKhach = new ObservableCollection<HANHKHACH>(DataProvider.Ins.DB.HANHKHACHes.Where(k => k.PHIEUDATCHO.MACHUYEN.Equals(SelectedChuyen.MACHUYEN) && k.CCCD.Contains(SearchText)));
+                //}
+                //else if (SelectedFilter == FilterCbItems[1])
+                //{
+                //    ListKhach = new ObservableCollection<HANHKHACH>(DataProvider.Ins.DB.HANHKHACHes.Where(k => k.PHIEUDATCHO.MACHUYEN.Equals(SelectedChuyen.MACHUYEN) && k.HOTEN.Contains(SearchText)));
 
-                }
-                else if (SelectedFilter == FilterCbItems[2])
-                {
-                    ListKhach = new ObservableCollection<HANHKHACH>(DataProvider.Ins.DB.HANHKHACHes.Where(k => k.PHIEUDATCHO.MACHUYEN.Equals(SelectedChuyen.MACHUYEN) && k.GIOITINH.Contains(SearchText)));
+                //}
+                //else if (SelectedFilter == FilterCbItems[2])
+                //{
+                //    ListKhach = new ObservableCollection<HANHKHACH>(DataProvider.Ins.DB.HANHKHACHes.Where(k => k.PHIEUDATCHO.MACHUYEN.Equals(SelectedChuyen.MACHUYEN) && k.GIOITINH.Contains(SearchText)));
 
-                }
+                //}
                 OnPropertyChanged();
             } 
         }
@@ -61,6 +61,14 @@ namespace TourismManagementSystem.ViewModel
             IsAdmin = MainVM.AdminRole;
             CHUYEN = SelectedChuyen;
             ListKhach = new ObservableCollection<HANHKHACH>(DataProvider.Ins.DB.HANHKHACHes.Where(k => k.PHIEUDATCHO.MACHUYEN.Equals(SelectedChuyen.MACHUYEN)));
+        }
+
+        public TripDetailVM(ObservableCollection<HANHKHACH> listKhach)
+        {
+            SelectedFilter = FilterCbItems.First();
+            IsAdmin = MainVM.AdminRole;
+            CHUYEN = SelectedChuyen;
+            ListKhach = listKhach;
         }
     }
 }

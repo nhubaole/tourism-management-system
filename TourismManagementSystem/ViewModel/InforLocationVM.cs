@@ -146,7 +146,7 @@ namespace TourismManagementSystem.ViewModel
 
             LocationVM.IsDone = true;
             MessageBox.Show("Đã tạo mới địa điểm thành công \nBạn có thể xem lại các thông tin");
-            //sau cập nhập 
+            //sau cập nhập laod thoong tin vào màn hình infor
             LocationVM.TenDD = tenDD;
             LocationVM.DcDD = dcDD;
             LocationVM.MtDD = mtDD;
