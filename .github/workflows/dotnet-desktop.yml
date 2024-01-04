@@ -80,6 +80,10 @@ jobs:
     # Restore NuGet packages
     - name: Installing dependency command
       run: nuget restore 
+
+    # Build command
+    - name: Build command
+      run: dotnet build
       
     # Execute all unit tests in the solution
     #- name: Execute unit tests
