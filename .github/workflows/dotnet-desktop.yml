@@ -77,7 +77,7 @@ jobs:
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1.0.2      
       with: 
-        msbuild-architecture: 'x64'
+        msbuild-architecture: 'x86'
      
     # Restore NuGet packages
     - name: Installing dependency command
