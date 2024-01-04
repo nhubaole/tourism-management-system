@@ -89,8 +89,16 @@ jobs:
       
     # Execute all unit tests in the solution
     - name: Execute unit tests
-      run: msbuild /t:Test
-
+      run: |
+        cd TourismManagementSystem
+        msbuild /t:RunTests
+      
+    # Execute mutation testing
+    - name: Run mutation testing
+      run: |
+        cd TourismManagementSystem
+        msbuild /t:RunMutationTests
+        
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Restore the application
       run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
