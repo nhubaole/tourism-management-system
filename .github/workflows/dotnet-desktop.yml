@@ -116,7 +116,12 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 6.0.x
-
+    - name: Install .NET Framework 4.7.2 Developer Pack
+      run: |
+        wget https://download.visualstudio.microsoft.com/download/pr/...
+        chmod +x install-dotnet-framework.sh
+        ./install-dotnet-framework.sh
+        
     - name: Restore Dependencies
       run: dotnet restore
 
