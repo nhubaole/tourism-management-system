@@ -95,9 +95,7 @@ jobs:
       
     # Execute mutation testing
     - name: Run mutation testing
-      run: |
-        cd TourismManagementSystem
-        msbuild /t:RunMutationTests
+      run: dotnet-stryker
         
     # Restore the application to populate the obj folder with RuntimeIdentifiers
     - name: Restore the application
