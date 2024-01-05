@@ -49,11 +49,10 @@ jobs:
   build:
 
     strategy:
-      matrix:
-        os: [windows-latest,ubuntu-latest]
+      matrix:        
         configuration: [Debug, Release]
 
-    runs-on: ${{ matrix.os }}  # For a list of available runner types, refer to
+    runs-on: windows-latest  # For a list of available runner types, refer to
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
     env:
@@ -105,5 +104,25 @@ jobs:
       run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
       env:
         Configuration: ${{ matrix.configuration }}
+        
+  build-ubuntu:
+    runs-on: ubuntu-latest
 
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1
+
+    - name: Restore Dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build -c Release
+
+    - name: Test
+      run: dotnet test
 
