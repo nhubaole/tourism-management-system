@@ -107,7 +107,13 @@ jobs:
         
   build-ubuntu:
     runs-on: ubuntu-latest
-
+    
+    env:
+      Solution_Name: TourismManagementSystem.sln                      # Replace with your solution name, i.e. MyWpfApp.sln.
+      Test_Project_Path: TourismManagementSystem\TourismManagementSystem.csproj                 # Replace with the path to your test project, i.e. MyWpfApp.Tests\MyWpfApp.Tests.csproj.
+      Wap_Project_Directory: TourismManagementSystem\packages.config    # Replace with the Wap project directory relative to the solution, i.e. MyWpfApp.Package.
+      Wap_Project_Path: your-wap-project-path                   # Replace with the path to your Wap project, i.e. MyWpf.App.Package\MyWpfApp.Package.wapproj.
+      
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
@@ -116,12 +122,7 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 6.0.x
-    - name: Install .NET Framework 4.7.2 Developer Pack
-      run: |
-        wget https://download.visualstudio.microsoft.com/download/pr/...
-        chmod +x install-dotnet-framework.sh
-        ./install-dotnet-framework.sh
-        
+    
     - name: Restore Dependencies
       run: dotnet restore
 
